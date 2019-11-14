@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'font-awesome/css/font-awesome.min.css';
 import './App.css';
 
 class App extends Component {
@@ -8,6 +10,7 @@ class App extends Component {
         <div className="App">
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
+              <i className="fa fa-facebook-official"/>
             <p>
               Edit <code>src/App.js</code> and save to reload.
             </p>
