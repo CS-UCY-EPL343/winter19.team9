@@ -49,9 +49,8 @@ function ControlledCarousel() {
         >
             { carousel.map((item, index) => {
                 return (
-                    <Carousel.Item>
+                    <Carousel.Item key = { index }>
                         <img
-                            key = { index }
                             className = "d-block img-responsive fit-image"
                             src = { item.src }
                             alt = { item.label }
@@ -63,9 +62,7 @@ function ControlledCarousel() {
                     </Carousel.Item>
                 );
             }) }
-
         </Carousel>
-
     );
 }
 
