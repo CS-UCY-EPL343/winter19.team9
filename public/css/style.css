@@ -80,7 +80,7 @@ h6 {
         -webkit-transition : padding-top 0.3s, padding-bottom 0.3s;
         transition         : padding-top 0.3s, padding-bottom 0.3s;
         border             : none;
-        /*background-color: transparent;*/
+        background-color   : transparent;
     }
     
     #mainNav .navbar-brand {
@@ -103,4 +103,43 @@ h6 {
         font-size : 1.25em;
         padding   : 12px 0;
     }
+}
+
+/* Carousel */
+.carousel {
+    height              : 40rem;
+    background-position : center;
+    background-size     : cover;
+    background-repeat   : no-repeat;
+    text-align          : center;
+    overflow-wrap       : break-word;
+}
+
+.carousel .fit-image {
+    width      : 100%;
+    object-fit : cover;
+    height     : 40rem;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    height           : 50px;
+    width            : 50px;
+    outline          : white;
+    background-size  : 100%, 100%;
+    border-radius    : 50%;
+    border           : 1px solid white;
+    background-color : white;
+}
+
+.carousel-control-next-icon:after {
+    content   : '>';
+    font-size : 30px;
+    color     : #D90429;
+}
+
+.carousel-control-prev-icon:after {
+    content   : '<';
+    font-size : 30px;
+    color     : #D90429;
 }
