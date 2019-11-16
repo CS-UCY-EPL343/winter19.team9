@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 // Re-usable components
-import CarouselHp           from '../Common/CarouselHP';
+import CarouselHp from '../Common/CarouselHP';
 
 class Home extends Component {
     render() {
         return (
-            <CarouselHp />
+            <div>
+                <CarouselHp/>
+            </div>
         )
     }
 }

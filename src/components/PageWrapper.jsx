@@ -43,6 +43,7 @@ class PageWrapper extends Component {
                                     <Link className = "nav-link js-scroll-trigger" to = "/">Contact&nbsp;Us</Link>
                                 </li>
                                 <li className = "nav-item">
+
                                     <Link className = "nav-link js-scroll-trigger"
                                           to = "/"
                                     >Login/Register <i className = "fas fa-sign-in-alt" /></Link>
