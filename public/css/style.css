@@ -161,8 +161,9 @@ h6 {
 /* Logo */
 #author {
     text-align: center;
-    margin-top: -45px;
+    margin: -50px 0;
     position: relative;
+    z-index: 999;
 }
 
 #author img {
@@ -192,4 +193,26 @@ h6 {
 
 #to-top:hover {
     background-color : #D90429;
+}
+
+/* Footer */
+.footer{
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #2B2D42;
+    color: #EDF2F4;
+    text-align: center;
+    padding: 2rem;
+}
+
+.footer h2 {
+    color: #EF233C;
+}
+
+.styleImage {
+    font-size: 25px ;
+    margin: 5px;
+    border: none;
 }
