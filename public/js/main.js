@@ -2,14 +2,14 @@
 /**
  * Update page on Width size
  */
-$(document).ready(function() {
+$(document).ready(function () {
     // Scroll to top
-    $('#to-top').on('click', function() {
+    $('#to-top').on('click', function () {
         let hash = $(this).data('hash');
         if (hash) {
             $('html, body').animate({
-                                        scrollTop: $(document.getElementById(hash)).offset().top
-                                    }, 800, function() {
+                scrollTop: $(document.getElementById(hash)).offset().top
+            }, 800, function () {
                 window.location.hash = hash;
             });
         }
@@ -17,7 +17,7 @@ $(document).ready(function() {
 });
 
 // Check scrolling
-window.onscroll = function() {
+window.onscroll = function () {
     scrollFunction()
 };
 
@@ -31,3 +31,19 @@ function scrollFunction() {
         document.getElementById('to-top').style.display = 'none';
     }
 }
+
+//--------------------------------------------- Leaflet Map ----------------------------------------------------------//
+//
+// let mymap = L.map('mapid').setView([35.166262, 33.32693], 16);
+// let marker = L.marker([35.166262, 33.32693]).addTo(mymap);
+//
+// L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+//     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+//         '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © ' +
+//         '<a href="https://www.mapbox.com/">Mapbox</a>',
+//     maxZoom: 18,
+//     id: 'mapbox.streets',
+//     accessToken: 'pk.eyJ1IjoibWF2cm9zIiwiYSI6ImNrMzFvc2YwbDBhZmQzZXBnYmNwZmlpZ3UifQ.Tf5U3k-a8MdaJcQXkgOzmw'
+// }).addTo(mymap);
+//
+// marker.bindPopup("<b>Fitness Factory Nicosia</b><br>Address : Pindou 4 <br> Egkomi 2409 .").openPopup();
