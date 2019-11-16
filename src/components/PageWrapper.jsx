@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link }             from 'react-router-dom';
+// Images
+import logo_img             from '../logo.svg';
 
 class PageWrapper extends Component {
     render() {
@@ -7,8 +9,11 @@ class PageWrapper extends Component {
             <div id = "top-of-page">
                 {/* Navigation */ }
                 <nav className = "navbar navbar-expand-lg navbar-dark fixed-top" id = "mainNav">
-                    <div className = "container">
-                        <Link className = "navbar-brand js-scroll-trigger" to = "/">Fitness Factory Nicosia</Link>
+                    <div className = "container-fluid mx-auto">
+                        <Link className = "navbar-brand js-scroll-trigger" to = "/">
+                            Fitness Factory Nicosia&nbsp;
+                            <img id = { 'logo' } src = { logo_img } alt = 'Logo' height = { 48 } width = { 48 } />
+                        </Link>
                         <button className = "navbar-toggler navbar-toggler-right"
                                 type = "button"
                                 data-toggle = "collapse"
