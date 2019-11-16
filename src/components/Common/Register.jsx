@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import '../assets/styles/registerForm.css'
 
 class Register extends Component {
+
     render() {
         return (
             <div id="register" className="main">
@@ -74,8 +75,9 @@ class Register extends Component {
                                 </div>
 
                                 <div className="form-group">
-                                    <label htmlFor="username"><b>Username  *</b></label>
-                                    <input type="text" className="form-control" name="username" id="username" placeholder="Enter username"
+                                    <label htmlFor="username"><b>Username *</b></label>
+                                    <input type="text" className="form-control" name="username" id="username"
+                                           placeholder="Enter username"
                                            pattern="[A-Za-z]{3,}" required/>
                                     <div className="valid-feedback">Valid.</div>
                                     <div className="invalid-feedback">Please fill out this field.</div>
@@ -85,7 +87,8 @@ class Register extends Component {
                                     <div className="form-group">
                                         <label htmlFor="password">Password *</label>
                                         <input type="password" className="form-control" name="password" id="password"
-                                               placeholder="Enter password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required/>
+                                               placeholder="Enter password"
+                                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required/>
                                         <div className="valid-feedback">Valid.</div>
                                         <div className="invalid-feedback">Must contain at least one number and one
                                             uppercase and lowercase letter, and at least 8 or more characters.
@@ -102,19 +105,19 @@ class Register extends Component {
                                 <div className="form-row">
                                     <div className="form-group">
                                         <label htmlFor="address">Address </label>
-                                        <input type="text"  name="address" id="address" placeholder="Enter Address"/>
+                                        <input type="text" name="address" id="address" placeholder="Enter Address"/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="ZipCode">Zip Code</label>
-                                        <input type="text"  name="ZipCode" placeholder="Enter the Zip code"/>
+                                        <input type="text" name="ZipCode" placeholder="Enter the Zip code"/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="City">City</label>
-                                        <input type="text"  name="City" placeholder="Enter the city you live in"/>
+                                        <input type="text" name="City" placeholder="Enter the city you live in"/>
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="Number">Number</label>
-                                        <input type="text"  name="Number" placeholder="Enter the number of you address"/>
+                                        <input type="text" name="Number" placeholder="Enter the number of you address"/>
                                     </div>
                                 </div>
                                 <p><b>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</b></p>
