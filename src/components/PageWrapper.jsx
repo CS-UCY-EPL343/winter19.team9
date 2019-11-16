@@ -72,7 +72,7 @@ class PageWrapper extends Component {
                             <div className="col-lg-4">
                                 <h2><b>Where you can find us</b></h2>
                                 <LeafletMap
-                                    markerPosition={[{lat: 35.1665466}, {lng: 33.3256638}]}
+                                    markerPosition={[{lat: 35.166226}, {lng: 33.326983}]}
                                     zoom={16}
                                 />
                             </div>
