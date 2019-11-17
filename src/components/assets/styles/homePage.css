@@ -67,10 +67,15 @@
     background-color : #2B2D42;
     padding          : 60px 0;
     border-bottom    : 1px solid black;
-    background-image: url("../../../logo.svg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 500px 500px;
+}
+
+#our-services .bgImage {
+    /*position: absolute;*/
+    /*height: 500px;*/
+    /*width: 500px;*/
+    /*top: 50%;*/
+    /*left: 50%;*/
+    /*transform: translate(-50%, -50%);*/
 }
 
 #our-services .service-title {
@@ -94,7 +99,7 @@
 }
 
 #our-services .service-area {
-    position : relative;
+    position: relative;
 }
 
 #our-services .service-box {
@@ -124,8 +129,7 @@
 }
 
 @media (max-width : 1200px) {
-    #our-services {
-        background-color : #2B2D42;
-        background-image: none;
+    #our-services .bgImage {
+        display: none;
     }
 }
