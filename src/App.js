@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 // Components
 import PageWrapper from './components/PageWrapper';
 import Home        from './components/Pages/Home';
-import Register from "./components/Common/Register";
+import Register from "./components/Pages/Register";
 
 class App extends Component {
     render() {
