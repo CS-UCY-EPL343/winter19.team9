@@ -41,7 +41,7 @@ class Navigation extends Component {
                             </li>
                             <li className = "nav-item">
                                 <Link className = "nav-link"
-                                      to = "/"
+                                      to = "/register"
                                 >Login/Register <i className = "fas fa-sign-in-alt" /></Link>
                             </li>
                         </ul>

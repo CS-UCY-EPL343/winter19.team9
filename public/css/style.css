@@ -73,6 +73,12 @@ h6 {
     color : #D90429;
 }
 
+@media (min-width : 1100px) {
+    #mainNav .navbar-nav .nav-item .nav-link {
+        padding : 1.1em 1.0em !important;
+    }
+}
+
 @media (min-width : 992px) {
     #mainNav {
         padding-top        : 25px;
@@ -90,7 +96,7 @@ h6 {
     }
     
     #mainNav .navbar-nav .nav-item .nav-link {
-        padding : 1.1em 1.2em ;
+        padding : 1.1em 0.3em ;
     }
     
     #mainNav.navbar-shrink {
