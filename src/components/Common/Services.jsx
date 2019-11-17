@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../assets/styles/homePage.css'
 import ServiceGoal          from './ServiceGoal';
+import { AnimatedOnScroll } from 'react-animated-css-onscroll';
 
 class Services extends Component {
     render() {
@@ -20,63 +21,71 @@ class Services extends Component {
                 <div className = { 'service-area' }>
                     <div className = { 'container' }>
                         <div className = { 'row' }>
+                            <AnimatedOnScroll animationIn = "fadeInLeft">
+                                <div className = { 'col-lg-12' }>
+                                    <div className = { 'row d-flex justify-content-between' }>
+                                        <ServiceGoal
+                                            icon = { 'fas fa-dumbbell' }
+                                            title = { 'Equipment' }
+                                            message = { 'This is a message, im too bored to think of a message so im writing '
+                                                        + 'this fake message.' }
+                                        />
+
+                                        <ServiceGoal
+                                            icon = { 'fas fa-dumbbell' }
+                                            title = { 'Equipment' }
+                                            message = { 'This is a message, im too bored to think of a message so im writing '
+                                                        + 'this fake message.' }
+                                        />
+                                    </div>
+                                </div>
+                            </AnimatedOnScroll>
+
+                            <AnimatedOnScroll animationIn = "fadeInRight">
                             <div className = { 'col-lg-12' }>
                                 <div className = { 'row d-flex justify-content-between' }>
                                     <ServiceGoal
-                                        icon={'fas fa-dumbbell'}
-                                        title={'Equipment'}
-                                        message={'This is a message, im too bored to think of a message so im writing '
-                                                 + 'this fake message.'}
+                                        icon = { 'fas fa-dumbbell' }
+                                        title = { 'Equipment' }
+                                        message = { 'This is a message, im too bored to think of a message so im writing '
+                                                    + 'this fake message.' }
                                     />
 
                                     <ServiceGoal
-                                        icon={'fas fa-dumbbell'}
-                                        title={'Equipment'}
-                                        message={'This is a message, im too bored to think of a message so im writing '
-                                                 + 'this fake message.'}
+                                        icon = { 'fas fa-dumbbell' }
+                                        title = { 'Equipment' }
+                                        message = { 'This is a message, im too bored to think of a message so im writing '
+                                                    + 'this fake message.' }
                                     />
                                 </div>
                             </div>
+                            </AnimatedOnScroll>
 
-                            <div className = { 'col-lg-12' }>
-                                <div className = { 'row d-flex justify-content-between' }>
-                                    <ServiceGoal
-                                        icon={'fas fa-dumbbell'}
-                                        title={'Equipment'}
-                                        message={'This is a message, im too bored to think of a message so im writing '
-                                                 + 'this fake message.'}
-                                    />
+                            <AnimatedOnScroll animationIn = "fadeInLeft">
+                                <div className = { 'col-lg-12' }>
+                                    <div className = { 'row d-flex justify-content-between' }>
+                                        <ServiceGoal
+                                            icon = { 'fas fa-dumbbell' }
+                                            title = { 'Equipment' }
+                                            message = { 'This is a message, im too bored to think of a message so im writing '
+                                                        + 'this fake message.' }
+                                        />
 
-                                    <ServiceGoal
-                                        icon={'fas fa-dumbbell'}
-                                        title={'Equipment'}
-                                        message={'This is a message, im too bored to think of a message so im writing '
-                                                 + 'this fake message.'}
-                                    />
+                                        <ServiceGoal
+                                            icon = { 'fas fa-dumbbell' }
+                                            title = { 'Equipment' }
+                                            message = { 'This is a message, im too bored to think of a message so im writing '
+                                                        + 'this fake message.' }
+                                        />
+                                    </div>
                                 </div>
-                            </div>
+                            </AnimatedOnScroll>
 
-                            <div className = { 'col-lg-12' }>
-                                <div className = { 'row d-flex justify-content-between' }>
-                                    <ServiceGoal
-                                        icon={'fas fa-dumbbell'}
-                                        title={'Equipment'}
-                                        message={'This is a message, im too bored to think of a message so im writing '
-                                                 + 'this fake message.'}
-                                    />
-
-                                    <ServiceGoal
-                                        icon={'fas fa-dumbbell'}
-                                        title={'Equipment'}
-                                        message={'This is a message, im too bored to think of a message so im writing '
-                                                 + 'this fake message.'}
-                                    />
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         );
     }
 }
