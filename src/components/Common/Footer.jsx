@@ -20,6 +20,8 @@ class Footer extends Component {
                         </div>
                         <div className = "col-lg-4">
                             <h2><b>Where you can find us</b></h2>
+                            <p>Address : Pindou 4</p>
+                            <p>Post Code : 2409</p>
                             <LeafletMap
                                 markerPosition = { [{ lat: 35.166279 }, { lng: 33.326951 }] }
                                 zoom = { 16 }
