@@ -7,7 +7,7 @@ class Navigation extends Component {
             // Navigation
             <nav className = "navbar navbar-expand-lg navbar-dark fixed-top" id = "mainNav">
                 <div className = "container-fluid mx-auto">
-                    <Link className = "navbar-brand js-scroll-trigger" to = "/">
+                    <Link className = "navbar-brand" to = "/">
                         Fitness Factory Nicosia&nbsp;
                         <img id = { 'logo' } src = { this.props.img } alt = 'Logo' height = { 48 } width = { 48 } />
                     </Link>
@@ -25,22 +25,22 @@ class Navigation extends Component {
                     <div className = "collapse navbar-collapse" id = "navbarResponsive">
                         <ul className = "navbar-nav text-uppercase ml-auto">
                             <li className = "nav-item">
-                                <Link className = "nav-link js-scroll-trigger" to = "/">Services</Link>
+                                <Link className = "nav-link" to = "/">Services</Link>
                             </li>
                             <li className = "nav-item">
-                                <Link className = "nav-link js-scroll-trigger" to = "/">Classes</Link>
+                                <Link className = "nav-link" to = "/">Classes</Link>
                             </li>
                             <li className = "nav-item">
-                                <Link className = "nav-link js-scroll-trigger" to = "/">About</Link>
+                                <Link className = "nav-link" to = "/">About</Link>
                             </li>
                             <li className = "nav-item">
-                                <Link className = "nav-link js-scroll-trigger" to = "/">Team</Link>
+                                <Link className = "nav-link" to = "/">Team</Link>
                             </li>
                             <li className = "nav-item">
-                                <Link className = "nav-link js-scroll-trigger" to = "/">Contact&nbsp;Us</Link>
+                                <Link className = "nav-link" to = "/">Contact&nbsp;Us</Link>
                             </li>
                             <li className = "nav-item">
-                                <Link className = "nav-link js-scroll-trigger"
+                                <Link className = "nav-link"
                                       to = "/"
                                 >Login/Register <i className = "fas fa-sign-in-alt" /></Link>
                             </li>

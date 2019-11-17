@@ -1,0 +1,68 @@
+/* Carousel */
+.carousel {
+    height              : 40rem;
+    background-position : center;
+    background-size     : cover;
+    background-repeat   : no-repeat;
+    text-align          : center;
+    overflow-wrap       : break-word;
+}
+
+.carousel .carousel-indicators {
+    padding-bottom: 3em;
+}
+
+.carousel-caption {
+    padding-bottom: 5em;
+}
+
+.carousel .fit-image {
+    width      : 100%;
+    object-fit : cover;
+    height     : 40rem;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    height           : 50px;
+    width            : 50px;
+    outline          : white;
+    background-size  : 100%, 100%;
+    border-radius    : 50%;
+    border           : 1px solid white;
+    background-color : white;
+}
+
+.carousel-control-next-icon:after {
+    content   : '>';
+    font-size : 30px;
+    color     : #D90429;
+}
+
+.carousel-control-prev-icon:after {
+    content   : '<';
+    font-size : 30px;
+    color     : #D90429;
+}
+
+/* Logo */
+#author {
+    text-align: center;
+    margin: -50px 0;
+    position: relative;
+    z-index: 999;
+}
+
+#author img {
+    width: 100px;
+    border: 1px solid white;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+}
+
+/* Services */
+.our-services {
+    background-image: none;
+    background-color: #1C7430;
+}
