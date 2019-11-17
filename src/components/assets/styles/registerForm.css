@@ -1,11 +1,11 @@
 /* @extend display-flex; */
-#register display-flex, .form-flex, .form-row, .add-info-link {
+#register .display-flex, .form-flex, .form-row, .add-info-link {
     display: flex;
     display: -webkit-flex;
 }
 
 /* @extend list-type-ulli; */
-#register list-type-ulli, ul {
+#register .list-type-ulli, ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -49,15 +49,15 @@
 }
 
 
-body {
-    font-size: 13px;
-    line-height: 1.8;
-    color: #222;
-    font-weight: 600;
+/*body {*/
+/*    font-size: 13px;*/
+/*    line-height: 1.8;*/
+/*    color: #222;*/
+/*    font-weight: 600;*/
 
-    background-image: url("../img/Register Background/RegisterPic.jpg");
-    padding: 0 0;
-}
+/*    background-image: url("../img/Register Background/RegisterPic.jpg");*/
+/*    padding: 0 0;*/
+/*}*/
 
 #register a {
     color: #EF233C;
