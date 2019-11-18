@@ -74,7 +74,7 @@
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1);
-    background: linear-gradient(to right,#2B2D42,#b8daff,#EDF2F4,#b8daff,#2B2D42);
+    background: linear-gradient(to right,grey,lightgrey,grey);
     border-radius: 5%;
 }
 #register .signLink {
@@ -336,4 +336,3 @@
      background-color:#D90429;
      opacity:1;
  }
-/*# sourceMappingURL=style.css.map */
