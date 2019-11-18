@@ -9,11 +9,11 @@
 }
 
 .carousel .carousel-indicators {
-    padding-bottom: 3em;
+    padding-bottom : 3em;
 }
 
 .carousel-caption {
-    padding-bottom: 5em;
+    padding-bottom : 5em;
 }
 
 .carousel .fit-image {
@@ -47,22 +47,89 @@
 
 /* Logo */
 #author {
-    text-align: center;
-    margin: -50px 0;
-    position: relative;
-    z-index: 999;
+    text-align : center;
+    margin     : -50px 0;
+    position   : relative;
+    z-index    : 999;
 }
 
 #author img {
-    width: 100px;
-    border: 1px solid white;
-    -webkit-border-radius: 100%;
-    -moz-border-radius: 100%;
-    border-radius: 100%;
+    width                 : 100px;
+    border                : 1px solid white;
+    -webkit-border-radius : 100%;
+    -moz-border-radius    : 100%;
+    border-radius         : 100%;
+    background-color      : whitesmoke;
 }
 
 /* Services */
-.our-services {
-    background-image: none;
-    background-color: #1C7430;
+#our-services {
+    background-color : #2B2D42;
+    padding          : 60px 0;
+    border-bottom    : 1px solid black;
+}
+
+#our-services .bgImage {
+    /*position: absolute;*/
+    /*height: 500px;*/
+    /*width: 500px;*/
+    /*top: 50%;*/
+    /*left: 50%;*/
+    /*transform: translate(-50%, -50%);*/
+}
+
+#our-services .service-title {
+    position       : relative;
+    padding-bottom : 30px;
+}
+
+#our-services .subtitle {
+    color          : #EDF2F4;
+    font-size      : 18px;
+    letter-spacing : 1px;
+    font-weight    : 500;
+}
+
+#our-services .title {
+    color          : #EDF2F4;
+    font-size      : 65px;
+    letter-spacing : 2px;
+    font-weight    : 700;
+    text-transform : capitalize;
+}
+
+#our-services .service-area {
+    position: relative;
+}
+
+#our-services .service-box {
+    margin-bottom : 45px;
+}
+
+#our-services .service-box-icon {
+    color         : #D90429;
+    margin-bottom : 10px;
+    text-align    : center;
+    font-size     : 50px;
+}
+
+#our-services .service-box-title {
+    color          : #EDF2F4;
+    font-size      : 24px;
+    letter-spacing : 0;
+    font-weight    : 600;
+    margin-bottom  : 15px;
+}
+
+#our-services p {
+    font-size      : 16px;
+    letter-spacing : 1px;
+    color          : #8D99AE;
+    font-weight    : 400;
+}
+
+@media (max-width : 1200px) {
+    #our-services .bgImage {
+        display: none;
+    }
 }

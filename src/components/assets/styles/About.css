@@ -1,0 +1,130 @@
+/*body {*/
+/*    overflow-x: hidden;*/
+/*    font-family: 'Roboto Slab',  'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';*/
+/*}*/
+
+#contact a {
+    padding-right: 20px;
+    color: #af3232;
+}
+
+#contact p {
+    line-height: 1.75;
+    color: white;
+    font-size: 18px;
+}
+
+#contact h2 {
+    line-height: 1.75;
+    /*color:white;*/
+    color: #af3232;
+    font-size: 30px;
+}
+
+#contact h1 {
+
+    font-size: 42px;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /*font-size : 65px;*/
+    /* font-family: Brush Script MT, Brush Script Std, cursive; */
+    font-weight: 600;
+
+}
+
+#contact {
+    padding: 100px 50px;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+#contact .btn {
+    font-family: 'Montserrat', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 700;
+}
+
+#contact .btn-xl {
+    font-size: 18px;
+    padding: 20px 40px;
+}
+
+#contact .btn-primary {
+    background-color: #af3232;
+    border: none;
+}
+
+#contact .btn-primary:active, .btn-primary:focus, .btn-primary:hover {
+    background-color: #974632 !important;
+    border: none;
+    color: white;
+}
+
+#colored {
+    color: #af3232;
+    font-size: 17px;
+    line-height: 0.75;
+}
+
+#contact btn-primary:active, .btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(254, 95, 55, 0.5) !important;
+}
+
+#sendMessageButton {
+    margin-bottom: 25px;
+}
+
+section#contact {
+    background-image: url("../img/Register Background/RegisterPic.jpg");
+    /*TODO Fix image*/
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    overflow: -moz-hidden-unscrollable
+}
+
+section#contact .section-heading {
+    color: #af3232;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+section#contact .form-group {
+    margin-bottom: 25px;
+}
+
+section#contact .form-group input,
+section#contact .form-group textarea {
+    padding: 10px;
+}
+
+section#contact .form-group input.form-control {
+    height: auto;
+}
+
+section#contact .form-group textarea.form-control {
+    height: 190px;
+}
+
+section#contact .form-control:focus {
+    border-color: #af3232;
+
+}
+
+#contact .mapouter {
+    padding-right: 20px;
+    margin-top: 20px;
+    position: relative;
+    text-align: right;
+    height: 400px;
+    width: 550px;
+}
+
+#contact .gmap_canvas {
+    padding-right: 20px;
+    margin-top: 20px;
+    overflow: hidden;
+    background: none !important;
+    height: 400px;
+    width: 550px;
+}
