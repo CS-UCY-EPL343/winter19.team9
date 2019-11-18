@@ -31,7 +31,7 @@ class Navigation extends Component {
                                 <Link className = "nav-link" to = "/">Classes</Link>
                             </li>
                             <li className = "nav-item">
-                                <Link className = "nav-link" to = "/">About</Link>
+                                <Link className = "nav-link" to = "/about">About</Link>
                             </li>
                             <li className = "nav-item">
                                 <Link className = "nav-link" to = "/">Team</Link>

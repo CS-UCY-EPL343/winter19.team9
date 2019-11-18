@@ -5,6 +5,7 @@ import PageWrapper                        from './components/PageWrapper';
 import Home                               from './components/Pages/Home';
 import Register                           from './components/Pages/Register';
 import ScrollToTop                        from './components/Common/ScrollToTop';
+import AboutUs from "./components/Pages/AboutUs";
 
 class App extends Component {
     render() {
@@ -21,6 +22,11 @@ class App extends Component {
                     <Route
                         path = "/register"
                         component = { Register }
+                    />
+
+                    <Route
+                        path = "/about"
+                        component = { AboutUs }
                     />
 
                 </PageWrapper>
