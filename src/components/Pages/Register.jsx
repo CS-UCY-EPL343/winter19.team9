@@ -181,7 +181,34 @@ class Register extends Component {
 
                                 </div>
 
-                                <p><b>By creating an account you agree to our <a href = "#">Terms & Privacy</a>.</b></p>
+                                <p><b>By creating an account you agree to our <a data-toggle="modal" href={"#exampleModalLong"}>Terms & Privacy</a>.</b></p>
+                                <div className="modal fade" id="exampleModalLong" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLong" aria-hidden="true">>
+                                    <div className="modal-dialog" role="document">
+                                        <div className="modal-content">
+                                            <div className="modal-header">
+                                                <h5 className="modal-title" id="exampleModalLongTitle">Terms & Privacy</h5>
+                                                <button type="button" className="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div className="modal-body">
+                                                Terms & Privacy Conditions
+                                                <br/>
+                                                ...
+                                                <br/>
+                                                ...
+                                                <br/>
+                                                ...
+                                            </div>
+                                            <div className="modal-footer">
+                                                <button type="button" className="btn btn-secondary"
+                                                        data-dismiss="modal">Close
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div className = "form-group">
                                     <form method = "get" action = "#">
                                         <button type = "submit" className = "registerbtn">Register</button>
@@ -189,7 +216,7 @@ class Register extends Component {
                                 </div>
                             </form>
 
-                            <p className = "signLink"><b>Already have an account? </b><a href = "#">Sign in</a>.</p>
+                            {/*<p className = "signLink"><b>Already have an account? </b><a href = "#">Sign in</a>.</p>*/}
                         </div>
                     </div>
                 </section>
