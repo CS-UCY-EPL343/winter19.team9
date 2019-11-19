@@ -11,6 +11,9 @@
                     event.preventDefault();
                     event.stopPropagation();
                 }
+                else{
+                    sendMail();
+                }
                 form.classList.add('was-validated');
             }, false);
 
@@ -18,3 +21,14 @@
     }, false);
 
 })();
+
+function sendMail() {
+    let link;
+    link = "mailto: louis.4949@hotmail.com"
+        + "?cc=apoullis79@gmail.com"
+        + "&subject=" + escape("Fitness Factory Customer Message")
+        + "&body=" + escape(document.getElementById('message').value + "\n\nCustomer Info\n--------------------\n" +
+            "Name: " + document.getElementById('name').value + "\n" + "Phone: " + document.getElementById('phone').value + "\nE-mail: " +
+            document.getElementById('email').value);
+    window.location.href = link;
+}
