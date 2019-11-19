@@ -21,11 +21,12 @@
 
 #about .page-section {
   padding: 100px 0;
+  height: 2010px;
 }
 
 #about .page-section h2.section-heading {
   font-size: 40px;
-  margin-top: 0;
+  margin-top: 1000px;
   margin-bottom: 75px;
 }
 
@@ -40,8 +41,10 @@
 
 @media (min-width: 768px) {
   #about {
-  padding: 150px 0;
-}
+    background-color: #2B2D42;
+    padding: 150px 0;
+    height: 2010px;
+  }
 }
 
 ::-moz-selection {
@@ -67,8 +70,8 @@ img::-moz-selection {
 }
 
 .timeline {
-  position: absolute;
-  padding: 0;
+
+  padding: 100px 50px 50px 50px;
   list-style: none;
 }
 
@@ -128,7 +131,7 @@ img::-moz-selection {
   height: 80px;
   margin-left: 0;
   text-align: center;
-  color: white;
+  color: #2B2D42;
   border: 7px solid #e9ecef;
   border-radius: 100%;
   background-color: #831414;
@@ -159,10 +162,14 @@ img::-moz-selection {
 }
 
 @media (min-width: 768px) {
+  .timeline{
+    padding: 0;
+  }
   .timeline:before {
     left: 50%;
   }
   .timeline > li {
+
     min-height: 100px;
     margin-bottom: 100px;
   }
@@ -191,6 +198,9 @@ img::-moz-selection {
 }
 
 @media (min-width: 992px) {
+  .timeline{
+    padding: 0;
+  }
   .timeline > li {
     min-height: 150px;
   }
