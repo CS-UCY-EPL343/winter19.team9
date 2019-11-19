@@ -2,24 +2,32 @@ import React, {Component} from 'react';
 import '../assets/styles/coaches.css'
 
 // Images
-import team1 from '../assets/img/coaches/69423072_3238381526187039_3449618990849064960_o.jpg';
+import coach1 from '../assets/img/coaches/coach1.jpg';
+import coach2 from '../assets/img/coaches/coach2.jpg';
+import coach3 from '../assets/img/coaches/coach3.jpg';
+import coach4 from '../assets/img/coaches/coach4.jpg';
+import coach5 from '../assets/img/coaches/coach5.jpg';
 import TeamMember from "./TeamMember";
 
 const coaches = [
 
-    {className: '', src: team1, name: 'Alekos', text: 'By combining the movement one conducts in their ' +
+    {className: '', src: coach1, name: 'Alekos', text: 'By combining the movement one conducts in their ' +
                                     'everyday lives, from housewives and young children to professional ' +
                                     'athletes and special forces individuals, in Fitness Factory is the ' +
                                     'ultimate workout!'},
-    {className: 'timeline-inverted', src: team1, name: 'Alekos', text: 'By combining the movement one conducts in their ' +
+    {className: 'timeline-inverted', src: coach2, name: 'Alekos', text: 'By combining the movement one conducts in their ' +
             'everyday lives, from housewives and young children to professional ' +
             'athletes and special forces individuals, in Fitness Factory is the ' +
             'ultimate workout!'},
-    {className: '', src: team1, name: 'Alekos', text: 'By combining the movement one conducts in their ' +
+    {className: '', src: coach3, name: 'Alekos', text: 'By combining the movement one conducts in their ' +
             'everyday lives, from housewives and young children to professional ' +
             'athletes and special forces individuals, in Fitness Factory is the ' +
             'ultimate workout!'},
-    {className: 'timeline-inverted', src: team1, name: 'Alekos', text: 'By combining the movement one conducts in their ' +
+    {className: 'timeline-inverted', src: coach4, name: 'Alekos', text: 'By combining the movement one conducts in their ' +
+            'everyday lives, from housewives and young children to professional ' +
+            'athletes and special forces individuals, in Fitness Factory is the ' +
+            'ultimate workout!'},
+    {className: '', src: coach5, name: 'Alekos', text: 'By combining the movement one conducts in their ' +
             'everyday lives, from housewives and young children to professional ' +
             'athletes and special forces individuals, in Fitness Factory is the ' +
             'ultimate workout!'}
