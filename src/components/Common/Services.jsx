@@ -95,7 +95,47 @@ class Services extends Component {
                                 </div>
                             </AnimatedOnScroll>
 
-                        </div>
+                            <AnimatedOnScroll animationIn = "fadeInLeft">
+                                <h1 id = "Announcements">Announcements</h1>
+                                <div id="ann" className="container mt-2">
+                                    <div className="row">
+                                        <div className="col-md-3 col-sm-6">
+                                            <div className="card card-block">
+
+                                                <h5 className="card-title mt-3 mb-3">Announcement 1</h5>
+
+                                                <p className="card-text">This is a sample text to show how the announcement section in our web app will work.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-3 col-sm-6">
+                                            <div className="card card-block">
+
+                                                <h5 className="card-title  mt-3 mb-3">Announcement 2</h5>
+
+                                                <p className="card-text">This is a sample text to show how the announcement section in our web app will work.</p>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-3 col-sm-6">
+                                            <div className="card card-block">
+
+                                                <h5 className="card-title  mt-3 mb-3">Announcement 3</h5>
+
+                                                <p className="card-text">This is a sample text to show how the announcement section in our web app will work.</p>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-3 col-sm-6">
+                                            <div className="card card-block">
+
+                                                <h5 className="card-title  mt-3 mb-3">Announcement 4</h5>
+
+                                                <p className="card-text">This is a sample text to show how the announcement section in our web app will work.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </AnimatedOnScroll>
+                    </div>
                     </div>
                 </div>
             </div>
