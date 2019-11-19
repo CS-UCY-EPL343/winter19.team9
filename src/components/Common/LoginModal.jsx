@@ -15,8 +15,8 @@ class LoginModal extends Component {
                     <div className="row">
                         <div className="col-lg-12 col-md-12 col-sm-12">
                             <i className="fab fa-google google brands"/>
-                            <i className="fab fa-facebook-square facebook brands"/>
-                            <i className="fab fa-twitter-square twitter brands"/>
+                            <i className="fab fa-facebook facebook brands"/>
+                            <i className="fab fa-twitter twitter brands"/>
                         </div>
                     </div>
                 </div>
