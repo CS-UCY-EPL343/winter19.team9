@@ -1,0 +1,436 @@
+/* The Modal (background) */
+#LoginModal {
+    /*display: none; !* Hidden by default *!*/
+    /*position: fixed; !* Stay in place *!*/
+    /*z-index: 1000; !* Sit on top *!*/
+    /*left: 0;*/
+    /*top: 0;*/
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: hidden; /* Enable scroll if needed */
+
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    padding-bottom: 24px;
+}
+
+
+#LoginModal .fa {
+    /*font-size: 4em;*/
+    /*width: 4em;*/
+    /*height: 2.5em;*/
+    /*text-align: center;*/
+}
+
+#LoginModal .fancy {
+    line-height: 0.5;
+    text-align: center;
+}
+
+#LoginModal .fancy span {
+    display: inline-block;
+    position: relative;
+}
+
+.fancy span:before,
+.fancy span:after {
+    content: "";
+    position: absolute;
+    height: 5px;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    top: 0;
+    width: 620%;
+}
+
+.fancy span:before {
+    right: 100%;
+    margin-right: 15px;
+}
+
+.fancy span:after {
+    left: 100%;
+    margin-left: 15px;
+}
+
+#LoginModal .red {
+    color: red;
+}
+
+
+/*  */
+
+#LoginModal .cursive {
+    font-family: 'Rubik', sans-serif;
+    font-size: x-large;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+#LoginModal .cursive2 {
+    font-family: 'Rubik', sans-serif;
+    font-size: large;
+    padding-bottom: 5px;
+}
+
+.modalBack {
+    background-image: linear-gradient(to right, #d2d4dc, #d5d7df, #d8dae2, #dbdde5, #dee0e8, #dee0e8, #E2E4EC, #E2E4EC, #dee0e8, #dee0e8, #dbdde5, #d8dae2, #d5d7df, #d2d4dc);
+}
+
+#LoginModal .coloring {
+    color: #2b2d42;
+}
+
+/* Center the image and position the close button */
+#LoginModal .imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+}
+
+#LoginModal #username {
+    /*font-family: 'PT Serif', serif;*/
+    /*width: 100%;*/
+}
+
+#LoginModal #pword {
+    /*font-family: 'PT Serif', serif;*/
+    /*width: 100%*/
+}
+
+#LoginModal .textFields {
+    color: #111425;
+    font-weight: 600;
+    font-family: 'Montserrat', serif;
+}
+
+#LoginModal .fa {
+    font-size: 20px;
+    height: 0;
+    padding: 0 30px;
+}
+
+#LoginModal .imgcontainer .brands {
+    font-size: 40px;
+    /*width: 10em;*/
+    height: 5px;
+    text-align: center;
+    padding: 0 40px;
+}
+
+/* Full-width input fields */
+#LoginModal input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+#LoginModal button {
+    background-color: #ef233c;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+#LoginModal button:hover {
+    opacity: 0.8;
+}
+
+/* Extra styles for the cancel button */
+/*#LoginModal .cancelbtn {*/
+/*    width: auto;*/
+/*    padding: 10px 18px;*/
+/*    background-color: #ef233c;*/
+/*}*/
+
+#LoginModal .container {
+    /*padding: 16px;*/
+}
+
+#LoginModal span.psw {
+    float: right;
+    /*padding-top: 16px;*/
+}
+
+
+/* Modal Content/Box */
+#LoginModal .modal-content {
+    background-image: linear-gradient(to right, #d2d4dc, #d5d7df, #d8dae2, #dbdde5, #dee0e8, #dee0e8, #E2E4EC, #E2E4EC, #dee0e8, #dee0e8, #dbdde5, #d8dae2, #d5d7df, #d2d4dc);
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+#LoginModal .close {
+    /*position: absolute;*/
+    /*right: 25px;*/
+    /*top: 0;*/
+    /*color: #000;*/
+    /*font-size: 35px;*/
+    /*font-weight: bold;*/
+}
+
+#LoginModal .close:hover,
+.close:focus {
+    /*color: red;*/
+    /*cursor: pointer;*/
+}
+
+/* Add Zoom Animation */
+.animate {
+    -webkit-animation: animatezoom 0.6s;
+    animation: animatezoom 0.6s
+}
+
+@-webkit-keyframes animatezoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes animatezoom {
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 420px) {
+    #LoginModal span.psw {
+        font-size: 14px;
+        display: block;
+        float: none;
+    }
+
+    #LoginModal #signup {
+        font-size: 14px;
+        display: block;
+        float: none;
+        padding-bottom: 3px;
+    }
+
+    #LoginModal .cancelbtn {
+        /*width: 100%;*/
+    }
+
+    #LoginModal .brands {
+        font-size: 14px;
+        height: 8px;
+        text-align: center;
+    }
+
+
+    #LoginModal .fancy {
+        line-height: 0.5;
+        text-align: center;
+    }
+
+    #LoginModal .fancy span {
+        display: inline-block;
+        position: relative;
+    }
+
+    .fancy span:before,
+    .fancy span:after {
+        content: "";
+        position: absolute;
+        height: 5px;
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;
+        top: 0;
+        width: 350%;
+    }
+
+    .fancy span:before {
+        right: 100%;
+        margin-right: 15px;
+    }
+
+    .fancy span:after {
+        left: 100%;
+        margin-left: 15px;
+    }
+
+
+    #LoginModal .cursive {
+        font-family: 'Rubik', sans-serif;
+        font-size: large;
+        padding-bottom: 5px;
+    }
+
+    #LoginModal .cursive2 {
+        font-family: 'Rubik', sans-serif;
+        font-size: small;
+        padding-bottom: 5px;
+    }
+
+}
+
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 370px) {
+    #LoginModal span.psw {
+        font-size: 14px;
+        display: block;
+        float: none;
+        padding-bottom: 3px;
+    }
+
+    #LoginModal #signup {
+        font-size: 14px;
+        display: block;
+        float: none;
+    }
+
+    #LoginModal .cancelbtn {
+        /*width: 100%;*/
+    }
+
+    #LoginModal .brands {
+        font-size: 10px;
+        height: 7px;
+        text-align: center;
+    }
+
+
+    .fancy {
+        line-height: 0.5;
+        text-align: center;
+    }
+
+    .fancy span {
+        display: inline-block;
+        position: relative;
+    }
+
+    .fancy span:before,
+    .fancy span:after {
+        content: "";
+        position: absolute;
+        height: 5px;
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;
+        top: 0;
+        width: 250%;
+    }
+
+    .fancy span:before {
+        right: 100%;
+        margin-right: 15px;
+    }
+
+    .fancy span:after {
+        left: 100%;
+        margin-left: 15px;
+    }
+
+
+    #LoginModal .cursive {
+        font-family: 'Rubik', sans-serif;
+        font-size: large;
+        padding-bottom: 5px;
+    }
+
+    #LoginModal .cursive2 {
+        font-family: 'Rubik', sans-serif;
+        font-size: small;
+        padding-bottom: 5px;
+    }
+
+}
+
+
+@media screen and (max-width: 800px) {
+    #LoginModal span.psw {
+        font-size: 14px;
+        display: block;
+        float: none;
+    }
+
+    #LoginModal #signup {
+        font-size: 14px;
+        display: block;
+        float: none;
+
+    }
+
+    #LoginModal .cancelbtn {
+        width: 100%;
+    }
+
+    #LoginModal .brands {
+        font-size: 35px;
+        height: 8px;
+        text-align: center;
+    }
+
+    .fancy {
+        line-height: 0.5;
+        text-align: center;
+    }
+
+    .fancy span {
+        display: inline-block;
+        position: relative;
+    }
+
+    .fancy span:before,
+    .fancy span:after {
+        content: "";
+        position: absolute;
+        height: 5px;
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;
+        top: 0;
+        width: 580%;
+    }
+
+    .fancy span:before {
+        right: 100%;
+        margin-right: 15px;
+    }
+
+    .fancy span:after {
+        left: 100%;
+        margin-left: 15px;
+    }
+
+
+    #LoginModal .cursive {
+        font-family: 'Rubik', sans-serif;
+        font-size: large;
+        padding-bottom: 5px;
+    }
+
+    #LoginModal .cursive2 {
+        font-family: 'Rubik', sans-serif;
+        font-size: medium;
+        padding-bottom: 5px;
+    }
+
+}
+
+#LoginModal #remember-me > input {
+    display: inline-block;
+    width: 20px;
+}
+
+#LoginModal #remember-me label {
+    margin-bottom: 25px;
+    display: inline-block;
+    width: 235px;
+}

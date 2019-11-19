@@ -35,14 +35,14 @@ function scrollFunction() {
 /*
  * This method is used for validation of the login form modal
  */
-var modal = document.getElementById('LoginModal');
+let modal = document.getElementById('LoginModal');
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
-    if (event.target == modal) {
+    if (event.target === modal) {
         modal.style.display = "none";
     }
-}
+};
 
 
 //--------------------------------------------- Leaflet Map ----------------------------------------------------------//
