@@ -2,9 +2,29 @@ import React, {Component} from 'react';
 import '../assets/styles/coaches.css'
 
 // Images
-import team1 from '../assets/img/team/marinos.jpg';
-import team2 from '../assets/img/team/alekos.jpg';
+import team1 from '../assets/img/coaches/69423072_3238381526187039_3449618990849064960_o.jpg';
+import TeamMember from "./TeamMember";
 
+const coaches = [
+
+    {className: '', src: team1, name: 'Alekos', text: 'By combining the movement one conducts in their ' +
+                                    'everyday lives, from housewives and young children to professional ' +
+                                    'athletes and special forces individuals, in Fitness Factory is the ' +
+                                    'ultimate workout!'},
+    {className: 'timeline-inverted', src: team1, name: 'Alekos', text: 'By combining the movement one conducts in their ' +
+            'everyday lives, from housewives and young children to professional ' +
+            'athletes and special forces individuals, in Fitness Factory is the ' +
+            'ultimate workout!'},
+    {className: '', src: team1, name: 'Alekos', text: 'By combining the movement one conducts in their ' +
+            'everyday lives, from housewives and young children to professional ' +
+            'athletes and special forces individuals, in Fitness Factory is the ' +
+            'ultimate workout!'},
+    {className: 'timeline-inverted', src: team1, name: 'Alekos', text: 'By combining the movement one conducts in their ' +
+            'everyday lives, from housewives and young children to professional ' +
+            'athletes and special forces individuals, in Fitness Factory is the ' +
+            'ultimate workout!'}
+
+];
 
 class Team extends Component {
     render() {
@@ -19,70 +39,14 @@ class Team extends Component {
                     <div className="row">
                         <div className="col-lg-12">
                             <ul className="timeline">
-                                <li>
-                                    <div className="timeline-image">
-                                        <img className="rounded-circle img-fluid" src={team1} alt=""/>
-                                    </div>
-                                    <div className="timeline-panel">
-                                        <div className="timeline-heading">
-                                            <h4>Marinos Papakyriacou</h4>
-                                        </div>
-                                        <div className="timeline-body">
-                                            <p className="text-muted">By combining the movement one conducts in their
-                                                everyday lives, from housewives and young children to professional
-                                                athletes and special forces individuals, in Fitness Factory is the
-                                                ultimate workout!</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li className="timeline-inverted">
-                                    <div className="timeline-image">
-                                        <img className="rounded-circle img-fluid" src={team2} alt=""/>
-                                    </div>
-                                    <div className="timeline-panel">
-                                        <div className="timeline-heading">
-                                            <h4>Andreas Ketonis</h4>
-                                        </div>
-                                        <div className="timeline-body">
-                                            <p className="text-muted">The workouts will keep you honest and force you to
-                                                attack your weaknesses, making you a better all-around athlete. This is
-                                                something that nearly everyone avoids when training on their own, which
-                                                severely limits progress.</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div className="timeline-image">
-                                        <img className="rounded-circle img-fluid" src={team1} alt=""/>
-                                    </div>
-                                    <div className="timeline-panel">
-                                        <div className="timeline-heading">
-                                            <h4>Marinos Papakyriacou</h4>
-                                        </div>
-                                        <div className="timeline-body">
-                                            <p className="text-muted">By combining the movement one conducts in their
-                                                everyday lives, from housewives and young children to professional
-                                                athletes and special forces individuals, in Fitness Factory is the
-                                                ultimate workout!</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li className="timeline-inverted">
-                                    <div className="timeline-image">
-                                        <img className="rounded-circle img-fluid" src={team2} alt=""/>
-                                    </div>
-                                    <div className="timeline-panel">
-                                        <div className="timeline-heading">
-                                            <h4>Andreas Ketonis</h4>
-                                        </div>
-                                        <div className="timeline-body">
-                                            <p className="text-muted">The workouts will keep you honest and force you to
-                                                attack your weaknesses, making you a better all-around athlete. This is
-                                                something that nearly everyone avoids when training on their own, which
-                                                severely limits progress.</p>
-                                        </div>
-                                    </div>
-                                </li>
+
+                                {coaches.map((coach, index) => {
+                                    return (<TeamMember
+                                        key={index}
+                                        {...coach}
+                                    />);
+                                })}
+
                                 <li className="timeline-inverted">
                                     <div className="timeline-image">
                                         <h4>Start
