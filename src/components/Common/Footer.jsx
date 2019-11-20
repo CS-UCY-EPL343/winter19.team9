@@ -19,11 +19,6 @@ class Footer extends Component {
                             <a href = "https://www.instagram.com/fitness_factory_nicosia/?hl=en">
                                 <i className = "styleImage fa fa-instagram" />
                             </a>
-                            <p className= "fa-pull-left">
-                                <br/>
-                                <br/>
-                                &copy;"FitnessFactoryNicosia"
-                            </p>
                         </div>
                         <div className = "col-lg-6">
                             <h2><b>About The Club</b></h2>
@@ -33,6 +28,11 @@ class Footer extends Component {
                                 <br />
                                That is what differentiates us!</p>
                         </div>
+                    <div className = "containers">
+                        <p className= "fa-pull-left">
+                            &copy;"FitnessFactoryNicosia"
+                        </p>
+                    </div>
                     </div>
                 </div>
             </footer>
