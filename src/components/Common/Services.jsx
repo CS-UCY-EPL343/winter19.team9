@@ -32,7 +32,7 @@ class Services extends Component {
                                 transform: 'translate(-50%, -50%)'
                             } }
                             >
-                                <img className = { 'bgImage' } src = { bgImage } alt = { 'Image' } />
+                                <img className = { 'bgImage' } src = { bgImage } alt = { 'Background' } />
                             </AnimatedOnScroll>
 
                             <AnimatedOnScroll animationIn = "fadeInLeft">

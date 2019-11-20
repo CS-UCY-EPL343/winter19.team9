@@ -1,3 +1,8 @@
+#register {
+    padding: 5rem 0;
+}
+
+
 /* @extend display-flex; */
 #register .display-flex, .form-flex, .form-row, .add-info-link {
     display: flex;
@@ -69,7 +74,7 @@
 #register .container {
     width: 680px;
     position: relative;
-    margin: 5rem auto;
+    margin: 0 auto;
     padding: 1rem 0;
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1);
