@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import img1                           from '../assets/img/FFNFamily/FamilyPic.jpg';
-import LeafletMap           from './LeafletMap';
-import {Carousel} from "react-bootstrap";
 
 class Footer extends Component {
     render() {
@@ -28,11 +25,11 @@ class Footer extends Component {
                                 <br />
                                That is what differentiates us!</p>
                         </div>
-                    <div className = "containers">
-                        <p className= "fa-pull-left">
-                            &copy;"FitnessFactoryNicosia"
-                        </p>
-                    </div>
+                        <div className = "containers">
+                            <p className = "fa-pull-left">
+                                &copy;"FitnessFactoryNicosia"
+                            </p>
+                        </div>
                     </div>
                 </div>
             </footer>

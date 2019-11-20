@@ -23,7 +23,7 @@ class Services extends Component {
                 <div className = { 'service-area' }>
                     <div className = { 'container' }>
                         <div className = { 'row' }>
-                            <AnimatedOnScroll animationInDelay="500" animationIn = "zoomInRight" style = { {
+                            <AnimatedOnScroll animationInDelay={500} animationIn = "zoomInRight" style = { {
                                 position : 'absolute',
                                 height   : 500,
                                 width    : 500,

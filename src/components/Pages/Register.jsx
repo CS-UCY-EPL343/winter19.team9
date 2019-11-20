@@ -16,7 +16,7 @@ let styles = {
 
 class Register extends Component {
 
-    componentWillMount() {
+    componentDidMount() {
         for (let i in styles.body) {
             // noinspection JSUnfilteredForInLoop
             document.body.style[i] = styles.body[i];
@@ -39,7 +39,7 @@ class Register extends Component {
                         <div className = "signup-content">
                             <form method = "POST" id = "signup-form" className = "signup-form was-validated"
                                   noValidate = "novalidate"
-                                  onInput = 're_password.set`CustomValidity(password.value != re_password.value ? "Passwords do not match." : "")'
+                                  // onInput = 're_password.set`CustomValidity(password.value != re_password.value ? "Passwords do not match." : "")'
                             >
                                 <div className = "form-row">
                                     <FormInput
@@ -84,7 +84,7 @@ class Register extends Component {
                                         </b></label>
                                         <div className = "form-flex">
                                             <input type = "radio" name = "gender" value = "male" id = "male"
-                                                   checked = "checked"
+                                                   defaultChecked
                                             />
                                             <label htmlFor = "male">Male</label>
                                             <input type = "radio" name = "gender" value = "female" id = "female" />
@@ -210,9 +210,9 @@ class Register extends Component {
                                     </div>
                                 </div>
                                 <div className = "form-group">
-                                    <form method = "get" action = "#">
+                                    {/*<form method = "get" action = "#">*/}
                                         <button type = "submit" className = "registerbtn">Register</button>
-                                    </form>
+                                    {/*</form>*/}
                                 </div>
                             </form>
 

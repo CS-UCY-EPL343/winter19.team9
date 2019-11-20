@@ -89,7 +89,7 @@ class ContactUs extends Component {
                         <div className="col-lg-6 text-center">
                             <div className="mapouter">
                                 <div className="gmap_canvas">
-                                    <iframe width="550" height="400" id="gmap_canvas"
+                                    <iframe title='gmap_canvas' width="550" height="400" id="gmap_canvas"
                                             src="https://maps.google.com/maps?q=fitness%20factory%20nicosia&t=&z=13&ie=UTF8&iwloc=&output=embed"
                                             frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"/>
                                     <a href="https://www.embedgooglemap.net/blog/divi-discount-code-elegant-themes-coupon/">embedgooglemap.net</a>
