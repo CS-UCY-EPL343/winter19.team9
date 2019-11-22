@@ -10,6 +10,7 @@
     "react-bootstrap": "^1.0.0-beta.14",
     "react-bootstrap-modal": "^4.2.0",
     "react-dom": "^16.11.0",
+    "react-paypal-express-checkout": "^1.0.5",
     "react-scripts": "3.2.0"
   },
   "scripts": {

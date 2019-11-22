@@ -44,7 +44,7 @@ class Navigation extends Component {
                             <li className = "nav-item">
                                 <ToggleModal
                                     btnClass = { 'nav-link' }
-                                    btnText = { ['Login/Register ', <i className = "fas fa-sign-in-alt" />] }
+                                    btnText = { ['Login/Register ', <i className = "fas fa-sign-in-alt" key={Math.random()}/>] }
                                     modalSize = { 'md' }
                                     modalHeader = { 'Login Form' }
                                     modalBody={<LoginModal/>}
