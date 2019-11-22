@@ -13,7 +13,7 @@
                         event.preventDefault();
                         event.stopPropagation();
                     } else {
-                        sendMail();
+                        //sendMail();
                     }
                     form.classList.add('was-validated');
                 }, false);

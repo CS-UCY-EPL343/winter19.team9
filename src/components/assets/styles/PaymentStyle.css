@@ -249,3 +249,18 @@
     background-color: #079ad9;
 }
 
+#CheckoutButton .btn {
+
+}
+
+.btn-primary{
+    font-family: 'Montserrat', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    padding: 20px 40px;
+    background-color: #ef233c;
+    border: none;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
