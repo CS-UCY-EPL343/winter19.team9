@@ -4,6 +4,8 @@ import CarouselHp from '../Common/CarouselHP';
 import Services from '../Common/Services';
 // Images
 import logo_img from '../../logo.svg';
+import ToggleModal from "../Common/ToggleModal";
+import PaymentModal from "../Common/PaymentModal";
 
 class Home extends Component {
     render() {
@@ -16,6 +18,14 @@ class Home extends Component {
                 </div>
 
                 <Services/>
+
+                <ToggleModal
+                    btnClass = { 'nav-link' }
+                    btnText = { ['Payment ', <i className = "fas fa-sign-in-alt" />] }
+                    modalSize = { 'lg' }
+                    modalHeader = { 'Payment' }
+                    modalBody={<PaymentModal/>}
+                />
             </div>
         )
     }
