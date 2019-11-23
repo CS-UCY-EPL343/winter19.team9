@@ -22,7 +22,7 @@ window.onscroll = function () {
 };
 
 /**
- * When the user scrolls down 20px from the top of the document, show the button
+ * When the user scrolls down 20px from the top of the document, show the button and NavBar Background
  */
 function scrollFunction() {
     if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {

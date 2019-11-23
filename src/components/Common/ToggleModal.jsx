@@ -20,7 +20,6 @@ export default class ToggleModal extends React.Component {
         let Comp = this.props.modalBody;
         return (
             <div>
-                {/*<Button color="danger" onClick={this.toggle}>Open</Button>*/ }
                 <Button className = { this.props.btnClass } onClick = { this.toggle }
                 >{ this.props.btnText || 'Button' }</Button>
 

@@ -15,18 +15,18 @@ const carousel = [
     },
     {
         src  : img2,
-        label: 'First slide label',
-        text : 'Nulla vitae elit libero, a pharetra augue mollis interdum.'
+        label: 'Second slide label',
+        text : 'Ab continet efficere si at liberius differre impulsum.'
     },
     {
         src  : img3,
-        label: 'First slide label',
-        text : 'Nulla vitae elit libero, a pharetra augue mollis interdum.'
+        label: 'Third slide label',
+        text : 'Mo co exhibentur praesertim varietates ha.'
     },
     {
         src  : img4,
-        label: 'First slide label',
-        text : 'Nulla vitae elit libero, a pharetra augue mollis interdum.'
+        label: 'Forth slide label',
+        text : 'Paulo ipsos ei istud se at supra entis de.'
     }
 ];
 

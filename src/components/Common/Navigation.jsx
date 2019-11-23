@@ -27,7 +27,7 @@ class Navigation extends Component {
                     <div className = "collapse navbar-collapse" id = "navbarResponsive">
                         <ul className = "navbar-nav text-uppercase ml-auto">
                             <li className = "nav-item">
-                                <Link className = "nav-link" to = "/">Services</Link>
+                                <Link className = "nav-link" to = "/services">Services</Link>
                             </li>
                             <li className = "nav-item">
                                 <Link className = "nav-link" to = "/">Classes</Link>
