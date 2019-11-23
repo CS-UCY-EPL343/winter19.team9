@@ -1,0 +1,514 @@
+/************************************ FONTS ************************************/
+/*noinspection CssUnknownTarget*/
+/*@import url(http://weloveiconfonts.com/api/?family=entypo|fontawesome|zocial);*/
+/* entypo */
+[class*="entypo-"]:before {
+    font-family: 'entypo', sans-serif;
+}
+
+/* fontawesome */
+[class*="fontawesome-"]:before {
+    font-family: 'FontAwesome', sans-serif;
+}
+
+/* zocial */
+[class*="zocial-"]:before {
+    font-family: 'zocial', sans-serif;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    font-family: 'icomoon', serif;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-cloudy:before {
+    content: "\e60f";
+}
+
+.icon-sun:before {
+    content: "\e610";
+}
+
+.icon-cloudy2:before {
+    content: "\e611";
+}
+
+/************************************* END FONTS *************************************/
+#profile ul {
+    list-style-type: none;
+    margin: 0;
+    padding-left: 0;
+}
+
+
+#profileBlock:hover {
+    transition: .4s;
+    transform: scale(1.02);
+}
+
+#leftBlock:hover {
+    transition: .4s;
+    transform: scale(1.02);
+}
+
+#leftBlock {
+    background-color: #F4EBED;
+    border-radius: 22px;
+    border: 2px solid #ef233c;
+    margin: 5% auto;
+}
+
+#profile .scnd-font-color {
+    color: #4F4E4E;
+}
+
+#profile .input-container {
+    position: relative;
+}
+
+#profile input[type=text] {
+    width: 90%;
+    height: 50px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    padding-left: 45px;
+    background: #E5DDDF;
+    color: #000;
+    border: solid 1px #1f253d;
+    border-radius: 5px;
+}
+
+#profile input[type=text]::-webkit-input-placeholder { /* WebKit browsers */
+    color: #000;
+}
+
+#profile input[type=text]::-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #000;
+}
+
+#profile input[type=text]:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #000;
+}
+
+#profile input[type=text]:focus {
+    outline: none; /* removes the default orange border when focus */
+    border: 1px solid #ef233c;
+}
+
+#profile .input-icon {
+    font-size: 22px;
+    position: absolute;
+    left: 31px;
+    top: 10px;
+}
+
+#profile .horizontal-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+#profile .horizontal-list li {
+    float: left;
+}
+
+#profile .clear {
+    clear: both;
+}
+
+#profile .icon {
+    font-size: 25px;
+}
+
+#profile .titular {
+    display: block;
+    line-height: 60px;
+    margin: 0;
+    text-align: center;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.profile-picture {
+    border-radius: 100%;
+    overflow: hidden;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+
+.big-profile-picture {
+    margin: 0 auto;
+    border: 5px solid #50597b;
+    width: 150px;
+    height: 150px;
+    transition: .5s ease;
+    backface-visibility: hidden;
+    opacity: 1;
+}
+
+
+.middleEdit {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    transform: translate(-50%, -120%);
+    -ms-transform: translate(-50%, -120%);
+    text-align: center;
+}
+
+.profile-picture:hover {
+    opacity: 50%;
+}
+
+.profile-picture:hover .middleEdit {
+    opacity: 1;
+}
+
+.profile-picture:hover .mytext {
+    color: white;
+}
+
+
+.middleEdit .mytext {
+    color: white;
+    font-size: 16px;
+    padding: 16px 32px;
+}
+
+
+/** MAIN CONTAINER **/
+
+#profile {
+    font-family: 'Ubuntu', sans-serif;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+/** CONTAINERS **/
+
+#profileBlock {
+    background: #F4EBED;
+    border-radius: 20px;
+    border: 2px solid #2b2d42;
+    margin: 5% auto;
+}
+
+/******************************************** LEFT CONTAINER *****************************************/
+.menu-box {
+    height: 390px;
+    /*width: 350px;*/
+    width: 80%;
+    border: 2px solid #ef233c;
+}
+
+.menu-box .titular {
+    background: #ef233c;
+    font-size: 24px;
+    font-weight: 300;
+    text-align: center;
+    color: #fff;
+}
+
+.menu-box-menu .icon {
+    display: inline-block;
+    vertical-align: top;
+    width: 28px;
+    margin-left: 20px;
+    margin-right: 15px;
+    color: #000;
+}
+
+.menu-box-number {
+    width: 36px;
+    line-height: 22px;
+    background: #ef233c;
+    text-align: center;
+    border-radius: 15px;
+    /*float: right;*/
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    color: #fff;
+}
+
+.menu-box-menu li {
+    height: 66px;
+    position: relative;
+    border-top: 1px solid #1f253d;
+}
+
+.menu-box-tab {
+    line-height: 60px;
+    display: block;
+    -webkit-transition: background .2s;
+    transition: background .2s;
+}
+
+.menu-box-menu:hover {
+    overflow: hidden;
+}
+
+.menu-box-menu li:hover {
+    background: #E7DDDD;
+    /*border-top: 1px solid #1f253d;*/
+    /*border-bottom: 1px solid #1f253d;*/
+    text-decoration: none;
+    overflow: hidden;
+}
+
+.menu-box-menu #editAccount:hover {
+    overflow: hidden;
+    border-bottom-right-radius: 22px;
+    border-bottom-left-radius: 22px;
+    height: 99%;
+}
+
+.menu-box-tab:hover .icon {
+    color: #000;
+}
+
+.menu-box-tab:hover .menu-box-number {
+    background: #d90429;
+}
+
+
+.middle-container {
+    margin: 0 25px;
+}
+
+.profile {
+    height: 390px;
+    width: 80%;
+}
+
+.user-name {
+    margin: 25px 0 16px;
+    font-size: 24px;
+    font-weight: 300;
+    text-align: center;
+    color: #000;
+}
+
+.profile-description {
+    width: 210px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.profile-options {
+    padding-top: 23px;
+}
+
+.profile-options li {
+    border-left: 1px solid #1f253d;
+}
+
+.profile-options p {
+    margin: 0;
+}
+
+.profile-options a {
+    display: block;
+    width: 99px;
+    line-height: 60px;
+    text-align: center;
+    -webkit-transition: background .3s;
+    transition: background .3s;
+}
+
+.profile-options a:hover {
+    text-decoration: none;
+    background: #ef233c;
+}
+
+
+.menu-text {
+    font-family: Quicksand, serif;
+    color: #262627;
+}
+
+
+/********************************************* RIGHT CONTAINER ****************************************/
+
+
+/* BMI  */
+#backBox {
+    /*   background-color: #edf2f4;  */
+    background-color: #F4EBED;
+    /*width: 350px;*/
+    width: 80%;
+    height: 390px;
+    border-radius: 20px;
+    display: block;
+    border: solid 2px #ef233c;
+    margin: 5% auto;
+}
+
+#backBox:hover {
+    transition: .4s;
+    transform: scale(1.02);
+}
+
+.text-input {
+    width: 60px;
+    height: 30px;
+    border-radius: 10px;
+    background-color: #fff;
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    color: #000;
+}
+
+
+.text-input:last-child {
+    margin-bottom: 35px;
+}
+
+.text-input:hover {
+    background-color: #DED0D4;
+}
+
+#submitBMI {
+    border: none;
+    border-radius: 10px;
+    height: 40px;
+    width: 140px;
+    background-color: #ef233c;
+    color: #edf2f4;
+    margin: auto;
+    display: block;
+    outline: none;
+    cursor: pointer;
+}
+
+#submitBMI:hover {
+    background-color: #d90429;
+}
+
+.centerGender {
+    margin-right: auto;
+    margin-left: auto;
+    padding-inline: inherit;
+    padding-inline-start: inherit;
+}
+
+#profile .text {
+    display: inline-block;
+    color: black;
+    margin: 5px 20px 5px 8px;;
+}
+
+#profile .row-one {
+    padding: 0 20px 10px 20px;
+    width: 100%;
+}
+
+#profile .row-two {
+    padding: 5px 20px 0 20px;
+    height: 35%;
+    width: 100%;
+}
+
+
+.bmi-container {
+    display: inline-block;
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.bmi-container input {
+    position: absolute;
+    opacity: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #9D9DA1;
+    border-radius: 50%;
+}
+
+.bmi-container:hover input ~ .checkmark {
+    background-color: #D4A0A0;
+}
+
+.bmi-container input:checked ~ .checkmark {
+    background-color: #ef233c;
+}
+
+#bmiHeading {
+    font-size: 24px;
+    font-weight: 300;
+    text-align: center;
+    padding: 15px;
+    font-family: Quicksand, serif;
+    color: #000;
+}
+
+#bmiHeading b {
+    font-size: 32px;
+    font-weight: 300;
+    color: #ef233c;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+#profile .row-one input {
+
+}
+
+.bmi-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.bmi-container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* timetable  */
+
+#profile {
+    padding-top: 100px;
+    width: 100%;
+    margin: auto;
+    font-family: 'Karla', serif;
+    color: #fff;
+    background: #232526; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #414345, #232526); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
