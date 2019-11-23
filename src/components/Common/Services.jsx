@@ -3,7 +3,7 @@ import '../assets/styles/homePage.css'
 import ServiceGoal          from './ServiceGoal';
 import { AnimatedOnScroll } from 'react-animated-css-onscroll';
 // Images
-import bgImage              from '../../logo.svg';
+import bgImage              from '../assets/img/logos/ffLogoTransparent.png';
 
 class Services extends Component {
     render() {
@@ -27,8 +27,8 @@ class Services extends Component {
                                 position : 'absolute',
                                 height   : 500,
                                 width    : 500,
-                                top      : '50%',
-                                left     : '50%',
+                                top      : '40%',
+                                left     : '45%',
                                 transform: 'translate(-50%, -50%)'
                             } }
                             >

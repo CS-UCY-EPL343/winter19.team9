@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import CarouselHp from '../Common/CarouselHP';
 import Services from '../Common/Services';
 // Images
-import logo_img from '../../logo.svg';
+import logo_img from '../assets/img/logos/fitnessFactoryLogo.png';
 import ToggleModal from "../Common/ToggleModal";
 import PaymentModal from "../Common/PaymentModal";
 

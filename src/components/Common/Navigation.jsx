@@ -11,7 +11,7 @@ class Navigation extends Component {
                 <div className = "container-fluid mx-auto">
                     <Link className = "navbar-brand" to = "/">
                         Fitness Factory Nicosia&nbsp;
-                        <img id = { 'logo' } src = { this.props.img } alt = 'Logo' height = { 48 } width = { 48 } />
+                        <img id = { 'logo' } src = { this.props.img } alt = 'Logo' height = { 64 } width = { 64 } />
                     </Link>
                     <button className = "navbar-toggler navbar-toggler-right"
                             type = "button"

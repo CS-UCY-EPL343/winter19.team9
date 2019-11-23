@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Navigation           from './Common/Navigation';
 // Images
-import logo_img             from '../logo.svg';
+import logo_img             from './assets/img/logos/ffLogoTransparent.png';
 import Footer               from './Common/Footer';
 
 class PageWrapper extends Component {
