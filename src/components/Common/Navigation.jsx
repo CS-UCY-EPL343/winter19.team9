@@ -34,6 +34,9 @@ class Navigation extends Component {
                                 <a className = "nav-link" href='/#our-services'>Services</a>
                             </li>
                             <li className = "nav-item">
+                                <Link className = "nav-link" to = "/classes">Classes</Link>
+                            </li>
+                            <li className = "nav-item">
                                 <Link className = "nav-link" to = "/profile">Profile</Link>
                             </li>
                             <li className = "nav-item">

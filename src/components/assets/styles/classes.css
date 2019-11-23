@@ -1,0 +1,128 @@
+#classes html, body {
+	height: 100%;
+	font-family: "Roboto", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+	background: #1b1b1b;
+}
+
+#classes h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	color: #111111;
+	font-weight: 600;
+}
+
+#classes h1 {
+	font-size: 70px;
+}
+
+#classes h2 {
+	font-size: 36px;
+}
+
+#classes h3 {
+	font-size: 30px;
+}
+
+#classes h4 {
+	font-size: 24px;
+}
+
+#classes h5 {
+	font-size: 18px;
+}
+
+#classes h6 {
+	font-size: 16px;
+}
+
+#classes p {
+	font-size: 15px;
+	color: #bebebe;
+	font-weight: 400;
+	line-height: 1.6;
+	margin: 0 0 15px 0;
+}
+
+#classes img {
+	max-width: 100%;
+}
+
+#classes input:focus, select:focus, button:focus, textarea:focus {
+	outline: none;
+}
+
+#classes a:hover, a:focus {
+	text-decoration: none;
+	outline: none;
+	color: #fff;
+}
+
+#classes ul, ol {
+	padding: 0;
+	margin: 0;
+}
+
+/*---------------------
+  Classes
+-----------------------*/
+
+
+.classes-section {
+	padding-bottom: 52px;
+	height: 5000px;
+}
+
+#single-classes:hover {
+	transition: .4s;
+	transform: scale(1.05);
+	box-shadow: inset;
+}
+
+.single-classes {
+	margin-bottom: 40px;
+	background-color: #353535;
+	border-radius: 10px;
+}
+
+.single-classes .classes-img {
+	padding: 15px;
+	margin-bottom: 21px;
+}
+
+.single-classes .classes-img img {
+	min-width: 100%;
+	border-radius: 8px;
+}
+
+.single-classes .classes-text {
+	text-align: center;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.single-classes .classes-text h5 {
+	color: #dadada;
+	font-size: 18px;
+	font-weight: 700;
+	text-transform: uppercase;
+	margin-bottom: 21px;
+}
+
+.single-classes .classes-text p {
+	color: #aaaaaa;
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 30px;
+	padding-bottom: 50px;
+}
+
+.page-title{
+	padding-top: 50px;
+	padding-bottom: 40px;
+}
+
+.page-title h1{
+	color: #dadada;
+	text-align: center;
+}
