@@ -1,4 +1,5 @@
 {
+  "homepage": "https://cs-ucy-epl343.github.io/winter19.team9/",
   "name": "winter19.team9",
   "version": "0.1.0",
   "private": true,
@@ -14,6 +15,8 @@
     "react-scripts": "3.2.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -35,6 +38,7 @@
     ]
   },
   "devDependencies": {
+    "gh-pages": "^2.1.1",
     "react-router-dom": "^5.1.2",
     "reactstrap": "latest"
   }
