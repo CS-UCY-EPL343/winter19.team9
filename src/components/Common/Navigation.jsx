@@ -5,6 +5,7 @@ import LoginModal           from './LoginModal';
 
 class Navigation extends Component {
     render() {
+        // noinspection HtmlUnknownAnchorTarget,HtmlUnknownTarget
         return (
             // Navigation
             <nav className = "navbar navbar-expand-lg navbar-dark fixed-top" id = "mainNav">
@@ -27,7 +28,10 @@ class Navigation extends Component {
                     <div className = "collapse navbar-collapse" id = "navbarResponsive">
                         <ul className = "navbar-nav text-uppercase ml-auto">
                             <li className = "nav-item">
-                                <Link className = "nav-link" to = "/services">Services</Link>
+                                <Link className = "nav-link" to = "/">Home</Link>
+                            </li>
+                            <li className = "nav-item">
+                                <a className = "nav-link" href='/#our-services'>Services</a>
                             </li>
                             <li className = "nav-item">
                                 <Link className = "nav-link" to = "/">Classes</Link>
@@ -36,10 +40,7 @@ class Navigation extends Component {
                                 <Link className = "nav-link" to = "/about">About</Link>
                             </li>
                             <li className = "nav-item">
-                                <Link className = "nav-link" to = "/">Team</Link>
-                            </li>
-                            <li className = "nav-item">
-                                <Link className = "nav-link" to = "/">Contact&nbsp;Us</Link>
+                                <a className = "nav-link" href='/about#contact'>Contact&nbsp;Us</a>
                             </li>
                             <li className = "nav-item">
                                 <ToggleModal
