@@ -7,6 +7,7 @@ import Register from './components/Pages/Register';
 import ScrollToTop from './components/Common/ScrollToTop';
 import AboutUs from "./components/Pages/AboutUs";
 import Profile from "./components/Common/Profile";
+import Classes from "./components/Common/Classes";
 
 class App extends Component {
     render() {
@@ -33,6 +34,11 @@ class App extends Component {
                     <Route
                         path="/profile"
                         component={Profile}
+                    />
+
+                    <Route
+                        path="/classes"
+                        component={Classes}
                     />
 
                 </PageWrapper>
