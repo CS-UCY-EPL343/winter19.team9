@@ -1,20 +1,20 @@
 /* Universal Styles */
 body {
-    overflow-x  : hidden;
-    font-family : 'Roboto Slab', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    overflow-x: hidden;
+    font-family: 'Roboto Slab', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 p {
-    line-height : 1.75;
+    line-height: 1.75;
 }
 
 a {
-    color : #EF233C;
+    color: #EF233C;
 }
 
 a:hover {
-    color : #D90429;
+    color: #D90429;
 }
 
 h1,
@@ -23,13 +23,13 @@ h3,
 h4,
 h5,
 h6 {
-    font-weight : 700;
-    font-family : 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    font-weight: 700;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 .fa {
-    display : inline;
+    display: inline;
 }
 
 /* Navigation Bar Styles */
@@ -38,109 +38,110 @@ h6 {
 }
 
 #mainNav .navbar-toggler {
-    font-size        : 12px;
-    right            : 0;
-    padding          : 13px;
-    text-transform   : uppercase;
-    color            : #EDF2F4;
-    border           : 0;
-    background-color : #EF233C;
-    font-family      : 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    font-size: 12px;
+    right: 0;
+    padding: 13px;
+    text-transform: uppercase;
+    color: #EDF2F4;
+    border: 0;
+    background-color: #EF233C;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 #mainNav .navbar-brand {
-    color       : #EF233C;
-    font-family : 'Kaushan Script', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    color: #EF233C;
+    font-family: 'Kaushan Script', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 #mainNav .navbar-brand.active, #mainNav .navbar-brand:active, #mainNav .navbar-brand:focus, #mainNav .navbar-brand:hover {
-    color : #D90429;
+    color: #D90429;
 }
 
 #mainNav .navbar-nav .nav-item .nav-link {
-    font-size      : 90%;
-    font-weight    : 400;
-    padding        : 0.75em 0;
-    letter-spacing : 1px;
-    color          : #EDF2F4;
-    font-family    : 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    font-size: 90%;
+    font-weight: 400;
+    padding: 0.75em 0;
+    letter-spacing: 1px;
+    color: #EDF2F4;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 #mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover {
-    color : #D90429;
+    color: #D90429;
 }
 
-@media (max-width : 992px) {
+@media (max-width: 992px) {
     #mainNav {
-        background-color : #2B2D42 !important;
+        background-color: #2B2D42 !important;
     }
 }
 
-@media (min-width : 1100px) {
+@media (min-width: 1100px) {
     #mainNav .navbar-nav .nav-item .nav-link {
-        padding : 1.1em 1.0em !important;
+        padding: 1.1em 1.0em !important;
     }
 }
 
-@media (min-width : 992px) {
+@media (min-width: 992px) {
     #mainNav {
         height: 100px;
-        padding-top        : 25px;
-        padding-bottom     : 25px;
-        -webkit-transition : padding-top 0.3s, padding-bottom 0.3s;
-        transition         : padding-top 0.3s, padding-bottom 0.3s;
-        border             : none;
+        padding-top: 25px;
+        padding-bottom: 25px;
+        -webkit-transition: padding-top 0.3s, padding-bottom 0.3s;
+        transition: padding-top 0.3s, padding-bottom 0.3s;
+        border: none;
         /*background-color   : transparent;*/
     }
-    
+
     #mainNav .navbar-brand {
-        font-size          : 1.75em;
-        -webkit-transition : all 0.3s;
-        transition         : all 0.3s;
+        font-size: 1.75em;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
     }
-    
+
     #mainNav .navbar-nav .nav-item .nav-link {
-        padding : 1.1em 0.3em ;
+        padding: 1.1em 0.3em;
     }
-    
+
     #mainNav.navbar-shrink {
-        padding-top      : 0;
-        padding-bottom   : 0;
-        background-color : #212529;
+        padding-top: 0;
+        padding-bottom: 0;
+        background-color: #212529;
     }
-    
+
     #mainNav.navbar-shrink .navbar-brand {
-        font-size : 1.25em;
-        padding   : 12px 0;
+        font-size: 1.25em;
+        padding: 12px 0;
     }
 }
 
 /* To Top Button */
 #to-top {
-    display          : none; /* Hidden by default */
-    position         : fixed;
-    bottom           : 20px;
-    right            : 30px;
-    z-index          : 99;
-    border           : none;
-    outline          : none;
-    background-color : #EF233C;
-    color            : #EDF2F4;
-    cursor           : pointer; /* Mouse pointer on hover */
-    padding          : 15px;
-    border-radius    : 10px;
-    font-size        : 18px;
+    display: none; /* Hidden by default */
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: #EF233C;
+    color: #EDF2F4;
+    cursor: pointer; /* Mouse pointer on hover */
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 18px;
 }
 
 #to-top:hover {
-    background-color : #D90429;
+    background-color: #D90429;
 }
 
 /* Footer */
-.footer{
+.footer {
+    /*display: block;*/
     position: relative;
     left: 0;
     bottom: 0;
@@ -151,12 +152,45 @@ h6 {
     padding: 2rem;
 }
 
-.footer h2 {
+.footer h2, h6 {
+    position: relative;
     color: #EF233C;
 }
 
+.footer p {
+    position: static;
+    color: #EDF2F4;
+}
+
 .footer .styleImage {
-    font-size: 25px ;
+    font-size: 25px;
     margin: 5px;
     border: none;
+}
+
+.footer .row {
+    font-family: 'Material-Design-Iconic-Font', serif;
+}
+
+.footer .col-lg-3 {
+    display: block;
+    width: 50%;
+}
+
+.footer .f-address{
+    width: 100px;
+}
+
+.footer .about-icon {
+    padding-right: 20px;
+}
+
+.footer .AboutUs{
+    width: 100px;
+    position: relative;
+}
+
+.footer .GetHelp {
+    width: 100px;
+    color: #EDF2F4;
 }
