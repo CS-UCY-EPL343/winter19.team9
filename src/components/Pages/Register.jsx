@@ -35,7 +35,7 @@ class Register extends Component {
             <div id = "register" className = "main">
                 <section className = "signup">
                     <div className = "container">
-                        <h1 className = "text-center">Sign Up Form</h1>
+                        <h1 className = "text-center veryBlack">Sign Up Form</h1>
                         <div className = "signup-content">
                             <form method = "POST" id = "signup-form" className = "signup-form was-validated"
                                   noValidate = "novalidate"
@@ -181,7 +181,11 @@ class Register extends Component {
 
                                 </div>
 
-                                <p><b>By creating an account you agree to our <a data-toggle="modal" href={"#exampleModalLong"}>Terms & Privacy</a>.</b></p>
+                                <div id = "term-check" className = "Term Class">
+                                    <input type = "checkbox" name = "term"/>
+                                    <p><b>By creating an account you agree to our <a data-toggle="modal" href={"#exampleModalLong"}>Terms & Privacy</a>.</b></p>
+
+                                </div>
                                 <div className="modal fade" id="exampleModalLong" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLong" aria-hidden="true">>
                                     <div className="modal-dialog" role="document">
                                         <div className="modal-content">

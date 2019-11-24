@@ -63,7 +63,22 @@
 /*    background-image: url("../img/Register Background/RegisterPic.jpg");*/
 /*    padding: 0 0;*/
 /*}*/
+#register #term-check > input{
+    display: inline-block;
+    width: 20px;
+}
 
+#register #term-check p {
+    margin-bottom: 25px;
+    display: inline-block;
+    width: 335px;
+}
+#register .veryBlack{
+    color: black;
+}
+#register .term-check{
+   margin-right: auto;
+}
 #register a {
     color: #EF233C;
 }
@@ -79,7 +94,8 @@
     box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1);
-    background: linear-gradient(to right,grey,lightgrey,grey);
+    background-image: linear-gradient(to right, #d2d4dc, #d5d7df, #d8dae2, #dbdde5, #dee0e8, #dee0e8, #E2E4EC, #E2E4EC, #dee0e8, #dee0e8, #dbdde5, #d8dae2, #d5d7df, #d2d4dc);
+    /*background: linear-gradient(to right,grey,lightgrey,grey);*/
     border-radius: 5%;
 }
 #register .signLink {
