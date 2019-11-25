@@ -255,15 +255,28 @@
 }
 
 .menu-box-tab {
-    line-height: 60px;
-    display: block;
+    line-height: 50px;
+    display: inline-block;
     -webkit-transition: background .2s;
     transition: background .2s;
+    cursor: pointer;
+    background-color: inherit;
+    color: inherit;
+    border: none;
+    width: 100%;
+    text-align: left;
+    vertical-align: center;
 }
 
 .menu-box-menu:hover {
     overflow: hidden;
 }
+
+.menu-box-menu li button i {
+    padding-right: 10px;
+    font-size: 20px;
+}
+
 
 .menu-box-menu li:hover {
     background: #E7DDDD;
@@ -271,6 +284,11 @@
     /*border-bottom: 1px solid #1f253d;*/
     text-decoration: none;
     overflow: hidden;
+}
+
+.menu-box-menu li button:hover {
+    background-color: inherit;
+    color: black;
 }
 
 .menu-box-menu #editAccount:hover {

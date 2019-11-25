@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import { AnimatedOnScroll } from 'react-animated-css-onscroll';
+import '../assets/styles/announcementModal.css'
 
 class Announcements extends Component {
     render() {
@@ -7,15 +9,15 @@ class Announcements extends Component {
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal_background">
-                            <!-- Modal Header -->
+                            {/*// <!-- Modal Header -->*/}
                             <div className="modal-header" id="AnnouncementsHeader">
                                 <h3>Fewest Announcement</h3>
                                 <button type="button" className="close" data-dismiss="modal">&times;</button>
                             </div>
                         </div>
-                        <!-- Modal body -->
+                        {/*// <!-- Modal body -->*/}
                         <div className="modal-body">
-                            <!-- Flexbox container for aligning the toasts -->
+                            {/*// <!-- Flexbox container for aligning the toasts -->*/}
                             <div aria-live="polite"
                                  aria-atomic="true"
                                  className="d-flex justify-content-center align-items-center"
@@ -79,7 +81,7 @@ class Announcements extends Component {
                             </div>
                         </div>
 
-                        <!-- Modal footer -->
+                        {/*// <!-- Modal footer -->*/}
                         <div className="modal_background">
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-danger" data-dismiss="modal">Close</button>
