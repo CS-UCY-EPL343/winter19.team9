@@ -16,14 +16,6 @@ class Home extends Component {
                 </div>
 
                 <Services/>
-
-                {/*<ToggleModal*/}
-                {/*    btnClass = { 'nav-link' }*/}
-                {/*    btnText = { ['Payment ', <i className = "fas fa-sign-in-alt" key={Math.random()} />] }*/}
-                {/*    modalSize = { 'md' }*/}
-                {/*    modalHeader = { 'Payment' }*/}
-                {/*    modalBody={<PaymentModal/>}*/}
-                {/*/>*/}
             </div>
         )
     }
