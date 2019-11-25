@@ -38,7 +38,7 @@ class SettingsProfile extends Component {
                         </li>
                         <li>
                             <Button className = { 'nav-link menu-box-tab menu-text ' } onClick = { this.togglePayment }>
-                                <i className = "scnd-font-color fas fa-sync-alt" /> Activate/Renew Membership
+                                <i className = "scnd-font-color fas fa-sync-alt" /> Membership
                             </Button>
                             <ToggleModal
                                 modal = { this.state.modalPayment }
