@@ -1,3 +1,7 @@
+#about {
+  background-color: #1b1b1b;
+}
+
 #about p {
   line-height: 1.75;
 }
@@ -41,6 +45,7 @@
 }
 
 #about h2.section-heading.text-uppercase {
+  margin-top: 100px;
   margin-bottom: 100px;
   font-size: 70px;
   color: #fff;
