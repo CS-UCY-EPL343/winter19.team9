@@ -61,3 +61,104 @@ after redirection from the webapp to paypal's or jcc's web page.
 Basic static tests were implemented by our development team in order to ensure the uninterrupted and correct 
 web application's operation. These consists of several checks on the interface of the web application as well 
 as javascript checks after the user input on our forms.
+
+### Future Intentions
+
+For a more comprehensive and thorough checking, in the future development for the functionality of our web 
+application, automated error checking implementations will be used in each major update of the project.
+
+## Deployment
+
+At the current state a github pages basic deployment will be used in order to test and visualize the web 
+application's interface.
+<pre>
+"scripts": {
+    "predeploy": "npm run build",<br/>
+    "deploy": "gh-pages -d build",<br/>
+    "start": "react-scripts start",<br/>
+    "build": "react-scripts build",<br/>
+    "test": "react-scripts test",<br/>
+    "eject": "react-scripts eject"<br/>
+  }
+  </pre>
+```
+    "predeploy": "npm run build",
+    This command/script performs a compilation before the deployment of the web 
+    application. This is also includes the deploy feature in it.
+    
+```
+
+```
+    "deploy": "gh-pages -d build",
+    This command/script is used to deploy our web application through github pages
+    option with also the corresponding react configurations in order to be able to 
+    view the web application on the go
+```
+```
+    "start": "react-scripts start",
+    This command/script is used to start the necessary scripts required for normal
+    web application's operation with the necessary react features in place.
+```
+```
+    "build": "react-scripts build",
+    This command/script is used to combine the necessary scripts required for normal
+    web application's operation.
+```
+```
+    "test": "react-scripts test",
+    This command/script is used in order to run the necessary react error checkings to 
+    ensure that our web application will run normally.
+```
+```
+    "eject": "react-scripts eject"<br/>
+    This command/script calls the create-react-app which encapsulates all of the npm modules 
+    it is using internally, so that your package.json will be very clean and simple without 
+    you having to worry about it.
+```
+
+## Login Information
+```
+    Username:           Password:
+    coach               1234
+    admin               1234
+    user                1234
+```
+
+## Built With
+
+* [React.js](https://reactjs.org/) - A JavaScript library for building user interfaces
+
+### Future additions
+
+* [Maven](https://maven.apache.org/) - Dependency Management
+* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+
+## Contributing
+
+This web application is being developed within the constraints of a university course subject. Hence the development 
+team is fixed and the web application development is strictly private.
+
+## Versioning
+
+We (the development team) are able to access version iterations or iterative development stages based on 
+our github branches/commits.
+
+## Authors
+
+* **Andreas Loizou** - *Initial work* - [aloizo03](https://github.com/aloizo03)
+* **Panagiotis Melios** - *Initial work* - [pmelio01](https://github.com/pmelio01)
+* **Andreas Paraskeva** - *Initial work* - [aparas01](https://github.com/aparas01)
+* **Antonis Poullis** - *Initial work* - [poullis](https://github.com/poullis)
+* **Loizos Siakallis** - *Initial work* - [lsiaka01](https://github.com/lsiaka01)
+* **Yiannis Sophocleous** - *Initial work* - [isopho01](https://github.com/isopho01)
+
+
+See also the list of [contributors](https://github.com/CS-UCY-EPL343/winter19.team9/graphs/contributors) who participated in this project.
+
+## License
+
+At the current state of the development process there is no licensing approval or request.
+
+## Acknowledgments
+
+* Inspiration: [Bootstrap Templates](https://getbootstrap.com/docs/4.3/examples/) and several [Codepen](https://codepen.io/) examples.
