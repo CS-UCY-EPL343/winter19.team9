@@ -7,7 +7,7 @@ import Register from './components/Pages/Register';
 import ScrollToTop from './components/Common/ScrollToTop';
 import AboutUs from "./components/Pages/AboutUs";
 import Profile from "./components/Common/Profile";
-import Classes from "./components/Common/Classes";
+import Classes from "./components/Pages/Classes";
 
 class App extends Component {
     render() {
