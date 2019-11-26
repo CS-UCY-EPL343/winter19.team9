@@ -1,0 +1,42 @@
+{
+  "files": {
+    "main.css": "/winter19.team9/static/css/main.0d63bcfe.chunk.css",
+    "main.js": "/winter19.team9/static/js/main.f921cee4.chunk.js",
+    "main.js.map": "/winter19.team9/static/js/main.f921cee4.chunk.js.map",
+    "runtime-main.js": "/winter19.team9/static/js/runtime-main.0e1dc25c.js",
+    "runtime-main.js.map": "/winter19.team9/static/js/runtime-main.0e1dc25c.js.map",
+    "static/js/2.3ba05c9d.chunk.js": "/winter19.team9/static/js/2.3ba05c9d.chunk.js",
+    "static/js/2.3ba05c9d.chunk.js.map": "/winter19.team9/static/js/2.3ba05c9d.chunk.js.map",
+    "index.html": "/winter19.team9/index.html",
+    "precache-manifest.06328fbff371618ec76fb64437f5f7b6.js": "/winter19.team9/precache-manifest.06328fbff371618ec76fb64437f5f7b6.js",
+    "service-worker.js": "/winter19.team9/service-worker.js",
+    "static/css/main.0d63bcfe.chunk.css.map": "/winter19.team9/static/css/main.0d63bcfe.chunk.css.map",
+    "static/media/MK7_2008.jpg": "/winter19.team9/static/media/MK7_2008.c4eab072.jpg",
+    "static/media/MK7_2011.jpg": "/winter19.team9/static/media/MK7_2011.e6d41925.jpg",
+    "static/media/MK7_2019.jpg": "/winter19.team9/static/media/MK7_2019.50884345.jpg",
+    "static/media/MK7_2044.jpg": "/winter19.team9/static/media/MK7_2044.7cbcabd0.jpg",
+    "static/media/RegisterPic.jpg": "/winter19.team9/static/media/RegisterPic.e7ad0bb3.jpg",
+    "static/media/About.css": "/winter19.team9/static/media/aboutusimg.231364a7.jpg",
+    "static/media/classes-1.jpg": "/winter19.team9/static/media/classes-1.dc8af237.jpg",
+    "static/media/classes-2.jpg": "/winter19.team9/static/media/classes-2.b9a2f9fb.jpg",
+    "static/media/classes-3.jpg": "/winter19.team9/static/media/classes-3.ab8d8b62.jpg",
+    "static/media/classes-4.jpg": "/winter19.team9/static/media/classes-4.2056b362.jpg",
+    "static/media/classes-5.jpg": "/winter19.team9/static/media/classes-5.28d3eae8.jpg",
+    "static/media/classes-6.jpg": "/winter19.team9/static/media/classes-6.cc540517.jpg",
+    "static/media/coach1.jpg": "/winter19.team9/static/media/coach1.864df216.jpg",
+    "static/media/coach2.jpg": "/winter19.team9/static/media/coach2.5a620835.jpg",
+    "static/media/coach3.jpg": "/winter19.team9/static/media/coach3.7c8ca869.jpg",
+    "static/media/coach4.jpg": "/winter19.team9/static/media/coach4.9ab0da7f.jpg",
+    "static/media/coach5.jpg": "/winter19.team9/static/media/coach5.22bf736a.jpg",
+    "static/media/ffLogoTransparent.png": "/winter19.team9/static/media/ffLogoTransparent.9f75a55d.png",
+    "static/media/fitnessFactoryLogo.png": "/winter19.team9/static/media/fitnessFactoryLogo.444228d2.png",
+    "static/media/jccLogo.svg": "/winter19.team9/static/media/jccLogo.c31e2ec4.svg",
+    "static/media/paypalLogo.svg": "/winter19.team9/static/media/paypalLogo.9984b3be.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0e1dc25c.js",
+    "static/js/2.3ba05c9d.chunk.js",
+    "static/css/main.0d63bcfe.chunk.css",
+    "static/js/main.f921cee4.chunk.js"
+  ]
+}
