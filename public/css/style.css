@@ -1,24 +1,24 @@
 /* Universal Styles */
 html, body {
-    font-family: 'Roboto Slab', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    font-family : 'Roboto Slab', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+    width       : 100%;
+    height      : 100%;
+    margin      : 0;
+    padding     : 0;
+    overflow-x  : hidden;
 }
 
 p {
-    line-height: 1.75;
+    line-height : 1.75;
 }
 
 a {
-    color: #EF233C;
+    color : #EF233C;
 }
 
 a:hover {
-    color: #D90429;
+    color : #D90429;
 }
 
 h1,
@@ -27,230 +27,230 @@ h3,
 h4,
 h5,
 h6 {
-    font-weight: 700;
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    font-weight : 700;
+    font-family : 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 .fa {
-    display: inline;
+    display : inline;
 }
 
 /* Navigation Bar Styles */
 #mainNav .navbar-toggler {
-    font-size: 12px;
-    right: 0;
-    padding: 13px;
-    text-transform: uppercase;
-    color: #EDF2F4;
-    border: 0;
-    background-color: #EF233C;
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    font-size        : 12px;
+    right            : 0;
+    padding          : 13px;
+    text-transform   : uppercase;
+    color            : #EDF2F4;
+    border           : 0;
+    background-color : #EF233C;
+    font-family      : 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 #mainNav .navbar-brand {
-    color: #EF233C;
-    font-family: 'Kaushan Script', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    color       : #EF233C;
+    font-family : 'Kaushan Script', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 #mainNav .navbar-brand.active, #mainNav .navbar-brand:active, #mainNav .navbar-brand:focus, #mainNav .navbar-brand:hover {
-    color: #D90429;
+    color : #D90429;
 }
 
 #mainNav .navbar-nav .nav-item .nav-link {
-    font-size: 100%;
-    font-weight: 600;
-    padding: 0.75em 0;
-    letter-spacing: 1px;
-    color: #EDF2F4;
-    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    font-size      : 100%;
+    font-weight    : 600;
+    padding        : 0.75em 0;
+    letter-spacing : 1px;
+    color          : #EDF2F4;
+    font-family    : 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 #mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover {
-    color: #D90429;
+    color : #D90429;
 }
 
-@media (max-width: 992px) {
+@media (max-width : 992px) {
     #mainNav {
-        background-color: #353535 !important;
+        background-color : #353535 !important;
     }
 }
 
-@media (min-width: 1100px) {
+@media (min-width : 1100px) {
     #mainNav .navbar-nav .nav-item .nav-link {
-        padding: 1.1em 1.0em !important;
+        padding : 1.1em 1.0em !important;
     }
 }
 
-@media (min-width: 992px) {
+@media (min-width : 992px) {
     #mainNav {
-        height: 100px;
-        padding-top: 25px;
-        padding-bottom: 25px;
-        -webkit-transition: padding-top 0.3s, padding-bottom 0.3s;
-        transition: padding-top 0.3s, padding-bottom 0.3s;
-        border: none;
+        height             : 100px;
+        padding-top        : 25px;
+        padding-bottom     : 25px;
+        -webkit-transition : padding-top 0.3s, padding-bottom 0.3s;
+        transition         : padding-top 0.3s, padding-bottom 0.3s;
+        border             : none;
     }
-
+    
     #mainNav .navbar-brand {
-        font-size: 1.75em;
-        font-weight: 700;
-        -webkit-transition: all 0.3s;
-        transition: all 0.3s;
+        font-size          : 1.75em;
+        font-weight        : 700;
+        -webkit-transition : all 0.3s;
+        transition         : all 0.3s;
     }
-
+    
     #mainNav .navbar-nav .nav-item .nav-link {
-        padding: 1.1em 1.0em !important;
+        padding : 1.1em 1.0em !important;
     }
-
+    
     #mainNav.navbar-shrink {
-        padding-top: 0;
-        padding-bottom: 0;
-        background-color: #353535;
+        padding-top      : 0;
+        padding-bottom   : 0;
+        background-color : #353535;
     }
-
+    
     #mainNav.navbar-shrink .navbar-brand {
-        font-size: 1.25em;
-        padding: 12px 0;
+        font-size : 1.25em;
+        padding   : 12px 0;
     }
 }
 
 #mainNav #navbarResponsive ul .logout {
-    font-size: 90%;
-    font-weight: 400;
-    letter-spacing: 1px;
-    color: #EDF2F4;
-    cursor: pointer;
-    background-color: #6c757d;
-    text-align: center;
-    vertical-align: middle;
-    user-select: none;
-    border: 1px solid #6c757d;
+    font-size        : 90%;
+    font-weight      : 400;
+    letter-spacing   : 1px;
+    color            : #EDF2F4;
+    cursor           : pointer;
+    background-color : #6C757D;
+    text-align       : center;
+    vertical-align   : middle;
+    user-select      : none;
+    border           : 1px solid #6C757D;
 }
 
 #mainNav #navbarResponsive ul .login {
-    width: 100%;
-    font-weight: 400;
-    letter-spacing: 1px;
-    color: #EDF2F4;
-    cursor: pointer;
-    background-color: #6c757d;
-    text-align: center;
-    vertical-align: middle;
-    user-select: none;
-    border: 1px solid #6c757d;
+    width            : 100%;
+    font-weight      : 400;
+    letter-spacing   : 1px;
+    color            : #EDF2F4;
+    cursor           : pointer;
+    background-color : #6C757D;
+    text-align       : center;
+    vertical-align   : middle;
+    user-select      : none;
+    border           : 1px solid #6C757D;
 }
 
 #mainNav #navbarResponsive ul .logout:hover {
-    color: #D90429;
+    color : #D90429;
 }
 
 #mainNav #navbarResponsive ul .login:hover {
-    color: #D90429;
+    color : #D90429;
 }
 
 /* To Top Button */
 #to-top {
-    display: none; /* Hidden by default */
-    position: fixed;
-    bottom: 20px;
-    right: 30px;
-    z-index: 99;
-    border: none;
-    outline: none;
-    background-color: #EF233C;
-    color: #EDF2F4;
-    cursor: pointer; /* Mouse pointer on hover */
-    padding: 15px;
-    border-radius: 10px;
-    font-size: 18px;
+    display          : none; /* Hidden by default */
+    position         : fixed;
+    bottom           : 20px;
+    right            : 30px;
+    z-index          : 99;
+    border           : none;
+    outline          : none;
+    background-color : #EF233C;
+    color            : #EDF2F4;
+    cursor           : pointer; /* Mouse pointer on hover */
+    padding          : 15px;
+    border-radius    : 10px;
+    font-size        : 18px;
 }
 
 #to-top:hover {
-    background-color: #D90429;
+    background-color : #D90429;
 }
 
 /* Footer */
 #footer {
-    background-color: #353535;
-    align-items: center;
-    padding: 50px;
+    background-color : #353535;
+    align-items      : center;
+    padding          : 50px;
 }
 
 #footer h2 {
-    color: #ef233c;
-    margin-bottom: 25px;
+    color         : #EF233C;
+    margin-bottom : 25px;
 }
 
 #footer .row div {
-    text-align: center;
-    padding: 20px 0;
+    text-align : center;
+    padding    : 20px 0;
 }
 
 #footer p {
-    color: #EDF2F4;
+    color : #EDF2F4;
 }
 
 #footer .footer-icon {
-    padding-right: 15px;
-    font-size: 25px;
-    color: #EDF2F4;
+    padding-right : 15px;
+    font-size     : 25px;
+    color         : #EDF2F4;
 }
 
 #footer a .footer-icon:hover {
-    color: #D90429;
-    border: none;
+    color  : #D90429;
+    border : none;
 }
 
 #copyrights {
-    padding: 15px 0;
-    background-color: #8d99AE;
-    vertical-align: center;
+    padding          : 15px 0;
+    background-color : #8D99AE;
+    vertical-align   : center;
 }
 
 #copyrights p {
-    margin: 0;
+    margin : 0;
 }
 
 .nav-item {
-    margin-bottom: auto;
-    margin-top: auto;
+    margin-bottom : auto;
+    margin-top    : auto;
 }
 
 /* Modals */
 .modal-header {
     background-color : #353535;
-    border-width: 0;
-    border-radius: 0;
+    border-width     : 0;
+    border-radius    : 0;
 }
 
 .modal-header h5 {
-    color    : #e3484e;
+    color : #E3484E;
 }
 
 .modal-header button {
-    color: whitesmoke;
+    color : whitesmoke;
 }
 
 .modal-body {
-    background-color: #1b1b1b;
+    background-color : #1B1B1B;
 }
 
-.modal-content{
-    border-width: 0;
+.modal-content {
+    border-width : 0;
 }
 
 .modal-footer {
     background-color : #353535;
-    color : #FFFFFF;
-    border-width: 0;
-    border-radius: 0;
+    color            : #FFFFFF;
+    border-width     : 0;
+    border-radius    : 0;
 }
 
 .modal-footer button {
-    background-color    : #D90429;
-    color: whitesmoke;
+    background-color : #D90429;
+    color            : whitesmoke;
 }
