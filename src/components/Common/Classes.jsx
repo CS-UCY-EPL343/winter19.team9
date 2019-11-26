@@ -1,5 +1,13 @@
 import React, {Component} from 'react';
 import '../assets/styles/classes.css';
+import class1 from '../assets/img/classes/classes-1.jpg';
+import class2 from '../assets/img/classes/classes-2.jpg';
+import class3 from '../assets/img/classes/classes-3.jpg';
+import class4 from '../assets/img/classes/classes-4.jpg';
+import class5 from '../assets/img/classes/classes-5.jpg';
+import class6 from '../assets/img/classes/classes-6.jpg';
+
+
 
 class Classes extends Component {
     render() {
@@ -13,7 +21,7 @@ class Classes extends Component {
                             <div className="col-md-4 col-sm-6">
                                 <div className="single-classes" id="single-classes">
                                     <div className="classes-img">
-                                        <img src="../assets/img/classes/classes-1.jpg" className="rounded-corners" alt=""/>
+                                        <img src={class1} className="rounded-corners" alt=""/>
                                     </div>
                                     <div className="classes-text">
                                         <h5>Pilates</h5>
@@ -26,7 +34,7 @@ class Classes extends Component {
                             <div className="col-md-4 col-sm-6">
                                 <div className="single-classes" id="single-classes">
                                     <div className="classes-img">
-                                        <img src="../assets/img/classes/classes-2.jpg" className="rounded-corners" alt=""/>
+                                        <img src={class2} className="rounded-corners" alt=""/>
                                     </div>
                                     <div className="classes-text">
                                         <h5>Body Building</h5>
@@ -39,7 +47,7 @@ class Classes extends Component {
                             <div className="col-md-4 col-sm-6">
                                 <div className="single-classes" id="single-classes">
                                     <div className="classes-img">
-                                        <img src="../assets/img/classes/classes-3.jpg" className="rounded-corners" alt=""/>
+                                        <img src={class3} className="rounded-corners" alt=""/>
                                     </div>
                                     <div className="classes-text">
                                         <h5>Fitness</h5>
@@ -52,7 +60,7 @@ class Classes extends Component {
                             <div className="col-md-4 col-sm-6">
                                 <div className="single-classes" id="single-classes">
                                     <div className="classes-img">
-                                        <img src="../assets/img/classes/classes-4.jpg" className="rounded-corners" alt=""/>
+                                        <img src={class4} className="rounded-corners" alt=""/>
                                     </div>
                                     <div className="classes-text">
                                         <h5>Yoga</h5>
@@ -65,7 +73,7 @@ class Classes extends Component {
                             <div className="col-md-4 col-sm-6">
                                 <div className="single-classes" id="single-classes">
                                     <div className="classes-img">
-                                        <img src="../assets/img/classes/classes-5.jpg" className="rounded-corners" alt=""/>
+                                        <img src={class5} className="rounded-corners" alt=""/>
                                     </div>
                                     <div className="classes-text">
                                         <h5>Trx</h5>
@@ -78,7 +86,7 @@ class Classes extends Component {
                             <div className="col-md-4 col-sm-6">
                                 <div className="single-classes" id="single-classes">
                                     <div className="classes-img">
-                                        <img src="../assets/img/classes/classes-6.jpg" className="rounded-corners" alt=""/>
+                                        <img src={class6} className="rounded-corners" alt=""/>
                                     </div>
                                     <div className="classes-text">
                                         <h5>Spinning</h5>

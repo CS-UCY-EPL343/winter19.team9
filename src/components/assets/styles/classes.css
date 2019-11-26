@@ -1,4 +1,4 @@
-#classes html, body {
+#classes {
 	height: 100%;
 	font-family: "Roboto", sans-serif;
 	-webkit-font-smoothing: antialiased;
@@ -117,12 +117,13 @@
 	padding-bottom: 50px;
 }
 
-.page-title{
+#classes .page-title{
 	padding-top: 50px;
 	padding-bottom: 40px;
 }
 
-.page-title h1{
+#classes .page-title h1{
+	padding-top: 60px;
 	color: #dadada;
 	text-align: center;
 }
