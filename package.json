@@ -1,8 +1,8 @@
 {
-  "homepage": "https://cs-ucy-epl343.github.io/winter19.team9/",
   "name": "winter19.team9",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://cs-ucy-epl343.github.io/winter19.team9/",
   "dependencies": {
     "leaflet": "^1.5.1",
     "react": "^16.11.0",

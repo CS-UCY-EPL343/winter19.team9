@@ -27,7 +27,7 @@ class Navigation extends Component {
             // Navigation
             <nav className = "navbar navbar-expand-lg navbar-dark fixed-top" id = "mainNav">
                 <div className = "container-fluid mx-auto">
-                    <NavLink className = "navbar-brand" to = "/" exact = {true}>
+                    <NavLink className = "navbar-brand" to = "/winter19.team9/" exact = {true}>
                         Fitness Factory Nicosia&nbsp;
                         <img id = { 'logo' } src = { this.props.img } alt = 'Logo' height = { 64 } width = { 64 } />
                     </NavLink>
@@ -45,22 +45,22 @@ class Navigation extends Component {
                     <div className = "collapse navbar-collapse" id = "navbarResponsive">
                         <ul className = "navbar-nav text-uppercase ml-auto">
                             <li className = "nav-item">
-                                <NavLink className = "nav-link" to = "/" exact = { true }>Home</NavLink>
+                                <NavLink className = "nav-link" to = "/winter19.team9/" exact = { true }>Home</NavLink>
                             </li>
                             <li className = "nav-item">
-                                <NavLink className = "nav-link" to = "/classes">Classes</NavLink>
+                                <NavLink className = "nav-link" to = "/winter19.team9/classes">Classes</NavLink>
                             </li>
                             { this.props.signed_in &&
                             <li className = "nav-item">
-                                <NavLink className = "nav-link" to = "/profile">Profile</NavLink>
+                                <NavLink className = "nav-link" to = "/winter19.team9/profile">Profile</NavLink>
                             </li>
                             }
                             <li className = "nav-item">
-                                <NavLink className = "nav-link" to = "/about">About Us</NavLink>
+                                <NavLink className = "nav-link" to = "/winter19.team9/about">About Us</NavLink>
                             </li>
                             { this.props.signed_in ?
                                 <li className = "nav-item">
-                                    <NavLink to="/" className = { 'nav-link logout btn btn-secondary' } onClick = { this.logout }>
+                                    <NavLink to="/winter19.team9/" className = { 'nav-link logout btn btn-secondary' } onClick = { this.logout }>
                                         Logout <i className = "fas fa-sign-out-alt" />
                                     </NavLink>
                                 </li> :

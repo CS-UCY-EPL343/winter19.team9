@@ -12,28 +12,28 @@ class Footer extends Component {
                             <h2>Get Social</h2>
                             <p>Follow us on the Social Network to learn all the news and win discounts!</p>
                             <a href="https://www.facebook.com/fitnessfactorynicosia/">
-                                <i className="fa fa-facebook footer-icon"/>
+                                <i className="fab fa-facebook footer-icon"/>
                             </a>
                             <a href="https://www.instagram.com/fitness_factory_nicosia/?hl=en">
-                                <i className="fa fa-instagram footer-icon"/>
+                                <i className="fab fa-instagram footer-icon"/>
                             </a>
                         </div>
                         <div id="about-footer" className="col-lg-3 col-md-12 col-sm-12">
                             <h2>About Us</h2>
                             <p>
-                                <i className="fa fa-map-marker footer-icon"/> Address:
+                                <i className="fas fa-map-marker footer-icon"/> Address:
                                 <span className="about-footer-text"> Pindou4,Egkomi(2408),Cyprus</span>
                             </p>
                             <p>
-                                <i className="fa fa-envelope-o footer-icon"/> Questions?
+                                <i className="far fa-envelope footer-icon"/> Questions?
                                 <span className="about-footer-text"> Support@userthemes.com</span>
                             </p>
                         </div>
                         <div id="help-footer" className="col-lg-3 col-md-12 col-sm-12">
                             <h2>Get Help</h2>
-                            <p><i className="fa fa-phone footer-icon"/> <a href="/about#contact">Contact Us</a></p>
-                            <p><i className="fa fa-user footer-icon"/> <a href="/register">Register Account</a></p>
-                            <p><i className="fa fa-info footer-icon"/> <a href="/classes">See the classes</a></p>
+                            <p><i className="fa fa-phone footer-icon"/> <a href="/winter19.team9/about#contact">Contact Us</a></p>
+                            <p><i className="fa fa-user footer-icon"/> <a href="/winter19.team9/register">Register Account</a></p>
+                            <p><i className="fa fa-info footer-icon"/> <a href="/winter19.team9/classes">See the classes</a></p>
                         </div>
                         <div id="about-club" className="col-lg-3 col-md-12 col-sm-12">
                             <h2>About The Club</h2>

@@ -117,17 +117,17 @@ class LoginModal extends Component {
                     </button>
 
                     { this.state.redirectToAdmin ? <Redirect to = { {
-                            pathname: '/profile/admin',
+                            pathname: '/winter19.team9//profile/admin',
                             state   : { level: '1' }
                         } }
                         /> :
                         this.state.redirectToCoach ? <Redirect to = { {
-                                pathname: '/profile/coach',
+                                pathname: '/winter19.team9//profile/coach',
                                 state   : { level: '2' }
                             } }
                             /> :
                             this.state.redirectToUser ? <Redirect to = { {
-                                    pathname: '/profile/user',
+                                    pathname: '/winter19.team9//profile/user',
                                     state   : { level: '3' }
                                 } }
                                 /> :
@@ -141,7 +141,7 @@ class LoginModal extends Component {
                         <div className = 'row d-flex justify-content-between login-help'>
                         <span id = 'signup'>
                             Don't have an account?
-                            <Link onClick = { this.props.toggle } to = '/register'>Sign Up</Link>
+                            <Link onClick = { this.props.toggle } to = '/winter19.team9/register'>Sign Up</Link>
                         </span>
 
                             <span id = 'forgot-pass' className = 'psw'> <a href = '/'>Forgot password?</a></span>

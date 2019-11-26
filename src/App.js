@@ -48,27 +48,27 @@ class App extends Component {
 
                             <Route
                                 exact = { true }
-                                path = "/"
+                                path = "/winter19.team9/"
                                 component = { Home }
                             />
 
                             <Route
-                                path = "/register"
+                                path = "/winter19.team9/register"
                                 component = { Register }
                             />
 
                             <Route
-                                path = "/about"
+                                path = "/winter19.team9/about"
                                 component = { AboutUs }
                             />
 
                             <Route
-                                path = "/profile/"
+                                path = "/winter19.team9/profile/"
                                 render={(props) => <Profile {...props} level={this.state.level} />}
                             />
 
                             <Route
-                                path = "/classes"
+                                path = "/winter19.team9/classes"
                                 component = { Classes }
                             />
 
