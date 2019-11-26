@@ -1,105 +1,61 @@
-.modal_background {
-    background-color : #2B2D42;
-    size             : A5;
-}
-
-.modal-body {
-    position : relative;
-    -ms-flex : 1 1 auto;
-    flex     : 1 1 auto;
-    padding  : 1rem;
-}
-
-#AnnouncementsHeader {
-    text-align : center;
-}
-
-h3 {
+.Announcements h3 {
     color    : #D90429;
     position : relative;
 }
 
-h5 {
+.Announcements h5 {
     color    : #D90429;
     position : relative;
 }
 
-#ann div [class^="col-"] {
-
-    padding-left  : 5px;
-    padding-right : 5px;
-}
-
-#Announcements {
-    padding-top    : 150px;
-    padding-bottom : 30px;
-    color          : whitesmoke;
-}
-
-.card-block {
+.Announcements .card-block {
     padding : 0 15px 15px 25px;
 }
 
-.card {
-    transition : 0.5s;
-    cursor     : pointer;
-}
-
-.card-title {
+.Announcements .card-title {
     font-size   : 15px;
     transition  : 1s;
     cursor      : pointer;
     padding-top : 0;
 }
 
-.card-title i {
+.Announcements .card-title i {
     font-size  : 15px;
     transition : 1s;
     cursor     : pointer;
     color      : #FFA710;
 }
 
-.card-title i:hover {
+.Announcements .card-title i:hover {
     transform : scale(1.25) rotate(100deg);
     color     : #18D4CA;
 
 }
 
-.card:hover {
+.Announcements .card:hover {
     transform  : scale(1.05);
     box-shadow : 10px 10px 15px rgba(0, 0, 0, 0.3);
 }
 
-.card-text {
+.Announcements .card-text {
     height : auto;
 }
 
-.card::before {
+.Announcements .card::before {
     transform-origin : left top;
 }
 
-.card::after {
+.Announcements .card::after {
     transform-origin : right bottom;
 }
 
-.card:hover::before, .card:hover::after, .card:focus::before, .card:focus::after {
+.Announcements .card:hover::before, .card:hover::after, .card:focus::before, .card:focus::after {
     transform : scale3d(1, 1, 1);
 }
 
-.Announcements {
-    position : relative;
-}
-
-.card {
+.Announcements .card {
     transition : 0.5s;
     cursor     : pointer;
-}
-
-.card-block {
-    padding : 0 15px 15px 25px;
-}
-
-.card {
     position           : relative;
     display            : -ms-flexbox;
     display            : flex;
@@ -107,28 +63,13 @@ h5 {
     flex-direction     : column;
     min-width          : 0;
     word-wrap          : break-word;
-    background-color   : #FFFFFF;
+    background-color   : whitesmoke;
     background-clip    : border-box;
     border             : 1px solid rgba(0, 0, 0, .125);
     border-radius      : .25rem;
 }
 
-.modal .close {
-    color: #FFFFFF;
-}
-
-*, ::after, ::before {
-    box-sizing : border-box;
-}
-
-div {
-    display : block;
-}
-
-Style Attribute {
-    animation-delay    : 0ms;
-    animation-duration : 1000ms;
-    pointer-events     : all;
-    opacity            : 1;
+.Announcements .card-block {
+    padding : 0 15px 15px 25px;
 }
 
