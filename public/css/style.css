@@ -146,53 +146,35 @@ h6 {
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: #353535;
+    background-color: #2B2D42;
     color: #EDF2F4;
     text-align: center;
-    padding: 2rem;
+    padding: 20px 0;
 }
 
-.footer h2, h6 {
-    position: relative;
-    color: #EF233C;
-}
-
-.footer p {
-    position: static;
+#footer p {
     color: #EDF2F4;
 }
 
-.footer .styleImage {
+#footer .footer-icon {
+    padding-right: 15px;
     font-size: 25px;
-    margin: 5px;
+    color: #EDF2F4;
+}
+
+#footer a .footer-icon:hover {
+    color: #D90429;
     border: none;
 }
 
-.footer .row {
-    font-family: 'Material-Design-Iconic-Font', serif;
+#copyrights {
+    padding: 15px 0;
+    background-color: #8d99AE;
+    vertical-align: center;
 }
 
-.footer .col-lg-3 {
-    display: block;
-    width: 50%;
-}
-
-.footer .f-address{
-    width: 100px;
-}
-
-.footer .about-icon {
-    padding-right: 20px;
-}
-
-.footer .AboutUs{
-    width: 100px;
-    position: relative;
-}
-
-.footer .GetHelp {
-    width: 100px;
-    color: #EDF2F4;
+#copyrights p {
+    margin: 0;
 }
 
 .nav-item {

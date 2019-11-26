@@ -2,8 +2,21 @@ import React, { Component } from 'react';
 import { Link }             from 'react-router-dom';
 import ToggleModal          from './ToggleModal';
 import LoginModal           from './LoginModal';
+import { Button }           from 'reactstrap';
 
 class Navigation extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            modal: false
+        };
+        this.toggle = this.toggle.bind(this);
+    };
+
+    toggle = () => {
+        this.setState({ modal: !this.state.modal });
+    };
+
     render() {
         // noinspection HtmlUnknownAnchorTarget,HtmlUnknownTarget
         return (
@@ -31,7 +44,7 @@ class Navigation extends Component {
                                 <Link className = "nav-link" to = "/">Home</Link>
                             </li>
                             <li className = "nav-item">
-                                <a className = "nav-link" href='/#our-services'>Services</a>
+                                <a className = "nav-link" href = '/#our-services'>Services</a>
                             </li>
                             <li className = "nav-item">
                                 <Link className = "nav-link" to = "/classes">Classes</Link>
@@ -40,21 +53,21 @@ class Navigation extends Component {
                                 <Link className = "nav-link" to = "/profile">Profile</Link>
                             </li>
                             <li className = "nav-item">
-                                <Link className = "nav-link" to = "/classes">Classes</Link>
-                            </li>
-                            <li className = "nav-item">
                                 <Link className = "nav-link" to = "/about">About</Link>
                             </li>
                             <li className = "nav-item">
-                                <a className = "nav-link" href='/about#contact'>Contact&nbsp;Us</a>
+                                <a className = "nav-link" href = '/about#contact'>Contact&nbsp;Us</a>
                             </li>
                             <li className = "nav-item">
+                                <Button className = { 'nav-link' } onClick = { this.toggle }>
+                                    Login/Register <i className = "fas fa-sign-in-alt" />
+                                </Button>
                                 <ToggleModal
-                                    btnClass = { 'nav-link' }
-                                    btnText = { ['Login/Register ', <i className = "fas fa-sign-in-alt" key={Math.random()}/>] }
+                                    modal = { this.state.modal }
+                                    toggle = { this.toggle }
                                     modalSize = { 'md' }
                                     modalHeader = { 'Login Form' }
-                                    modalBody={<LoginModal/>}
+                                    modalBody = { <LoginModal /> }
                                 />
                             </li>
                         </ul>
