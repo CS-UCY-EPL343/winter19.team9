@@ -5,7 +5,7 @@ import '../assets/styles/announcementModal.css'
 class Announcements extends Component {
     render() {
         return (
-            <div className = "Announcements">
+            <div className = "Announcements" id = "AnnounceModal">
                 <AnimatedOnScroll animationIn = "fadeInLeft">
                     <div id = "ann" className = "container mt-2">
                         <div className = "row">

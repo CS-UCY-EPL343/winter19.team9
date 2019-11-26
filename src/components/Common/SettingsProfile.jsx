@@ -43,11 +43,11 @@ class SettingsProfile extends Component {
                                     onClick = { this.togglePayment }
                             >
                                 { this.props.user &&
-                                <i className = "scnd-font-color fas fa-sync-alt"><span>Membership</span></i> }
+                                <i className = "scnd-font-color fas fa-sync-alt"><span style={{color: 'white'}}>Membership</span></i> }
                                 { this.props.coach &&
-                                <i className = "scnd-font-color fas fa-sync-alt"><span>Change Classes</span></i> }
+                                <i className = "scnd-font-color fas fa-sync-alt"><span style={{color: 'white'}}>Change Classes</span></i> }
                                 { this.props.admin &&
-                                <i className = "scnd-font-color fas fa-sync-alt"><span>Statistics</span></i> }
+                                <i className = "scnd-font-color fas fa-sync-alt"><span style={{color: 'white'}}>Statistics</span></i> }
                             </Button>
                             <ToggleModal
                                 modal = { this.state.modalPayment }

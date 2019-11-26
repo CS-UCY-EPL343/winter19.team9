@@ -11,23 +11,23 @@ import TeamMember from "./TeamMember";
 
 const coaches = [
 
-    {className: '', src: coach1, name: 'Alekos', text: 'By combining the movement one conducts in their ' +
+    {className: '', src: coach1, name: 'Andreas Evagorou', text: 'By combining the movement one conducts in their ' +
                                     'everyday lives, from housewives and young children to professional ' +
                                     'athletes and special forces individuals, in Fitness Factory is the ' +
                                     'ultimate workout!'},
-    {className: 'timeline-inverted', src: coach2, name: 'Alekos', text: 'By combining the movement one conducts in their ' +
+    {className: 'timeline-inverted', src: coach2, name: 'Marinos Papakyriakou', text: 'The workouts will keep you honest and ' +
+            'force you to attack your weaknesses, making you a better all-around ' +
+            'athlete. This is something that nearly everyone avoids when training ' +
+            'on their own, which severely limits progress.'},
+    {className: '', src: coach3, name: 'Giorgos Frantzeskos', text: 'By combining the movement one conducts in their ' +
             'everyday lives, from housewives and young children to professional ' +
             'athletes and special forces individuals, in Fitness Factory is the ' +
             'ultimate workout!'},
-    {className: '', src: coach3, name: 'Alekos', text: 'By combining the movement one conducts in their ' +
-            'everyday lives, from housewives and young children to professional ' +
-            'athletes and special forces individuals, in Fitness Factory is the ' +
-            'ultimate workout!'},
-    {className: 'timeline-inverted', src: coach4, name: 'Alekos', text: 'By combining the movement one conducts in their ' +
-            'everyday lives, from housewives and young children to professional ' +
-            'athletes and special forces individuals, in Fitness Factory is the ' +
-            'ultimate workout!'},
-    {className: '', src: coach5, name: 'Alekos', text: 'By combining the movement one conducts in their ' +
+    {className: 'timeline-inverted', src: coach4, name: 'Andreas Ketwnis', text: 'The workouts will keep you honest and ' +
+            'force you to attack your weaknesses, making you a better all-around ' +
+            'athlete. This is something that nearly everyone avoids when training ' +
+            'on their own, which severely limits progress.'},
+    {className: '', src: coach5, name: 'Constantinos Christos', text: 'By combining the movement one conducts in their ' +
             'everyday lives, from housewives and young children to professional ' +
             'athletes and special forces individuals, in Fitness Factory is the ' +
             'ultimate workout!'}

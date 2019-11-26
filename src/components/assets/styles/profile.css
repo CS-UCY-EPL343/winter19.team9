@@ -61,14 +61,14 @@
 }
 
 #leftBlock {
-    background-color : #F4EBED;
-    border-radius    : 22px;
-    border           : 2px solid #EF233C;
-    margin           : 5% auto;
+    background-color: #1d1d1d;
+    border-radius: 22px;
+    border: 2px solid #353535;
+    margin: 5% auto;
 }
 
 #profile .scnd-font-color {
-    color : #4F4E4E;
+    color: #606060;
 }
 
 #profile .input-container {
@@ -81,10 +81,10 @@
     margin-left   : 20px;
     margin-bottom : 20px;
     padding-left  : 45px;
-    background    : #E5DDDF;
-    color         : #000000;
-    border        : solid 1px #1F253D;
-    border-radius : 5px;
+    background: #aaa;
+    color: #000;
+    border: solid 1px #353535;
+    border-radius: 5px;
 }
 
 #profile input[type=text]::-webkit-input-placeholder { /* WebKit browsers */
@@ -101,7 +101,7 @@
 
 #profile input[type=text]:focus {
     outline : none; /* removes the default orange border when focus */
-    border  : 1px solid #EF233C;
+    border  : 1px solid #D90429;
 }
 
 #profile .input-icon {
@@ -149,7 +149,7 @@
 
 .big-profile-picture {
     margin              : 0 auto;
-    border              : 5px solid #50597B;
+    border              : 5px solid #D90429;
     width               : 150px;
     height              : 150px;
     transition          : .5s ease;
@@ -192,22 +192,23 @@
 /** MAIN CONTAINER **/
 
 #profile {
-    font-family : 'Karla', 'Ubuntu', sans-serif;
+    font-family: 'Roboto', serif;
     width       : 100%;
     padding     : 100px 0;
     margin      : auto;
     color       : #FFFFFF;
-    background  : #232526; /* fallback for old browsers */
-    background  : -webkit-linear-gradient(to right, #414345, #232526); /* Chrome 10-25, Safari 5.1-6 */
-    background  : linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    /*background  : #232526; !* fallback for old browsers *!*/
+    /*background  : -webkit-linear-gradient(to right, #414345, #232526); !* Chrome 10-25, Safari 5.1-6 *!*/
+    /*background  : linear-gradient(to right, #414345, #232526); !* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
+    background-color: #1d1d1d;
 }
 
 /** CONTAINERS **/
 
 #profileBlock {
-    background    : #F4EBED;
-    border-radius : 20px;
-    border        : 2px solid #2B2D42;
+    background: #2b2b2b;
+    border-radius: 20px;
+    border: 2px solid #454545;
     margin        : 5% auto;
 }
 
@@ -220,7 +221,7 @@
 }
 
 .menu-box .titular {
-    background  : #EF233C;
+    background: #353535;
     font-size   : 24px;
     font-weight : 300;
     text-align  : center;
@@ -254,7 +255,7 @@
 .menu-box-menu li {
     height     : 66px;
     position   : relative;
-    border-top : 1px solid #1F253D;
+    border-top : 1px solid #353535;
 }
 
 .menu-box-tab {
@@ -288,7 +289,7 @@
 }
 
 .menu-box-menu li:hover {
-    background      : #E7DDDD;
+    background      : #351e1d;
     /*border-top: 1px solid #1f253d;*/
     /*border-bottom: 1px solid #1f253d;*/
     text-decoration : none;
@@ -330,7 +331,7 @@
     font-size   : 24px;
     font-weight : 300;
     text-align  : center;
-    color       : #000000;
+    color       : #fff;
 }
 
 .profile-description {
@@ -344,7 +345,7 @@
 }
 
 .profile-options li {
-    border-left : 1px solid #1F253D;
+    border-left : 1px solid #353535;
 }
 
 .profile-options p {
@@ -368,7 +369,7 @@
 
 .menu-text {
     font-family : Quicksand, serif;
-    color       : #262627;
+    color       : #fff;
 }
 
 
@@ -378,13 +379,13 @@
 /* BMI  */
 #backBox {
     /*   background-color: #edf2f4;  */
-    background-color : #F4EBED;
+    background-color : #2b2b2b;
     /*width: 350px;*/
     width            : 80%;
     height           : 390px;
     border-radius    : 20px;
     display          : block;
-    border           : solid 2px #EF233C;
+    border           : solid 2px #454545;
     margin           : 5% auto;
 }
 
@@ -397,7 +398,7 @@
     width            : 60px;
     height           : 30px;
     border-radius    : 10px;
-    background-color : #FFFFFF;
+    background-color : #353535;
     border           : none;
     outline          : none;
     padding          : 5px 10px;
@@ -419,7 +420,7 @@
     border-radius    : 10px;
     height           : 40px;
     width            : 140px;
-    background-color : #EF233C;
+    background-color : #D90429;
     color            : #EDF2F4;
     margin           : auto;
     display          : block;
@@ -477,7 +478,7 @@
     left             : 0;
     height           : 25px;
     width            : 25px;
-    background-color : #9D9DA1;
+    background-color : #555555;
     border-radius    : 50%;
 }
 
@@ -495,13 +496,13 @@
     text-align  : center;
     padding     : 15px;
     font-family : Quicksand, serif;
-    color       : #000000;
+    color       : #fff;
 }
 
 #bmiHeading b {
     font-size   : 32px;
     font-weight : 300;
-    color       : #EF233C;
+    color       : #D90429;
 }
 
 .checkmark:after {
@@ -510,9 +511,9 @@
     display  : none;
 }
 
-#profile .row-one input {
+/*#profile .row-one input {*/
 
-}
+/*}*/
 
 .bmi-container input:checked ~ .checkmark:after {
     display : block;

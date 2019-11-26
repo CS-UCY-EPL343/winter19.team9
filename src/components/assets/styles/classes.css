@@ -2,11 +2,12 @@
 	height: 100%;
 	font-family: "Roboto", sans-serif;
 	-webkit-font-smoothing: antialiased;
+	/*noinspection CssUnknownProperty*/
 	font-smoothing: antialiased;
 	background: #1b1b1b;
 }
 
-#classes h1, h2, h3, h4, h5, h6 {
+#classes h1, #classes h2, #classes h3, #classes h4, #classes h5, #classes h6 {
 	margin: 0;
 	color: #111111;
 	font-weight: 600;
@@ -68,7 +69,7 @@
 -----------------------*/
 
 
-.classes-section {
+#classes .classes-section {
 	padding-bottom: 52px;
 	height: 5000px;
 }
@@ -79,29 +80,29 @@
 	box-shadow: inset;
 }
 
-.single-classes {
+#classes .single-classes {
 	margin-bottom: 40px;
 	background-color: #353535;
 	border-radius: 10px;
 }
 
-.single-classes .classes-img {
+#classes .single-classes .classes-img {
 	padding: 15px;
 	margin-bottom: 21px;
 }
 
-.single-classes .classes-img img {
+#classes .single-classes .classes-img img {
 	min-width: 100%;
 	border-radius: 8px;
 }
 
-.single-classes .classes-text {
+#classes .single-classes .classes-text {
 	text-align: center;
 	padding-left: 15px;
 	padding-right: 15px;
 }
 
-.single-classes .classes-text h5 {
+#classes .single-classes .classes-text h5 {
 	color: #dadada;
 	font-size: 18px;
 	font-weight: 700;
@@ -109,7 +110,7 @@
 	margin-bottom: 21px;
 }
 
-.single-classes .classes-text p {
+#classes .single-classes .classes-text p {
 	color: #aaaaaa;
 	font-size: 15px;
 	font-weight: 400;

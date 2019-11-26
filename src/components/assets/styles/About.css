@@ -5,7 +5,7 @@
 
 #contact a {
     padding-right: 20px;
-    color: #af3232;
+    color: #D90429;
 }
 
 #contact p {
@@ -17,7 +17,7 @@
 #contact h2 {
     line-height: 1.75;
     /*color:white;*/
-    color: #af3232;
+    color: #D90429;
     font-size: 30px;
 }
 
@@ -48,24 +48,24 @@
 }
 
 #contact .btn-primary {
-    background-color: #af3232;
+    background-color: #D90429;
     border: none;
 }
 
 #contact .btn-primary:active, .btn-primary:focus, .btn-primary:hover {
-    background-color: #97272c !important;
+    background-color: #D90429 !important;
     border: none;
     color: white;
 }
 
 #colored {
-    color: #af3232;
+    color: #D90429;
     font-size: 17px;
     line-height: 0.75;
 }
 
-#contact btn-primary:active, .btn-primary:focus {
-    box-shadow: 0 0 0 0.2rem rgba(254, 95, 55, 0.5) !important;
+#contact .btn-primary:active, .btn-primary:focus {
+    box-shadow: 0 0 0 0.2rem #D90429 !important;
 }
 
 #sendMessageButton {
@@ -85,7 +85,7 @@ section#contact {
 }
 
 section#contact .section-heading {
-    color: #af3232;
+    color: #D90429;
     text-align: center;
     margin-bottom: 20px;
 }
@@ -108,7 +108,7 @@ section#contact .form-group textarea.form-control {
 }
 
 section#contact .form-control:focus {
-    border-color: #af3232;
+    border-color: #D90429;
 
 }
 

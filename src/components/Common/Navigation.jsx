@@ -27,7 +27,7 @@ class Navigation extends Component {
             // Navigation
             <nav className = "navbar navbar-expand-lg navbar-dark fixed-top" id = "mainNav">
                 <div className = "container-fluid mx-auto">
-                    <NavLink className = "navbar-brand" to = "/">
+                    <NavLink className = "navbar-brand" to = "/" exact = {true}>
                         Fitness Factory Nicosia&nbsp;
                         <img id = { 'logo' } src = { this.props.img } alt = 'Logo' height = { 64 } width = { 64 } />
                     </NavLink>
@@ -65,7 +65,7 @@ class Navigation extends Component {
                                     </NavLink>
                                 </li> :
                                 <li className = "nav-item">
-                                    <Button className = { 'nav-link logout btn btn-secondary' } onClick = { this.toggle }>
+                                    <Button className = { 'nav-link login btn btn-secondary' } onClick = { this.toggle }>
                                         Login/Register <i className = "fas fa-sign-in-alt" />
                                     </Button>
                                     <ToggleModal

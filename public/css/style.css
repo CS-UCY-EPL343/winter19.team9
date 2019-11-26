@@ -56,8 +56,8 @@ h6 {
 }
 
 #mainNav .navbar-nav .nav-item .nav-link {
-    font-size: 90%;
-    font-weight: 400;
+    font-size: 100%;
+    font-weight: 600;
     padding: 0.75em 0;
     letter-spacing: 1px;
     color: #EDF2F4;
@@ -71,7 +71,7 @@ h6 {
 
 @media (max-width: 992px) {
     #mainNav {
-        background-color: #2B2D42 !important;
+        background-color: #353535 !important;
     }
 }
 
@@ -89,11 +89,11 @@ h6 {
         -webkit-transition: padding-top 0.3s, padding-bottom 0.3s;
         transition: padding-top 0.3s, padding-bottom 0.3s;
         border: none;
-        /*background-color   : transparent;*/
     }
 
     #mainNav .navbar-brand {
         font-size: 1.75em;
+        font-weight: 700;
         -webkit-transition: all 0.3s;
         transition: all 0.3s;
     }
@@ -105,7 +105,7 @@ h6 {
     #mainNav.navbar-shrink {
         padding-top: 0;
         padding-bottom: 0;
-        background-color: #212529;
+        background-color: #353535;
     }
 
     #mainNav.navbar-shrink .navbar-brand {
@@ -127,7 +127,24 @@ h6 {
     border: 1px solid #6c757d;
 }
 
+#mainNav #navbarResponsive ul .login {
+    width: 100%;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: #EDF2F4;
+    cursor: pointer;
+    background-color: #6c757d;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid #6c757d;
+}
+
 #mainNav #navbarResponsive ul .logout:hover {
+    color: #D90429;
+}
+
+#mainNav #navbarResponsive ul .login:hover {
     color: #D90429;
 }
 
@@ -154,7 +171,7 @@ h6 {
 
 /* Footer */
 #footer {
-    background-color: #2b2d42;
+    background-color: #353535;
     align-items: center;
     padding: 50px;
 }
@@ -201,20 +218,32 @@ h6 {
 
 /* Modals */
 .modal-header {
-    background-color : #2B2D42;
+    background-color : #353535;
+    border-width: 0;
+    border-radius: 0;
 }
 
 .modal-header h5 {
-    color    : #D90429;
+    color    : #e3484e;
 }
 
 .modal-header button {
     color: whitesmoke;
 }
 
+.modal-body {
+    background-color: #1b1b1b;
+}
+
+.modal-content{
+    border-width: 0;
+}
+
 .modal-footer {
-    background-color : #2B2D42;
+    background-color : #353535;
     color : #FFFFFF;
+    border-width: 0;
+    border-radius: 0;
 }
 
 .modal-footer button {

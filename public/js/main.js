@@ -27,7 +27,7 @@ window.onscroll = function () {
 function scrollFunction() {
     if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
         document.getElementById('to-top').style.display = 'block';
-        document.getElementById('mainNav').style.backgroundColor = '#2B2D42';
+        document.getElementById('mainNav').style.backgroundColor = '#353535';
     } else {
         document.getElementById('to-top').style.display = 'none';
         document.getElementById('mainNav').style.backgroundColor = 'transparent';

@@ -1,3 +1,7 @@
+#AnnounceModal {
+    background-color: #1b1b1b;
+}
+
 .Announcements h3 {
     color    : #D90429;
     position : relative;
@@ -63,10 +67,11 @@
     flex-direction     : column;
     min-width          : 0;
     word-wrap          : break-word;
-    background-color   : whitesmoke;
+    background-color   : #353535;
     background-clip    : border-box;
-    border             : 1px solid rgba(0, 0, 0, .125);
+    border             : 1px #aaaaaa;
     border-radius      : .25rem;
+    color: #aaaaaa;
 }
 
 .Announcements .card-block {

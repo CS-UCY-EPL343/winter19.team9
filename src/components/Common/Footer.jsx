@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 class Footer extends Component {
     render() {
+        // noinspection HtmlUnknownTarget
         return (
             // Footer
             <footer>
@@ -30,9 +31,9 @@ class Footer extends Component {
                         </div>
                         <div id="help-footer" className="col-lg-3 col-md-12 col-sm-12">
                             <h2>Get Help</h2>
-                            <p><i className="fa fa-phone footer-icon"/> <a href="/">Contact Us</a></p>
-                            <p><i className="fa fa-user footer-icon"/> <a href="/">Register Account</a></p>
-                            <p><i className="fa fa-info footer-icon"/> <a href="/">See the classes</a></p>
+                            <p><i className="fa fa-phone footer-icon"/> <a href="/about#contact">Contact Us</a></p>
+                            <p><i className="fa fa-user footer-icon"/> <a href="/register">Register Account</a></p>
+                            <p><i className="fa fa-info footer-icon"/> <a href="/classes">See the classes</a></p>
                         </div>
                         <div id="about-club" className="col-lg-3 col-md-12 col-sm-12">
                             <h2>About The Club</h2>

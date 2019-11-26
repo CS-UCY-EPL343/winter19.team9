@@ -9,8 +9,9 @@
     height: 100%; /* Full height */
     overflow: hidden; /* Enable scroll if needed */
 
-    background-color: rgb(0, 0, 0); /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    /*background-color: rgb(0, 0, 0); !* Fallback color *!*/
+    /*background-color: rgba(0, 0, 0, 0.4); !* Black w/ opacity *!*/
+    background-color: #aaa;
     padding-bottom: 24px;
 }
 
@@ -37,8 +38,9 @@
     content: "";
     position: absolute;
     height: 5px;
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
+    /*border-bottom: 1px solid black;*/
+    /*border-top: 1px solid black;*/
+    border-width: 0;
     top: 0;
     width: 620%;
 }
@@ -73,9 +75,9 @@
     padding-bottom: 5px;
 }
 
-.modalBack {
-    background-image: linear-gradient(to right, #d2d4dc, #d5d7df, #d8dae2, #dbdde5, #dee0e8, #dee0e8, #E2E4EC, #E2E4EC, #dee0e8, #dee0e8, #dbdde5, #d8dae2, #d5d7df, #d2d4dc);
-}
+/*.modalBack {*/
+/*    background-image: linear-gradient(to right, #d2d4dc, #d5d7df, #d8dae2, #dbdde5, #dee0e8, #dee0e8, #E2E4EC, #E2E4EC, #dee0e8, #dee0e8, #dbdde5, #d8dae2, #d5d7df, #d2d4dc);*/
+/*}*/
 
 #LoginModal .coloring {
     color: #2b2d42;
@@ -164,7 +166,8 @@
 #LoginModal .modal-content {
     background-image: linear-gradient(to right, #d2d4dc, #d5d7df, #d8dae2, #dbdde5, #dee0e8, #dee0e8, #E2E4EC, #E2E4EC, #dee0e8, #dee0e8, #dbdde5, #d8dae2, #d5d7df, #d2d4dc);
     margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-    border: 1px solid #888;
+    /*border: 1px solid #888;*/
+    border-width: 0;
     width: 80%; /* Could be more or less, depending on screen size */
 }
 
@@ -178,9 +181,8 @@
     /*font-weight: bold;*/
 }
 
-#LoginModal .close:hover,
-.close:focus {
-    /*color: red;*/
+#LoginModal .close:hover, .close:focus {
+    color: red;
     /*cursor: pointer;*/
 }
 
@@ -249,8 +251,9 @@
         content: "";
         position: absolute;
         height: 5px;
-        border-bottom: 1px solid black;
-        border-top: 1px solid black;
+        /*border-bottom: 1px solid black;*/
+        /*border-top: 1px solid black;*/
+        border-width: 0;
         top: 0;
         width: 350%;
     }
@@ -322,8 +325,9 @@
         content: "";
         position: absolute;
         height: 5px;
-        border-bottom: 1px solid black;
-        border-top: 1px solid black;
+        /*border-bottom: 1px solid black;*/
+        /*border-top: 1px solid black;*/
+        border-width: 0;
         top: 0;
         width: 250%;
     }
@@ -393,8 +397,9 @@
         content: "";
         position: absolute;
         height: 5px;
-        border-bottom: 1px solid black;
-        border-top: 1px solid black;
+        /*border-bottom: 1px solid black;*/
+        /*border-top: 1px solid black;*/
+        border-width: 0;
         top: 0;
         width: 580%;
     }
