@@ -8,7 +8,12 @@ class PageWrapper extends Component {
     render() {
         return (
             <div id = "top-of-page">
-                <Navigation img = { logo_img } />
+                <Navigation signed_in = { this.props.signed_in }
+                            level = { this.props.level }
+                            onSignin = { this.props.onSignin }
+                            onSignout = { this.props.onSignout }
+                            img = { logo_img }
+                />
 
                 { this.props.children }
 

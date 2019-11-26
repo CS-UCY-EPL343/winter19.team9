@@ -5,8 +5,8 @@ import { Button }           from 'reactstrap';
 import Announcements        from './Announcements';
 
 class SettingsProfile extends Component {
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
         this.state = {
             modalPayment      : false,
             modalAnnouncements: false
@@ -16,7 +16,9 @@ class SettingsProfile extends Component {
     };
 
     togglePayment = () => {
-        this.setState({ modalPayment: !this.state.modalPayment });
+        if (this.props.user) {
+            this.setState({ modalPayment: !this.state.modalPayment });
+        }
     };
     toggleAnnouncements = () => {
         this.setState({ modalAnnouncements: !this.state.modalAnnouncements });
@@ -37,8 +39,15 @@ class SettingsProfile extends Component {
                             {/* Modal for Messages*/ }
                         </li>
                         <li>
-                            <Button className = { 'nav-link menu-box-tab menu-text ' } onClick = { this.togglePayment }>
-                                <i className = "scnd-font-color fas fa-sync-alt" /> Membership
+                            <Button className = { 'nav-link menu-box-tab menu-text ' }
+                                    onClick = { this.togglePayment }
+                            >
+                                { this.props.user &&
+                                <i className = "scnd-font-color fas fa-sync-alt"><span>Membership</span></i> }
+                                { this.props.coach &&
+                                <i className = "scnd-font-color fas fa-sync-alt"><span>Change Classes</span></i> }
+                                { this.props.admin &&
+                                <i className = "scnd-font-color fas fa-sync-alt"><span>Statistics</span></i> }
                             </Button>
                             <ToggleModal
                                 modal = { this.state.modalPayment }
@@ -61,7 +70,7 @@ class SettingsProfile extends Component {
                                         onClick = { this.toggleAnnouncements }
                                 >
                                     <i className = "scnd-font-color fas fa-tasks" /> Announcements
-                                    <div className = "menu-box-number">3</div>
+                                    <div className = "menu-box-number">5</div>
                                 </Button>
                                 <ToggleModal
                                     modal = { this.state.modalAnnouncements }

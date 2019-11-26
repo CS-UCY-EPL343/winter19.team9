@@ -1,8 +1,52 @@
 import React, { Component } from 'react';
 import '../assets/styles/loginStyle.css'
-import { Link }             from 'react-router-dom';
+import { Link, Redirect }   from 'react-router-dom';
 
 class LoginModal extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            username       : '',
+            password       : '',
+            redirectToAdmin: false,
+            redirectToCoach: false,
+            redirectToUser : false,
+            onSignin       : '',
+            onSignout      : ''
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange = (e) => {
+        this.setState({ [e.target.name]: e.target.value })
+    };
+
+    onSubmit = (e) => {
+        e.preventDefault();
+        const { username, password } = this.state;
+
+        // Admin Login (For Testing)
+        if (username === 'admin' && password === '1234') {
+            this.props.onSignin('1');
+            this.props.toggle();
+            this.setState({ redirectToAdmin: true });
+        }
+        // Coach Login (For Testing)
+        if (username === 'coach' && password === '1234') {
+            this.props.onSignin('2');
+            this.props.toggle();
+            this.setState({ redirectToCoach: true });
+        }
+        // User Login (For Testing)
+        if (username === 'user' && password === '1234') {
+            this.props.onSignin('3');
+            this.props.toggle();
+            this.setState({ redirectToUser: true });
+        }
+    };
+
     render() {
         return (
 
@@ -40,7 +84,9 @@ class LoginModal extends Component {
                                    id = "username"
                                    pattern = "^ *[a-zA-Z0-9]+.*"
                                    placeholder = "Enter username or email"
+                                   name = "username"
                                    required
+                                   onChange = { this.handleChange }
                             />
 
                         </div>
@@ -50,29 +96,55 @@ class LoginModal extends Component {
                             >Password </span><span
                                 className = "red"
                             >*</span></label>
-                            <input type = "password" className = "form-control" id = "pword" pattern = "^ *[a-zA-Z]+.*"
-                                   placeholder = "Enter password" required
+                            <input type = "password"
+                                   className = "form-control"
+                                   id = "pword"
+                                   pattern = "^ *[a-zA-Z]+.*"
+                                   placeholder = "Enter password"
+                                   name = "password"
+                                   required
+                                   onChange = { this.handleChange }
                             />
 
                         </div>
                     </form>
 
+                    <button id = "search"
+                            type = "submit"
+                            className = "btn btn-primary"
+                            onClick = { this.onSubmit }
+                    >Login
+                    </button>
 
-                    <button id = "search" type = "submit" className = "btn btn-primary">Login</button>
+                    { this.state.redirectToAdmin ? <Redirect to = { {
+                            pathname: '/profile/admin',
+                            state   : { level: '1' }
+                        } }
+                        /> :
+                        this.state.redirectToCoach ? <Redirect to = { {
+                                pathname: '/profile/coach',
+                                state   : { level: '2' }
+                            } }
+                            /> :
+                            this.state.redirectToUser ? <Redirect to = { {
+                                    pathname: '/profile/user',
+                                    state   : { level: '3' }
+                                } }
+                                /> :
+                                false }
 
                     <div id = "remember-me" className = "">
                         <input type = "checkbox" name = "remember" />
                         <label className = "textFields">Remember me</label>
                     </div>
+                    < div className = 'container'>
+                        <div className = 'row d-flex justify-content-between login-help'>
+                        <span id = 'signup'>
+                            Don't have an account?
+                            <Link onClick = { this.props.toggle } to = '/register'>Sign Up</Link>
+                        </span>
 
-
-                    <div className = "container">
-                        <div className = "row d-flex justify-content-between login-help">
-                            <span id = "signup">Don't have an account? <Link onClick = { this.props.toggle }
-                                                                             to = "/register"
-                            >Sign Up</Link></span>
-
-                            <span id = "forgot-pass" className = "psw"> <a href = "/">Forgot password?</a></span>
+                            <span id = 'forgot-pass' className = 'psw'> <a href = '/'>Forgot password?</a></span>
                         </div>
                     </div>
                 </div>

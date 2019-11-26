@@ -13,7 +13,11 @@ export default class ToggleModal extends React.Component {
                 >
                     <ModalHeader toggle = { this.props.toggle }>{ this.props.modalHeader }</ModalHeader>
                     <ModalBody>
-                        { React.cloneElement(Comp, { toggle: this.props.toggle }) }
+                        { React.cloneElement(Comp, {
+                            toggle   : this.props.toggle,
+                            onSignin : this.props.onSignin,
+                            onSignout: this.props.onSignout
+                        }) }
                     </ModalBody>
                     <ModalFooter>
                         <Button onClick = { this.props.toggle }>{ this.props.btnCancel || 'Cancel' }</Button>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link }             from 'react-router-dom';
+import { NavLink }          from 'react-router-dom';
 import ToggleModal          from './ToggleModal';
 import LoginModal           from './LoginModal';
 import { Button }           from 'reactstrap';
@@ -17,16 +17,20 @@ class Navigation extends Component {
         this.setState({ modal: !this.state.modal });
     };
 
+    logout = () => {
+        this.props.onSignout();
+    };
+
     render() {
         // noinspection HtmlUnknownAnchorTarget,HtmlUnknownTarget
         return (
             // Navigation
             <nav className = "navbar navbar-expand-lg navbar-dark fixed-top" id = "mainNav">
                 <div className = "container-fluid mx-auto">
-                    <Link className = "navbar-brand" to = "/">
+                    <NavLink className = "navbar-brand" to = "/">
                         Fitness Factory Nicosia&nbsp;
                         <img id = { 'logo' } src = { this.props.img } alt = 'Logo' height = { 64 } width = { 64 } />
-                    </Link>
+                    </NavLink>
                     <button className = "navbar-toggler navbar-toggler-right"
                             type = "button"
                             data-toggle = "collapse"
@@ -41,35 +45,40 @@ class Navigation extends Component {
                     <div className = "collapse navbar-collapse" id = "navbarResponsive">
                         <ul className = "navbar-nav text-uppercase ml-auto">
                             <li className = "nav-item">
-                                <Link className = "nav-link" to = "/">Home</Link>
+                                <NavLink className = "nav-link" to = "/" exact = { true }>Home</NavLink>
                             </li>
                             <li className = "nav-item">
-                                <a className = "nav-link" href = '/#our-services'>Services</a>
+                                <NavLink className = "nav-link" to = "/classes">Classes</NavLink>
                             </li>
+                            { this.props.signed_in &&
                             <li className = "nav-item">
-                                <Link className = "nav-link" to = "/classes">Classes</Link>
+                                <NavLink className = "nav-link" to = "/profile">Profile</NavLink>
                             </li>
+                            }
                             <li className = "nav-item">
-                                <Link className = "nav-link" to = "/profile">Profile</Link>
+                                <NavLink className = "nav-link" to = "/about">About Us</NavLink>
                             </li>
-                            <li className = "nav-item">
-                                <Link className = "nav-link" to = "/about">About</Link>
-                            </li>
-                            <li className = "nav-item">
-                                <a className = "nav-link" href = '/about#contact'>Contact&nbsp;Us</a>
-                            </li>
-                            <li className = "nav-item">
-                                <Button className = { 'nav-link' } onClick = { this.toggle }>
-                                    Login/Register <i className = "fas fa-sign-in-alt" />
-                                </Button>
-                                <ToggleModal
-                                    modal = { this.state.modal }
-                                    toggle = { this.toggle }
-                                    modalSize = { 'md' }
-                                    modalHeader = { 'Login Form' }
-                                    modalBody = { <LoginModal /> }
-                                />
-                            </li>
+                            { this.props.signed_in ?
+                                <li className = "nav-item">
+                                    <NavLink to="/" className = { 'nav-link logout btn btn-secondary' } onClick = { this.logout }>
+                                        Logout <i className = "fas fa-sign-out-alt" />
+                                    </NavLink>
+                                </li> :
+                                <li className = "nav-item">
+                                    <Button className = { 'nav-link logout btn btn-secondary' } onClick = { this.toggle }>
+                                        Login/Register <i className = "fas fa-sign-in-alt" />
+                                    </Button>
+                                    <ToggleModal
+                                        modal = { this.state.modal }
+                                        toggle = { this.toggle }
+                                        modalSize = { 'md' }
+                                        modalHeader = { 'Login Form' }
+                                        modalBody = { <LoginModal /> }
+                                        onSignin={this.props.onSignin}
+                                        onSignout={this.props.onSignout}
+                                    />
+                                </li>
+                            }
                         </ul>
                     </div>
                 </div>
