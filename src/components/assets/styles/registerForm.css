@@ -65,13 +65,13 @@
 /*}*/
 #register #term-check > input{
     display: inline-block;
-    width: 20px;
+    width: 10%;
 }
 
 #register #term-check p {
     margin-bottom: 25px;
     display: inline-block;
-    width: 335px;
+    width: 90%;
 }
 #register .veryBlack{
     color: black;
@@ -96,7 +96,7 @@
     -webkit-box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.1);
     background-image: linear-gradient(to right, #d2d4dc, #d5d7df, #d8dae2, #dbdde5, #dee0e8, #dee0e8, #E2E4EC, #E2E4EC, #dee0e8, #dee0e8, #dbdde5, #d8dae2, #d5d7df, #d2d4dc);
     /*background: linear-gradient(to right,grey,lightgrey,grey);*/
-    border-radius: 5%;
+    border-radius: 25px;
 }
 #register .signLink {
     position: relative;
@@ -357,3 +357,45 @@
      background-color:#D90429;
      opacity:1;
  }
+
+@media (max-width: 700px) {
+    #register .container {
+        width : 100%;
+    }
+    
+    #register label, input {
+        width: 100%;
+    }
+    
+    #register .form-radio input {
+        width: 100%;
+    }
+    
+    #register .form-radio input + label {
+        width   : 100%;
+    }
+    
+    #register .form-row .form-group, .form-row .form-radio {
+        width: 100%;
+    }
+    
+    #register .select-list {
+        width: 100%;
+    }
+    
+    #register .list-item {
+        width: 100%;
+    }
+    
+    #register .registerbtn{
+        width: 100%;
+    }
+    
+    #register #term-check > input{
+        width: 10%
+    }
+    
+    #register #term-check p {
+        width: 90%;
+    }
+}

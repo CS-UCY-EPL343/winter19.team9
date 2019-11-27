@@ -203,3 +203,9 @@
 .Announcements {
     position: relative;
 }
+
+@media (max-width: 500px) {
+.Announcements h1 {
+    font-size: 1.5rem;
+}
+}

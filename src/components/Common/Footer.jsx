@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { NavLink }        from 'react-router-dom';
 
 class Footer extends Component {
     render() {
@@ -31,9 +32,9 @@ class Footer extends Component {
                         </div>
                         <div id="help-footer" className="col-lg-3 col-md-12 col-sm-12">
                             <h2>Get Help</h2>
-                            <p><i className="fa fa-phone footer-icon"/> <a href="/about">Contact Us</a></p>
-                            <p><i className="fa fa-user footer-icon"/> <a href="/register">Register Account</a></p>
-                            <p><i className="fa fa-info footer-icon"/> <a href="/classes">See the classes</a></p>
+                            <p><i className="fa fa-phone footer-icon"/> <NavLink to="/about">Contact Us</NavLink></p>
+                            <p><i className="fa fa-user footer-icon"/> <NavLink to="/register">Register Account</NavLink></p>
+                            <p><i className="fa fa-info footer-icon"/> <NavLink to="/classes">See the classes</NavLink></p>
                         </div>
                         <div id="about-club" className="col-lg-3 col-md-12 col-sm-12">
                             <h2>About The Club</h2>
