@@ -59,6 +59,12 @@ h6 {
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+@media (max-width: 500px) {
+    #mainNav .navbar-brand .gym-name {
+        display: none;
+    }
+}
+
 #mainNav .navbar-brand.active, #mainNav .navbar-brand:active, #mainNav .navbar-brand:focus, #mainNav .navbar-brand:hover {
     color : #D90429;
 }
@@ -162,7 +168,7 @@ h6 {
     position         : fixed;
     bottom           : 20px;
     right            : 30px;
-    z-index          : 99;
+    z-index          : 999;
     border           : none;
     outline          : none;
     background-color : #EF233C;
