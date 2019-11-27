@@ -6,6 +6,9 @@ an indication of the interface of the website in development, however most of th
 As stated this is an indication of the final product's interface, hence changes might apply during the 
 progression of the development process.
 
+####Deployment link: 
+[https://cs-ucy-epl343.github.io/winter19.team9/](https://cs-ucy-epl343.github.io/winter19.team9/)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
