@@ -66,7 +66,7 @@ class ContactUs extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-lg-6">
+                        <div className="col-lg-6 col-md-12 col-sm-12">
                             <h2>Contact Information</h2>
                             <p> Address: Engomi 2409 - Nicosia
                                 <br/>Phone: 22-260001
@@ -86,7 +86,7 @@ class ContactUs extends Component {
                                 <i className="fab fa-linkedin"/>
                             </a>
                         </div>
-                        <div className="col-lg-6 text-center">
+                        <div className="col-lg-6 col-md-12 col-sm-12 text-center">
                             <div className="mapouter">
                                 <div className="gmap_canvas">
                                     <iframe title='gmap_canvas' width="550" height="400" id="gmap_canvas"

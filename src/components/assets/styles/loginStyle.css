@@ -229,12 +229,6 @@
         /*width: 100%;*/
     }
 
-    #LoginModal .brands {
-        font-size: 14px;
-        height: 8px;
-        text-align: center;
-    }
-
 
     #LoginModal .fancy {
         line-height: 0.5;
@@ -282,7 +276,14 @@
     }
 
 }
-
+@media screen and (max-width: 400px) {
+    #LoginModal .imgcontainer .brands {
+        font-size  : 5px;
+        height     : 5px;
+        text-align : center;
+        padding: 0 20px;
+    }
+}
 
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 370px) {
@@ -302,13 +303,6 @@
     #LoginModal .cancelbtn {
         /*width: 100%;*/
     }
-
-    #LoginModal .brands {
-        font-size: 10px;
-        height: 7px;
-        text-align: center;
-    }
-
 
     .fancy {
         line-height: 0.5;
@@ -375,8 +369,8 @@
     #LoginModal .cancelbtn {
         width: 100%;
     }
-
-    #LoginModal .brands {
+    
+    #LoginModal .imgcontainer .brands {
         font-size: 35px;
         height: 8px;
         text-align: center;

@@ -113,19 +113,27 @@ section#contact .form-control:focus {
 }
 
 #contact .mapouter {
-    padding-right: 20px;
-    margin-top: 20px;
+    padding: 15px 10px;
+    margin: auto;
+    /*margin-top: 20px;*/
     position: relative;
     text-align: right;
-    height: 400px;
-    width: 550px;
+    /*height: 400px;*/
+    /*width: 550px;*/
 }
 
 #contact .gmap_canvas {
-    padding-right: 20px;
-    margin-top: 20px;
+    margin: auto;
+    /*margin-top: 20px;*/
     overflow: hidden;
     background: none !important;
-    height: 400px;
-    width: 550px;
+    /*height: 400px;*/
+    /*width: 550px;*/
+}
+
+#contact .mapouter a {
+    background-color: white;
+    position: relative;
+    bottom: 30px;
+    display: none;
 }
