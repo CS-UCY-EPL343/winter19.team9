@@ -40,7 +40,7 @@ class App extends Component {
 
     render() {
         return (
-            <BrowserRouter>
+            <BrowserRouter basename={'/winter19.team9'}>
                 <div>
                     <ScrollToTop />
                     <Switch>
@@ -48,27 +48,27 @@ class App extends Component {
 
                             <Route
                                 exact = { true }
-                                path = "/winter19.team9/"
+                                path = "/"
                                 component = { Home }
                             />
 
                             <Route
-                                path = "/winter19.team9/register"
+                                path = "/register"
                                 component = { Register }
                             />
 
                             <Route
-                                path = "/winter19.team9/about"
+                                path = "/about"
                                 component = { AboutUs }
                             />
 
                             <Route
-                                path = "/winter19.team9/profile/"
+                                path = "/profile"
                                 render={(props) => <Profile {...props} level={this.state.level} />}
                             />
 
                             <Route
-                                path = "/winter19.team9/classes"
+                                path = "/classes"
                                 component = { Classes }
                             />
 

@@ -60,7 +60,7 @@ class SettingsProfile extends Component {
                         <li>
                             <Button className = { 'nav-link menu-box-tab menu-text ' }>
                                 <i className = "scnd-font-color far fa-calendar-alt" /> Events
-                                <div className = "menu-box-number">5</div>
+                                <div className = "menu-box-number">3</div>
                             </Button>
                             {/* Modal for Events */ }
                         </li>
