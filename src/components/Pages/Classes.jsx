@@ -6,6 +6,8 @@ import class3 from '../assets/img/classes/classes-3.jpg';
 import class4 from '../assets/img/classes/classes-4.jpg';
 import class5 from '../assets/img/classes/classes-5.jpg';
 import class6 from '../assets/img/classes/classes-6.jpg';
+import timetableimg from '../assets/img/classes/timetableimg.jpg';
+import { AnimatedOnScroll } from 'react-animated-css-onscroll';
 
 
 
@@ -98,6 +100,13 @@ class Classes extends Component {
                             </div>
                         </div>
                     </div>
+                    <AnimatedOnScroll animationIn = "zoomInUp">
+                        <div className = 'container'>
+                            <div className = 'full-width-image'>
+                               <img src = {timetableimg} alt="timetable"/>
+                            </div>
+                        </div>
+                    </AnimatedOnScroll>
                 </section>
         );
     }
