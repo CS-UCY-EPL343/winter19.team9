@@ -128,3 +128,15 @@
 	color: #dadada;
 	text-align: center;
 }
+
+#classes .full-width-image{
+	width: 100%;
+	position: relative;
+	margin: auto;
+	padding-top: 50px;
+	padding-bottom: 100px;
+}
+
+#classes .full-width-image img{
+	width: 100%;
+}
