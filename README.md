@@ -8,6 +8,7 @@ progression of the development process.
 
 ####Deployment link: 
 [https://cs-ucy-epl343.github.io/winter19.team9/](https://cs-ucy-epl343.github.io/winter19.team9/)
+##### The web application is also responsive and operates normally on mobile devices
 
 ## Getting Started
 
@@ -135,7 +136,10 @@ application's interface.
 
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [SQL Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15) -
+ Used to build and access our database for back-end operations of our web application.
 
+#####Note: Currently there is an sql file in our repository which will be used for building the web application's database.
 ## Contributing
 
 This web application is being developed within the constraints of a university course subject. Hence the development 
