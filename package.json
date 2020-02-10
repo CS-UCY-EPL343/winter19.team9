@@ -12,7 +12,8 @@
     "react-bootstrap-modal": "^4.2.0",
     "react-dom": "^16.11.0",
     "react-paypal-express-checkout": "^1.0.5",
-    "react-scripts": "^3.2.0"
+    "react-scripts": "^3.2.0",
+    "mysql": "^2.18.1"
   },
   "scripts": {
     "predeploy": "npm run build",
