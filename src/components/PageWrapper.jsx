@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
-import Navigation           from './Common/Navigation';
-// Images
-import logo_img             from './assets/img/logos/ffLogoTransparent.png';
-import Footer               from './Common/Footer';
+import Navigation           from './common/Navigation';
+import Footer               from './common/Footer';
 
 class PageWrapper extends Component {
     render() {
         return (
             <div id = "top-of-page">
-                <Navigation signed_in = { this.props.signed_in }
-                            level = { this.props.level }
-                            onSignin = { this.props.onSignin }
-                            onSignout = { this.props.onSignout }
-                            img = { logo_img }
-                />
+                <Navigation />
 
                 { this.props.children }
 
