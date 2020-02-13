@@ -2,12 +2,12 @@ import React               from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { isAuthenticated } from '../repository';
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
+const PrivateRoute = ({ component: Component, userLevel: UserLevel, ...rest }) => (
     <Route
         { ...rest }
         render = { props =>
             isAuthenticated() ? (
-                <Component { ...props } />
+                <Component userLevel = { UserLevel } { ...props } />
             ) : (
                 <Redirect to = { '/' } />
             )

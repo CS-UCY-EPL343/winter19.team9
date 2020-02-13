@@ -1,20 +1,18 @@
-import React, { Component } from 'react';
-import Navigation           from './common/Navigation';
-import Footer               from './common/Footer';
-import history              from '../history';
+import React, { Component }              from 'react';
+import Navigation                        from './common/Navigation';
+import Footer                            from './common/Footer';
 
 class PageWrapper extends Component {
-
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        localStorage.setItem('path', history.location.pathname);
-    }
-
     render() {
+        // noinspection JSCheckFunctionSignatures
+        const childrenWithProps = React.Children.map(this.props.children, child =>
+            React.cloneElement(child, { userLevel: this.props.userLevel })
+        );
         return (
             <div id = "top-of-page">
-                <Navigation />
+                <Navigation userLevel = { this.props.userLevel } setUserLevel = { this.props.setUserLevel } />
 
-                { this.props.children }
+                { childrenWithProps }
 
                 <Footer />
 

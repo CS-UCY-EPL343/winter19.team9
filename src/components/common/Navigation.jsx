@@ -1,35 +1,27 @@
 import React, { Component }                      from 'react';
-import { NavLink }                     from 'react-router-dom';
+import { NavLink }                               from 'react-router-dom';
 import ToggleModal                               from './ToggleModal';
 import LoginModal                                from './LoginModal';
 import { Button }                                from 'reactstrap';
-import { getUserLevel, isAuthenticated, logOut } from '../../repository';
+import { isAuthenticated, logOut } from '../../repository';
 import logo_img                                  from '../assets/img/logos/ffLogoTransparent.png';
+import history                                   from '../../history';
 
 class Navigation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            modal    : false,
-            userLevel: undefined
+            modal    : false
         };
         this.toggle = this.toggle.bind(this);
-        this.setUserLevel = this.setUserLevel.bind(this);
     };
 
-    componentDidMount() {
-        // Persist on state
-        if (isAuthenticated()) {
-            getUserLevel().then(level => this.setUserLevel(level))
-        }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        localStorage.setItem('path', history.location.pathname);
     }
 
     toggle = () => {
         this.setState({ modal: !this.state.modal });
-    };
-
-    setUserLevel = (userLevel) => {
-        this.setState({ userLevel });
     };
 
     onLogOut = () => {
@@ -66,17 +58,17 @@ class Navigation extends Component {
                             </li>
                             { isAuthenticated() &&
                               (
-                                  this.state.userLevel === 'user' ?
+                                  this.props.userLevel === 'user' ?
                                   <li className = "nav-item">
                                       <NavLink className = "nav-link" to = "/user/profile">Profile</NavLink>
                                   </li>
                                                                   :
-                                  this.state.userLevel === 'coach' ?
+                                  this.props.userLevel === 'coach' ?
                                   <li className = "nav-item">
                                       <NavLink className = "nav-link" to = "/coach/profile">Profile</NavLink>
                                   </li>
                                                                    :
-                                  this.state.userLevel === 'admin' ?
+                                  this.props.userLevel === 'admin' ?
                                   <li className = "nav-item">
                                       <NavLink className = "nav-link" to = "/admin/profile">Profile</NavLink>
                                   </li>
@@ -111,7 +103,7 @@ class Navigation extends Component {
                                         modalSize = { 'md' }
                                         modalHeader = { 'Login Form' }
                                         modalBody = { <LoginModal /> }
-                                        setUserLevel = { this.setUserLevel }
+                                        setUserLevel = { this.props.setUserLevel }
                                     />
                                 </li>
                             }
