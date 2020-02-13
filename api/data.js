@@ -16,6 +16,6 @@ const users = [
     'password': 'qwerty',
     'level': 'admin'
   }
-]
+];
 
-module.exports = { users: users }
+module.exports = { users: users };

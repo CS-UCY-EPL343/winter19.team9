@@ -1,11 +1,12 @@
 const jwt = require('jsonwebtoken');
-
-const JWT_SECRET = "jwt_secret_password"; // Change later
+const dotenv = require('dotenv');
+dotenv.config();
+const JWT_SECRET = process.env.JWT_SECRET;
 
 module.exports = (req, res, next) => {
 
     // check header or url parameters or post parameters for token
-    var token = req.body['x-access-token'] || req.query['x-access-token'] || req.headers['x-access-token'];
+    const token = req.body['x-access-token'] || req.query['x-access-token'] || req.headers['x-access-token'];
 
     // decode token
     if (token) {
@@ -19,6 +20,7 @@ module.exports = (req, res, next) => {
                 });
             } else {
                 // if everything is good, save to request for use in other routes
+                req.decoded = decoded;
                 next();
             }
         });

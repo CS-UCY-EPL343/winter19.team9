@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import Navigation           from './common/Navigation';
 import Footer               from './common/Footer';
+import history              from '../history';
 
 class PageWrapper extends Component {
+
+    componentDidUpdate() {
+        localStorage.setItem('path', history.location.pathname);
+    }
+
     render() {
         return (
             <div id = "top-of-page">

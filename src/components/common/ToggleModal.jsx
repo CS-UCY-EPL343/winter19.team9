@@ -14,7 +14,7 @@ export default class ToggleModal extends React.Component {
                     <ModalHeader toggle = { this.props.toggle }>{ this.props.modalHeader }</ModalHeader>
                     <ModalBody>
                         { React.cloneElement(Comp, {
-                            toggle   : this.props.toggle
+                            ...this.props
                         }) }
                     </ModalBody>
                     <ModalFooter>
