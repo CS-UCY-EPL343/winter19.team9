@@ -1,5 +1,5 @@
 import React, { Component }                      from 'react';
-import { NavLink, Redirect }                     from 'react-router-dom';
+import { NavLink }                     from 'react-router-dom';
 import ToggleModal                               from './ToggleModal';
 import LoginModal                                from './LoginModal';
 import { Button }                                from 'reactstrap';
@@ -81,7 +81,7 @@ class Navigation extends Component {
                                       <NavLink className = "nav-link" to = "/admin/profile">Profile</NavLink>
                                   </li>
                                                                    :
-                                  <Redirect to = "/" />
+                                  ""
                               )
                             }
                             <li className = "nav-item">

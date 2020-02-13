@@ -6,7 +6,7 @@ import ProfileInfo from '../common/ProfileInfo';
 import BmiCalc from '../common/BMICalc';
 import Timetable from '../common/Timetable';
 
-class Profile extends Component {
+class ProfileUser extends Component {
     render() {
         return (
             <div id='profile' className="main-container container-fluid">
@@ -27,4 +27,4 @@ class Profile extends Component {
     }
 }
 
-export default Profile;
+export default ProfileUser;

@@ -47,7 +47,7 @@ and twitter). If the user doesn't have an account she/he can create a new accoun
 By clicking the sign-up option a new page appears, which shows a form which the user has to fill with his unique
 information and credentials in order to create his own account in the system. 
 <br/><br/>
-**Profile** <br/>
+**ProfileUser** <br/>
 This profile is responsible for visualizing the users unique profile and its only available after the user sign-in to
 the system using his credentials. From this page the user has the ability view his personal messages by clicking the 
 messages option, add/edit his profile picture by hovering and clicking the current profile picture,

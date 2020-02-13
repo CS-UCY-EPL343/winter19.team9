@@ -5,7 +5,7 @@ import history              from '../history';
 
 class PageWrapper extends Component {
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState, snapshot) {
         localStorage.setItem('path', history.location.pathname);
     }
 
