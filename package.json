@@ -5,6 +5,9 @@
   "homepage": "https://cs-ucy-epl343.github.io/winter19.team9/",
   "dependencies": {
     "axios": "^0.19.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "history": "^4.10.1",
     "leaflet": "^1.5.1",
     "mysql": "^2.18.1",
     "react": "^16.11.0",
@@ -14,8 +17,7 @@
     "react-bootstrap-modal": "^4.2.0",
     "react-dom": "^16.11.0",
     "react-paypal-express-checkout": "^1.0.5",
-    "react-scripts": "^3.3.1",
-    "history": "^4.10.1"
+    "react-scripts": "^3.3.1"
   },
   "scripts": {
     "predeploy": "npm run build",

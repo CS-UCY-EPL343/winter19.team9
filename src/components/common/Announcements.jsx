@@ -4,6 +4,10 @@ import '../assets/styles/announcementModal.css'
 
 class Announcements extends Component {
     render() {
+        const express = require('express');
+        const cors =  require('cors');
+        const mysql = require('mysql');
+
         return (
             <div className = "Announcements" id = "AnnounceModal">
                 <AnimatedOnScroll animationIn = "fadeInLeft">
