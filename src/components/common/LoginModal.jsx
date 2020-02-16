@@ -25,12 +25,12 @@ class LoginModal extends Component {
         e.preventDefault();
         logIn(this.state)
             .then(data => {
-                if (!data.level) {
-                    throw Error;
-                }
-                this.props.toggle();    // Close Modal
-                this.props.setUserLevel(data.level);
-            })
+            if (!data.level) {
+                throw Error;
+            }
+            this.props.toggle();    // Close Modal
+            this.props.setUserLevel(data.level);
+        })
             .catch(err => alert(err));
     };
 
