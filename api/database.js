@@ -36,8 +36,22 @@ function dbLogIn(username, password) {
     })
 }
 
+function getUserData(user) {
+    return new Promise((resolve, reject) =>{
+        connection.query('SELECT * FROM `ACCOUNT` WHERE username = "aloizo03"', (err, rows) => {
+            if(err) {
+                console.log('Error in user data');
+                return reject(err);
+            }
+            //console.log('Data received from Db:');
+            return resolve(rows[0]);
+        })
+    })
+}
+
 module.exports = {
     dbConnect,
     dbDisconnect,
-    dbLogIn
+    dbLogIn,
+    getUserData
 };

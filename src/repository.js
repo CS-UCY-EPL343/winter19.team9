@@ -17,6 +17,13 @@ export function logIn(data) {
         .catch(err => Promise.reject('Authentication Failed!'));
 }
 
+export function userData() {
+    return axios
+        .post(`${BASE_URL}/api/user/data`, {'x-access-token': localStorage.getItem('x-access-token')})
+        .then(response => response.data)
+        .catch(err => Promise.reject('Authentication Failed!'))
+}
+
 export function logOut() {
     localStorage.removeItem('x-access-token');
     localStorage.removeItem('x-access-token-expiration');

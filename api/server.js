@@ -6,12 +6,13 @@ const app = express();
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const data = require('./data');
 const middleware = require('./middleware');
 const dotenv = require('dotenv');
 dotenv.config();
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 
 app.post('/api/auth', (req, res) => {
@@ -37,6 +38,20 @@ app.post('/api/auth', (req, res) => {
 app.post('/api/userLevel', middleware, (req, res) => {
     res.json({ 'userLevel': req.decoded.level });
 });
+
+app.post('/api/user/data', middleware, (req, res) => {
+    // console.log(req.decoded);
+    db.getUserData(req.decoded.name)
+        .then(data => {
+            if (data) {
+                return res.status(200).json(data)
+            } else {
+                return res.status(409).json('Authentication failed. User not found.');
+            }
+        })
+        .catch(err => res.status(409).json(err));
+});
+
 
 const PORT = process.env.PORT;
 const server = app.listen(PORT, () => {

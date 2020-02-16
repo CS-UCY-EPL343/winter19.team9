@@ -78,7 +78,20 @@
     border-radius: 100%;
 
 }
-
+#savel{
+    text-align: center;
+    display: block;
+}
+#save{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+#resetl{
+    text-align: center;
+    display: block;
+    margin-top: 0;
+    margin-bottom: 0;
+}
 #reset{
     color: whitesmoke;
     background-color: #000010;
