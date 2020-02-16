@@ -37,16 +37,13 @@ function dbLogIn(username, password) {
 }
 
 function getUserData(user) {
-    return new Promise((resolve, reject) =>{
-        connection.query('SELECT * FROM `ACCOUNT` WHERE username = "aloizo03"', (err, rows) => {
-            if(err) {
-                console.log('Error in user data');
-                return reject(err);
-            }
-            //console.log('Data received from Db:');
-            return resolve(rows[0]);
-        })
-    })
+    return new Promise((resolve, reject) => {
+        const sql = "SELECT * FROM ACCOUNT WHERE username = ?";
+        connection.query(sql, [ user ], function(err, rows) {
+            if(err) reject(err);
+            resolve(rows[0]);
+        });
+    });
 }
 
 module.exports = {

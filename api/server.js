@@ -6,7 +6,6 @@ const app = express();
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const data = require('./data');
 const middleware = require('./middleware');
 const dotenv = require('dotenv');
 dotenv.config();
@@ -16,9 +15,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors());
 
 app.post('/api/auth', (req, res) => {
-    // let user = data.users.find((user) => {
-    //     return user.name === req.body.name && user.password === req.body.password;
-    // });
     db.dbLogIn(req.body.name, req.body.password)
       .then(user => {
           if (!user) {
@@ -40,8 +36,7 @@ app.post('/api/userLevel', middleware, (req, res) => {
 });
 
 app.post('/api/user/data', middleware, (req, res) => {
-    // console.log(req.decoded);
-    db.getUserData(req.decoded.name)
+    db.getUserData(req.decoded.username)
         .then(data => {
             if (data) {
                 return res.status(200).json(data)
