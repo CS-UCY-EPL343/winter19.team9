@@ -26,7 +26,18 @@ function dbDisconnect() {
     console.log('Connection closed.');
 }
 
+function dbLogIn(username, password) {
+    return new Promise((resolve, reject) => {
+        const sql = "SELECT * FROM ACCOUNT WHERE username = ? AND password = ?";
+        connection.query(sql, [ username, password ], function(err, rows) {
+            if(err) reject(err);
+            resolve(rows[0]);
+        });
+    })
+}
+
 module.exports = {
     dbConnect,
-    dbDisconnect
+    dbDisconnect,
+    dbLogIn
 };
