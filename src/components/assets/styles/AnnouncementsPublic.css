@@ -1,0 +1,111 @@
+/* Services */
+#AnnouncementsPub {
+    background-color : #2B2B2B;
+    padding          : 20px 0;
+    position         : relative;
+    margin           : auto;
+}
+
+#AnnouncementsPub .ann-title {
+    color: #D90429;
+    padding-left : 35px;
+}
+
+#AnnouncementsPub .ann-cards {
+    height     : 100%;
+    color      : #FFFFFF;
+    text-align : center;
+    position   : relative;
+    margin     : 0 25px;
+}
+
+#AnnouncementsPub #ann-container .ann-card {
+    position: relative;
+    padding          : 15px;
+    margin           : 0 5px;
+    background-color : #353535;
+    height           : 150px;
+    overflow         : hidden;
+    text-align: left;
+}
+
+#AnnouncementsPub .ann-card i {
+    position        : relative;
+    align-items     : center;
+    justify-content : center;
+    font-size       : 125px;
+    z-index         : 2;
+    text-align: center !important;
+}
+
+#AnnouncementsPub .ann-img-plus {
+    display : block;
+    text-align: center;
+}
+
+#AnnouncementsPub .ann-img {
+    display : none;
+    text-align: center;
+}
+
+#AnnouncementsPub .ann-card .card-title {
+    color: #D90429;
+    position: relative;
+    font-size: 15px;
+    transition: 1s;
+    cursor: pointer;
+    padding-top: 0;
+}
+
+#AnnouncementsPub .ann-card .card-text {
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #8D99AE;
+    font-weight: 400;
+}
+
+#AnnouncementsPub .ann-card:hover {
+    cursor  : pointer;
+    z-index: 1000;
+    transition     : transform .3s ease-out 0s;
+    transform  : scale(1.05);
+    box-shadow : 10px 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+#AnnouncementsPub .ann-card:hover .ann-data {
+    display : none;
+}
+
+#AnnouncementsPub .ann-card:hover .ann-img {
+    display : block;
+}
+
+#AnnouncementsPub .ann-card .ann-data {
+    height : auto;
+}
+
+#AnnouncementsPub .ann-card::before, #AnnouncementsPub .ann-card::after {
+    position       : absolute;
+    top            : 0;
+    right          : 0;
+    bottom         : 0;
+    left           : 0;
+    transform      : scale3d(0, 0, 1);
+    transition     : transform .3s ease-out 0s;
+    background     : rgba(255, 255, 255, 0.1);
+    content        : '';
+    pointer-events : none;
+}
+
+#AnnouncementsPub .ann-card::before {
+    transform-origin : left top;
+}
+
+#AnnouncementsPub .ann-card::after {
+    transform-origin : right bottom;
+}
+
+#AnnouncementsPub .ann-card:hover::before, #AnnouncementsPub .ann-card:hover::after,
+#AnnouncementsPub .ann-card:focus::before, #AnnouncementsPub .ann-card:focus::after {
+    transform : scale3d(1, 1, 1);
+}
