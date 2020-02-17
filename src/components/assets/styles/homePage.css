@@ -65,8 +65,7 @@
 /* Services */
 #our-services {
     background-color : #2B2B2B;
-    padding          : 60px 0;
-    border-bottom    : 1px solid black;
+    padding          : 60px 0 0 30px;
 }
 
 #our-services .bgImage {

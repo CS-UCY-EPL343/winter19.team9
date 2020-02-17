@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
+import React, {Component}  from 'react';
 // Re-usable components
-import CarouselHp from '../common/CarouselHP';
-import Services from '../common/Services';
-import logo_img from '../assets/img/logos/fitnessFactoryLogo.png';
+import CarouselHp          from '../common/CarouselHP';
+import Services            from '../common/Services';
+import logo_img            from '../assets/img/logos/fitnessFactoryLogo.png';
+import AnnouncementsPublic from '../common/AnnouncementsPublic';
 
 class Home extends Component {
     render() {
@@ -15,6 +16,8 @@ class Home extends Component {
                 </div>
 
                 <Services/>
+
+                <AnnouncementsPublic userLevel={this.props.userLevel} />
             </div>
         )
     }

@@ -3,7 +3,6 @@ import '../assets/styles/homePage.css'
 import ServiceGoal          from './ServiceGoal';
 import { AnimatedOnScroll } from 'react-animated-css-onscroll';
 import bgImage              from '../assets/img/logos/ffLogoTransparent.png';
-import AnnouncementsPublic  from './AnnouncementsPublic';
 
 class Services extends Component {
     render() {
@@ -100,8 +99,6 @@ class Services extends Component {
                         </div>
                     </div>
                 </div>
-
-                <AnnouncementsPublic />
             </div>
 
         );

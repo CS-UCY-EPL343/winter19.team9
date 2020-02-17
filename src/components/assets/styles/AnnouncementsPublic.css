@@ -1,13 +1,14 @@
 /* Services */
 #AnnouncementsPub {
     background-color : #2B2B2B;
-    padding          : 20px 0;
+    padding          : 5px 0 40px 0;
     position         : relative;
     margin           : auto;
+    border-bottom    : 1px solid black;
 }
 
 #AnnouncementsPub .ann-title {
-    color: #D90429;
+    color        : #D90429;
     padding-left : 35px;
 }
 
@@ -19,14 +20,21 @@
     margin     : 0 25px;
 }
 
-#AnnouncementsPub #ann-container .ann-card {
-    position: relative;
+#AnnouncementsPub #ann-container .ann-card-prompt {
+    cursor     : default;
+    box-shadow : 10px 10px 15px rgba(0, 0, 0, 0.3);
+    background : rgb(53, 53, 53);
+    background : linear-gradient(225deg, rgba(53, 53, 53, 1) 35%, rgba(6, 6, 6, 0.20211834733893552) 70%);
+}
+
+#AnnouncementsPub #ann-container .ann-card, .ann-card-prompt {
+    position         : relative;
     padding          : 15px;
     margin           : 0 5px;
     background-color : #353535;
     height           : 150px;
     overflow         : hidden;
-    text-align: left;
+    text-align       : left;
 }
 
 #AnnouncementsPub .ann-card i {
@@ -35,39 +43,39 @@
     justify-content : center;
     font-size       : 125px;
     z-index         : 2;
-    text-align: center !important;
+    text-align      : center !important;
 }
 
 #AnnouncementsPub .ann-img-plus {
-    display : block;
-    text-align: center;
+    display    : block;
+    text-align : center;
 }
 
 #AnnouncementsPub .ann-img {
-    display : none;
-    text-align: center;
+    display    : none;
+    text-align : center;
 }
 
 #AnnouncementsPub .ann-card .card-title {
-    color: #D90429;
-    position: relative;
-    font-size: 15px;
-    transition: 1s;
-    cursor: pointer;
-    padding-top: 0;
+    color       : #D90429;
+    position    : relative;
+    font-size   : 15px;
+    transition  : 1s;
+    cursor      : pointer;
+    padding-top : 0;
 }
 
 #AnnouncementsPub .ann-card .card-text {
-    font-size: 14px;
-    letter-spacing: 1px;
-    color: #8D99AE;
-    font-weight: 400;
+    font-size      : 14px;
+    letter-spacing : 1px;
+    color          : #8D99AE;
+    font-weight    : 400;
 }
 
 #AnnouncementsPub .ann-card:hover {
-    cursor  : pointer;
-    z-index: 1000;
-    transition     : transform .3s ease-out 0s;
+    cursor     : pointer;
+    z-index    : 1000;
+    transition : transform .3s ease-out 0s;
     transform  : scale(1.05);
     box-shadow : 10px 10px 15px rgba(0, 0, 0, 0.3);
 }
