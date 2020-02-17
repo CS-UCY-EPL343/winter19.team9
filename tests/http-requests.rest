@@ -1,0 +1,22 @@
+POST http://localhost:5000/api/auth
+Content-Type: application/json
+
+{"name"    : "aloizo03", "password": "1234"}
+
+###
+
+POST http://localhost:5000/api/userLevel
+Content-Type: application/json
+
+{"x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFsb2l6bzAzIiwibGV2ZWwiOiJ1c2VyIiwiaWF0IjoxNTgxODY5NjU2LCJleHAiOjE1ODE4NzY4NTZ9.m7WUTKujvkmtHe0tCMrzJN5QYrhLUOJaVl0Yg8WXItE"}
+
+###
+
+POST http://localhost:5000/api/user/data
+Content-Type: application/json
+
+{"x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFsb2l6bzAzIiwibGV2ZWwiOiJ1c2VyIiwiaWF0IjoxNTgxODY5NjU2LCJleHAiOjE1ODE4NzY4NTZ9.m7WUTKujvkmtHe0tCMrzJN5QYrhLUOJaVl0Yg8WXItE"}
+
+<> 2020-02-16T062404.200.json
+
+###
