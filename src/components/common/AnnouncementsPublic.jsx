@@ -6,16 +6,20 @@ import '../assets/styles/AnnouncementsPublic.css';
 import {AnimatedOnScroll} from 'react-animated-css-onscroll';
 import Announcement       from './Announcement';
 import AnnouncementModal  from './AnnouncementModal';
-import {isAuthenticated}  from '../../repository';
+import {
+    getPublicAnnouncements,
+    isAuthenticated,
+    removeAnnouncement,
+    addAnnouncement,
+}                         from '../../repository';
 
 class AnnouncementsPublic extends Component {
+    _isMounted = false;
+
     constructor(props) {
         super(props);
         this.state = {
-            announcements: [
-                {id: 1, title: 'Hello', message: 'World'},
-                {id: 2, title: 'Hello', message: 'World'},
-            ],
+            announcements: [],
             modal        : false,
             level        : 0,
         };
@@ -23,8 +27,11 @@ class AnnouncementsPublic extends Component {
         this.slickRemove = this.slickRemove.bind(this);
         this.toggle = this.toggle.bind(this);
     }
+
     // need to see
     componentDidMount() {
+        this._isMounted = true;
+
         let l = 0;
         if (isAuthenticated()) {
             const level = this.props.userLevel;
@@ -37,6 +44,17 @@ class AnnouncementsPublic extends Component {
             }
         }
         this.setState({level: l});
+
+        getPublicAnnouncements().then(response => {
+            if (this._isMounted) {
+                this.setState(
+                    {announcements: response.data.announcements});
+            }
+        });
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     toggle = () => {
@@ -47,41 +65,45 @@ class AnnouncementsPublic extends Component {
         this.setState({modal: !this.state.modal});
     };
 
-    slickAdd = (title, message) => {
+    slickAdd = (Title, Message) => {
         if (this.state.level <= 1) {
             return;
         }
 
-        if (title === '' || message === '') {
+        if (Title === '' || Message === '') {
             alert('Please give correct data.');
             return;
         }
 
         this.toggle();
-        let newID = 1;
-        if (this.state.announcements.length > 0) {
-            newID = this.state.announcements.reduce((prev, current) => (
-                                                                           prev.id
-                                                                           > current.id)
-                                                                       ? prev
-                                                                       : current).id
-                    + 1;
-        }
 
-        console.log(newID);
-        this.state.announcements.push(
-            {id: newID, title: title, message: message});
+        addAnnouncement(Title, Message).then(response => {
+            let prevAnn = this.state.announcements.slice(0);
+            prevAnn.push(
+                {
+                    ANNOUNCEMENT_ID: response.data.ANNOUNCEMENT_ID,
+                    Title          : Title,
+                    Message        : Message,
+                });
+            // console.log(announcements);
+            this.setState({announcements: prevAnn});
+            console.log(prevAnn);
+        }).catch(err => alert(err));
     };
 
-    slickRemove = (id) => {
+    slickRemove = (ANNOUNCEMENT_ID) => {
         if (this.state.level <= 1) {
             return;
         }
 
-        this.setState({
-                          announcements: this.state.announcements.filter(
-                              ann => ann.id !== id),
-                      });
+        removeAnnouncement(ANNOUNCEMENT_ID).then(() => {
+            this.setState({
+                              announcements: this.state.announcements.filter(
+                                  ann => ann.ANNOUNCEMENT_ID
+                                         !== ANNOUNCEMENT_ID),
+                          });
+        }).catch(err => alert(err));
+
     };
 
     render() {
@@ -130,23 +152,17 @@ class AnnouncementsPublic extends Component {
                             <div className = "col-lg-12">
                                 <div className = "ann-cards">
                                     <Slider { ...settings }>
-                                        { this.state.level >= 2
-                                          &&
-                                          <Announcement isAdder = { true }
-                                                        id = { 0 }
-                                                        slickAdd = { this.toggle }
-                                                        level = { this.state.level }
-                                          /> }
-                                          {/*//need to see for public*/}
+                                        {/*//need to see for public*/ }
                                         { this.state.announcements.sort(
                                             function(a, b) {
-                                                return b.id - a.id;
+                                                return b.ANNOUNCEMENT_ID
+                                                       - a.ANNOUNCEMENT_ID;
                                             }).map(ann => {
-                                            return <Announcement key = { ann.id }
+                                            return <Announcement key = { ann.ANNOUNCEMENT_ID }
                                                                  isAdder = { false }
-                                                                 id = { ann.id }
-                                                                 title = { ann.title }
-                                                                 message = { ann.message }
+                                                                 id = { ann.ANNOUNCEMENT_ID }
+                                                                 title = { ann.Title }
+                                                                 message = { ann.Message }
                                                                  slickRemove = { this.slickRemove }
                                                                  level = { this.state.level }
                                             />;
@@ -182,6 +198,13 @@ class AnnouncementsPublic extends Component {
                                               id = { 0 }
                                               slickAdd = { this.toggle }
                                               level = { this.state.level }
+                                          /> }
+                                        { this.state.level >= 2
+                                          &&
+                                          <Announcement isAdder = { true }
+                                                        id = { 0 }
+                                                        slickAdd = { this.toggle }
+                                                        level = { this.state.level }
                                           /> }
                                     </Slider>
                                 </div>
