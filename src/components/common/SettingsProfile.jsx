@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ToggleModal from './ToggleModal';
 import PaymentModal from './PaymentModal';
 import {Button} from 'reactstrap';
-import Announcements from './Announcements';
+import AnnouncementsPrivate from './AnnouncementsPrivate';
 import EditAccount from "./EditAccount";
 
 
@@ -79,7 +79,7 @@ class SettingsProfile extends Component {
                                     toggle={this.toggleAnnouncements}
                                     modalSize={'md'}
                                     modalHeader={'Announcements'}
-                                    modalBody={<Announcements/>}
+                                    modalBody={<AnnouncementsPrivate/>}
                                 />
                             </div>
                         </li>

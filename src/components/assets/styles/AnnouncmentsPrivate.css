@@ -1,0 +1,21 @@
+#AnnounceModal {
+    background-color: #1b1b1b;
+}
+
+.Announcements .ann-card {
+    transition: 0.5s;
+    cursor: pointer;
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #353535;
+    background-clip: border-box;
+    border: 1px #aaaaaa;
+    border-radius: .25rem;
+    color: #aaaaaa;
+    padding: 30px;
+}

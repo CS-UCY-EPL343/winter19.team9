@@ -23,7 +23,7 @@ class AnnouncementsPublic extends Component {
         this.slickRemove = this.slickRemove.bind(this);
         this.toggle = this.toggle.bind(this);
     }
-
+    // need to see
     componentDidMount() {
         let l = 0;
         if (isAuthenticated()) {
@@ -137,6 +137,7 @@ class AnnouncementsPublic extends Component {
                                                         slickAdd = { this.toggle }
                                                         level = { this.state.level }
                                           /> }
+                                          {/*//need to see for public*/}
                                         { this.state.announcements.sort(
                                             function(a, b) {
                                                 return b.id - a.id;

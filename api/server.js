@@ -57,11 +57,17 @@ const server = app.listen(PORT, () => {
 setInterval(() => server.getConnections(
     (err, connections) => console.log(`${ connections } connections currently open`)
 ), 1000);
-
 process.on('SIGTERM', shutDown);
 process.on('SIGINT', shutDown);
 
 let connections = [];
+
+// app.post('/api/announcement/getAll', (req, res) => {
+//     let announcement = connections[0].query('SELECT AN.TIMESTAMP\t, C.Name , C.Surname , AN.Text\n' +
+//         'FROM ACCOUNT A, ANNOUNCEMENT AN, COACH C\n' +
+//         'WHERE A.username='+req.username+' AND AN.User_ID=A.User_ID AND C.Coach_ID=AN.Coach_ID');
+//         return announcement;
+// });
 
 server.on('connection', connection => {
     connections.push(connection);
