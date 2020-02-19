@@ -1,0 +1,95 @@
+.msg-card .card-title {
+    color       : #D90429;
+    position    : relative;
+    font-size   : 25px;
+    transition  : 1s;
+    cursor      : pointer;
+    padding-top : 0;
+    margin-bottom: 0;
+}
+
+.msg-card .msg-data {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.msg-card .msg-content.right {
+    /*float: right;*/
+}
+
+.msg-card .msg-content.left {
+    /*float: right;*/
+    text-align: right;
+}
+
+.msg-card .msg-data img {
+    max-height: 50px;
+    max-width: 50px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.msg-card .msg-data .img-left {
+    float: left;
+    margin-right: 20px;
+}
+
+.msg-card .msg-data .img-right {
+    float: right;
+    margin-left: 20px;
+    margin-right:0;
+}
+
+.msg-card .msg-data .msg-contact {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.msg-card .card-text {
+    font-size      : 14px;
+    letter-spacing : 1px;
+    color          : #8D99AE;
+    font-weight    : 400;
+    text-align: justify;
+}
+
+.msg-card .msg-timestamp {
+    font-size: 12px;
+    position: absolute;
+    bottom: 0;
+    right: 15px;
+}
+
+.msg-card:hover {
+    cursor     : pointer;
+    z-index    : 1000;
+    transition : transform .3s ease-out 0s;
+    transform  : scale(1.05);
+    box-shadow : 10px 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+.msg-card::before, .msg-card::after {
+    position       : absolute;
+    top            : 0;
+    right          : 0;
+    bottom         : 0;
+    left           : 0;
+    transform      : scale3d(0, 0, 1);
+    transition     : transform .3s ease-out 0s;
+    background     : rgba(255, 255, 255, 0.1);
+    content        : '';
+    pointer-events : none;
+}
+
+.msg-card::before {
+    transform-origin : left top;
+}
+
+.msg-card::after {
+    transform-origin : right bottom;
+}
+
+.msg-card:hover::before, .msg-card:hover::after,
+.msg-card:focus::before, .msg-card:focus::after {
+    transform : scale3d(1, 1, 1);
+}
