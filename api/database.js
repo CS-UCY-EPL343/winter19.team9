@@ -3,9 +3,6 @@ const mysql = require('mysql');
 let connection = null; // Global
 
 function dbConnect() {
-    if (connection !== null) {
-        return;
-    }
     const conn = mysql.createConnection({
                                             host    : 'dione.in.cs.ucy.ac.cy',
                                             user    : 'ffndb',
@@ -16,11 +13,12 @@ function dbConnect() {
         if (err) {
             return err;
         }
-        console.log('Connected to database.');
+        console.log('\x1b[32m%s\x1b[0m', 'Connected to database.');
         connection = conn;
     });
     conn.on('error', function() {
         dbDisconnect();
+        return null;
     });
 }
 
@@ -28,7 +26,7 @@ function dbDisconnect() {
     if (connection !== null) {
         connection.end();
     }
-    console.log('Connection closed.');
+    console.log('\x1b[31m%s\x1b[0m', 'Error. Database connection closed.');
 }
 
 function dbLogIn(username, password) {
