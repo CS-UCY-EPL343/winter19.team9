@@ -29,7 +29,7 @@
     border-radius: 100%;
     background: #FFFFFF;
     border: 1px solid transparent;
-    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12);
     cursor: pointer;
     font-weight: normal;
     transition: all .2s ease-in-out;
@@ -57,7 +57,7 @@
     position: relative;
     border-radius: 100%;
     border: 6px solid #F8F8F8;
-    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
     background-image: url("https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200");
 }
 /*
@@ -94,5 +94,24 @@
 }
 #reset{
     color: whitesmoke;
-    background-color: #000010;
+    background-color: #ad8d11;
 }
+#delete{
+    color: whitesmoke;
+    background-color: #000010;
+    margin-left: 10px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+#deletel{
+    text-align: center;
+    display: block;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-right: 0;
+}
+#buttons{
+    margin-bottom: 0;
+}
+
+/******************************************************/

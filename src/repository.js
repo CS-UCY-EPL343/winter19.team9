@@ -16,11 +16,11 @@ export function logIn(data) {
 }
 
 export function userData() {
-  return axios.post(`${ BASE_URL }/api/user/data`, {
-    'x-access-token': localStorage.getItem('x-access-token'),
-  })
-      .then(response => response.announcements)
-      .catch(() => Promise.reject('Authentication Failed!'));
+    return axios.post(`${ BASE_URL }/api/user/data`, {
+        'x-access-token': localStorage.getItem('x-access-token'),
+    })
+                 .then(response => response.data)
+                 .catch(() => Promise.reject('Authentication Failed!'));
 }
 
 export function getPublicAnnouncements() {
@@ -45,6 +45,23 @@ export function addAnnouncement(title, message) {
       .then(response => response)
       .catch(() => Promise.reject('Authentication Failed!'));
 }
+export function postuserData(data) {
+    return axios
+        .post(`${BASE_URL}/api/user/post/data`, {'x-access-token': localStorage.getItem('x-access-token'), data: data})
+        .then(response => response.message)
+        .catch(() => Promise.reject('Authentication Failed!'))
+}
+
+export function deleteUserData() {
+    return axios
+        .post(`${BASE_URL}/api/user/delete/data`, {
+            'x-access-token': localStorage.getItem('x-access-token'),
+        })
+        .then(response => {console.log(response); return response.data})
+        .catch(() => Promise.reject('Authentication Failed!'));
+
+}
+
 
 export function logOut() {
   localStorage.removeItem('x-access-token');

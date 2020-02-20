@@ -3,13 +3,16 @@ const mysql = require('mysql');
 let connection = null; // Global
 
 function dbConnect() {
+    if(connection !== null) return;
     const conn = mysql.createConnection({
-                                            host    : 'dione.in.cs.ucy.ac.cy',
-                                            user    : 'ffndb',
-                                            password: '3dwaxQvnSDPpVjJS',
-                                            database: 'ffndb',
-                                        });
+        host: 'dione.in.cs.ucy.ac.cy',
+        user: 'ffndb',
+        password: '3dwaxQvnSDPpVjJS',
+        database: 'ffndb'
+    });
     conn.connect((err) => {
+        if (err) return err;
+        console.log('Connected to database.');
         if (err) {
             return err;
         }
@@ -31,24 +34,42 @@ function dbDisconnect() {
 
 function dbLogIn(username, password) {
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT * FROM ACCOUNT WHERE username = ? AND password = ?';
-        connection.query(sql, [username, password], function(err, rows) {
-            if (err) {
-                return reject(err);
-            }
-            resolve(rows[0]);
+        const sql = "SELECT * FROM ACCOUNT WHERE username = ? AND password = ?";
+        connection.query(sql, [ username, password ], function(err, rows) {
+            if(err) return reject(err);
+            return resolve(rows[0]);
         });
     });
 }
 
 function getUserData(user) {
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT * FROM ACCOUNT WHERE username = ?';
-        connection.query(sql, [user], function(err, rows) {
-            if (err) {
-                return reject(err);
-            }
-            resolve(rows[0]);
+        const sql = "SELECT * FROM ACCOUNT,USERS WHERE username = ?  AND ACCOUNT.User_ID = USERS.User_ID";
+        connection.query(sql, [ user ], function(err, rows) {
+            if(err) return reject(err);
+            return resolve(rows[0]);
+        });
+    });
+}
+function postUserData(data) {
+    return new Promise((resolve, reject) => {
+        const sql = "UPDATE USERS,ACCOUNT SET  Name = ? , Surname = ? , Email = ? , password = ? WHERE ACCOUNT.username = ? ";
+        connection.query(sql, [ data.Name , data.Surname , data.Email , data.password , data.username ], function(err) {
+            if(err) {console.log(err); return reject(err)}
+            console.log("1 record inserted");
+            return resolve('The data were saved successfully!');
+        });
+    });
+}
+
+function deleteUserData(user) {
+    return new Promise((resolve, reject) => {
+
+        const sql = "DELETE a,u FROM USERS u JOIN ACCOUNT a ON a.User_ID = u.User_ID WHERE a.username = ? ";
+        connection.query(sql, [ user ] , function(err) {
+            if(err) return reject(err);
+            console.log("1 record deleted");
+            return resolve('Success');
         });
     });
 }
@@ -113,7 +134,9 @@ module.exports = {
     dbDisconnect,
     dbLogIn,
     getUserData,
+    postUserData,
+    deleteUserData,
     getPublicAnnouncements,
     removeAnnouncement,
-    addAnnouncement,
+    addAnnouncement
 };

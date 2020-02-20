@@ -152,6 +152,28 @@ app.post('/api/announcements/remove', middleware, (req, res) => {
       .catch(() => res.status(404).json('Not Found'));
 });
 
+/*************************************************************************/
+app.post('/api/user/post/data', middleware, (req, res) => {
+    db.postUserData(req.body.data)
+        .then(response => res.status(200).json({message: response}))
+        .catch(err => res.status(409).json(err));
+});
+/*************************************************************************/
+/*************************************************************************/
+app.post('/api/user/delete/data', middleware, (req, res) => {
+    db.deleteUserData(req.decoded.username).then(data => {
+            if (data) {
+                return res.status(200).json(data)
+            } else {
+
+                return res.status(409).json('Authentication failed. User not found.');
+            }
+        })
+        .catch(err => res.status(409).json(err));
+});
+/*************************************************************************/
+
+
 const PORT = process.env.PORT;
 const server = app.listen(PORT, () => {
   console.log('Running on port: ' + PORT);
