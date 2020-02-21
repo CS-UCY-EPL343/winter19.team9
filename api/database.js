@@ -129,6 +129,23 @@ function addAnnouncement(title, message, level, username) {
     });
 }
 
+
+
+//mine
+function getUserInfo(name) {
+    return new Promise((resolve, reject) => {
+        const sql = "SELECT * FROM ACCOUNT a, USERS u WHERE u.name = ? and u.User_ID = a.User_ID";
+        connection.query(sql, [ name ], function(err, rows) {
+            if(err) reject(err);
+            resolve(rows);
+        });
+    });
+}
+
+
+//Testing for fetch
+
+//add method name
 module.exports = {
     dbConnect,
     dbDisconnect,
@@ -138,5 +155,6 @@ module.exports = {
     deleteUserData,
     getPublicAnnouncements,
     removeAnnouncement,
-    addAnnouncement
+    addAnnouncement,
+    getUserInfo
 };

@@ -63,6 +63,15 @@ export function deleteUserData() {
 }
 
 
+//mine
+export function userDetails(name) {
+    return axios
+        .post(`${BASE_URL}/api/user/userDetails`, {'x-access-token': localStorage.getItem('x-access-token'), name: name})
+        .then(response => response.data)
+        .catch(err => Promise.reject('Authentication Failed!'))
+}
+
+
 export function logOut() {
   localStorage.removeItem('x-access-token');
   localStorage.removeItem('x-access-token-expiration');

@@ -87,7 +87,7 @@ h6 {
     #mainNav {
         background-color : #353535 !important;
     }
-    
+
     #mainNav .navbar-brand {
         font-weight        : 700;
         -webkit-transition : all 0.3s;
@@ -110,24 +110,24 @@ h6 {
         transition         : padding-top 0.3s, padding-bottom 0.3s;
         border             : none;
     }
-    
+
     #mainNav .navbar-brand {
         font-size          : 1.70em;
         font-weight        : 700;
         -webkit-transition : all 0.3s;
         transition         : all 0.3s;
     }
-    
+
     #mainNav .navbar-nav .nav-item .nav-link {
         padding : 1.1em 1.0em !important;
     }
-    
+
     #mainNav.navbar-shrink {
         padding-top      : 0;
         padding-bottom   : 0;
         background-color : #353535;
     }
-    
+
     #mainNav.navbar-shrink .navbar-brand {
         font-size : 1.25em;
         padding   : 12px 0;

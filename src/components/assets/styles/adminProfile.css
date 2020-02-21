@@ -1,0 +1,57 @@
+form.adminViewClient .searchDiv {
+    /*background-color: red;*/
+    /*display: inline-flex;*/
+    /*justify-content: space-around;*/
+    /*align-content: baseline;*/
+}
+
+form.adminViewClient input[type=text] {
+    /*!*padding: 10px;*!*/
+    /*font-size: 17px;*/
+    /*border: 1px solid grey;*/
+    /*!*float: left;*!*/
+    /*!*width: 80%;*!*/
+    /*background: #f1f1f1;*/
+    height: auto;
+    margin-left: 0;
+    padding-left: 10px !important;
+}
+
+form.adminViewClient button {
+    height: 100%;
+    width: 100%;
+    /*padding: 10px;*/
+    background: #f30638;
+    color: white;
+    font-size: 17px;
+    border: 1px transparent;
+    border-radius: 10%;
+    cursor: pointer;
+}
+
+form.adminViewClient button:hover {
+    /*background: #0b7dda;*/
+}
+
+form.adminViewClient::after {
+    /*content: "";*/
+    /*clear: both;*/
+    /*display: table;*/
+}
+
+#profPic {
+    margin-top: 20px;
+    width: 100px;
+    border-radius: 50%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#profile input[type="text"]{
+    background: mintcream;
+}
+
+#clientDetails, #searchClient{
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}

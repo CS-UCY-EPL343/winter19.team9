@@ -111,6 +111,7 @@ app.post('/api/userLevel', middleware, (req, res) => {
   res.json({'userLevel': req.decoded.level});
 });
 
+// template
 app.post('/api/user/data', middleware, (req, res) => {
   db.getUserData(req.decoded.username).then(data => {
     if (data) {
@@ -172,6 +173,22 @@ app.post('/api/user/delete/data', middleware, (req, res) => {
         .catch(err => res.status(409).json(err));
 });
 /*************************************************************************/
+
+// mine
+app.post('/api/user/userDetails', middleware, (req, res) => {
+    if(req.decoded.level === 'user') {
+        return res.status(409).json('Authentication failed.');
+    }
+    db.getUserInfo(req.body.name)
+        .then(data => {
+            if (data) {
+                return res.status(200).json(data)
+            } else {
+                return res.status(409).json('Authentication failed. User not found.');
+            }
+        })
+        .catch(err => res.status(409).json(err));
+});
 
 
 const PORT = process.env.PORT;
