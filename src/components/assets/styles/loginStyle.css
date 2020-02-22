@@ -1,28 +1,280 @@
-/* The Modal (background) */
+
+/*#LoginModal html,body{*/
+/*    min-height: 100%;*/
+/*}*/
+/*#LoginModal body{*/
+/*    font: 100% / 1.414 "Open sans", "Trebuchet MS", arial, sans-serif;*/
+/*    background-color: #aaa;*/
+/*}*/
 #LoginModal {
     /*display: none; !* Hidden by default *!*/
-    /*position: fixed; !* Stay in place *!*/
-    /*z-index: 1000; !* Sit on top *!*/
-    /*left: 0;*/
-    /*top: 0;*/
+    position: relative; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    display: block;
+    left: 0;
+    top: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
-    overflow: hidden; /* Enable scroll if needed */
-
+    /*overflow: auto; !* Enable scroll if needed *!*/
     /*background-color: rgb(0, 0, 0); !* Fallback color *!*/
     /*background-color: rgba(0, 0, 0, 0.4); !* Black w/ opacity *!*/
-    background-color: #aaa;
+    /*background-color: #aaa;*/
     padding-bottom: 24px;
 }
 
+/*#LoginModal a,input[type="submit"],.form__link{*/
+/*    -webkit-transition: all .25s ease;*/
+/*    transition: all .25s ease;*/
+/*}*/
 
-#LoginModal .fa {
-    /*font-size: 4em;*/
-    /*width: 4em;*/
-    /*height: 2.5em;*/
+#LoginModal .small{
+    display: block;
+    margin-top: 1rem;
+    text-align: center;
+}
+#LoginModal .hidden{
+    display: none;
+}
+/*@-webkit-keyframes gradient {*/
+/*    0% {*/
+/*        background-position: 0 50%;*/
+/*    }*/
+/*    50% {*/
+/*        background-position: 100% 50%;*/
+/*    }*/
+/*    100% {*/
+/*        background-position: 0 50%;*/
+/*    }*/
+/*}*/
+/*@keyframes gradient {*/
+/*    0% {*/
+/*        background-position: 0 50%;*/
+/*    }*/
+/*    50% {*/
+/*        background-position: 100% 50%;*/
+/*    }*/
+/*    100% {*/
+/*        background-position: 0 50%;*/
+/*    }*/
+/*}*/
+#LoginModal .wrapper {
+    position: relative;
+    margin-top: 3rem;
+    margin-right: auto;
+    margin-left: auto;
+    /*width: remy(320px);*/
+    background: #1B1B1B;
+    box-shadow: 3px 3px 32px rgba(0,0,0,0.25);
+    -webkit-perspective: inherit;
+    transform: perspective(1000px);
+}
+/*#LoginModal .flipper__checkbox:checked + .form__container {*/
+/*    -webkit-transform: rotateY(180deg);*/
+/*    transform: rotateY(180deg);*/
+/*}*/
+
+/*#LoginModal .form__container{*/
+/*    position: relative;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    -webkit-transform-style: preserve-3d;*/
+/*    transform-style: preserve-3d;*/
+/*    -webkit-transition: -webkit-transform .25s ease;*/
+/*    transition: transform .25s ease;*/
+/*}*/
+/*#LoginModal .form__container--inner{*/
+/*    padding: 2rem;*/
+/*}*/
+#LoginModal .form__login, .form__signup{
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 24px;
+    width: 100%;
+    /*-webkit-backface-visibility: hidden;*/
+    backface-visibility: hidden;
+    background-color: #aaa;
+    box-shadow: 3px 3px 32px rgba(0,0,0,0.25);
+}
+#LoginModal .form__login:after, .form__signup:after {
+    content: "";
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    /*background-color: rgb(0, 0, 0); */
+    /*background-color: rgba(0, 0, 0, 0.4); !* Black w/ opacity *!*/
+    background-color: #aaa;
+    padding-bottom: 24px;
+    background-size: 400% 400%;
+    -webkit-animation: gradient 2s ease infinite;
+    animation: gradient 2s ease infinite;
+}
+#LoginModal .form__login {
+    z-index: 2;
+    padding: 2rem;
+}
+#LoginModal .form__signup {
+    padding: 2rem;
+}
+#LoginModal .form__header {
+    font-family: cursive, sans-serif;
+    margin-bottom: 2rem;
+    font-size: 1.618rem;
+    font-weight: 700;
+    text-align: center;
+}
+#LoginModal .form__group:nth-of-type(n + 2){
+    margin-top: 1.5rem;
+}
+#LoginModal #birthday{
+    margin-bottom: 2rem;
+    font-weight: 400;
+    font-size: 1.2rem;
+}
+#LoginModal .label__icon {
+    /*padding: .97rem 0;*/
+    float: left;
+    width: 3rem;
+    font-size: 1.25rem;
     /*text-align: center;*/
+    /*color: #ef233c;*/
+    /*border-top: 1px solid #e1e1e1;*/
+    /*border-bottom: 1px solid #e1e1e1;*/
+    /*border-left: 1px solid #e1e1e1;*/
+    /*border-bottom-left-radius: 2px;*/
+}
+#LoginModal #pword, #username{
+    width: 300px;
+    padding: 16px 16px 16px 0;
+    margin: 8px 0;
+}
+#LoginModal .form__element{
+    padding-top: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+    /*width: 15.875rem;*/
+    width: 300px;
+    border-top: 1px solid #e1e1e1;
+    border-right: 1px #e1e1e1;
+    border-bottom: 1px solid #e1e1e1;
+    border-left: 0;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+#LoginModal .form__element:focus{
+    outline: 0;
+}
+#LoginModal [type="checkbox"]{
+    position: relative;
+    margin-right: .5rem;
+}
+#LoginModal [type="checkbox"]:after{
+    content:"";
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 1px solid #e1e1e1;
+    width: 16px;
+    height:16px;
+    background: #fff;
+    border-radius: 2px;
+    cursor: pointer;
+}
+#LoginModal label[for="checkbox"] {
+    position: relative;
+    font-size: .9rem;
+    font-weight: 700;
+}
+#LoginModal .signUpName{
+    padding: 16px 16px 16px 0;
+    width: 150px;
+}
+#LoginModal #signUpUsername{
+    padding: 16px 16px 16px 0;
+    width: 300px;
+    margin: 8px 40px;
+}
+/*#LoginModal .checkbox--forget:checked + .icon--checkbox {*/
+/*    opacity: 1;*/
+/*    -webkit-transform: scale(1);*/
+/*    -ms-transform: scale(1);*/
+/*    transform: scale(1);*/
+/*}*/
+/*#LoginModal .icon--checkbox {*/
+/*    position: absolute;*/
+/*    top: 4px;*/
+/*    left: 6px;*/
+/*    opacity: 0;*/
+/*    cursor: pointer;*/
+/*    -webkit-transition: all 0.35s cubic-bezier(0.91, 0.8, 0.84, 2.81);*/
+/*    transition: all 0.35s cubic-bezier(0.91, 0.8, 0.84, 2.81);*/
+/*    -webkit-transform: scale(0);*/
+/*    -ms-transform: scale(0);*/
+/*    transform: scale(0);*/
+/*}*/
+#LoginModal .form__link {
+    font-size: .8rem;
+    font-weight: bold;
+    text-decoration: underline;
+    color: #ef233c;
+    cursor: pointer;
+}
+#LoginModal .form__link:focus, .form__link:hover {
+    color: red;
 }
 
+#LoginModal .link--right {
+    float: right;
+}
+
+#LoginModal .form__button {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    display: inline-block;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    color: whitesmoke;
+    background-color: #ef233c;
+    border: 0;
+    border-radius: 2px;
+    cursor: pointer;
+}
+#LoginModal .form__button:focus, .form__button:hover {
+    background-color: red;
+}
+#LoginModal .fa {
+    font-size: 4em;
+    width: 2em;
+    height: 2.5em;
+    text-align: center;
+}
+#LoginModal .fa {
+    font-size: 20px;
+    height: 0;
+    padding: 0 10px;
+}
+#LoginModal .imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+}
+#LoginModal .cursive {
+    font-family: cursive, sans-serif;
+    font-size: x-large;
+    padding-bottom: 5px;
+    text-align: center;
+}
+#LoginModal .cursive2 {
+    font-family: cursive, sans-serif;
+    font-size: x-large;
+    padding-bottom: 5px;
+    text-align: center;
+}
 #LoginModal .fancy {
     line-height: 0.5;
     text-align: center;
@@ -33,7 +285,7 @@
     position: relative;
 }
 
-.fancy span:before,
+#LoginModal .fancy span:before,
 .fancy span:after {
     content: "";
     position: absolute;
@@ -45,73 +297,15 @@
     width: 620%;
 }
 
-.fancy span:before {
+#LoginModal .fancy span:before {
     right: 100%;
     margin-right: 15px;
 }
 
-.fancy span:after {
-    left: 100%;
-    margin-left: 15px;
-}
-
-#LoginModal .red {
-    color: red;
-}
-
-
-/*  */
-
-#LoginModal .cursive {
-    font-family: 'Rubik', sans-serif;
-    font-size: x-large;
-    padding-bottom: 5px;
-    text-align: center;
-}
-
-#LoginModal .cursive2 {
-    font-family: 'Rubik', sans-serif;
-    font-size: large;
-    padding-bottom: 5px;
-}
-
-/*.modalBack {*/
-/*    background-image: linear-gradient(to right, #d2d4dc, #d5d7df, #d8dae2, #dbdde5, #dee0e8, #dee0e8, #E2E4EC, #E2E4EC, #dee0e8, #dee0e8, #dbdde5, #d8dae2, #d5d7df, #d2d4dc);*/
+/*#LoginModal .fancy span:after {*/
+/*    left: 100%;*/
+/*    margin-left: 15px;*/
 /*}*/
-
-#LoginModal .coloring {
-    color: #2b2d42;
-}
-
-/* Center the image and position the close button */
-#LoginModal .imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
-    position: relative;
-}
-
-#LoginModal #username {
-    /*font-family: 'PT Serif', serif;*/
-    /*width: 100%;*/
-}
-
-#LoginModal #pword {
-    /*font-family: 'PT Serif', serif;*/
-    /*width: 100%*/
-}
-
-#LoginModal .textFields {
-    color: #111425;
-    font-weight: 600;
-    font-family: 'Montserrat', serif;
-}
-
-#LoginModal .fa {
-    font-size: 20px;
-    height: 0;
-    padding: 0 30px;
-}
-
 #LoginModal .imgcontainer .brands {
     font-size: 40px;
     /*width: 10em;*/
@@ -119,19 +313,28 @@
     text-align: center;
     padding: 0 40px;
 }
-
-/* Full-width input fields */
-#LoginModal input[type=text], input[type=password] {
-    width: 100%;
-    padding: 12px 20px;
+#LoginModal #signUpAge{
     margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
+    padding: 16px 16px 16px 0;
 }
 
-/* Set a style for all buttons */
-#LoginModal button {
+#LoginModal #gender{
+    margin: 1px 0;
+    padding: 16px 16px 0 0;
+    font-size: 1.2rem;
+}
+#LoginModal #remember-me > input {
+    display: inline-block;
+    width: 20px;
+}
+
+#LoginModal #remember-me label {
+    margin-bottom: 25px;
+    display: inline-block;
+    width: 235px;
+}
+/*!*!* Set a style for all buttons *!*!*/
+#LoginModal .form__button {
     background-color: #ef233c;
     color: white;
     padding: 14px 20px;
@@ -141,16 +344,32 @@
     width: 100%;
 }
 
-#LoginModal button:hover {
+#LoginModal .form__button:hover {
     opacity: 0.8;
 }
+/*!* Modal Content/Box *!*/
+#LoginModal .modal-content {
+    background-image: linear-gradient(to right, #d2d4dc, #d5d7df, #d8dae2, #dbdde5, #dee0e8, #dee0e8, #E2E4EC, #E2E4EC, #dee0e8, #dee0e8, #dbdde5, #d8dae2, #d5d7df, #d2d4dc);
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    /*border: 1px solid #888;*/
+    border-width: 0;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+#LoginModal .coloring {
+    color: #2b2d42;
+    height: 25px;
+}
+#LoginModal .form__link{
+    font-size: 100%;
+}
 
-/* Extra styles for the cancel button */
-/*#LoginModal .cancelbtn {*/
-/*    width: auto;*/
-/*    padding: 10px 18px;*/
-/*    background-color: #ef233c;*/
-/*}*/
+
+/*!*!* Extra styles for the cancel button *!*/
+/*!*!*#LoginModal .cancelbtn {*!*/
+/*!*!*    width: auto;*!*/
+/*!*!*    padding: 10px 18px;*!*/
+/*!*!*    background-color: #ef233c;*!*/
+/*!*!*}*!*/
 
 #LoginModal .container {
     /*padding: 16px;*/
@@ -161,24 +380,14 @@
     /*padding-top: 16px;*/
 }
 
-
-/* Modal Content/Box */
-#LoginModal .modal-content {
-    background-image: linear-gradient(to right, #d2d4dc, #d5d7df, #d8dae2, #dbdde5, #dee0e8, #dee0e8, #E2E4EC, #E2E4EC, #dee0e8, #dee0e8, #dbdde5, #d8dae2, #d5d7df, #d2d4dc);
-    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-    /*border: 1px solid #888;*/
-    border-width: 0;
-    width: 80%; /* Could be more or less, depending on screen size */
-}
-
-/* The Close Button (x) */
+/*/* The Close Button (x) */
 #LoginModal .close {
-    /*position: absolute;*/
-    /*right: 25px;*/
-    /*top: 0;*/
-    /*color: #000;*/
-    /*font-size: 35px;*/
-    /*font-weight: bold;*/
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
 }
 
 #LoginModal .close:hover, .close:focus {
@@ -186,31 +395,10 @@
     /*cursor: pointer;*/
 }
 
-/* Add Zoom Animation */
-.animate {
-    -webkit-animation: animatezoom 0.6s;
-    animation: animatezoom 0.6s
-}
+/*!*!* Add Zoom Animation *!*/
 
-@-webkit-keyframes animatezoom {
-    from {
-        -webkit-transform: scale(0)
-    }
-    to {
-        -webkit-transform: scale(1)
-    }
-}
 
-@keyframes animatezoom {
-    from {
-        transform: scale(0)
-    }
-    to {
-        transform: scale(1)
-    }
-}
-
-/* Change styles for span and cancel button on extra small screens */
+/*/* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 420px) {
     #LoginModal span.psw {
         font-size: 14px;
@@ -274,8 +462,8 @@
         font-size: small;
         padding-bottom: 5px;
     }
-
 }
+
 @media screen and (max-width: 400px) {
     #LoginModal .imgcontainer .brands {
         font-size  : 5px;
@@ -285,19 +473,13 @@
     }
 }
 
-/* Change styles for span and cancel button on extra small screens */
+/*/* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 370px) {
     #LoginModal span.psw {
         font-size: 14px;
         display: block;
         float: none;
         padding-bottom: 3px;
-    }
-
-    #LoginModal #signup {
-        font-size: 14px;
-        display: block;
-        float: none;
     }
 
     #LoginModal .cancelbtn {
@@ -330,25 +512,20 @@
         right: 100%;
         margin-right: 15px;
     }
-
     .fancy span:after {
         left: 100%;
         margin-left: 15px;
     }
-
-
     #LoginModal .cursive {
         font-family: 'Rubik', sans-serif;
         font-size: large;
         padding-bottom: 5px;
     }
-
     #LoginModal .cursive2 {
         font-family: 'Rubik', sans-serif;
         font-size: small;
         padding-bottom: 5px;
     }
-
 }
 
 
@@ -423,13 +600,4 @@
 
 }
 
-#LoginModal #remember-me > input {
-    display: inline-block;
-    width: 20px;
-}
 
-#LoginModal #remember-me label {
-    margin-bottom: 25px;
-    display: inline-block;
-    width: 235px;
-}

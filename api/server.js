@@ -202,7 +202,12 @@ app.post('/api/user/delete/data', middleware, (req, res) => {
         .catch(err => res.status(409).json(err));
 });
 /*************************************************************************/
-
+app.post('/api/user/insert', (req,res) => {
+  console.log(req.body);
+  db.dbSignUp(req.body)
+      .then(response => res.status(200).json({message: response}))
+      .catch(err => res.status(409).json(err));
+});
 // mine
 app.post('/api/user/userDetails', middleware, (req, res) => {
     if(req.decoded.level === 'user') {

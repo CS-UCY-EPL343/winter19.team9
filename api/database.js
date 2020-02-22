@@ -41,7 +41,33 @@ function dbLogIn(username, password) {
         });
     });
 }
+function dbSignUp(data) {
+    return new Promise((resolve, reject) => {
+        // let lvl = 'User';
+        const ins = "INSERT INTO ACCOUNT(username,password,level,User_ID) values(?,?,?,?)";
+        const insert = "INSERT INTO USERS(Name, Surname, Bdate, Gender, Email, Medical_History, Age, Membership_ID) values(?,?,?,?,?,?,?,?)";
 
+        connection.query(insert, [data.fname, data.lname, data.bDate, data.gender, data.email, data.med, data.age, data.med], function (err, rows) {
+            if (err) {
+                console.log(err);
+                return reject(err)
+            }
+            let id = rows.insertId;
+            console.log("User created");
+
+            connection.query(ins, [data.username, data.password, data.level, id], function (err) {
+                if (err) {
+                    console.log(err);
+                    return reject(err)
+                }
+                console.log("User inserted");
+                return resolve("The user account was inserted successfully")
+            });
+
+            return resolve("User created successfully!")
+        });
+    });
+}
 function getUserData(user) {
     return new Promise((resolve, reject) => {
         const sql = "SELECT * FROM ACCOUNT,USERS WHERE username = ?  AND ACCOUNT.User_ID = USERS.User_ID";
@@ -174,6 +200,7 @@ function getUserInfo(name) {
 module.exports = {
     dbConnect,
     dbDisconnect,
+    dbSignUp,
     dbLogIn,
     getUserData,
     postUserData,

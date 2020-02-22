@@ -84,6 +84,12 @@ export function userDetails(name) {
         .catch(err => Promise.reject('Authentication Failed!'))
 }
 
+export function signUp(data) {
+    return axios
+        .post(`${BASE_URL}/api/user/insert`, data)
+        .then(response => response.data)
+        .catch(() => Promise.reject("Sign Up failed."))
+}
 
 export function logOut() {
   localStorage.removeItem('x-access-token');
