@@ -53,7 +53,7 @@ function getUserData(user) {
 }
 function postUserData(data) {
     return new Promise((resolve, reject) => {
-        const sql = "UPDATE USERS,ACCOUNT SET  Name = ? , Surname = ? , Email = ? , password = ? WHERE ACCOUNT.username = ? AND ACCOUNT.User_ID = USERS.User_ID";
+        const sql = "UPDATE USERS , ACCOUNT SET  Name = ? , Surname = ? , Email = ? , password = ? WHERE ACCOUNT.username = ? AND ACCOUNT.User_ID = USERS.User_ID";;
         connection.query(sql, [ data.Name , data.Surname , data.Email , data.password , data.username ], function(err) {
             if(err) {console.log(err); return reject(err)}
             console.log("1 record inserted");
@@ -73,6 +73,19 @@ function deleteUserData(user) {
         });
     });
 }
+
+function getPrivateAnnouncements(username){
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT AN.ANNOUNCEMENT_ID, AN.Title , AN.Message FROM ACCOUNT A, ANNOUNCEMENT AN, COACH C WHERE A.username= ? AND AN.User_ID=A.User_ID AND C.Coach_ID=AN.Coach_ID AND isActive = 1 AND isPrivate = 1 ';
+        connection.query(sql, [username], function(err, rows) {
+            if (err) {
+                return reject(err);
+            }
+            resolve(rows);
+        });
+    });
+}
+
 
 function getPublicAnnouncements() {
     return new Promise((resolve, reject) => {
@@ -154,6 +167,7 @@ module.exports = {
     postUserData,
     deleteUserData,
     getPublicAnnouncements,
+    getPrivateAnnouncements,
     removeAnnouncement,
     addAnnouncement,
     getUserInfo

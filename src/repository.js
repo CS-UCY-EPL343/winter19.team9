@@ -23,6 +23,12 @@ export function userData() {
                  .catch(() => Promise.reject('Authentication Failed!'));
 }
 
+export function getPrivateAnnouncements() {
+    return axios.post(`${ BASE_URL }/api/announcements/private`, {'x-access-token': localStorage.getItem('x-access-token')})
+        .then(response => response)
+        .catch(() => Promise.reject('Get private Announcements from database!!'));
+}
+
 export function getPublicAnnouncements() {
   return axios.get(`${ BASE_URL }/api/announcements/public`)
       .then(response => response);

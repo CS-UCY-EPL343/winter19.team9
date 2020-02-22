@@ -122,6 +122,24 @@ app.post('/api/user/data', middleware, (req, res) => {
   }).catch(err => res.status(401).json(err));
 });
 
+/****************************************************
+ *                                                   *
+ * Getting the private announcements from the database   *
+ *                                                   *
+ ***************************************************/
+
+app.post('/api/announcements/private', middleware, (req, res) => {
+  db.getPrivateAnnouncements(req.decoded.username)
+      .then(data => {
+        if (data) {
+          return res.status(200).json({announcements: data});
+        } else {
+          return res.status(409).json('No data found.');
+        }
+      });
+});
+
+
 app.get('/api/announcements/public', (req, res) => {
   db.getPublicAnnouncements().then(data => {
     if (data) {
