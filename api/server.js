@@ -139,6 +139,17 @@ app.post('/api/announcements/private', middleware, (req, res) => {
       });
 });
 
+app.post('/api/announcements/private/total',middleware,(req, res) => {
+  db.getTotalAnnouncements(req.decoded.username)
+      .then(data => {
+        if (data) {
+          return res.status(200).json({TotalAnnouncement: data});
+        } else {
+          return res.status(409).json('No data found.');
+        }
+      });
+});
+
 
 app.get('/api/announcements/public', (req, res) => {
   db.getPublicAnnouncements().then(data => {

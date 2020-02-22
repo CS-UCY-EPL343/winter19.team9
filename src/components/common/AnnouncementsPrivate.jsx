@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {AnimatedOnScroll} from 'react-animated-css-onscroll';
 import '../assets/styles/AnnouncmentsPrivate.css'
 import AnnouncementCompPub from './AnnouncementCompPub';
-import {getPrivateAnnouncements, isAuthenticated, userData} from "../../repository";
+import {getPrivateAnnouncements} from "../../repository";
 
 
 class AnnouncementsPrivate extends Component {

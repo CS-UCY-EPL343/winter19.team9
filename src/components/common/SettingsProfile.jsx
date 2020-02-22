@@ -5,6 +5,7 @@ import {Button}             from 'reactstrap';
 import AnnouncementsPrivate from './AnnouncementsPrivate';
 import EditAccount          from './EditAccount';
 import MessagesModal        from './MessagesModal';
+import {getTotalPrivateAnnouncements} from "../../repository";
 
 class SettingsProfile extends Component {
   constructor(props, context) {
@@ -14,6 +15,7 @@ class SettingsProfile extends Component {
       modalAnnouncements: false,
       modalMessages     : false,
       modalEditAccount  : false,
+      TotalAnnouncement : 0,
     };
     this.togglePayment = this.togglePayment.bind(this);
     this.toggleAnnouncements = this.toggleAnnouncements.bind(this);
@@ -33,6 +35,14 @@ class SettingsProfile extends Component {
   toggleMessages = () => {
     this.setState({modalMessages: !this.state.modalMessages});
   };
+
+  componentDidMount() {
+
+    getTotalPrivateAnnouncements().then(response => {
+      this.setState(
+          {TotalAnnouncement: response.data.TotalAnnouncement.TotalAnnouncement});
+    });
+  }
 
   render() {
     return (
@@ -85,7 +95,7 @@ class SettingsProfile extends Component {
                           onClick = { this.toggleAnnouncements }
                   >
                     <i className = "scnd-font-color fa fa-tasks" /> Announcements
-                    <div className = "menu-box-number">5</div>
+                    <div className = "menu-box-number">{this.state.TotalAnnouncement}</div>
                   </Button>
                   <ToggleModal
                       modal = { this.state.modalAnnouncements }

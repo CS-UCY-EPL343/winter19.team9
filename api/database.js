@@ -74,9 +74,21 @@ function deleteUserData(user) {
     });
 }
 
+function getTotalAnnouncements(username){
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT COUNT(AN.ANNOUNCEMENT_ID) AS TotalAnnouncement FROM ACCOUNT A, ANNOUNCEMENT AN, COACH C WHERE A.username= ? AND AN.User_ID=A.User_ID AND C.Coach_ID=AN.Coach_ID AND isActive = 1 AND isPrivate = 1';
+        connection.query(sql, [username], function(err, rows) {
+            if (err) {
+                return reject(err);
+            }
+            resolve(rows[0]);
+        });
+    });
+}
+
 function getPrivateAnnouncements(username){
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT AN.ANNOUNCEMENT_ID, AN.Title , AN.Message FROM ACCOUNT A, ANNOUNCEMENT AN, COACH C WHERE A.username= ? AND AN.User_ID=A.User_ID AND C.Coach_ID=AN.Coach_ID AND isActive = 1 AND isPrivate = 1 ';
+        const sql = 'SELECT ANNOUNCEMENT_ID, Title, Message FROM ACCOUNT A, ANNOUNCEMENT AN, COACH C WHERE A.username= ? AND AN.User_ID=A.User_ID AND C.Coach_ID=AN.Coach_ID AND isActive = 1 AND isPrivate = 1';
         connection.query(sql, [username], function(err, rows) {
             if (err) {
                 return reject(err);
@@ -170,5 +182,6 @@ module.exports = {
     getPrivateAnnouncements,
     removeAnnouncement,
     addAnnouncement,
-    getUserInfo
+    getUserInfo,
+    getTotalAnnouncements,
 };
