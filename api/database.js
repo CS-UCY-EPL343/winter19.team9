@@ -53,7 +53,7 @@ function getUserData(user) {
 }
 function postUserData(data) {
     return new Promise((resolve, reject) => {
-        const sql = "UPDATE USERS,ACCOUNT SET  Name = ? , Surname = ? , Email = ? , password = ? WHERE ACCOUNT.username = ? ";
+        const sql = "UPDATE USERS,ACCOUNT SET  Name = ? , Surname = ? , Email = ? , password = ? WHERE ACCOUNT.username = ? AND ACCOUNT.User_ID = USERS.User_ID";
         connection.query(sql, [ data.Name , data.Surname , data.Email , data.password , data.username ], function(err) {
             if(err) {console.log(err); return reject(err)}
             console.log("1 record inserted");
