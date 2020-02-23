@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 // import Flippy, { FrontSide, BackSide } from 'react-flippy';
 import '../assets/styles/loginStyle.css'
-import '../assets/styles/normilize.css'
+// import '../assets/styles/normilize.css'
 // import {Link} from 'react-router-dom';
 import {logIn, signUp} from '../../repository';
 import history from "../../history";
