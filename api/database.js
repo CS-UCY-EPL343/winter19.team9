@@ -43,7 +43,7 @@ function dbLogIn(username, password) {
 }
 function dbSignUp(data) {
     return new Promise((resolve, reject) => {
-        // let lvl = 'User';
+         let lvl = 'User';
         const ins = "INSERT INTO ACCOUNT(username,password,level,User_ID) values(?,?,?,?)";
         const insert = "INSERT INTO USERS(Name, Surname, Bdate, Gender, Email, Medical_History, Age, Membership_ID) values(?,?,?,?,?,?,?,?)";
 
@@ -55,7 +55,7 @@ function dbSignUp(data) {
             let id = rows.insertId;
             console.log("User created");
 
-            connection.query(ins, [data.username, data.password, data.level, id], function (err) {
+            connection.query(ins, [data.username, data.password, lvl, id], function (err) {
                 if (err) {
                     console.log(err);
                     return reject(err)

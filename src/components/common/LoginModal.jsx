@@ -169,7 +169,7 @@ class LoginModal extends Component {
                             </form>
                         </div>
                         :
-                        <div className={"form__signup"}>
+                        <div className={"form__signup"} >
                             <h1 className={"form__header"}>Sign Up</h1>
                             <form id={"signupForm"} method={"post"} className={"form"}>
                                 <fieldset className={"form__group"}>
