@@ -79,7 +79,7 @@ function getUserData(user) {
 }
 function postUserData(data) {
     return new Promise((resolve, reject) => {
-        const sql = "UPDATE USERS , ACCOUNT SET  Name = ? , Surname = ? , Email = ? , password = ? WHERE ACCOUNT.username = ? AND ACCOUNT.User_ID = USERS.User_ID";;
+        const sql = "UPDATE USERS, ACCOUNT SET  Name = ? , Surname = ? , Email = ? , password = ? WHERE ACCOUNT.username = ? AND ACCOUNT.User_ID = USERS.User_ID";
         connection.query(sql, [ data.Name , data.Surname , data.Email , data.password , data.username ], function(err) {
             if(err) {console.log(err); return reject(err)}
             console.log("1 record inserted");
@@ -194,7 +194,82 @@ function getUserInfo(name) {
 }
 
 
-//Testing for fetch
+
+function getMessages(user) {
+    return new Promise((resolve, reject) => {
+        const sql = 'call getMessages(?)';
+        connection.query(sql, [user], function(err, rows) {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(rows);
+        });
+    });
+}
+
+function getMessagesCount(user) {
+    return new Promise((resolve, reject) => {
+        const sql = 'call getUnreadMessagesCount(?)';
+        connection.query(sql, [user], function(err, rows) {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(rows[0]);
+        });
+    });
+}
+
+function makeMessagesRead(ids) {
+    return new Promise((resolve, reject) => {
+        const sql = 'UPDATE Messages SET hasSeen=1 WHERE Messages.Message_ID IN (?)';
+        connection.query(sql, [ids], function(err) {
+            if (err) {
+                return reject(err);
+            }
+            return resolve('Success');
+        });
+    });
+}
+
+function createNewMessage(data, username) {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT ACCOUNT.AccountID FROM `ACCOUNT` WHERE `ACCOUNT`.`username` = ?';
+        connection.query(sql, [username], function(err, rows) {
+            if (err || rows[0] === undefined) {
+                return reject(err);
+            }
+            const fromId = rows[0].AccountID;
+            const sql = 'INSERT INTO Messages(Title, Message, From_ID, To_ID) VALUES (?, ?, ?, ?)';
+            connection.query(sql, [data.title, data.message, fromId, data.contact],
+                function(err, rows) {
+                    if (err) {
+                        return reject(err);
+                    }
+                    const newMsgId = rows.insertId;
+                    const sql = 'call getMessage(?)';
+                    connection.query(sql, [newMsgId],
+                        function(err, rows) {
+                            if (err) {
+                                return reject(err);
+                            }
+                            return resolve(rows[0]);
+                        });
+                });
+        });
+    });
+}
+
+function getCoaches() {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT ACCOUNT.AccountID, ACCOUNT.level, COACH.CoachName, COACH.Surname FROM ACCOUNT JOIN COACH ON ACCOUNT.Coach_ID=COACH.Coach_ID';
+        connection.query(sql, [], function(err, rows) {
+            if (err) {
+                return reject(err);
+            }
+            resolve(rows);
+        });
+    });
+}
 
 //add method name
 module.exports = {
@@ -209,6 +284,11 @@ module.exports = {
     getPrivateAnnouncements,
     removeAnnouncement,
     addAnnouncement,
-    getUserInfo,
     getTotalAnnouncements,
+    getUserInfo,
+    getMessages,
+    getMessagesCount,
+    makeMessagesRead,
+    getCoaches,
+    createNewMessage
 };

@@ -81,7 +81,7 @@ export function userDetails(name) {
     return axios
         .post(`${BASE_URL}/api/user/userDetails`, {'x-access-token': localStorage.getItem('x-access-token'), name: name})
         .then(response => response.data)
-        .catch(err => Promise.reject('Authentication Failed!'))
+        .catch(() => Promise.reject('Authentication Failed!'))
 }
 
 export function signUp(data) {
@@ -130,4 +130,43 @@ export function getUserLevel() {
 export function sendEmail(data) {
   return axios.post(`${ BASE_URL }/api/email`, data)
       .then(response => response.data);
+}
+
+export function getMessages() {
+    return axios.post(`${ BASE_URL }/api/messages/get`, {
+        'x-access-token': localStorage.getItem('x-access-token'),
+    })
+        .then(response => response.data)
+        .catch(() => Promise.reject('Authentication Failed!'));
+}
+
+export function getTotalMessages() {
+    return axios.post(`${ BASE_URL }/api/messages/total`,
+        {'x-access-token': localStorage.getItem('x-access-token')})
+        .then(response => response.data.count[0])
+        .catch(() => Promise.reject('Error'));
+}
+
+export function makeMessagesRead(newMessages) {
+    return axios.post(`${ BASE_URL }/api/messages/unread`,
+        {
+            'x-access-token': localStorage.getItem('x-access-token'),
+            newMessages     : newMessages,
+        })
+        .then(response => response.data)
+        .catch(() => Promise.reject('Error'));
+}
+
+export function createNewMessage(data) {
+    return axios.post(`${ BASE_URL }/api/messages/new`,
+        {
+            'x-access-token': localStorage.getItem('x-access-token'), data,
+        })
+        .then(response => response.data)
+        .catch(() => Promise.reject('Error'));
+}
+
+export function getCoaches() {
+    return axios.get(`${ BASE_URL }/api/coaches/get`)
+        .then(response => response.data);
 }

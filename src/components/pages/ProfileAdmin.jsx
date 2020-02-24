@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
-import {clientList} from "../../adminProf";
 import "../assets/styles/adminProfile.css"
 import {userDetails} from "../../repository";
 import AnnouncementsPrivate from '../common/AnnouncementsPrivate';
@@ -126,7 +125,7 @@ class ProfileAdmin extends Component {
                                            value={this.state.Email}/>
                                 </div>
                                 <div className="form-group">
-                                    <label name="usernameIn">Username</label>
+                                    <label className="usernameIn">Username</label>
                                     <input type="username" className="form-control" id="usernameIn"
                                            value={this.state.username}/>
                                 </div>

@@ -224,6 +224,60 @@ app.post('/api/user/userDetails', middleware, (req, res) => {
         .catch(err => res.status(409).json(err));
 });
 
+/***********************************************/
+app.post('/api/messages/get', middleware, (req, res) => {
+  db.getMessages(req.decoded.username).then(data => {
+    if (data) {
+      return res.status(200).json({messages: data});
+    } else {
+
+      return res.status(409).json('Authentication failed. User not found.');
+    }
+  }).catch(err => res.status(409).json(err));
+});
+
+app.post('/api/messages/total', middleware, (req, res) => {
+  db.getMessagesCount(req.decoded.username).then(data => {
+    if (data) {
+      return res.status(200).json({count: data});
+    } else {
+
+      return res.status(409).json('Authentication failed. User not found.');
+    }
+  }).catch(err => res.status(409).json(err));
+});
+
+app.post('/api/messages/unread', middleware, (req, res) => {
+  db.makeMessagesRead(req.body.newMessages).then(data => {
+    if (data) {
+      return res.status(200).json(data);
+    } else {
+
+      return res.status(409).json('Authentication failed. User not found.');
+    }
+  }).catch(err => res.status(409).json(err));
+});
+
+app.post('/api/messages/new', middleware, (req, res) => {
+  db.createNewMessage(req.body.data, req.decoded.username).then(data => {
+    if (data) {
+      return res.status(200).json(data);
+    } else {
+
+      return res.status(409).json('Authentication failed. User not found.');
+    }
+  }).catch(err => res.status(409).json(err));
+});
+
+app.get('/api/coaches/get', (req, res) => {
+  db.getCoaches().then(data => {
+    if (data) {
+      return res.status(200).json(data);
+    } else {
+      return res.status(404).json('Not found.');
+    }
+  });
+});
 
 const PORT = process.env.PORT;
 const server = app.listen(PORT, () => {

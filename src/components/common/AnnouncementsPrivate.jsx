@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import {AnimatedOnScroll} from 'react-animated-css-onscroll';
 import '../assets/styles/AnnouncmentsPrivate.css'
