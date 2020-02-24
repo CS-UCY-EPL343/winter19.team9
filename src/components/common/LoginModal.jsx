@@ -58,7 +58,7 @@ class LoginModal extends Component {
             })
             .catch(err => alert(err));
     };
-    onSignUp= (e) =>{
+   onSignUp= (e) =>{
         e.preventDefault();
         if(this.state.password !== this.state.repeatedPassword){
             alert("Password dont match");

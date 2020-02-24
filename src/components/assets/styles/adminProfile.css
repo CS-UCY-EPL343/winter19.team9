@@ -29,8 +29,8 @@ form.adminViewClient button {
     cursor: pointer;
 }
 
-form.adminViewClient button:hover {
-    /*background: #0b7dda;*/
+.edit button:hover {
+    background-color: #0b7dda;
 }
 
 form.adminViewClient::after {
@@ -54,4 +54,22 @@ form.adminViewClient::after {
 
 #clientDetails, #searchClient{
     font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+#EditAnns{
+    padding-left: 30px;
+    padding-right: 20px;
+    background-color: #1b1b1b;
+    border-radius: 10%;
+
+}
+
+.editAnn{
+    background-color: #0b7dda;
+}
+
+.edit{
+    padding-left: 0;
+    padding-right: 50px;
+    text-align: center;
 }

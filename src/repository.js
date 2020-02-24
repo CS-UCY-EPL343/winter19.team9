@@ -23,8 +23,8 @@ export function userData() {
                  .catch(() => Promise.reject('Authentication Failed!'));
 }
 
-export function getPrivateAnnouncements() {
-    return axios.post(`${ BASE_URL }/api/announcements/private`, {'x-access-token': localStorage.getItem('x-access-token')})
+export function getPrivateAnnouncements(username) {
+    return axios.post(`${ BASE_URL }/api/announcements/private`, {'x-access-token': localStorage.getItem('x-access-token'), username: username})
         .then(response => response)
         .catch(() => Promise.reject('Error when get private Announcements from database!!'));
 }
@@ -57,6 +57,17 @@ export function addAnnouncement(title, message) {
   })
       .then(response => response)
       .catch(() => Promise.reject('Authentication Failed!'));
+}
+
+export function updateAnnouncement(announcement_id,title, message) {
+    return axios.post(`${ BASE_URL }/api/announcements/private/update`, {
+        'x-access-token': localStorage.getItem('x-access-token'),
+        title           : title,
+        message         : message,
+        announcement_id : announcement_id,
+    })
+        .then(response => response.data)
+        .catch(() => Promise.reject('Authentication Failed!'));
 }
 export function postuserData(data) {
     return axios

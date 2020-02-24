@@ -98,10 +98,10 @@ class AnnouncementsPublic extends Component {
 
         removeAnnouncement(ANNOUNCEMENT_ID).then(() => {
             this.setState({
-                              announcements: this.state.announcements.filter(
-                                  ann => ann.ANNOUNCEMENT_ID
-                                         !== ANNOUNCEMENT_ID),
-                          });
+                announcements: this.state.announcements.filter(
+                    ann => ann.ANNOUNCEMENT_ID
+                        !== ANNOUNCEMENT_ID),
+            });
         }).catch(err => alert(err));
 
     };
@@ -156,7 +156,7 @@ class AnnouncementsPublic extends Component {
                                         { this.state.announcements.sort(
                                             function(a, b) {
                                                 return b.ANNOUNCEMENT_ID
-                                                       - a.ANNOUNCEMENT_ID;
+                                                    - a.ANNOUNCEMENT_ID;
                                             }).map(ann => {
                                             return <Announcement key = { ann.ANNOUNCEMENT_ID }
                                                                  isAdder = { false }
@@ -168,44 +168,44 @@ class AnnouncementsPublic extends Component {
                                             />;
                                         }) }
                                         { this.state.announcements.length === 0
-                                          &&
-                                          <Announcement isAdder = { true }
-                                                        id = { 0 }
-                                                        slickAdd = { this.toggle }
-                                                        level = { this.state.level }
-                                          /> }
+                                        &&
+                                        <Announcement isAdder = { true }
+                                                      id = { 0 }
+                                                      slickAdd = { this.toggle }
+                                                      level = { this.state.level }
+                                        /> }
                                         { this.state.announcements.length <= 1
-                                          &&
-                                          <Announcement isAdder = { true }
-                                                        id = { 0 }
-                                                        slickAdd = { this.toggle }
-                                                        level = { this.state.level }
-                                          /> }
+                                        &&
+                                        <Announcement isAdder = { true }
+                                                      id = { 0 }
+                                                      slickAdd = { this.toggle }
+                                                      level = { this.state.level }
+                                        /> }
                                         { this.state.announcements.length <= 2
-                                          &&
-                                          <Announcement
-                                              isAdder = { true }
-                                              id = { 0 }
-                                              slickAdd = { this.toggle }
-                                              level = { this.state.level }
-                                          /> }
+                                        &&
+                                        <Announcement
+                                            isAdder = { true }
+                                            id = { 0 }
+                                            slickAdd = { this.toggle }
+                                            level = { this.state.level }
+                                        /> }
                                         { this.state.level <= 1
-                                          &&
-                                          this.state.announcements.length <= 3
-                                          &&
-                                          <Announcement
-                                              isAdder = { true }
-                                              id = { 0 }
-                                              slickAdd = { this.toggle }
-                                              level = { this.state.level }
-                                          /> }
+                                        &&
+                                        this.state.announcements.length <= 3
+                                        &&
+                                        <Announcement
+                                            isAdder = { true }
+                                            id = { 0 }
+                                            slickAdd = { this.toggle }
+                                            level = { this.state.level }
+                                        /> }
                                         { this.state.level >= 2
-                                          &&
-                                          <Announcement isAdder = { true }
-                                                        id = { 0 }
-                                                        slickAdd = { this.toggle }
-                                                        level = { this.state.level }
-                                          /> }
+                                        &&
+                                        <Announcement isAdder = { true }
+                                                      id = { 0 }
+                                                      slickAdd = { this.toggle }
+                                                      level = { this.state.level }
+                                        /> }
                                     </Slider>
                                 </div>
                             </div>

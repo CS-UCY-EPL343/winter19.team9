@@ -114,7 +114,7 @@ function getTotalAnnouncements(username){
 
 function getPrivateAnnouncements(username){
     return new Promise((resolve, reject) => {
-        const sql = 'SELECT ANNOUNCEMENT_ID, Title, Message FROM ACCOUNT A, ANNOUNCEMENT AN, COACH C WHERE A.username= ? AND AN.User_ID=A.User_ID AND C.Coach_ID=AN.Coach_ID AND isActive = 1 AND isPrivate = 1';
+        const sql = 'SELECT AN.ANNOUNCEMENT_ID, AN.Title , AN.Message FROM ACCOUNT A, ANNOUNCEMENT AN LEFT JOIN COACH C ON C.Coach_ID=AN.Coach_ID LEFT JOIN OWNER O ON O.Owner_ID=AN.Admin_ID WHERE A.username= ? AND AN.User_ID=A.User_ID AND isActive = 1 AND isPrivate = 1 ';
         connection.query(sql, [username], function(err, rows) {
             if (err) {
                 return reject(err);
@@ -177,6 +177,38 @@ function addAnnouncement(title, message, level, username) {
                                  resolve({id: rows.insertId});
                              });
                          });
+    });
+}
+
+function updateAnnouncement(announcement_id,title, message, level, username) {
+    return new Promise((resolve, reject) => {
+
+        const sql = 'SELECT * FROM `ACCOUNT`, ANNOUNCEMENT WHERE `username`= ? ';
+        connection.query(sql, [username],
+            function(err, rows) {
+                if (err) {
+                    return reject(err);
+                }
+
+                let id, sql, ann_id = announcement_id;
+                if (level === 'coach') {
+                    id = rows[0].Coach_ID;
+                    sql = "UPDATE ANNOUNCEMENT SET Title = ? , Message = ? , isPrivate = 1, isActive = 1 , Coach_ID = ?  WHERE ANNOUNCEMENT_ID = ? ";
+                } else if (level === 'admin') {
+                    id = rows[0].Owner_ID;
+                    sql = "UPDATE ANNOUNCEMENT SET Title = ? , Message = ? , isPrivate = 1, isActive = 1 , Admin_ID = ? WHERE ANNOUNCEMENT_ID = ? ";
+                } else {
+                    return reject('Authentication failed');
+                }
+
+                connection.query(sql, [title, message, id, ann_id], function(err, rows) {
+                    if (err) {
+                        console.log(err);
+                        return reject(err);
+                    }
+                    resolve({ANNOUNCEMENT_ID: ann_id});
+                });
+            });
     });
 }
 
@@ -290,5 +322,6 @@ module.exports = {
     getMessagesCount,
     makeMessagesRead,
     getCoaches,
-    createNewMessage
+    createNewMessage,
+    updateAnnouncement,
 };

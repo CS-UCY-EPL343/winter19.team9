@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 
 class ProfileInfo extends Component {
     render() {
-        const image = 'http://upload.wikimedia.org/wikipedia/commons/e/e1/Anne_Hathaway_Face.jpg';
-        const name = 'Anne Hathaway';
+        const image = 'https://www.w3schools.com/howto/img_avatar.png';
+        const name = 'Member Name';
         return (
             <div className = "col-lg-4 col-md-12 col-sm-12">
                 <div className = "profile block" id = "profileBlock">
                     <br />
                     <div className = "profile-picture big-profile-picture clear">
-                        <img id = "profpic" width = "150px" alt = "Anne Hathaway"
+                        <img id = "profpic" width = "150px" alt = "Member Name"
                              src = { image }
                         />
 
