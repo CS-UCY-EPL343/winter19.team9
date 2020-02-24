@@ -16,27 +16,24 @@ export function logIn(data) {
 }
 
 export function userData() {
-  return axios.post(`${ BASE_URL }/api/user/data`, {
-    'x-access-token': localStorage.getItem('x-access-token'),
-  })
-      .then(response => response.data)
-      .catch(() => Promise.reject('Authentication Failed!'));
+    return axios.post(`${ BASE_URL }/api/user/data`, {
+        'x-access-token': localStorage.getItem('x-access-token'),
+    })
+                 .then(response => response.data)
+                 .catch(() => Promise.reject('Authentication Failed!'));
 }
 
-export function getPrivateAnnouncements() {
-  return axios.post(`${ BASE_URL }/api/announcements/private`,
-      {'x-access-token': localStorage.getItem('x-access-token')})
-      .then(response => response)
-      .catch(() => Promise.reject(
-          'Error when get private Announcements from database!!'));
+export function getPrivateAnnouncements(username) {
+    return axios.post(`${ BASE_URL }/api/announcements/private`, {'x-access-token': localStorage.getItem('x-access-token'), username: username})
+        .then(response => response)
+        .catch(() => Promise.reject('Error when get private Announcements from database!!'));
 }
 
-export function getTotalPrivateAnnouncements() {
+export function getTotalPrivateAnnouncements(){
 
-  return axios.post(`${ BASE_URL }/api/announcements/private/total`,
-      {'x-access-token': localStorage.getItem('x-access-token')})
-      .then(response => response)
-      .catch(() => Promise.reject('Error'));
+    return axios.post(`${ BASE_URL }/api/announcements/private/total`, {'x-access-token': localStorage.getItem('x-access-token')})
+        .then(response => response)
+        .catch(() => Promise.reject('Error'));
 }
 
 export function getPublicAnnouncements() {
@@ -62,45 +59,47 @@ export function addAnnouncement(title, message) {
       .catch(() => Promise.reject('Authentication Failed!'));
 }
 
-export function postuserData(data) {
-  return axios
-      .post(`${ BASE_URL }/api/user/post/data`, {
+export function updateAnnouncement(announcement_id,title, message) {
+    return axios.post(`${ BASE_URL }/api/announcements/private/update`, {
         'x-access-token': localStorage.getItem('x-access-token'),
-        data            : data,
-      })
-      .then(response => response.message)
-      .catch(() => Promise.reject('Authentication Failed!'));
+        title           : title,
+        message         : message,
+        announcement_id : announcement_id,
+    })
+        .then(response => response.data)
+        .catch(() => Promise.reject('Authentication Failed!'));
+}
+export function postuserData(data) {
+    return axios
+        .post(`${BASE_URL}/api/user/post/data`, {'x-access-token': localStorage.getItem('x-access-token'), data: data})
+        .then(response => response.message)
+        .catch(() => Promise.reject('Authentication Failed!'))
 }
 
 export function deleteUserData() {
-  return axios
-      .post(`${ BASE_URL }/api/user/delete/data`, {
-        'x-access-token': localStorage.getItem('x-access-token'),
-      })
-      .then(response => {
-        console.log(response);
-        return response.data;
-      })
-      .catch(() => Promise.reject('Authentication Failed!'));
+    return axios
+        .post(`${BASE_URL}/api/user/delete/data`, {
+            'x-access-token': localStorage.getItem('x-access-token'),
+        })
+        .then(response => {console.log(response); return response.data})
+        .catch(() => Promise.reject('Authentication Failed!'));
 
 }
+
 
 //mine
 export function userDetails(name) {
-  return axios
-      .post(`${ BASE_URL }/api/user/userDetails`, {
-        'x-access-token': localStorage.getItem('x-access-token'),
-        name            : name,
-      })
-      .then(response => response.data)
-      .catch(() => Promise.reject('Authentication Failed!'));
+    return axios
+        .post(`${BASE_URL}/api/user/userDetails`, {'x-access-token': localStorage.getItem('x-access-token'), name: name})
+        .then(response => response.data)
+        .catch(() => Promise.reject('Authentication Failed!'))
 }
 
 export function signUp(data) {
-  return axios
-      .post(`${ BASE_URL }/api/user/insert`, data)
-      .then(response => response.data)
-      .catch(() => Promise.reject('Sign Up failed.'));
+    return axios
+        .post(`${BASE_URL}/api/user/insert`, data)
+        .then(response => response.data)
+        .catch(() => Promise.reject("Sign Up failed."))
 }
 
 export function logOut() {
@@ -145,40 +144,40 @@ export function sendEmail(data) {
 }
 
 export function getMessages() {
-  return axios.post(`${ BASE_URL }/api/messages/get`, {
-    'x-access-token': localStorage.getItem('x-access-token'),
-  })
-      .then(response => response.data)
-      .catch(() => Promise.reject('Authentication Failed!'));
+    return axios.post(`${ BASE_URL }/api/messages/get`, {
+        'x-access-token': localStorage.getItem('x-access-token'),
+    })
+        .then(response => response.data)
+        .catch(() => Promise.reject('Authentication Failed!'));
 }
 
 export function getTotalMessages() {
-  return axios.post(`${ BASE_URL }/api/messages/total`,
-      {'x-access-token': localStorage.getItem('x-access-token')})
-      .then(response => response.data.count[0])
-      .catch(() => Promise.reject('Error'));
+    return axios.post(`${ BASE_URL }/api/messages/total`,
+        {'x-access-token': localStorage.getItem('x-access-token')})
+        .then(response => response.data.count[0])
+        .catch(() => Promise.reject('Error'));
 }
 
 export function makeMessagesRead(newMessages) {
-  return axios.post(`${ BASE_URL }/api/messages/unread`,
-      {
-        'x-access-token': localStorage.getItem('x-access-token'),
-        newMessages     : newMessages,
-      })
-      .then(response => response.data)
-      .catch(() => Promise.reject('Error'));
+    return axios.post(`${ BASE_URL }/api/messages/unread`,
+        {
+            'x-access-token': localStorage.getItem('x-access-token'),
+            newMessages     : newMessages,
+        })
+        .then(response => response.data)
+        .catch(() => Promise.reject('Error'));
 }
 
 export function createNewMessage(data) {
-  return axios.post(`${ BASE_URL }/api/messages/new`,
-      {
-        'x-access-token': localStorage.getItem('x-access-token'), data,
-      })
-      .then(response => response.data)
-      .catch(() => Promise.reject('Error'));
+    return axios.post(`${ BASE_URL }/api/messages/new`,
+        {
+            'x-access-token': localStorage.getItem('x-access-token'), data,
+        })
+        .then(response => response.data)
+        .catch(() => Promise.reject('Error'));
 }
 
 export function getCoaches() {
-  return axios.get(`${ BASE_URL }/api/coaches/get`)
-      .then(response => response.data);
+    return axios.get(`${ BASE_URL }/api/coaches/get`)
+        .then(response => response.data);
 }

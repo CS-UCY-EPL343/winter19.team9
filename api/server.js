@@ -56,7 +56,7 @@ app.post('/api/email', (req, res) => {
       });
     } else {
       res.status(200).json({
-        status: 'success',
+        status: 'success'
       });
 
       // Send response email
@@ -129,7 +129,7 @@ app.post('/api/user/data', middleware, (req, res) => {
  ***************************************************/
 
 app.post('/api/announcements/private', middleware, (req, res) => {
-  db.getPrivateAnnouncements(req.decoded.username)
+  db.getPrivateAnnouncements(req.body.username)
       .then(data => {
         if (data) {
           return res.status(200).json({announcements: data});
@@ -139,7 +139,7 @@ app.post('/api/announcements/private', middleware, (req, res) => {
       });
 });
 
-app.post('/api/announcements/private/total', middleware, (req, res) => {
+app.post('/api/announcements/private/total',middleware,(req, res) => {
   db.getTotalAnnouncements(req.decoded.username)
       .then(data => {
         if (data) {
@@ -150,6 +150,7 @@ app.post('/api/announcements/private/total', middleware, (req, res) => {
       });
 });
 
+
 app.get('/api/announcements/public', (req, res) => {
   db.getPublicAnnouncements().then(data => {
     if (data) {
@@ -159,6 +160,21 @@ app.get('/api/announcements/public', (req, res) => {
     }
   });
 });
+
+app.post('/api/announcements/private/update', middleware, (req, res) => {
+    if (req.decoded.level === 'user') {
+        return res.status(401).json({message: 'Authentication failed'});
+    }
+    db.updateAnnouncement(req.body.announcement_id , req.body.title, req.body.message, req.decoded.level,
+        req.decoded.username).then(response => {
+            console.log(response);
+        res.status(200).json({
+            message: 'Announcement updated successfully',
+            ANNOUNCEMENT_ID: response.ANNOUNCEMENT_ID,
+        })
+    }).catch(() => res.status(404).json('Not Found'));
+});
+
 
 app.post('/api/announcements/public/add', middleware, (req, res) => {
   if (req.decoded.level === 'user') {
@@ -183,46 +199,50 @@ app.post('/api/announcements/remove', middleware, (req, res) => {
 
 /*************************************************************************/
 app.post('/api/user/post/data', middleware, (req, res) => {
-  db.postUserData(req.body.data)
-      .then(response => res.status(200).json({message: response}))
-      .catch(err => res.status(409).json(err));
+    db.postUserData(req.body.data)
+        .then(response => res.status(200).json({message: response}))
+        .catch(err => res.status(409).json(err));
 });
 /*************************************************************************/
 /*************************************************************************/
 app.post('/api/user/delete/data', middleware, (req, res) => {
-  db.deleteUserData(req.decoded.username).then(data => {
-    if (data) {
-      return res.status(200).json(data);
-    } else {
+    db.deleteUserData(req.decoded.username).then(data => {
+            if (data) {
+                return res.status(200).json(data)
+            } else {
 
-      return res.status(409).json('Authentication failed. User not found.');
-    }
-  })
-      .catch(err => res.status(409).json(err));
+                return res.status(409).json('Authentication failed. User not found.');
+            }
+        })
+        .catch(err => res.status(409).json(err));
 });
 /*************************************************************************/
-app.post('/api/user/insert', (req, res) => {
+
+app.post('/api/user/insert', (req,res) => {
   console.log(req.body);
   db.dbSignUp(req.body)
       .then(response => res.status(200).json({message: response}))
       .catch(err => res.status(409).json(err));
 });
+
+
 // mine
 app.post('/api/user/userDetails', middleware, (req, res) => {
-  if (req.decoded.level === 'user') {
-    return res.status(409).json('Authentication failed.');
-  }
-  db.getUserInfo(req.body.name)
-      .then(data => {
-        if (data) {
-          return res.status(200).json(data);
-        } else {
-          return res.status(409).json('Authentication failed. User not found.');
-        }
-      })
-      .catch(err => res.status(409).json(err));
+    if(req.decoded.level === 'user') {
+        return res.status(409).json('Authentication failed.');
+    }
+    db.getUserInfo(req.body.name)
+        .then(data => {
+            if (data) {
+                return res.status(200).json(data)
+            } else {
+                return res.status(409).json('Authentication failed. User not found.');
+            }
+        })
+        .catch(err => res.status(409).json(err));
 });
 
+/***********************************************/
 app.post('/api/messages/get', middleware, (req, res) => {
   db.getMessages(req.decoded.username).then(data => {
     if (data) {

@@ -58,7 +58,9 @@
     border-radius: 100%;
     border: 6px solid #F8F8F8;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
-    background-image: url("https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200");
+    background-image: url("https://www.w3schools.com/howto/img_avatar.png");
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 /*
 .avatar-upload .avatar-preview > div {

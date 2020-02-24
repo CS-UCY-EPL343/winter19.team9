@@ -29,27 +29,25 @@
 #MessagesModal .msg-card {
     margin: 25px 0 !important;
 }
-
 #MessagesModal .msg-card.left {
     margin-right: 75px !important;
     border-radius: 30px !important;
     border-top-left-radius: 0 !important;
     -webkit-border-top-left-radius: 0;
 }
-
 #MessagesModal .msg-card.right {
     margin-left: 75px !important;
     border-radius: 30px !important;
     border-top-right-radius: 0 !important;
     -webkit-border-top-right-radius: 0;
 }
-
 #MessagesModal .msg-card.new-msg i {
     position: absolute;
     font-size: 30px;
     z-index: 10;
     color: #D90429;
 }
+
 
 #MessagesModal #message-container {
     padding: 0;
@@ -61,14 +59,12 @@
     font-weight: bold;
     font-size: 20px;
 }
-
 #MessagesModal .new-msg-line {
     display: flex;
     align-items: center;
     text-align: center;
     color: #D90429;
 }
-
 #MessagesModal .new-msg-line:before, #MessagesModal .new-msg-line::after {
     content: '';
     flex: 1;

@@ -3,7 +3,7 @@ import ToggleModal                                      from './ToggleModal';
 import PaymentModal                                     from './PaymentModal';
 import {Button}                                         from 'reactstrap';
 import AnnouncementsPrivate
-                                                        from './AnnouncementsPrivate';
+  from './AnnouncementsPrivate';
 import EditAccount                                      from './EditAccount';
 import MessagesModal                                    from './MessagesModal';
 import {getTotalMessages, getTotalPrivateAnnouncements} from '../../repository';
@@ -67,7 +67,7 @@ class SettingsProfile extends Component {
                 >
                   <i className = "scnd-font-color fa fa-envelope" /> Messages
                   { this.state.TotalMessages > 0 &&
-                    <div className = "menu-box-number">{ this.state.TotalMessages }</div> }
+                  <div className = "menu-box-number">{ this.state.TotalMessages }</div> }
                 </Button>
                 <ToggleModal
                     modal = { this.state.modalMessages }
