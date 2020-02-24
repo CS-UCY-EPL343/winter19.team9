@@ -1,20 +1,14 @@
-/*#dropdown-basic-button{*/
-/*    width: 100%;*/
-/*    font-size: 12px;*/
-/*    margin: 0px;*/
-/*    padding: 5px 0px;*/
-/*    align-content: center;*/
-/*}*/
-/*#first-row{*/
-/*}*/
-
 .RowBlock{
     margin: auto;
     padding-bottom: 7%;
 }
 
+.selectGroupPersonal{
+   font-size: 12px;
+}
+
 #backBox {
-    padding: 5%;
+    padding: 4%;
 }
 
 #DropDays{

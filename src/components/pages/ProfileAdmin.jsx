@@ -8,10 +8,11 @@ import {
 } from "../../repository";
 import AnnouncementModal from "../common/AnnouncementModal";
 import {Button} from "reactstrap";
+import Box from "../common/SelectClassRegistration";
+import Timetable from "../common/PersonalTrainingCreate";
 
 
 class ProfileAdmin extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -20,15 +21,24 @@ class ProfileAdmin extends Component {
             Surname: '',
             Email: '',
             username: '',
-            searchResults: [],
             announcements: [],
             modal: false,
             modalTitle: '',
             modalMessage: '',
-            modalAnnId: ''
+            modalAnnId: '',
+            searchResults: [],
+            day: '',
+            time: '',
+            flag: false
         };
         this.toggleAnnouncementsData = this.toggleAnnouncementsData.bind(this);
         this.onAnnouncementSubmit = this.onAnnouncementSubmit.bind(this);
+        this.handleDayTimeChange = this.handleDayTimeChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+        this.toggleAnnouncements = this.toggleAnnouncements.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleChange2 = this.handleChange2.bind(this);
+
     }
 
     onSubmit = (e) => {
@@ -85,33 +95,15 @@ class ProfileAdmin extends Component {
     };
 
     handleChange = (e) => {
-        // this.setState({[e.target.nameStart]: e.target.value})
         this.setState({nameStart: e.target.value})
     };
-
-    // AccountID: 0
-    // Age: 22
-    // Bdate: "1997-04-18T21:00:00.000Z"
-    // Coach_ID: null
-    // Email: "antreasloizou97@gmail.com"
-    // Gender: 1
-    // Medical_History: null
-    // Membership_ID: null
-    // Name: "Andreas"
-    // Owner_ID: null
-    // Surname: "Elia"
-    // User_ID: 3
-    // level: "user"
-    // password: "1234"​
-    // username: "aloizo03"
 
     handleChange2 = (e) => {
         const username = e.target.value;
         const user = this.state.searchResults.find(usr => usr.username === username);
-        if (!user) return null; // TODO fix error
+        if (!user) return null;
 
         this.setState({Name: user.Name, Surname: user.Surname, Email: user.Email, username});
-        // this.toggleAnnouncements = this.toggleAnnouncements.bind(this);
 
         getPrivateAnnouncementsAdmin(username).then(response => {
             this.setState(
@@ -122,6 +114,10 @@ class ProfileAdmin extends Component {
 
     toggleAnnouncements = () => {
         this.setState({modalAnnouncements: !this.state.modalAnnouncements});
+    };
+
+    handleDayTimeChange = (day, time, flag) => {
+        this.setState({day, time, flag});
     };
 
     toggleAnnouncementsData = (e) => {
@@ -229,13 +225,23 @@ class ProfileAdmin extends Component {
                             />
 
                         </div>
-
+                        <div>
+                            <div className="container">
+                                <div className="row">
+                                    <div id="timeTableHeading">Create Personal Training Schedule</div>
+                                    <div className="col-md-8">
+                                        <Timetable day={this.state.day} time={this.state.time} flag={this.state.flag}/>
+                                    </div>
+                                    <div className="col-md-4">
+                                        <Box toogle={this.handleDayTimeChange}/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
-        )
-
+        );
     }
 }
 
