@@ -29,6 +29,12 @@ export function getPrivateAnnouncements() {
         .catch(() => Promise.reject('Error when get private Announcements from database!!'));
 }
 
+export function getPrivateAnnouncementsAdmin(username) {
+    return axios.post(`${ BASE_URL }/api/announcements/admin/private`, {'x-access-token': localStorage.getItem('x-access-token'), username: username})
+        .then(response => response)
+        .catch(() => Promise.reject('Error when get private Announcements from database!!'));
+}
+
 export function getTotalPrivateAnnouncements() {
     return axios.post(`${BASE_URL}/api/announcements/private/total`, {'x-access-token': localStorage.getItem('x-access-token')})
         .then(response => response.data)

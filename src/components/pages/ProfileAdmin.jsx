@@ -2,17 +2,12 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import "../assets/styles/adminProfile.css"
 import {
-    addAnnouncement,
-    getPrivateAnnouncements,
-    getPublicAnnouncements,
+    getPrivateAnnouncementsAdmin,
     userDetails,
     updateAnnouncement
 } from "../../repository";
-import AnnouncementsPrivate from '../common/AnnouncementsPrivate';
 import AnnouncementModal from "../common/AnnouncementModal";
 import {Button} from "reactstrap";
-import ToggleModal from "../common/ToggleModal";
-import Announcement from "../common/Announcement";
 
 
 class ProfileAdmin extends Component {
@@ -46,7 +41,7 @@ class ProfileAdmin extends Component {
             })
     };
 
-    onAnnouncementSubmit = (Title, Message,Ann_ID) => {
+    onAnnouncementSubmit = (Title, Message, Ann_ID) => {
         console.log(Title + ' ' + Message);
         console.log(this.state.announcements[this.state.modalAnnId].Title + ' ' + this.state.announcements[this.state.modalAnnId].Message);
         if (Title === this.state.announcements[this.state.modalAnnId].Title && Message === this.state.announcements[this.state.modalAnnId].Message) {
@@ -61,14 +56,17 @@ class ProfileAdmin extends Component {
 
         console.log('Success');
 
-        updateAnnouncement(Ann_ID,Title, Message).then(response => {
+        updateAnnouncement(Ann_ID, Title, Message).then(response => {
             console.log(response);
             this.setState({
                 announcements: this.state.announcements.map(ann => {
                     let x = ann;
                     if (ann.ANNOUNCEMENT_ID === response.ANNOUNCEMENT_ID) {
+                        // noinspection JSPrimitiveTypeWrapperUsage
                         x.Title = Title;
+                        // noinspection JSPrimitiveTypeWrapperUsage
                         x.Message = Message;
+                        // noinspection JSPrimitiveTypeWrapperUsage
                         x.Ann_ID = Ann_ID;
                     }
                     return x;
@@ -115,7 +113,7 @@ class ProfileAdmin extends Component {
         this.setState({Name: user.Name, Surname: user.Surname, Email: user.Email, username});
         // this.toggleAnnouncements = this.toggleAnnouncements.bind(this);
 
-        getPrivateAnnouncements(username).then(response => {
+        getPrivateAnnouncementsAdmin(username).then(response => {
             this.setState(
                 {announcements: response.data.announcements});
             console.log(this.state.announcements);
@@ -209,8 +207,9 @@ class ProfileAdmin extends Component {
                                         return b.ANNOUNCEMENT_ID
                                             - a.ANNOUNCEMENT_ID;
                                     }).map((ann, index) => {
-                                    return <Button className="nav-link menu-box-tab menu-text" onClick={this.toggleAnnouncementsData} id={index}
-                                                key={index}><i className="scnd-font-color fa fa-tasks"/> {ann.Title}
+                                    return <Button className="nav-link menu-box-tab menu-text"
+                                                   onClick={this.toggleAnnouncementsData} id={index}
+                                                   key={index}><i className="scnd-font-color fa fa-tasks"/> {ann.Title}
                                     </Button>
                                 })}
 
@@ -226,7 +225,7 @@ class ProfileAdmin extends Component {
                                                announcements={this.state.announcements}
                                                title={this.state.modalTitle}
                                                message={this.state.modalMessage}
-                                               announcement_id = {this.state.modalAnnId}
+                                               announcement_id={this.state.modalAnnId}
                             />
 
                         </div>
