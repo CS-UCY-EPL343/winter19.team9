@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="MySQL - ffndb@studentdb.in.cs.ucy.ac.cy" uuid="30864674-1be9-4df2-991c-e93a5d4ba751">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://studentdb.in.cs.ucy.ac.cy:3306/ffndb</jdbc-url>
+    </data-source>
+  </component>
+</project>

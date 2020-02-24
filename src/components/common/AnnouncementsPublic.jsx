@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
-import Slider             from 'react-slick';
+import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '../assets/styles/AnnouncementsPublic.css';
 import {AnimatedOnScroll} from 'react-animated-css-onscroll';
-import Announcement       from './Announcement';
-import AnnouncementModal  from './AnnouncementModal';
+import Announcement from './Announcement';
+import AnnouncementModal from './AnnouncementModal';
 import {
     getPublicAnnouncements,
     isAuthenticated,
     removeAnnouncement,
     addAnnouncement,
-}                         from '../../repository';
+} from '../../repository';
 
 class AnnouncementsPublic extends Component {
     _isMounted = false;
@@ -20,8 +20,8 @@ class AnnouncementsPublic extends Component {
         super(props);
         this.state = {
             announcements: [],
-            modal        : false,
-            level        : 0,
+            modal: false,
+            level: 0,
         };
         this.slickAdd = this.slickAdd.bind(this);
         this.slickRemove = this.slickRemove.bind(this);
@@ -82,8 +82,8 @@ class AnnouncementsPublic extends Component {
             prevAnn.push(
                 {
                     ANNOUNCEMENT_ID: response.data.ANNOUNCEMENT_ID,
-                    Title          : Title,
-                    Message        : Message,
+                    Title: Title,
+                    Message: Message,
                 });
             // console.log(announcements);
             this.setState({announcements: prevAnn});
@@ -108,104 +108,104 @@ class AnnouncementsPublic extends Component {
 
     render() {
         const settings = {
-            dots          : true,
-            infinite      : false,
-            speed         : 300,
-            slidesToShow  : 4,
+            dots: true,
+            infinite: false,
+            speed: 300,
+            slidesToShow: 4,
             slidesToScroll: 4,
-            centerPadding : 0,
-            centerMode    : false,
-            responsive    : [
+            centerPadding: 0,
+            centerMode: false,
+            responsive: [
                 {
                     breakpoint: 1024,
-                    settings  : {
-                        slidesToShow  : 3,
+                    settings: {
+                        slidesToShow: 3,
                         slidesToScroll: 3,
-                        infinite      : true,
-                        dots          : true,
+                        infinite: true,
+                        dots: true,
                     },
                 },
                 {
                     breakpoint: 800,
-                    settings  : {
-                        slidesToShow  : 2,
+                    settings: {
+                        slidesToShow: 2,
                         slidesToScroll: 2,
                     },
                 },
                 {
                     breakpoint: 600,
-                    settings  : {
-                        slidesToShow  : 1,
+                    settings: {
+                        slidesToShow: 1,
                         slidesToScroll: 1,
                     },
                 },
             ],
         };
         return (
-            <div id = 'AnnouncementsPub'>
-                <AnimatedOnScroll animationIn = "fadeInLeft">
-                    <div id = "ann-container"
-                         className = "container-fluid mt-2"
+            <div id='AnnouncementsPub'>
+                <AnimatedOnScroll animationIn="fadeInLeft">
+                    <div id="ann-container"
+                         className="container-fluid mt-2"
                     >
-                        <h1 className = "ann-title">Announcements</h1>
-                        <div className = "row">
-                            <div className = "col-lg-12">
-                                <div className = "ann-cards">
-                                    <Slider { ...settings }>
-                                        {/*//need to see for public*/ }
-                                        { this.state.announcements.sort(
-                                            function(a, b) {
+                        <h1 className="ann-title">Announcements</h1>
+                        <div className="row">
+                            <div className="col-lg-12">
+                                <div className="ann-cards">
+                                    <Slider {...settings}>
+                                        {/*//need to see for public*/}
+                                        {this.state.announcements.sort(
+                                            function (a, b) {
                                                 return b.ANNOUNCEMENT_ID
                                                     - a.ANNOUNCEMENT_ID;
                                             }).map(ann => {
-                                            return <Announcement key = { ann.ANNOUNCEMENT_ID }
-                                                                 isAdder = { false }
-                                                                 id = { ann.ANNOUNCEMENT_ID }
-                                                                 title = { ann.Title }
-                                                                 message = { ann.Message }
-                                                                 slickRemove = { this.slickRemove }
-                                                                 level = { this.state.level }
+                                            return <Announcement key={ann.ANNOUNCEMENT_ID}
+                                                                 isAdder={false}
+                                                                 id={ann.ANNOUNCEMENT_ID}
+                                                                 title={ann.Title}
+                                                                 message={ann.Message}
+                                                                 slickRemove={this.slickRemove}
+                                                                 level={this.state.level}
                                             />;
-                                        }) }
-                                        { this.state.announcements.length === 0
+                                        })}
+                                        {this.state.announcements.length === 0
                                         &&
-                                        <Announcement isAdder = { true }
-                                                      id = { 0 }
-                                                      slickAdd = { this.toggle }
-                                                      level = { this.state.level }
-                                        /> }
-                                        { this.state.announcements.length <= 1
+                                        <Announcement isAdder={true}
+                                                      id={0}
+                                                      slickAdd={this.toggle}
+                                                      level={this.state.level}
+                                        />}
+                                        {this.state.announcements.length <= 1
                                         &&
-                                        <Announcement isAdder = { true }
-                                                      id = { 0 }
-                                                      slickAdd = { this.toggle }
-                                                      level = { this.state.level }
-                                        /> }
-                                        { this.state.announcements.length <= 2
+                                        <Announcement isAdder={true}
+                                                      id={0}
+                                                      slickAdd={this.toggle}
+                                                      level={this.state.level}
+                                        />}
+                                        {this.state.announcements.length <= 2
                                         &&
                                         <Announcement
-                                            isAdder = { true }
-                                            id = { 0 }
-                                            slickAdd = { this.toggle }
-                                            level = { this.state.level }
-                                        /> }
-                                        { this.state.level <= 1
+                                            isAdder={true}
+                                            id={0}
+                                            slickAdd={this.toggle}
+                                            level={this.state.level}
+                                        />}
+                                        {this.state.level <= 1
                                         &&
                                         this.state.announcements.length <= 3
                                         &&
                                         <Announcement
-                                            isAdder = { true }
-                                            id = { 0 }
-                                            slickAdd = { this.toggle }
-                                            level = { this.state.level }
-                                        /> }
-                                        { this.state.level >= 2
+                                            isAdder={true}
+                                            id={0}
+                                            slickAdd={this.toggle}
+                                            level={this.state.level}
+                                        />}
+                                        {this.state.level >= 2
                                         &&
-                                        <Announcement isAdder = { true }
-                                                      id = { 0 }
-                                                      slickAdd = { this.toggle }
-                                                      level = { this.state.level }
-                                        /> }
+                                        <Announcement isAdder={true}
+                                                      id={0}
+                                                      slickAdd={this.toggle}
+                                                      level={this.state.level}
+                                        />}
                                     </Slider>
                                 </div>
                             </div>
@@ -213,9 +213,9 @@ class AnnouncementsPublic extends Component {
                     </div>
                 </AnimatedOnScroll>
 
-                <AnnouncementModal onSubmit = { this.slickAdd }
-                                   toggle = { this.toggle }
-                                   modal = { this.state.modal }
+                <AnnouncementModal onSubmit={this.slickAdd}
+                                   toggle={this.toggle}
+                                   modal={this.state.modal}
                 />
             </div>
         );
