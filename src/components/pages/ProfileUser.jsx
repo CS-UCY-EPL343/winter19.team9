@@ -3,7 +3,7 @@ import '../assets/styles/profile.css';
 import '../assets/styles/timetable.css';
 import SettingsProfile      from '../common/SettingsProfile';
 import ProfileInfo          from '../common/ProfileInfo';
-import BmiCalc              from '../common/BMICalc';
+import BookClass              from '../common/BookClass';
 import Timetable            from '../common/Timetable';
 import { Redirect }         from 'react-router-dom';
 
@@ -17,7 +17,7 @@ class ProfileUser extends Component {
                     <div className="row ">
                         <SettingsProfile userLevel={this.props.userLevel} />
                         <ProfileInfo/>
-                        <BmiCalc/>
+                        <BookClass/>
 
                     </div>
                 </div>
