@@ -1,11 +1,12 @@
-import React, {Component}   from 'react';
-import ToggleModal          from './ToggleModal';
-import PaymentModal         from './PaymentModal';
-import {Button}             from 'reactstrap';
-import AnnouncementsPrivate from './AnnouncementsPrivate';
-import EditAccount          from './EditAccount';
-import MessagesModal        from './MessagesModal';
-import {getTotalPrivateAnnouncements} from "../../repository";
+import React, {Component}                               from 'react';
+import ToggleModal                                      from './ToggleModal';
+import PaymentModal                                     from './PaymentModal';
+import {Button}                                         from 'reactstrap';
+import AnnouncementsPrivate
+                                                        from './AnnouncementsPrivate';
+import EditAccount                                      from './EditAccount';
+import MessagesModal                                    from './MessagesModal';
+import {getTotalMessages, getTotalPrivateAnnouncements} from '../../repository';
 
 class SettingsProfile extends Component {
   constructor(props, context) {
@@ -15,16 +16,21 @@ class SettingsProfile extends Component {
       modalAnnouncements: false,
       modalMessages     : false,
       modalEditAccount  : false,
+      TotalMessages     : 0,
       TotalAnnouncement : 0,
     };
     this.togglePayment = this.togglePayment.bind(this);
     this.toggleAnnouncements = this.toggleAnnouncements.bind(this);
+    this.toggleTotalMessages = this.toggleTotalMessages.bind(this);
   };
 
   togglePayment = () => {
     if (this.props.user) {
       this.setState({modalPayment: !this.state.modalPayment});
     }
+  };
+  toggleTotalMessages = () => {
+    this.setState({TotalMessages: 0});
   };
   toggleAnnouncements = () => {
     this.setState({modalAnnouncements: !this.state.modalAnnouncements});
@@ -37,10 +43,14 @@ class SettingsProfile extends Component {
   };
 
   componentDidMount() {
-
     getTotalPrivateAnnouncements().then(response => {
       this.setState(
           {TotalAnnouncement: response.data.TotalAnnouncement.TotalAnnouncement});
+    });
+
+    getTotalMessages().then(response => {
+      this.setState(
+          {TotalMessages: response.TotalMessages});
     });
   }
 
@@ -56,14 +66,19 @@ class SettingsProfile extends Component {
                         onClick = { this.toggleMessages }
                 >
                   <i className = "scnd-font-color fa fa-envelope" /> Messages
-                  <div className = "menu-box-number">4</div>
+                  { this.state.TotalMessages > 0 &&
+                    <div className = "menu-box-number">{ this.state.TotalMessages }</div> }
                 </Button>
                 <ToggleModal
                     modal = { this.state.modalMessages }
                     toggle = { this.toggleMessages }
                     modalSize = { 'md' }
                     modalHeader = { 'Messages' }
-                    modalBody = { <MessagesModal /> }
+                    modalBody = {
+                      <MessagesModal userLevel = { this.props.userLevel }
+                                     TotalMessages = { this.state.TotalMessages }
+                                     toggleTotalMessages = { this.toggleTotalMessages }
+                      /> }
                 />
               </li>
               <li>
@@ -95,7 +110,7 @@ class SettingsProfile extends Component {
                           onClick = { this.toggleAnnouncements }
                   >
                     <i className = "scnd-font-color fa fa-tasks" /> Announcements
-                    <div className = "menu-box-number">{this.state.TotalAnnouncement}</div>
+                    <div className = "menu-box-number">{ this.state.TotalAnnouncement }</div>
                   </Button>
                   <ToggleModal
                       modal = { this.state.modalAnnouncements }

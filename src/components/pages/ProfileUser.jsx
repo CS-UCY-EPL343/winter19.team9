@@ -15,7 +15,7 @@ class ProfileUser extends Component {
 
                 <div className="container-fluid">
                     <div className="row ">
-                        <SettingsProfile />
+                        <SettingsProfile userLevel={this.props.userLevel} />
                         <ProfileInfo/>
                         <BmiCalc/>
 

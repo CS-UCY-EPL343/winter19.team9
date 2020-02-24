@@ -7,7 +7,12 @@ const userAvatar = 'https://raw.githubusercontent.com/isopho01/EPL344_HW4/master
 class Message extends Component {
   render() {
     return (
-        <div className = { 'msg-card' }>
+        <div className = { `msg-card 
+            ${ this.props.outgoing ? 'left' : 'right' } 
+            ${ this.props.hasSeen ? '' : 'new-msg' }` }
+        >
+          {/*{ !this.props.outgoing && !this.props.hasSeen &&*/}
+          {/*  <i className = "fa fa-plus-circle" /> }*/}
           { this.props.outgoing ?
               <div className = "msg-data">
                 <img src = { userAvatar }
@@ -19,17 +24,20 @@ class Message extends Component {
                     { this.props.title }
                   </h2>
                   <h5 className = "msg-contact">
-                    To: { this.props.contact }
+                    From: { this.props.contact }
                   </h5>
                   <p className = "card-text">
                     { this.props.message }
                   </p>
                 </div>
-                <p className="msg-timestamp">{this.props.timestamp}</p>
+                <p className = "msg-timestamp left">{ this.props.timestamp }</p>
               </div>
               :
               <div className = "msg-data">
-                < img src = { adminAvatar } className = { 'img-right' } alt = 'Avatar' />
+                < img src = { adminAvatar }
+                      className = { 'img-right' }
+                      alt = 'Avatar'
+                />
                 <div className = "msg-content left">
                   <h2 className = "card-title">
                     { this.props.title }
@@ -41,7 +49,7 @@ class Message extends Component {
                     { this.props.message }
                   </p>
                 </div>
-                <p className="msg-timestamp">{this.props.timestamp}</p>
+                <p className = "msg-timestamp right">{ this.props.timestamp }</p>
               </div>
           }
         </div>

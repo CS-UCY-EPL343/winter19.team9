@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
-import {clientList} from "../../adminProf";
 import "../assets/styles/adminProfile.css"
 import {userDetails} from "../../repository";
 import AnnouncementsPrivate from '../common/AnnouncementsPrivate';

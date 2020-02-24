@@ -1,48 +1,50 @@
 .msg-card .card-title {
-    color       : #D90429;
-    position    : relative;
-    font-size   : 25px;
-    transition  : 1s;
-    cursor      : pointer;
-    padding-top : 0;
-    margin-bottom: 0;
+    color         : #D90429;
+    position      : relative;
+    font-size     : 25px;
+    transition    : 1s;
+    cursor        : pointer;
+    padding-top   : 0;
+    margin-bottom : 0;
 }
 
 .msg-card .msg-data {
-    display: inline-block;
-    vertical-align: middle;
+    display        : inline-block;
+    vertical-align : middle;
 }
 
 .msg-card .msg-content.right {
     /*float: right;*/
+    /*padding-right : 75px;*/
 }
 
 .msg-card .msg-content.left {
     /*float: right;*/
-    text-align: right;
+    text-align   : right;
+    /*padding-left : 75px;*/
 }
 
 .msg-card .msg-data img {
-    max-height: 50px;
-    max-width: 50px;
-    border-radius: 50%;
-    vertical-align: middle;
+    max-height     : 50px;
+    max-width      : 50px;
+    border-radius  : 50%;
+    vertical-align : middle;
 }
 
 .msg-card .msg-data .img-left {
-    float: left;
-    margin-right: 20px;
+    float        : left;
+    margin-right : 20px;
 }
 
 .msg-card .msg-data .img-right {
-    float: right;
-    margin-left: 20px;
-    margin-right:0;
+    float        : right;
+    margin-left  : 20px;
+    margin-right : 0;
 }
 
 .msg-card .msg-data .msg-contact {
-    font-size: 14px;
-    margin-top: 5px;
+    font-size  : 14px;
+    margin-top : 5px;
 }
 
 .msg-card .card-text {
@@ -50,14 +52,21 @@
     letter-spacing : 1px;
     color          : #8D99AE;
     font-weight    : 400;
-    text-align: justify;
+    text-align     : justify;
 }
 
 .msg-card .msg-timestamp {
-    font-size: 12px;
-    position: absolute;
-    bottom: 0;
-    right: 15px;
+    font-size : 12px;
+    position  : absolute;
+    bottom    : 0;
+}
+
+.msg-card .msg-timestamp.right {
+    right : 15px;
+}
+
+.msg-card .msg-timestamp.left {
+    left : 15px;
 }
 
 .msg-card:hover {

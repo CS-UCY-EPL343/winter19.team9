@@ -23,7 +23,6 @@ class AnnouncementsPrivate extends Component {
         getPrivateAnnouncements().then(response => {
             this.setState(
                 {announcements: response.data.announcements});
-            console.log(this.state.announcements);
         });
     }
 

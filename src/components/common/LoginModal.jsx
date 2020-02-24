@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 // import Flippy, { FrontSide, BackSide } from 'react-flippy';
 import '../assets/styles/loginStyle.css'
-// import '../assets/styles/normilize.css'
 // import {Link} from 'react-router-dom';
 import {logIn, signUp} from '../../repository';
 import history from "../../history";
@@ -169,7 +168,7 @@ class LoginModal extends Component {
                             </form>
                         </div>
                         :
-                        <div className={"form__signup"} >
+                        <div className={"form__signup"}>
                             <h1 className={"form__header"}>Sign Up</h1>
                             <form id={"signupForm"} method={"post"} className={"form"}>
                                 <fieldset className={"form__group"}>
