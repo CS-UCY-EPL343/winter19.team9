@@ -214,6 +214,12 @@ app.post('/api/user/post/data', middleware, (req, res) => {
         .then(response => res.status(200).json({message: response}))
         .catch(err => res.status(409).json(err));
 });
+
+app.post('/api/BookClass/Enroll', middleware, (req, res) => {
+    db.enrollUser(req.body.CLASS_ID, req.body.User_ID)
+        .then(response => res.status(200).json({message: response}))
+        .catch(err => res.status(409).json(err));
+});
 /*************************************************************************/
 /*************************************************************************/
 app.post('/api/user/delete/data', middleware, (req, res) => {
@@ -253,6 +259,87 @@ app.post('/api/user/userDetails', middleware, (req, res) => {
         .catch(err => res.status(409).json(err));
 });
 
+app.post('/api/BookClass/ClassName', middleware, (req, res) => {
+    db.getClasses()
+        .then(data => {
+            if (data) {
+                return res.status(200).json(data)
+            } else {
+                return res.status(409).json('Authentication failed. User not found.');
+            }
+        })
+        .catch(err => res.status(409).json(err));
+});
+
+app.post('/api/BookClass/ClassDay', middleware, (req, res) => {
+  db.getClassDay(req.body.ClassName)
+      .then(data => {
+        if (data) {
+          return res.status(200).json(data)
+        } else {
+          return res.status(409).json('Authentication failed. User not found.');
+        }
+      })
+      .catch(err => res.status(409).json(err));
+});
+
+app.post('/api/BookClass/ClassTime', middleware, (req, res) => {
+  db.getClassTime(req.body.ClassName, req.body.ClassDay)
+      .then(data => {
+        if (data) {
+          return res.status(200).json(data)
+        } else {
+          return res.status(409).json('Authentication failed. User not found.');
+        }
+      })
+      .catch(err => res.status(409).json(err));
+});
+
+app.post('/api/BookClass/ClassCoach', middleware, (req, res) => {
+  db.getClassCoach(req.body.ClassName, req.body.ClassDay, req.body.ClassTime)
+      .then(data => {
+        if (data) {
+          return res.status(200).json(data)
+        } else {
+          return res.status(409).json('Authentication failed. User not found.');
+        }
+      })
+      .catch(err => res.status(409).json(err));
+});
+
+app.post('/api/BookClass/UserID', middleware, (req, res) => {
+    db.getUserID(req.decoded.username).then(data => {
+        if (data) {
+            return res.status(200).json(data);
+        } else {
+            return res.status(409).json('Authentication failed. User not found.');
+        }
+    }).catch(err => res.status(401).json(err));
+});
+
+// app.post('/api/BookClass/CoachID', middleware, (req, res) => {
+//     db.getCoachID(req.body.ClassName, req.body.ClassDay, req.body.ClassTime)
+//         .then(data => {
+//             if (data) {
+//                 return res.status(200).json(data)
+//             } else {
+//                 return res.status(409).json('Authentication failed. User not found.');
+//             }
+//         })
+//         .catch(err => res.status(409).json(err));
+// });
+//
+app.post('/api/BookClass/ClassID', middleware, (req, res) => {
+    db.getClassID(req.body.ClassName, req.body.ClassDay, req.body.ClassTime, req.body.CoachName)
+        .then(data => {
+            if (data) {
+                return res.status(200).json({ClassID: data})
+            } else {
+                return res.status(409).json('Authentication failed. User not found.');
+            }
+        })
+        .catch(err => res.status(409).json(err));
+});
 /***********************************************/
 app.post('/api/messages/get', middleware, (req, res) => {
     db.getMessages(req.decoded.username).then(data => {

@@ -3,7 +3,7 @@ const mysql = require('mysql');
 let connection = null; // Global
 
 function dbConnect() {
-    if (connection !== null) return;
+    if(connection !== null) return;
     const conn = mysql.createConnection({
         host: 'dione.in.cs.ucy.ac.cy',
         user: 'ffndb',
@@ -19,7 +19,7 @@ function dbConnect() {
         console.log('\x1b[32m%s\x1b[0m', 'Connected to database.');
         connection = conn;
     });
-    conn.on('error', function () {
+    conn.on('error', function() {
         dbDisconnect();
         return null;
     });
@@ -35,8 +35,8 @@ function dbDisconnect() {
 function dbLogIn(username, password) {
     return new Promise((resolve, reject) => {
         const sql = "SELECT * FROM ACCOUNT WHERE username = ? AND password = ?";
-        connection.query(sql, [username, password], function (err, rows) {
-            if (err) return reject(err);
+        connection.query(sql, [ username, password ], function(err, rows) {
+            if(err) return reject(err);
             return resolve(rows[0]);
         });
     });
@@ -217,6 +217,16 @@ function updateAnnouncement(announcement_id, title, message, level, username) {
             });
     });
 }
+function enrollUser(CLASS_ID, User_ID) {
+    return new Promise((resolve, reject) => {
+        const sql = "INSERT INTO ENROL (CLASS_ID, User_ID) VALUES ( ? , ? )";
+        connection.query(sql, [ CLASS_ID, User_ID], function(err) {
+            if(err) {console.log(err); return reject(err)}
+            console.log("1 record inserted");
+            return resolve('The data were saved successfully!');
+        });
+    });
+}
 
 
 //mine
@@ -308,6 +318,83 @@ function getCoaches() {
 }
 
 //add method name
+function getClasses() {
+    return new Promise((resolve, reject) => {
+        const sql = "SELECT DISTINCT c.Name FROM Class c";
+        connection.query(sql, function(err, rows) {
+            if(err) reject(err);
+            resolve(rows);
+        });
+    });
+}
+
+function getClassDay(Name) {
+    return new Promise((resolve, reject) => {
+        // console.log(Name);
+        const sql = "SELECT DISTINCT c.Day FROM Class c WHERE c.Name = ?";
+        connection.query(sql, [Name], function (err, rows) {
+            if(err) reject(err);
+            resolve(rows);
+        });
+    });
+}
+
+function getClassTime(Name, Day) {
+    return new Promise((resolve, reject) => {
+        // console.log();
+        const sql = "SELECT DISTINCT c.Time FROM Class c WHERE c.Name = ? AND c.Day = ?";
+        connection.query(sql, [Name, Day], function (err, rows) {
+            if(err) reject(err);
+            resolve(rows);
+        });
+    });
+}
+
+function getClassCoach(Name, Day, Time) {
+    return new Promise((resolve, reject) => {
+        // console.log();
+        // const sql = "SELECT DISTINCT c.Coach_ID FROM Class c WHERE c.Name = ? AND c.Day = ? AND c.Time = ?";
+        const sql = "SELECT co.CoachName FROM COACH co, Class ca WHERE ca.Name = ? AND ca.Day = ? AND ca.Time = ? AND co.Coach_ID = ca.Coach_ID";
+        connection.query(sql, [Name, Day, Time], function (err, rows) {
+            if(err) reject(err);
+            resolve(rows);
+        });
+    });
+}
+
+function getUserID(user) {
+    return new Promise((resolve, reject) => {
+        const sql = "SELECT u.User_ID FROM ACCOUNT a, USERS u WHERE username = ?  AND a.User_ID = u.User_ID";
+        connection.query(sql, [ user ], function(err, rows) {
+            if(err) return reject(err);
+            return resolve(rows[0]);
+        });
+    });
+}
+function getClassID(Name, Day, Time, CoachName) {
+    return new Promise((resolve, reject) => {
+        // console.log();
+        // const sql = "SELECT DISTINCT c.Coach_ID FROM Class c WHERE c.Name = ? AND c.Day = ? AND c.Time = ?";
+        const sql = "SELECT ca.ClassID FROM COACH co, Class ca WHERE ca.Name = ? AND ca.Day = ? AND ca.Time = ? AND co.CoachName = ? AND co.Coach_ID = ca.Coach_ID";
+        connection.query(sql, [Name, Day, Time, CoachName], function (err, rows) {
+            if(err) reject(err);
+            resolve(rows[0]);
+        });
+    });
+}
+//
+// function getCoachID(Name, Day, Time) {
+//     return new Promise((resolve, reject) => {
+//         // console.log();
+//         // const sql = "SELECT DISTINCT c.Coach_ID FROM Class c WHERE c.Name = ? AND c.Day = ? AND c.Time = ?";
+//         const sql = "SELECT ca.Coach_ID FROM COACH co, Class ca WHERE ca.Name = ? AND ca.Day = ? AND ca.Time = ? AND co.Coach_ID = ca.Coach_ID";
+//         connection.query(sql, [Name, Day, Time], function (err, rows) {
+//             if(err) reject(err);
+//             resolve(rows);
+//         });
+//     });
+// }
+
 module.exports = {
     dbConnect,
     dbDisconnect,
@@ -322,6 +409,13 @@ module.exports = {
     addAnnouncement,
     getTotalAnnouncements,
     getUserInfo,
+    getClassDay,
+    getClasses,
+    getClassTime,
+    getClassCoach,
+    getUserID,
+    getClassID,
+    enrollUser,
     getMessages,
     getMessagesCount,
     makeMessagesRead,

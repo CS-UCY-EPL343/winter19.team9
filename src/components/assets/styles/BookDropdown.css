@@ -1,0 +1,42 @@
+.RowBlock{
+    margin: auto;
+    padding-bottom: 7%;
+}
+
+.selectGroupPersonal{
+   font-size: 12px;
+}
+
+#backBox {
+    padding: 4%;
+}
+
+#DropDays{
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+    border-color: darkred;
+}
+
+#DropDays option {
+    background: black;
+}
+
+select:focus > option:hover {
+    background: #f00 !important;
+}
+
+.RowButton{
+    padding-right: 5px;
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: none;
+}
+
+
+
+@media all and (max-width:30em){
+
+}
+/*------------------------------------------------------------------------------------------*/
+
