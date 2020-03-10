@@ -15,13 +15,15 @@
     top: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
-    /*overflow: auto; !* Enable scroll if needed *!*/
+    /*overflow: auto; z!* Enable scroll if needed *!*/
     /*background-color: rgb(0, 0, 0); !* Fallback color *!*/
     /*background-color: rgba(0, 0, 0, 0.4); !* Black w/ opacity *!*/
     /*background-color: #aaa;*/
     padding-bottom: 24px;
 }
-
+#LoginModal .subtitle{
+    color: #edf2f4;
+}
 /*#LoginModal a,input[type="submit"],.form__link{*/
 /*    -webkit-transition: all .25s ease;*/
 /*    transition: all .25s ease;*/
@@ -94,7 +96,7 @@
     width: 100%;
     /*-webkit-backface-visibility: hidden;*/
     backface-visibility: hidden;
-    background-color: #aaa;
+    background-color: #1b1b1b;
     box-shadow: 3px 3px 32px rgba(0,0,0,0.25);
 }
 #LoginModal .form__login:after, .form__signup:after {
@@ -122,12 +124,16 @@
 #LoginModal .form__header {
     font-family: cursive, sans-serif;
     margin-bottom: 2rem;
-    font-size: 1.618rem;
+    font-size: 50px;
     font-weight: 700;
     text-align: center;
+    color: #edf2f4;
 }
-#LoginModal .form__group:nth-of-type(n + 2){
-    margin-top: 1.5rem;
+/*#LoginModal .form__group:nth-of-type(n + 2){*/
+/*    margin-top: 1.5rem;*/
+/*}*/
+#LoginModal .form__group{
+    padding: 16px 0 5px 0;
 }
 #LoginModal #birthday{
     margin-bottom: 2rem;
@@ -136,6 +142,8 @@
 }
 #LoginModal .label__icon {
     /*padding: .97rem 0;*/
+    padding-top: 5px;
+    padding-bottom: 5px;
     float: left;
     width: 3rem;
     font-size: 1.25rem;
@@ -148,13 +156,13 @@
 }
 #LoginModal #pword, #username{
     width: 300px;
-    padding: 16px 16px 16px 0;
+    padding: 5px 16px 5px 0;
     margin: 8px 0;
 }
 #LoginModal .form__element{
-    padding-top: 1rem;
+    padding-top: 5px;
     padding-right: 1rem;
-    padding-bottom: 1rem;
+    padding-bottom: 5px;
     /*width: 15.875rem;*/
     width: 300px;
     border-top: 1px solid #e1e1e1;
@@ -189,13 +197,14 @@
     font-weight: 700;
 }
 #LoginModal .signUpName{
-    padding: 16px 16px 16px 0;
-    width: 150px;
+    padding: 5px 16px 5px 0;
+    width: 36%;
+    margin-right: 12px;
 }
 #LoginModal #signUpUsername{
-    padding: 16px 16px 16px 0;
+    padding: 5px 16px 5px 0;
     width: 300px;
-    margin: 8px 40px;
+    margin: 8px 1px;
 }
 /*#LoginModal .checkbox--forget:checked + .icon--checkbox {*/
 /*    opacity: 1;*/
@@ -256,7 +265,7 @@
 #LoginModal .fa {
     font-size: 20px;
     height: 0;
-    padding: 0 10px;
+    padding: 16px 10px 5px 0;
 }
 #LoginModal .imgcontainer {
     text-align: center;
@@ -315,19 +324,21 @@
 }
 #LoginModal #signUpAge{
     margin: 8px 0;
-    padding: 16px 16px 16px 0;
+    padding: 5px 16px 5px 0;
 }
 
 #LoginModal #gender{
     margin: 1px 0;
-    padding: 16px 16px 0 0;
+    padding: 5px 16px 5px 0;
     font-size: 1.2rem;
 }
 #LoginModal #remember-me > input {
     display: inline-block;
     width: 20px;
 }
-
+#LoginModal label{
+    height: 10%;
+}
 #LoginModal #remember-me label {
     margin-bottom: 25px;
     display: inline-block;
@@ -356,7 +367,7 @@
     width: 80%; /* Could be more or less, depending on screen size */
 }
 #LoginModal .coloring {
-    color: #2b2d42;
+    color: #edf2f4;
     height: 25px;
 }
 #LoginModal .form__link{
