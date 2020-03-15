@@ -11,14 +11,12 @@ function dbConnect() {
         database: 'ffndb'
     });
     conn.connect((err) => {
-        if (err) return err;
-        console.log('Connected to database.');
         if (err) {
             return err;
         }
         console.log('\x1b[32m%s\x1b[0m', 'Connected to database.');
         connection = conn;
-    });
+    }).catch(err);
     conn.on('error', function() {
         dbDisconnect();
         return null;
