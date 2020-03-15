@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 class StaffList extends Component {
   render() {
     return (
-        <div className = "row admins">
+        <div className = "row staff">
           <div className = "col-md-6">
             <div className = "box">
               <h3>Admins:</h3>
@@ -47,7 +47,7 @@ class StaffList extends Component {
           </div>
           <div className = "col-md-6">
             <div className = "box">
-              <h3>Coach:</h3>
+              <h3>Coaches:</h3>
               <div className = "admin">
                 <div className = "img">
                   <img className = "img-responsive"

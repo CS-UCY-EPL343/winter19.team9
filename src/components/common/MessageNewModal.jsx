@@ -2,7 +2,7 @@ import React, {Component}                                   from 'react';
 import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
 import {
     getCoaches,
-    makeMessagesRead
+    // makeMessagesRead
 }                                                           from '../../repository';
 
 class MessageNewModal extends Component {

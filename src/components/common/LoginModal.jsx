@@ -149,7 +149,7 @@ class LoginModal extends Component {
                                         {/*</span>*/}
                                         <span className={"subtitle"}>Remember me</span>
                                     </label>
-                                    <a className={"form__link link--right"}>Forgot your password?</a>
+                                    <a className={"form__link link--right"} href={'/'}>Forgot your password?</a>
                                     {/*  href is missing*/}
                                 </fieldset>
                                 <fieldset className={"form__group"}>

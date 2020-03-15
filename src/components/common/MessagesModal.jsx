@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {AnimatedOnScroll} from 'react-animated-css-onscroll';
 import '../assets/styles/MessagesModal.css';
 import Message            from './Message';
 import {
@@ -36,7 +35,7 @@ class MessagesModal extends Component {
         if (this.props.TotalMessages > 0) {
             const newMessages = this.state.messages.slice(0,
                 this.props.TotalMessages).map(msg => msg.Message_ID);
-            makeMessagesRead(newMessages).then(response => {
+            makeMessagesRead(newMessages).then(() => {
                 this.props.toggleTotalMessages();
             }).catch(err => alert(err));
         }

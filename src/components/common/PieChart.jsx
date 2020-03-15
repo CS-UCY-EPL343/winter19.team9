@@ -35,7 +35,7 @@ class PieChart extends Component {
         },
       ],
     };
-    const myDoughnutChart = new Chart(ctx, {
+    new Chart(ctx, {
       type   : 'doughnut',
       data   : data,
       options: {

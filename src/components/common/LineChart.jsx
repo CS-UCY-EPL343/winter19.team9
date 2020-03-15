@@ -58,7 +58,7 @@ class LineChart extends Component {
 
   createChart() {
     Chart.defaults.global.legend.display = false;
-    Chart.defaults.global.tooltips.enabled = false;
+    Chart.defaults.global.tooltips.enabled = true;
     let ctx = document.getElementById(this.props.id);
     ctx.height = 125;
     let data = {
@@ -74,7 +74,7 @@ class LineChart extends Component {
         },
       ],
     };
-    let latestLabel = data.labels[6];
+    // let latestLabel = data.labels[6];
     let myLineChart = new Chart(ctx, {
       responsive         : true,
       maintainAspectRatio: false,
@@ -135,11 +135,9 @@ class LineChart extends Component {
   }
 
   render() {
-    let isArrowUp = this.state.percentComparison;
-    let arrowChange = null;
-
-    let lastNumber = this.state.lineChart.data[this.state.lineChart.data.length
-                                               - 1];
+    // let isArrowUp = this.state.percentComparison;
+    // let arrowChange = null;
+    // let lastNumber = this.state.lineChart.data[this.state.lineChart.data.length - 1];
 
     // function CheckArrow() {
     //     if(!isArrowUp === "Up") {

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
+// import Dropdown from "react-bootstrap/Dropdown";
+// import DropdownButton from "react-bootstrap/DropdownButton";
 import '../assets/styles/BookDropdown.css'
-import {getClasses, userData} from "../../repository";
+import {getClasses} from "../../repository";
+// import {userData} from "../../repository";
 import {getClassDay} from "../../repository";
 import {getClassTime} from "../../repository";
 import {getClassCoach} from "../../repository";
@@ -99,7 +100,7 @@ class BookClass extends Component {
                 // this.setState({confirmPassword: response.password});
                 getClasses().then(response => {
                     console.log(response);
-                    this.setState({Name: response})
+                    this.setState({Name: response});
                     console.log(this.state.Name);
                 });
             });

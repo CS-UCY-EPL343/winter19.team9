@@ -3,9 +3,9 @@ import LineChart          from '../common/LineChart';
 import PieChart           from '../common/PieChart';
 import StaffList          from '../common/StaffList';
 import LeaderBoard        from '../common/LeaderBoard';
+import Graphs             from '../common/Graphs';
 import {Redirect}         from 'react-router-dom';
 import '../assets/styles/UIDashboard.css'
-import Graphs             from '../common/Graphs';
 
 let uiDataCountries = [
   {
@@ -72,6 +72,16 @@ class UIDashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      selectedGraph: '1',
+      graphData: {
+        title: 'Chart 1',
+        type: 'bar',
+        xs  : ['January', 'February', 'March', 'April', 'May', 'June'],
+        ys  : [
+          {label: 'Lost', data: [45, 25, 40, 20, 45, 20]},
+          {label: 'Success', data: [20, 40, 20, 45, 25, 60]},
+        ],
+      },  // Set to first option of select
       traffic: {
         id: "traffic",
         new: 80,
@@ -88,6 +98,42 @@ class UIDashboard extends Component {
         returning: 1500
       }
     };
+
+    this.handleChart = this.handleChart.bind(this);
+  }
+
+  handleChart(e) {
+    this.setState({
+      [e.target.name]: e.target.value,
+    }, () => {
+      // Get data from database
+      if (this.state.selectedGraph === '1') {
+        this.setState({
+          graphData: {
+            title: 'Chart 1',
+            type: 'bar',
+            xs  : ['January', 'February', 'March', 'April', 'May', 'June'],
+            ys  : [
+              {label: 'Lost', data: [45, 25, 40, 20, 45, 20]},
+              {label: 'Success', data: [20, 40, 20, 45, 25, 60]},
+            ],
+          },
+        });
+      } else if (this.state.selectedGraph === '2') {
+        this.setState({
+          graphData: {
+            title: 'Chart 2',
+            type: 'line',
+            xs  : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August'],
+            ys  : [
+              {label: 'Day', data: [5, 10, 5, 8, 20, 30, 20, 10]},
+              {label: 'Week', data: [20, 14, 20, 25, 10, 15, 25, 10]},
+              {label: 'Month', data: [40, 20, 5, 10, 30, 15, 15, 10]},
+            ],
+          },
+        });
+      }
+    });
   }
 
   render() {
@@ -106,7 +152,14 @@ class UIDashboard extends Component {
               <PieChart title="Profit" new={this.state.profit.new} returning={this.state.profit.returning} id={this.state.profit.id}/>
               <PieChart title="Reveanue" new={this.state.reveanue.new} returning={this.state.reveanue.returning} id={this.state.reveanue.id}/>
             </div>
-            <Graphs/>
+            <div className="select-chart">
+              <select name="selectedGraph" onChange={this.handleChart}>
+                {/*<option selected disabled>Choose a chart to display</option>*/}
+                <option value="1">Chart 1</option>
+                <option value="2">Chart 2</option>
+              </select>
+            </div>
+            <Graphs graphData={this.state.graphData}/>
             <StaffList/>
             <div className="row leaderboards">
               <LeaderBoard data={uiDataCountries} sortAsc={true} title="Countries" dataSort="percent" dataTitle="country"/>

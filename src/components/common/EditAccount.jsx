@@ -87,7 +87,7 @@ class EditAccount extends Component {
         let {imagePreviewUrl} = this.state;
         let $imagePreview = null;
         if (imagePreviewUrl) {
-            $imagePreview = (<img src={imagePreviewUrl} alt={"Profile picture of user"}/>);
+            $imagePreview = (<img src={imagePreviewUrl} alt={"Profile of user"}/>);
         }
         return (
             <div className="container" id="EditModal">
@@ -105,7 +105,7 @@ class EditAccount extends Component {
                     </div>
 
                 </div>
-                <form className="form-horizontal" role="form">
+                <form className="form-horizontal">
                     <h3>Personal info</h3>
                     <div className="form-group">
                         <label className="col-lg-6 control-label">First name:</label>

@@ -8,13 +8,67 @@
     color : #999999;
 }
 
-#UIDashboard .pie__chart-wrapper {
-    margin : 30px auto;
+#UIDashboard {
+    background-color : #252830;
+    color            : #CFD2DA;
+    padding           : 100px 0 50px 0;
+}
+
+/* Reset Select */
+#UIDashboard .select-chart select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0 !important;
+    background : #2B2D42 none;
+}
+/* Remove IE arrow */
+#UIDashboard .select-chart select::-ms-expand {
+    display: none;
+}
+/* Custom Select */
+#UIDashboard .select-chart {
+    position: relative;
+    display: flex;
+    width: 20em;
+    height: 3em;
+    line-height: 3;
+    background: #2c3e50;
+    overflow: hidden;
+    border-radius: .25em;
+    margin : 30px 15px 10px 15px;
+}
+#UIDashboard .select-chart select {
+    flex: 1;
+    padding: 0 .5em;
+    color: #fff;
+    cursor: pointer;
+}
+/* Arrow */
+#UIDashboard .select-chart::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 1em;
+    background: #34495e;
+    cursor: pointer;
+    pointer-events: none;
+    -webkit-transition: .25s all ease;
+    -o-transition: .25s all ease;
+    transition: .25s all ease;
+}
+/* Transition */
+#UIDashboard .select-chart:hover::after {
+    color: #EF233C;
 }
 
 #UIDashboard .pie__chart {
     max-width : 250px;
-    margin    : 0 auto 15px;
+    margin    : 30px auto 15px;
 }
 
 #UIDashboard .line__chart {
@@ -118,47 +172,47 @@
 }
 
 /* Start users */
-#UIDashboard .admins {
+#UIDashboard .staff {
     margin-top : 25px;
 }
 
-#UIDashboard .admins .box > h3 {
+#UIDashboard .staff .box > h3 {
     color       : #CCCCCC;
-    font-family : Calibri;
+    font-family : Calibri, sans-serif;
     font-weight : 300;
     margin-top  : 0;
 }
 
-#UIDashboard .admins .box .admin {
+#UIDashboard .staff .box .admin {
     margin-bottom    : 20px;
     overflow         : hidden;
     background-color : #313348;
     padding          : 10px;
 }
 
-#UIDashboard .admins .box .admin .img {
+#UIDashboard .staff .box .admin .img {
     width        : 20%;
     margin-right : 5%;
     float        : left;
 }
 
-#UIDashboard .admins .box .admin .img img {
+#UIDashboard .staff .box .admin .img img {
     border-radius : 50%;
     width         : 100px;
     height        : 100px;
 }
 
-#UIDashboard .admins .box .info {
+#UIDashboard .staff .box .info {
     width          : 75%;
     color          : #EEEEEE;
     float          : left;
     vertical-align : middle;
 }
 
-#UIDashboard .admins .box .info h3 {
+#UIDashboard .staff .box .info h3 {
     font-size : 19px;
 }
 
-#UIDashboard .admins .box .info p {
+#UIDashboard .staff .box .info p {
     color : #BBBBBB;
 }
