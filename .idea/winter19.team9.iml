@@ -17,5 +17,8 @@
     <orderEntry type="library" name="popper" level="application" />
     <orderEntry type="library" name="all" level="application" />
     <orderEntry type="library" name="bootstrap" level="application" />
+    <orderEntry type="library" name="Chart.bundle" level="application" />
+    <orderEntry type="library" name="Chart" level="application" />
+    <orderEntry type="library" name="react-with-addons-0.14.7" level="application" />
   </component>
 </module>

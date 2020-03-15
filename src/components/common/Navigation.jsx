@@ -70,9 +70,14 @@ class Navigation extends Component {
                                   </li>
                                                                    :
                                   this.props.userLevel === 'admin' ?
-                                  <li className = "nav-item">
-                                      <NavLink className = "nav-link" to = "/admin/profile">Profile</NavLink>
-                                  </li>
+                                      <>
+                                          <li className = "nav-item">
+                                              <NavLink className = "nav-link" to = "/admin/profile">Profile</NavLink>
+                                          </li>
+                                          <li className = "nav-item">
+                                              <NavLink className = "nav-link" to = "/admin/profile/dashboard">Dashboard</NavLink>
+                                          </li>
+                                      </>
                                                                    :
                                   ""
                               )

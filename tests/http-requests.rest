@@ -29,3 +29,8 @@ Content-Type: application/json
 
 ###
 
+
+GET http://localhost:5000/api/announcements/public
+Content-Type: application/json
+
+###

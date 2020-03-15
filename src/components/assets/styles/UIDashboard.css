@@ -1,0 +1,164 @@
+#UIDashboard {
+    background-color : #252830;
+    color            : #CFD2DA;
+    padding           : 100px 0 50px 0;
+}
+
+#UIDashboard div strong {
+    color : #999999;
+}
+
+#UIDashboard .pie__chart-wrapper {
+    margin : 30px auto;
+}
+
+#UIDashboard .pie__chart {
+    max-width : 250px;
+    margin    : 0 auto 15px;
+}
+
+#UIDashboard .line__chart {
+    max-width     : 255px;
+    color         : #FFFFFF;
+    border-radius : 5px;
+    margin        : 0 auto 15px;
+}
+
+#UIDashboard .line__chart canvas {
+    margin-bottom : -6px;
+    border-radius : 0 0 5px 5px;
+}
+
+#UIDashboard .line__chart .line__chart-header {
+    padding        : 20px 20px 0;
+    text-transform : uppercase;
+    font-size      : 14px;
+}
+
+#UIDashboard .line__chart .line__chart-header strong {
+    color : rgba(255, 255, 255, 0.5);
+}
+
+#UIDashboard .line__chart .line__chart-data {
+    position      : relative;
+    padding       : 0 20px 20px;
+    font-size     : 28px;
+    margin-bottom : 15px;
+    border-bottom : 1px solid rgba(255, 255, 255, 0.5);
+}
+
+#UIDashboard .line__chart .line__chart-data span {
+    font-size : 14px;
+}
+
+#UIDashboard .line__chart .line__chart-data span:not(.arrow) {
+    position : absolute;
+    top      : 11px;
+    left     : 55px;
+}
+
+#UIDashboard .arrow {
+    position : relative;
+    left     : 40px;
+}
+
+#UIDashboard .arrow:before {
+    content    : "";
+    position   : absolute;
+    width      : 0;
+    height     : 0;
+    transition : 0.3s;
+    right      : -30px;
+    top        : 2px;
+}
+
+#UIDashboard .arrow.Up:before {
+    border-left   : 7px solid transparent;
+    border-right  : 7px solid transparent;
+    border-bottom : 7px solid green;
+}
+
+#UIDashboard .arrow.Down:before {
+    border-left  : 7px solid transparent;
+    border-right : 7px solid transparent;
+    border-top   : 7px solid red;
+}
+
+#UIDashboard .leaderboard__wrapper {
+    margin-top         : 30px;
+    margin-bottom      : 20px;
+    border-radius      : 4px;
+    -webkit-box-shadow : 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow         : 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+#UIDashboard .leaderboard__title {
+    position      : relative;
+    display       : block;
+    padding       : 10px 15px;
+    margin-bottom : -1px;
+    border        : 1px solid #434857;
+    border-radius : 3px 3px 0 0;
+}
+
+#UIDashboard .leaderboard__result {
+    position      : relative;
+    display       : block;
+    padding       : 10px 15px;
+    margin-bottom : -1px;
+    border        : 1px solid #434857;
+    color         : #CFD2DA;
+    transition    : 0.3s;
+}
+
+#UIDashboard .leaderboard__result:hover {
+    color            : #CFD2DA;
+    text-decoration  : none;
+    background-color : #434857;
+}
+
+/* Start users */
+#UIDashboard .admins {
+    margin-top : 25px;
+}
+
+#UIDashboard .admins .box > h3 {
+    color       : #CCCCCC;
+    font-family : Calibri;
+    font-weight : 300;
+    margin-top  : 0;
+}
+
+#UIDashboard .admins .box .admin {
+    margin-bottom    : 20px;
+    overflow         : hidden;
+    background-color : #313348;
+    padding          : 10px;
+}
+
+#UIDashboard .admins .box .admin .img {
+    width        : 20%;
+    margin-right : 5%;
+    float        : left;
+}
+
+#UIDashboard .admins .box .admin .img img {
+    border-radius : 50%;
+    width         : 100px;
+    height        : 100px;
+}
+
+#UIDashboard .admins .box .info {
+    width          : 75%;
+    color          : #EEEEEE;
+    float          : left;
+    vertical-align : middle;
+}
+
+#UIDashboard .admins .box .info h3 {
+    font-size : 19px;
+}
+
+#UIDashboard .admins .box .info p {
+    color : #BBBBBB;
+}

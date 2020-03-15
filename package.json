@@ -5,6 +5,7 @@
   "homepage": "https://cs-ucy-epl343.github.io/winter19.team9/",
   "dependencies": {
     "axios": "^0.19.2",
+    "chart.js": "^2.9.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "history": "^4.10.1",

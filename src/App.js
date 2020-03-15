@@ -13,74 +13,80 @@ import PrivateRoute                    from './components/PrivateRoute';
 // './components/common/NotFound';
 import history                         from './history';
 import {getUserLevel, isAuthenticated} from './repository';
+import UIDashboard                     from './components/pages/UIDashboard';
 
 class App extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            userLevel: undefined,
-        };
-        this.setUserLevel = this.setUserLevel.bind(this);
+  constructor(props) {
+    super(props);
+    this.state = {
+      userLevel: undefined,
     };
+    this.setUserLevel = this.setUserLevel.bind(this);
+  };
 
-    componentDidMount() {
-        const path = localStorage.getItem('path') || '/';
-        history.push(path);
+  componentDidMount() {
+    const path = localStorage.getItem('path') || '/';
+    history.push(path);
 
-        // Persist on state
-        if (isAuthenticated()) {
-            getUserLevel().then(level => this.setUserLevel(level));
-        }
+    // Persist on state
+    if (isAuthenticated()) {
+      getUserLevel().then(level => this.setUserLevel(level));
     }
+  }
 
-    setUserLevel = (userLevel) => {
-        this.setState({userLevel});
-    };
+  setUserLevel = (userLevel) => {
+    this.setState({userLevel});
+  };
 
-    render() {
-        return (
-            <Router history = { history }>
-                <div>
-                    <ScrollToTop />
-                    <Switch>
-                        <PageWrapper userLevel = { this.state.userLevel }
-                                     setUserLevel = { this.setUserLevel }
-                        >
-                            <Route exact
-                                   path = "/"
-                                   component = { (props) => <Home { ...props }
-                                                                  userLevel = { this.state.userLevel }
-                                   /> }
-                            />
-                            <Route exact
-                                   path = "/about"
-                                   component = { AboutUs }
-                            />
-                            <Route path = "/classes" component = { Classes } />
+  render() {
+    return (
+        <Router history = { history }>
+          <div>
+            <ScrollToTop />
+            <Switch>
+              <PageWrapper userLevel = { this.state.userLevel }
+                           setUserLevel = { this.setUserLevel }
+              >
+                <Route exact
+                       path = "/"
+                       component = { (props) => <Home { ...props }
+                                                      userLevel = { this.state.userLevel }
+                       /> }
+                />
+                <Route exact
+                       path = "/about"
+                       component = { AboutUs }
+                />
+                <Route exact path = "/classes" component = { Classes } />
 
-                            <PrivateRoute exact
-                                          path = "/user/profile"
-                                          component = { ProfileUser }
-                                          userLevel = { this.state.userLevel }
-                            />
-                            <PrivateRoute exact
-                                          path = "/coach/profile"
-                                          component = { ProfileCoach }
-                                          userLevel = { this.state.userLevel }
-                            />
-                            <PrivateRoute exact
-                                          path = "/admin/profile"
-                                          component = { ProfileAdmin }
-                                          userLevel = { this.state.userLevel }
-                            />
-                            {/*<Route path = "*" component = { NotFound } />*/ }
-                        </PageWrapper>
-                    </Switch>
-                </div>
-            </Router>
-        );
-    }
+                <PrivateRoute exact
+                              path = "/user/profile"
+                              component = { ProfileUser }
+                              userLevel = { this.state.userLevel }
+                />
+                <PrivateRoute exact
+                              path = "/coach/profile"
+                              component = { ProfileCoach }
+                              userLevel = { this.state.userLevel }
+                />
+                <PrivateRoute exact
+                              path = "/admin/profile"
+                              component = { ProfileAdmin }
+                              userLevel = { this.state.userLevel }
+                />
+                <PrivateRoute exact
+                              path = "/admin/profile/dashboard"
+                              component = { UIDashboard }
+                              userLevel = { this.state.userLevel }
+                />
+                {/*<Route path = "*" component = { NotFound } />*/ }
+              </PageWrapper>
+            </Switch>
+          </div>
+        </Router>
+    );
+  }
 }
 
 export default App;
