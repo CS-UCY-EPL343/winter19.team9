@@ -104,14 +104,13 @@ class LoginModal extends Component {
                                 <div className={"cursive"}>
 
                                 </div>
-                                <div className={"row"}>
-                                    <div className="col-lg-12 col-md-12 col-sm-12">
-                                        <i className="fa fa-facebook facebook brands"/>
-                                        <i className="fa fa-twitter twitter brands"/>
-                                    </div>
-                                </div>
+                                {/*<div className={"row"}>*/}
+                                {/*    <div className="col-lg-12 col-md-12 col-sm-12">*/}
+                                {/*        <p className={"subtitle fancy"}><span className={"cursive2"}><i className="fa fa-facebook facebook brands"/>OR<i className="fa fa-twitter twitter brands"/></span></p>*/}
+                                {/*    </div>*/}
+                                {/*</div>*/}
                             </div>
-                            <p className={"subtitle fancy"}><span className={"cursive2"}>OR</span></p>
+
                             <form id={"loginForm"} action={"#"} method={"post"} className={"form"}>
                                 <fieldset className={"form__group"}>
                                     <label htmlFor={"username"}>
@@ -148,7 +147,7 @@ class LoginModal extends Component {
                                                className={"checkbox--forget"} type={"checkbox"}/>
                                         {/*   <span className="icon--checkbox fa fa-check">*/}
                                         {/*</span>*/}
-                                        Remember me
+                                        <span className={"subtitle"}>Remember me</span>
                                     </label>
                                     <a className={"form__link link--right"}>Forgot your password?</a>
                                     {/*  href is missing*/}
@@ -158,7 +157,7 @@ class LoginModal extends Component {
                                            onClick={this.onSubmit}/>
                                 </fieldset>
 
-                                <small> Not a member yet?
+                                <small> <span className={"subtitle"}> Not a member yet?</span>
                                     <label htmlFor={"flipper__checkbox"} className={"form__link"}
                                            onClick={this.changeSign}>
                                         Create your account
@@ -220,7 +219,7 @@ class LoginModal extends Component {
                                 </fieldset>
                                 <fieldset className={"form__group"}>
                                     <label htmlFor={"age"} id={"birthday"}>
-                                        Birth Date:
+                                        <span className={"subtitle"}> Birth Date:</span>
                                         <span className={"fas fa-birthday-cake"}>
                                         </span>
                                     </label>
@@ -232,17 +231,17 @@ class LoginModal extends Component {
                                     <label htmlFor={"gender"} id={"gender"}>
                                         <input type={"radio"} value={"1"} checked={this.state.gender === '1'}
                                                onChange={this.onRadioChange}/>
-                                        Male
+                                        <span className={"subtitle"}> Male          </span>
                                         <input type={"radio"} value={"2"} checked={this.state.gender ==='2'}
                                                onChange={this.onRadioChange}/>
-                                        Female
+                                        <span className={"subtitle"}> Female</span>
                                     </label>
                                 </fieldset>
                                 <fieldset className={"form__group"}>
                                     <input className={"form__button"} type={"submit"} value={"Sign up"} onClick={this.onSignUp}/>
                                 </fieldset>
                                 <small>
-                                    Are you already a member?
+                                    <span className={"subtitle"}> Are you already a member?</span>
                                     <label htmlFor={"flipper__checkbox"}
                                            onClick={this.changeSign} className={"form__link"}>
                                         Click here to login
