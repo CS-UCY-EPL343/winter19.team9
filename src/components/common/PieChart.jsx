@@ -16,10 +16,7 @@ class PieChart extends Component {
   createChart() {
     let ctx = document.getElementById(this.props.id);
     let data = {
-      labels  : [
-        'New',
-        'Returning',
-      ],
+      labels  : ['New', 'Returning'],
       datasets: [
         {
           data                : [this.props.new, this.props.returning],
@@ -45,7 +42,9 @@ class PieChart extends Component {
         },
         animation       : {
           animateScale: true,
+          duration: this.state.animationTime || 1000,
         },
+        responsive      : true,
       },
     });
   }

@@ -9,7 +9,7 @@ class LineChart extends Component {
     this.state = {
       lineChart        : {
         data  : [],
-        labels: 6,
+        labels: 10,
       },
       percentChange    : 0,
       percentComparison: 'Up',
@@ -57,12 +57,10 @@ class LineChart extends Component {
   }
 
   createChart() {
-    Chart.defaults.global.legend.display = false;
-    Chart.defaults.global.tooltips.enabled = true;
-    let ctx = document.getElementById(this.props.id);
+    const ctx = document.getElementById(this.props.id);
     ctx.height = 125;
-    let data = {
-      labels  : [1, 2, 3, 4, 5, 6],
+    const data = {
+      labels  : [...Array(this.state.lineChart.labels).keys()],
       datasets: [
         {
           backgroundColor : 'rgba(255,255,255,0.5)',
@@ -74,18 +72,54 @@ class LineChart extends Component {
         },
       ],
     };
-    // let latestLabel = data.labels[6];
-    let myLineChart = new Chart(ctx, {
+
+    Chart.defaults.LineWithLine = Chart.defaults.line;
+    Chart.controllers.LineWithLine = Chart.controllers.line.extend({
+      draw: function(ease) {
+        // noinspection JSPotentiallyInvalidConstructorUsage
+        Chart.controllers.line.prototype.draw.call(this, ease);
+
+        if (this.chart.tooltip._active && this.chart.tooltip._active.length) {
+          let activePoint = this.chart.tooltip._active[0],
+              ctx = this.chart.ctx,
+              x = activePoint.tooltipPosition().x,
+              topY = this.chart.legend.bottom,
+              bottomY = this.chart.chartArea.bottom;
+
+          // draw line
+          ctx.save();
+          ctx.beginPath();
+          ctx.moveTo(x, topY);
+          ctx.lineTo(x, bottomY);
+          ctx.lineWidth = 2;
+          ctx.strokeStyle = '#fff';
+          ctx.stroke();
+          ctx.restore();
+        }
+      }
+    });
+
+    const myLineChart = new Chart(ctx, {
+      type               : 'LineWithLine',
       responsive         : true,
       maintainAspectRatio: false,
-      type               : 'line',
       data               : data,
       options            : {
-        legend  : {
+        responsive: true,
+        legend    : {
           display: false,
         },
-        elements: {point: {radius: 0}},
-        scales  : {
+        tooltips  : {
+          enabled           : true,
+          intersect         : false,
+          mode              : 'nearest',
+          titleFontSize     : 0,
+          titleSpacing      : 0,
+          titleMarginBottom : 0,
+          displayColors: false,
+        },
+        elements  : {point: {radius: 0}},
+        scales    : {
           xAxes: [
             {
               display: false,
@@ -101,10 +135,11 @@ class LineChart extends Component {
     });
 
     const self = this;
-    setInterval(function() {
-      self.updateChart(myLineChart);
-    }, this.props.chartSpeed);
-
+    this.setState({
+      newNumber: setInterval(function() {
+        self.updateChart(myLineChart);
+      }, this.props.chartSpeed),
+    });
   }
 
   updateChart(value) {
@@ -112,7 +147,7 @@ class LineChart extends Component {
       return;
     }
     value.data.datasets[0].data.push(Math.round(Math.random() * 100));
-    value.data.datasets[0].data.shift();
+    value.data.datasets[0].data.shift(); // Remove first value
     let changeOne = value.data.datasets[0].data[value.data.datasets[0].data.length
                                                 - 2];
     let changeTwo = value.data.datasets[0].data[value.data.datasets[0].data.length
@@ -135,26 +170,6 @@ class LineChart extends Component {
   }
 
   render() {
-    // let isArrowUp = this.state.percentComparison;
-    // let arrowChange = null;
-    // let lastNumber = this.state.lineChart.data[this.state.lineChart.data.length - 1];
-
-    // function CheckArrow() {
-    //     if(!isArrowUp === "Up") {
-    //         return <IsArrowUp />
-    //     } else {
-    //         return <IsArrowDown />
-    //     }
-    // };
-    // function IsArrowUp(props) {
-    //     //console.log("Up")
-    //     return <p>Up</p>
-    // }
-    // function IsArrowDown(props) {
-    //     //console.log("Down")
-    //     return <p>Down</p>
-    // }
-
     const divStyle = {
       background: this.props.bgColor,
     };

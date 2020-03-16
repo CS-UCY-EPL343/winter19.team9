@@ -1,7 +1,7 @@
 #UIDashboard {
     background-color : #252830;
     color            : #CFD2DA;
-    padding           : 100px 0 50px 0;
+    padding          : 100px 0 50px 0;
 }
 
 #UIDashboard div strong {
@@ -11,59 +11,64 @@
 #UIDashboard {
     background-color : #252830;
     color            : #CFD2DA;
-    padding           : 100px 0 50px 0;
+    padding          : 100px 0 50px 0;
 }
 
 /* Reset Select */
 #UIDashboard .select-chart select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -ms-appearance: none;
-    appearance: none;
-    outline: 0;
-    box-shadow: none;
-    border: 0 !important;
-    background : #2B2D42 none;
+    -webkit-appearance : none;
+    -moz-appearance    : none;
+    -ms-appearance     : none;
+    appearance         : none;
+    outline            : 0;
+    box-shadow         : none;
+    border             : 0 !important;
+    background         : #2B2D42 none;
 }
+
 /* Remove IE arrow */
 #UIDashboard .select-chart select::-ms-expand {
-    display: none;
+    display : none;
 }
+
 /* Custom Select */
 #UIDashboard .select-chart {
-    position: relative;
-    display: flex;
-    width: 20em;
-    height: 3em;
-    line-height: 3;
-    background: #2c3e50;
-    overflow: hidden;
-    border-radius: .25em;
-    margin : 30px 15px 10px 15px;
+    position      : relative;
+    display       : flex;
+    width         : 20em;
+    height        : 3em;
+    line-height   : 3;
+    background    : #2C3E50;
+    overflow      : hidden;
+    border-radius : .25em;
+    margin        : 30px 15px 10px 15px;
 }
+
 #UIDashboard .select-chart select {
-    flex: 1;
-    padding: 0 .5em;
-    color: #fff;
-    cursor: pointer;
+    flex    : 1;
+    padding : 0 .5em;
+    color   : #FFFFFF;
+    cursor  : pointer;
 }
+
 /* Arrow */
 #UIDashboard .select-chart::after {
-    content: '\25BC';
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 0 1em;
-    background: #34495e;
-    cursor: pointer;
-    pointer-events: none;
-    -webkit-transition: .25s all ease;
-    -o-transition: .25s all ease;
-    transition: .25s all ease;
+    content            : '\25BC';
+    position           : absolute;
+    top                : 0;
+    right              : 0;
+    padding            : 0 1em;
+    background         : #34495E;
+    cursor             : pointer;
+    pointer-events     : none;
+    -webkit-transition : .25s all ease;
+    -o-transition      : .25s all ease;
+    transition         : .25s all ease;
 }
+
 /* Transition */
 #UIDashboard .select-chart:hover::after {
-    color: #EF233C;
+    color : #EF233C;
 }
 
 #UIDashboard .pie__chart {
@@ -106,14 +111,16 @@
 }
 
 #UIDashboard .line__chart .line__chart-data span:not(.arrow) {
-    position : absolute;
-    top      : 11px;
-    left     : 55px;
+    /*position : absolute;*/
+    /*top      : 11px;*/
+    /*left     : 55px;*/
+    position : relative;
+    padding  : 0 5px;
 }
 
 #UIDashboard .arrow {
     position : relative;
-    left     : 40px;
+    /*left     : 40px;*/
 }
 
 #UIDashboard .arrow:before {

@@ -82,6 +82,7 @@ class UIDashboard extends Component {
           {label: 'Success', data: [20, 40, 20, 45, 25, 60]},
         ],
       },  // Set to first option of select
+      // Donought chats data
       traffic: {
         id: "traffic",
         new: 80,

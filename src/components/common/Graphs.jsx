@@ -25,7 +25,6 @@ class Graphs extends Component {
     Chart.defaults.scale.gridLines.color = 'rgba(255, 255, 255, 0.02)';
 
     const colors = ['#4BC0C0', '#FF6384', '#FFCD56', '#3fc62e'];
-    // const colors = ['green', '#4BC0C0', '#FF6384', '#FFCD56'];
     const ys = this.props.graphData.ys.map((data, index) => {
       data['fill'] = false;
       data['lineTension'] = .4;
@@ -50,7 +49,10 @@ class Graphs extends Component {
         aspectRatio     : 3,
         defaultFontColor: '#999999',
         defaultFontSize : 10,
-        tooltips        : {borderColor: 'white'},
+        tooltips        : {
+          enabled: true,
+          borderColor: 'white'
+        },
         legend          : {
           display  : true,
           align    : 'center',
