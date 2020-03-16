@@ -393,7 +393,8 @@ app.get('/api/coaches/get', (req, res) => {
 const PORT = process.env.PORT;
 const server = app.listen(PORT, () => {
   console.log('Running on port: ' + PORT);
-  startDatabaseConnection();
+  console.log('\x1b[33m%s\x1b[0m', 'Waiting database connection...');
+  startDatabaseConnection(1);
 });
 
 process.on('SIGTERM', shutDown);
@@ -407,28 +408,20 @@ let connections = [];
 // 'WHERE A.username='+req.username+' AND AN.User_ID=A.User_ID AND
 // C.Coach_ID=AN.Coach_ID'); return announcement; });
 
-function startDatabaseConnection() {
-  let callCount = 1;
-  const repeater = setInterval(function() {
-    if (callCount < 10) {
-      try {
-        db.dbConnect();
-
-        setInterval(() => server.getConnections(
-            (err, connections) => console.log(
-                `${ connections } connections currently open`),
-        ), 1000);
-
-        clearInterval(repeater);
-      } catch (err) {
-        console.log('\x1b[31m%s\x1b[0m', 'Cant connect to database.');
-        callCount += 1;
-      }
-    } else {
-      clearInterval(repeater);
+function startDatabaseConnection(callCount) {
+  try {
+    db.dbConnect();
+    setInterval(() => server.getConnections(
+        (err, connections) => console.log(
+            `${ connections } connections currently open`),
+    ), 1000);
+  } catch (err) {
+    if (callCount >= 10) {
       shutDown();
     }
-  }, 5000);
+    console.log('\x1b[31m%s\x1b[0m', 'Cant connect to database. Retrying...');
+    setTimeout(() => startDatabaseConnection(callCount + 1), 10000);
+  }
 }
 
 server.on('connection', connection => {
