@@ -16,7 +16,8 @@ class EditAccount extends Component {
             Name: '',
             Surname: '',
             password: '',
-            confirmPassword: ''
+            confirmPassword: '',
+            image: ''
         };
     }
 
@@ -65,7 +66,17 @@ class EditAccount extends Component {
             postuserData(this.state).then(() => alert('Success')).catch(err => alert(err));
 
     };
+    onSubmit = (e) => {
+        e.preventDefault();
 
+        if (!(
+            this.state.Name.match('[a-zA-Z ]+') &&
+            this.state.Email.match('[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$') &&
+            this.state.Surname.match('^ *[a-zA-Z0-9]+.'))) {
+            return;
+        }
+        this.Test();
+    };
 
     _handleImageChange(e) {
         e.preventDefault();
@@ -84,10 +95,12 @@ class EditAccount extends Component {
     }
 
     render() {
-        let {imagePreviewUrl} = this.state;
+
+        let imageURL = 'data:image/png;base64,' + new Buffer(this.state.image, 'binary').toString('base64');
+
         let $imagePreview = null;
-        if (imagePreviewUrl) {
-            $imagePreview = (<img src={imagePreviewUrl} alt={"Profile of user"}/>);
+        if (this.state.image !=='' ) {
+            $imagePreview = (<img src={imageURL} alt={"Picture"}/>);
         }
         return (
             <div className="container" id="EditModal">
@@ -99,51 +112,53 @@ class EditAccount extends Component {
                             <label htmlFor="imageUpload"/>
                         </div>
                         <div className="avatar-preview">
-                            <div id="imagePreview"
-                                 style={{'backgroundImage': 'url(' + this.state.url + ')'}}>{$imagePreview}</div>
+                            <div id="imagePreview">{$imagePreview}</div>
                         </div>
                     </div>
 
                 </div>
-                <form className="form-horizontal">
+                <form className="form-horizontal needs-validation" noValidate = "novalidate" role="form" onSubmit = { this.onSubmit }>
                     <h3>Personal info</h3>
                     <div className="form-group">
                         <label className="col-lg-6 control-label">First name:</label>
-                        <input className="form-control" name={"Name"} onChange={this.onValueInput} type="text"
-                               defaultValue={this.state.Name}/>
+                        <input className="form-control first-name-field" name={"Name"} onChange={this.onValueInput} type="text"
+                               defaultValue={this.state.Name} required = "required"
+                               pattern = "[a-zA-Z ]+"/> <span className="message"/>
                     </div>
                     <div className="form-group">
                         <label className="col-lg-6 control-label">Last name:</label>
-                        <input className="form-control" name={"Surname"} onChange={this.onValueInput} type="text"
-                               defaultValue={this.state.Surname}/>
+                        <input className="form-control last-name-field" name={"Surname"} onChange={this.onValueInput} type="text"
+                               defaultValue={this.state.Surname} required = "required"
+                               pattern = "[a-zA-Z ]+"/> <span className="message"/>
                     </div>
 
                     <div className="form-group">
                         <label className="col-lg-3 control-label">Email:</label>
-                        <input className="form-control" name={"Email"} onChange={this.onValueInput} type="text"
-                               defaultValue={this.state.Email}/>
+                        <input className="form-control email-field" name={"Email"} onChange={this.onValueInput} type="text"
+                               defaultValue={this.state.Email}  required = "required"
+                               pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"/> <span className="message"/>
                     </div>
 
                     <div className="form-group">
                         <label className="col-md-3 control-label">Username:</label>
-                        <input className="form-control" name={"username"} onChange={this.onValueInput} type="text"
-                               defaultValue={this.state.username}/>
+                        <input className="form-control username-field" name={"username"} onChange={this.onValueInput} type="text"
+                               defaultValue={this.state.username} pattern = "[a-zA-Z0-9 ]+" required = "required"/> <span className="message"/>
                     </div>
                     <div className="form-group">
                         <label className="col-md-3 control-label">Password:</label>
                         <input className="form-control" name={"password"} onChange={this.onValueInput} type="password"
-                               defaultValue={this.state.password}/>
+                               defaultValue={this.state.password} required = "required"/>
                     </div>
                     <div className="form-group">
                         <label className="col-md-6 control-label">Confirm password:</label>
                         <input className="form-control" name={"confirmPassword"} onChange={this.onValueInput}
                                type="password"
-                               defaultValue={this.state.confirmPassword}/>
+                               defaultValue={this.state.confirmPassword} required = "required"/>
                     </div>
                     <div className="form-group" id="buttons">
                         <label className="col-md-12 control-label" id="savel">
-                            <input type="button" className="btn btn-primary" defaultValue="Save Changes" id="save"
-                                   onClick={this.Test}/>
+                            <input type="submit" className="btn btn-primary" defaultValue="Save Changes" id="save"
+                                   />
                         </label>
                         <label className="col-md-12 control-label" id="resetl">
                             <input onClick={this.refreshPage} type="reset" className="btn btn-default" value="Reset"

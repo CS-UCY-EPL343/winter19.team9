@@ -73,3 +73,43 @@ form.adminViewClient::after {
     padding-right: 50px;
     text-align: center;
 }
+
+.first-name-field:invalid + .message::after {
+    color: red;
+    content: "Please enter your first name";
+}
+.last-name-field:invalid + .message::after {
+    color: red;
+    content: "Please enter your last name";
+}
+.username-field:invalid + .message::after {
+    color: red;
+    content: "Please enter your username";
+}
+.email-field:invalid + .message::after {
+    color: red;
+    content: "Invalid email address";
+}
+:required + .message::before {
+    content: "";
+}
+.text-field:required:valid {
+    outline: green solid 2px;
+}
+.form-control:focus:required:invalid {
+    outline: red solid 2px;
+}
+
+.form-control:focus:required:valid {
+    outline: green solid 2px;
+}
+p{
+    margin-left: 10px;
+    display: inline-block;
+}
+#extra{
+    margin-left: 0;
+}
+.nav-link{
+    width: fit-content;
+}

@@ -15,6 +15,14 @@ export function logIn(data) {
     }).catch(() => Promise.reject('Authentication Failed!'));
 }
 
+
+export function images (file){
+    return axios.post('/api/getProfilePic', { emp_id: 5 })
+        .then(res => {
+            let imageURL = 'data:image/png;base64,' + new Buffer(res.data.profile_pic, 'binary').toString('base64')
+        })
+
+}
 export function userData() {
     return axios.post(`${BASE_URL}/api/user/data`, {
         'x-access-token': localStorage.getItem('x-access-token'),
@@ -106,6 +114,16 @@ export function removeAnnouncement(id) {
 
 export function addAnnouncement(title, message) {
     return axios.post(`${BASE_URL}/api/announcements/public/add`, {
+        'x-access-token': localStorage.getItem('x-access-token'),
+        title: title,
+        message: message,
+    })
+        .then(response => response)
+        .catch(() => Promise.reject('Authentication Failed!'));
+}
+
+export function addPrivateAnnouncement(title, message) {
+    return axios.post(`${BASE_URL}/api/announcements/private/add`, {
         'x-access-token': localStorage.getItem('x-access-token'),
         title: title,
         message: message,

@@ -13,6 +13,7 @@ class AnnouncementModal extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -39,6 +40,7 @@ class AnnouncementModal extends Component {
         }
         this.setState({title: '', message: ''});
     };
+
 
     render() {
         return (

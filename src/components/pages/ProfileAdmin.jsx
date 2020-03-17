@@ -4,7 +4,8 @@ import "../assets/styles/adminProfile.css"
 import {
     getPrivateAnnouncementsAdmin,
     userDetails,
-    updateAnnouncement
+    updateAnnouncement,
+    addPrivateAnnouncement,
 } from "../../repository";
 import AnnouncementModal from "../common/AnnouncementModal";
 import {Button} from "reactstrap";
@@ -13,6 +14,7 @@ import Timetable from "../common/PersonalTrainingCreate";
 
 
 class ProfileAdmin extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -21,12 +23,12 @@ class ProfileAdmin extends Component {
             Surname: '',
             Email: '',
             username: '',
+            searchResults: [],
             announcements: [],
             modal: false,
             modalTitle: '',
             modalMessage: '',
             modalAnnId: '',
-            searchResults: [],
             day: '',
             time: '',
             flag: false,
@@ -34,6 +36,9 @@ class ProfileAdmin extends Component {
         };
         this.toggleAnnouncementsData = this.toggleAnnouncementsData.bind(this);
         this.onAnnouncementSubmit = this.onAnnouncementSubmit.bind(this);
+
+        this.toggleAnnouncementsData2 = this.toggleAnnouncementsData2.bind(this);
+        this.onAnnouncementSubmit2 = this.onAnnouncementSubmit2.bind(this);
         this.handleDayTimeChange = this.handleDayTimeChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.toggleAnnouncements = this.toggleAnnouncements.bind(this);
@@ -51,8 +56,6 @@ class ProfileAdmin extends Component {
                 this.setState({searchResults: response})
             })
     };
-
-
 
     onAnnouncementSubmit = (Title, Message, Ann_ID) => {
         console.log(Title + ' ' + Message);
@@ -88,6 +91,32 @@ class ProfileAdmin extends Component {
             this.toggle();
         }).catch(err => alert(err));
     };
+
+
+    onAnnouncementSubmit2 = (Title, Message, Ann_ID) => {
+
+        if (Title === '' || Message === '') {
+            alert('Please give correct data.');
+            return;
+        }
+
+        this.toggle();
+
+        addPrivateAnnouncement(Title, Message).then(response => {
+            let prevAnn = this.state.announcements.slice(0);
+            prevAnn.push(
+                {
+                    ANNOUNCEMENT_ID: response.data.ANNOUNCEMENT_ID,
+                    Title: Title,
+                    Message: Message,
+                });
+            // console.log(announcements);
+            this.setState({announcements: prevAnn});
+            console.log(prevAnn);
+        }).catch(err => alert(err));
+    };
+
+
 
     toggle = () => {
         if (this.state.level <= 1) {
@@ -129,13 +158,18 @@ class ProfileAdmin extends Component {
         this.toggleAnnouncements();
     };
 
+    toggleAnnouncementsData2 = (e) => {
+
+        this.toggleAnnouncements();
+    };
+
 
     render() {
         let { image } = this.state;
         let imageURL = "https://www.w3schools.com/howto/img_avatar.png";
         let $imagePreview = <img src={imageURL} alt={"Picture"}/>;
-        if(image !== '') {
-            imageURL = 'data:image/png;base64,' + new Buffer(image, 'binary').toString('base64')
+        if(this.state.image !== '') {
+            imageURL = 'data:image/png;base64,' + new Buffer(this.state.image, 'binary').toString('base64')
             $imagePreview = (<img src={imageURL} alt={"Picture"}/>);
         }
 
@@ -179,9 +213,8 @@ class ProfileAdmin extends Component {
 
                         <div className="col-md-4">
                             <h4>Client Details:</h4>
-                            {/*<img src={imageURL} alt="" id="profPic"/>*/}
                             <div className="avatar-preview d-flex justify-content-center">
-                                <div id="imagePreview">{$imagePreview}</div>
+                                {/*<div id="imagePreview">{$imagePreview}</div>*/}
                             </div>
                             <form id="clientDetails">
                                 <div className="form-group">
@@ -239,23 +272,13 @@ class ProfileAdmin extends Component {
                             />
 
                         </div>
-                        <div>
-                            <div className="container">
-                                <div className="row">
-                                    <div id="timeTableHeading">Create Personal Training Schedule</div>
-                                    <div className="col-md-8">
-                                        <Timetable day={this.state.day} time={this.state.time} flag={this.state.flag}/>
-                                    </div>
-                                    <div className="col-md-4">
-                                        <Box toogle={this.handleDayTimeChange}/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
-        );
+
+        )
+
     }
 }
 

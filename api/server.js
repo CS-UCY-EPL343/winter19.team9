@@ -185,13 +185,32 @@ app.post('/api/announcements/private/update', middleware, (req, res) => {
         })
     }).catch(() => res.status(404).json('Not Found'));
 });
-
+app.post('/api/getProfilePic', middleware,(req, res) => {
+    db.profileimage(req.body.emp_id)
+        .then(profile => {
+            res.json({ success: true, data: profile })
+        })
+        .catch(err => {
+            console.log('in error :: /api/getProfilePic')
+        })
+})
 
 app.post('/api/announcements/public/add', middleware, (req, res) => {
     if (req.decoded.level === 'user') {
         return res.status(401).json({message: 'Authentication failed'});
     }
     db.addAnnouncement(req.body.title, req.body.message, req.decoded.level,
+        req.decoded.username).then(response => res.status(200).json({
+        message: 'Announcement inserted successfully',
+        ANNOUNCEMENT_ID: response.id,
+    })).catch(() => res.status(404).json('Not Found'));
+});
+
+app.post('/api/announcements/private/add', middleware, (req, res) => {
+    if (req.decoded.level === 'user') {
+        return res.status(401).json({message: 'Authentication failed'});
+    }
+    db.addPrivateAnnouncement(req.body.title, req.body.message, req.decoded.level,
         req.decoded.username).then(response => res.status(200).json({
         message: 'Announcement inserted successfully',
         ANNOUNCEMENT_ID: response.id,
