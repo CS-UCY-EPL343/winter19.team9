@@ -89,6 +89,7 @@ class EditAccount extends Component {
                 file: file,
                 imagePreviewUrl: reader.result
             });
+
         };
 
         reader.readAsDataURL(file)
@@ -102,13 +103,19 @@ class EditAccount extends Component {
         if (this.state.image !=='' ) {
             $imagePreview = (<img src={imageURL} alt={"Picture"}/>);
         }
+        if (this.state.imagePreviewUrl) {
+            $imagePreview = (<img src={this.state.imagePreviewUrl} alt={"Picture"}/>);
+        }
+
         return (
             <div className="container" id="EditModal">
                 <div className="text-center">
                     <div className="avatar-upload">
                         <div className="avatar-edit">
                             <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg"
-                                   onChange={(e) => this._handleImageChange(e)}/>
+                                   onChange={(e) => this._handleImageChange(e)}
+
+                                    />
                             <label htmlFor="imageUpload"/>
                         </div>
                         <div className="avatar-preview">

@@ -72,7 +72,7 @@ function dbSignUp(data) {
 
 function getUserData(user) {
     return new Promise((resolve, reject) => {
-        const sql = "SELECT * FROM ACCOUNT,USERS,PIC WHERE username = ?  AND ACCOUNT.User_ID = USERS.User_ID";
+        const sql = "SELECT * FROM ACCOUNT,USERS,PIC WHERE username = ?  AND ACCOUNT.User_ID = USERS.User_ID  AND PIC.User_ID = USERS.User_ID";
         connection.query(sql, [user], function (err, rows) {
             if (err) return reject(err);
             return resolve(rows[0]);
@@ -82,9 +82,13 @@ function getUserData(user) {
 
 function postUserData(data) {
     return new Promise((resolve, reject) => {
-        let imageData = fs.readFileSync(data.imagePreviewUrl);
-        const sql = "UPDATE USERS, ACCOUNT,PIC SET  Name = ? , Surname = ? , Email = ? , password = ?, image = ? WHERE ACCOUNT.username = ? AND ACCOUNT.User_ID = USERS.User_ID";
-        connection.query(sql, [data.Name, data.Surname, data.Email, data.password, data.username, imageData], function (err) {
+        //let imageData = fs.readFileSync(data.imagePreviewUrl);
+        //console.log(imageData);
+        // console.log(data.Name)
+        //data.imagePreviewUrl]
+        let imageData = 'x';
+        const sql = "UPDATE USERS, ACCOUNT, PIC SET  Name = ? , Surname = ? , Email = ? , password = ?, image = ? WHERE ACCOUNT.username = ? AND ACCOUNT.User_ID = USERS.User_ID AND PIC.User_ID = USERS.User_ID";
+        connection.query(sql, [data.Name, data.Surname, data.Email, data.password, data.username, data.imagePreviewUrl], function (err) {
             if (err) {
                 console.log(err);
                 return reject(err)

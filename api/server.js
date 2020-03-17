@@ -30,8 +30,8 @@ transporter.verify((error, success) => {
     }
 });
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json({limit: '10mb', extended: true}));
+app.use(bodyParser.urlencoded({limit: '10mb',extended: true}));
 app.use(cors());
 
 app.post('/api/email', (req, res) => {
@@ -229,6 +229,7 @@ app.post('/api/announcements/remove', middleware, (req, res) => {
 
 /*************************************************************************/
 app.post('/api/user/post/data', middleware, (req, res) => {
+
     db.postUserData(req.body.data)
         .then(response => res.status(200).json({message: response}))
         .catch(err => res.status(409).json(err));
