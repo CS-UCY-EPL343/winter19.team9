@@ -226,16 +226,16 @@ function enrollUser(CLASS_ID, User_ID) {
     });
 }
 
-//for profile pic
-function getProfilePic(name) {
-    return new Promise((resolve, reject) => {
-        const sql = "SELECT * FROM ACCOUNT a, USERS u WHERE u.name = ? and u.User_ID = a.User_ID";
-        connection.query(sql, [name], function (err, rows) {
-            if (err) reject(err);
-            resolve(rows);
-        });
-    });
-}
+// //for profile pic
+// function getProfilePic(name) {
+//     return new Promise((resolve, reject) => {
+//         const sql = "SELECT * FROM ACCOUNT a, USERS u WHERE u.name = ? and u.User_ID = a.User_ID";
+//         connection.query(sql, [name], function (err, rows) {
+//             if (err) reject(err);
+//             resolve(rows);
+//         });
+//     });
+// }
 
 //mine
 function getUserInfo(name) {
