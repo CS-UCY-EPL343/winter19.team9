@@ -152,6 +152,17 @@ export function deleteUserData() {
 
 }
 
+//for image from database
+export function UserPic(name) {
+    return axios
+        .post(`${BASE_URL}/api/user/UserPic`, {
+            'x-access-token': localStorage.getItem('x-access-token'),
+            name: name
+        })
+        .then(response => response.data)
+        .catch(() => Promise.reject('Authentication Failed!'))
+}
+
 
 //mine
 export function userDetails(name) {

@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 // import Flippy, { FrontSide, BackSide } from 'react-flippy';
 import '../assets/styles/loginStyle.css'
 // import {Link} from 'react-router-dom';
+import Recaptcha from 'react-recaptcha';
+
 import {logIn, signUp} from '../../repository';
 import history from "../../history";
 
@@ -22,11 +24,20 @@ class LoginModal extends Component {
             age:'',
             bDate:'',
             toggle: true,
-            value: true
+            value: true,
+            isVerified: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.onRadioChange = this.onRadioChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.recaptchaLoaded = this.recaptchaLoaded.bind(this);
+        this.verifyCallback = this.verifyCallback.bind(this);
+    }
+
+    verifyCallback = (response) => {
+        if(response){
+            this.setState({isVerified : true})
+        }
     }
     handleChange = (e) => {
         if(e.target.name === 'bDate'){
@@ -62,25 +73,34 @@ class LoginModal extends Component {
         if(this.state.password !== this.state.repeatedPassword){
             alert("Password dont match");
         }else {
-            const dataSign = {
-                username: this.state.username,
-                password: this.state.password,
-                fname: this.state.fname,
-                lname: this.state.lname,
-                email: this.state.email,
-                age: this.state.age,
-                gender: this.state.gender,
-                level: this.state.level,
-                bDate: this.state.bDate,
-            };
-            signUp(dataSign)
-                .then(() => {
-                    alert('Success');
-                    history.push('/')
-                })
-                .catch(err => alert(err));
+            if (this.state.isVerified) {
+
+                const dataSign = {
+                    username: this.state.username,
+                    password: this.state.password,
+                    fname: this.state.fname,
+                    lname: this.state.lname,
+                    email: this.state.email,
+                    age: this.state.age,
+                    gender: this.state.gender,
+                    level: this.state.level,
+                    bDate: this.state.bDate,
+                };
+                signUp(dataSign)
+                    .then(() => {
+                        alert('Success');
+                        history.push('/')
+                    })
+                    .catch(err => alert(err));
+            }else{
+                alert("Please proceed with the recaptcha to verify that you are a human!");
+            }
         }
     };
+
+   recaptchaLoaded() {
+       console.log('captcha has successfully loaded');
+   }
     calcDate=(dDate)=>{
         let thenD = dDate.target.value;
         let str = thenD.split("-");
@@ -240,6 +260,12 @@ class LoginModal extends Component {
                                 <fieldset className={"form__group"}>
                                     <input className={"form__button"} type={"submit"} value={"Sign up"} onClick={this.onSignUp}/>
                                 </fieldset>
+                                <Recaptcha
+                                    sitekey="6Lf0od8UAAAAAFoog9iFIpVd8rcPxBwHpUKpnCua"
+                                    render="explicit"
+                                    onloadCallback={this.recaptchaLoaded}
+                                    verifyCallback={this.verifyCallback}
+                                />
                                 <small>
                                     <span className={"subtitle"}> Are you already a member?</span>
                                     <label htmlFor={"flipper__checkbox"}

@@ -29,7 +29,8 @@ class ProfileAdmin extends Component {
             searchResults: [],
             day: '',
             time: '',
-            flag: false
+            flag: false,
+            image: ''
         };
         this.toggleAnnouncementsData = this.toggleAnnouncementsData.bind(this);
         this.onAnnouncementSubmit = this.onAnnouncementSubmit.bind(this);
@@ -50,6 +51,8 @@ class ProfileAdmin extends Component {
                 this.setState({searchResults: response})
             })
     };
+
+
 
     onAnnouncementSubmit = (Title, Message, Ann_ID) => {
         console.log(Title + ' ' + Message);
@@ -103,7 +106,7 @@ class ProfileAdmin extends Component {
         const user = this.state.searchResults.find(usr => usr.username === username);
         if (!user) return null;
 
-        this.setState({Name: user.Name, Surname: user.Surname, Email: user.Email, username});
+        this.setState({Name: user.Name, Surname: user.Surname, Email: user.Email, username, image : user.image});
 
         getPrivateAnnouncementsAdmin(username).then(response => {
             this.setState(
@@ -128,6 +131,14 @@ class ProfileAdmin extends Component {
 
 
     render() {
+        let { image } = this.state;
+        let imageURL = "https://www.w3schools.com/howto/img_avatar.png";
+        let $imagePreview = <img src={imageURL} alt={"Picture"}/>;
+        if(image !== '') {
+            imageURL = 'data:image/png;base64,' + new Buffer(image, 'binary').toString('base64')
+            $imagePreview = (<img src={imageURL} alt={"Picture"}/>);
+        }
+
         return (
             <div id='profile' className="">
                 {(this.props.userLevel === 'admin') ? '' : <Redirect to="/"/>}
@@ -168,7 +179,10 @@ class ProfileAdmin extends Component {
 
                         <div className="col-md-4">
                             <h4>Client Details:</h4>
-                            <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" id="profPic"/>
+                            {/*<img src={imageURL} alt="" id="profPic"/>*/}
+                            <div className="avatar-preview d-flex justify-content-center">
+                                <div id="imagePreview">{$imagePreview}</div>
+                            </div>
                             <form id="clientDetails">
                                 <div className="form-group">
                                     <label htmlFor="nameInput">Name</label>
