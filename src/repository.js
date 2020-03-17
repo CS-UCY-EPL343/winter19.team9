@@ -31,6 +31,12 @@ export function userData() {
         .catch(() => Promise.reject('Authentication Failed!'));
 }
 
+export function getSevenDaysRemaining() {
+    return axios.post(`${BASE_URL}/api/user/getSevenDaysRemaining`, {'x-access-token': localStorage.getItem('x-access-token')})
+        .then(response => response)
+        .catch(() => Promise.reject('Error when get private Announcements from database!!'));
+}
+
 export function getPrivateAnnouncements() {
     return axios.post(`${BASE_URL}/api/announcements/private`, {'x-access-token': localStorage.getItem('x-access-token')})
         .then(response => response)
@@ -142,6 +148,32 @@ export function updateAnnouncement(announcement_id, title, message) {
         .then(response => response.data)
         .catch(() => Promise.reject('Authentication Failed!'));
 }
+
+
+export function updateAboutUdVisit(){
+    return axios.post(`${BASE_URL}/api/AboutUs/visit/count`, {'x-access-token': localStorage.getItem('x-access-token')})
+        .then(response => response.data)
+        .catch(() => Promise.reject('HomePage Count Failed!!!'));
+}
+
+export function updateClassesVisit(){
+    return axios.post(`${BASE_URL}/api/Classes/visit/count`, {'x-access-token': localStorage.getItem('x-access-token')})
+        .then(response => response.data)
+        .catch(() => Promise.reject('HomePage Count Failed!!!'));
+}
+
+export function updateProfileVisit(){
+    return axios.post(`${BASE_URL}/api/profile/visit/count`, {'x-access-token': localStorage.getItem('x-access-token')})
+        .then(response => response.data)
+        .catch(() => Promise.reject('Profile Count Failed!!!'));
+}
+
+export function updateHomePageVisit(){
+    return axios.post(`${BASE_URL}/api/homepage/visit/count`, {'x-access-token': localStorage.getItem('x-access-token')})
+        .then(response => response.data)
+        .catch(() => Promise.reject('HomePage Count Failed!!!'));
+}
+
 
 export function postuserData(data) {
     return axios

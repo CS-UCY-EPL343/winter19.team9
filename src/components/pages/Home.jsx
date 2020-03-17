@@ -4,8 +4,14 @@ import CarouselHp          from '../common/CarouselHP';
 import Services            from '../common/Services';
 import logo_img            from '../assets/img/logos/fitnessFactoryLogo.png';
 import AnnouncementsPublic from '../common/AnnouncementsPublic';
+import {updateHomePageVisit} from "../../repository";
 
 class Home extends Component {
+    componentDidMount() {
+        updateHomePageVisit().then();
+    }
+
+
     render() {
         return (
             <div>

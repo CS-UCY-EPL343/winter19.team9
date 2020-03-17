@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Popup from "reactjs-popup";
 import ToggleModal from './ToggleModal';
 import PaymentModal from './PaymentModal';
 import {Button} from 'reactstrap';
@@ -6,7 +7,12 @@ import AnnouncementsPrivate
     from './AnnouncementsPrivate';
 import EditAccount from './EditAccount';
 import MessagesModal from './MessagesModal';
-import {getTotalMessages, getTotalPrivateAnnouncements} from '../../repository';
+import {
+    getSevenDaysRemaining,
+    getTotalMessages,
+    getTotalPrivateAnnouncements,
+    updateProfileVisit
+} from '../../repository';
 
 class SettingsProfile extends Component {
     constructor(props, context) {
@@ -18,10 +24,17 @@ class SettingsProfile extends Component {
             modalEditAccount: false,
             TotalMessages: 0,
             TotalAnnouncement: 0,
+            sevenDaysLeft	:0,
+            open    :false,
         };
         this.togglePayment = this.togglePayment.bind(this);
         this.toggleAnnouncements = this.toggleAnnouncements.bind(this);
         this.toggleTotalMessages = this.toggleTotalMessages.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
+    };
+
+    toggleModal = () =>  {
+        this.setState({open: !this.state.open});
     };
 
     togglePayment = () => {
@@ -41,6 +54,10 @@ class SettingsProfile extends Component {
     };
 
     componentDidMount() {
+
+
+        updateProfileVisit().then();
+
         getTotalPrivateAnnouncements().then(response => {
             console.log(response);
             this.setState(
@@ -51,10 +68,31 @@ class SettingsProfile extends Component {
             this.setState(
                 {TotalMessages: response.TotalMessages});
         });
+
+        getSevenDaysRemaining().then(response => {
+                this.setState(
+                    {open	 : (response.sevenDaysLeft === 1)});
+                console.log(this.state.open);
+        }
+
+        );
     }
 
     render() {
         return (
+          /**  <>
+                <Popup
+                    open = { this.state.open }
+                    closeOnDocumentClick
+                    onClose = { this.toggleModal }
+                    modal
+                >
+                    <div style={{backgroundColor: 'red'}}>
+                        Your active subscription expires in less than 7 days.
+                        <br />
+                        If you would like to renew your subscription please click here.
+                    </div>
+                </Popup>**/
             <div className="col-lg-4 col-md-12 col-sm-12">
                 <div className="menu-box block" id="leftBlock">
                     <div className="titular">Settings</div>
@@ -137,10 +175,10 @@ class SettingsProfile extends Component {
 
                     </ul>
                 </div>
-
-
             </div>
+          /**  </>**/
         );
+
     }
 }
 

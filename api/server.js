@@ -122,6 +122,58 @@ app.post('/api/user/data', middleware, (req, res) => {
     }).catch(err => res.status(401).json(err));
 });
 
+
+app.post('/api/AboutUs/visit/count',middleware,(req,res) => {
+    db.updateAboutUdVisit()
+        .then(response => {
+            console.log(response);
+            res.status(200).json({
+                message: 'Update About Us visit',
+            })
+        }).catch(() => res.status(404).json('Not Found'));
+});
+
+app.post('/api/Classes/visit/count',middleware,(req,res) => {
+    db.updateClassesVisit()
+        .then(response => {
+            console.log(response);
+            res.status(200).json({
+                message: 'Update Classes Visit',
+            })
+        }).catch(() => res.status(404).json('Not Found'));
+});
+
+app.post('/api/homepage/visit/count',middleware,(req,res) => {
+    db.updateHomePageVisit()
+        .then(response => {
+            console.log(response);
+            res.status(200).json({
+                message: 'Update Home Page Visit',
+            })
+        }).catch(() => res.status(404).json('Not Found'));
+});
+
+app.post('/api/profile/visit/count',middleware,(req,res) => {
+    db.updateProfileVisit()
+        .then(response => {
+        console.log(response);
+        res.status(200).json({
+            message: 'Update Profile Visit',
+        })
+    }).catch(() => res.status(404).json('Not Found'));
+});
+
+app.post('/api/user/getSevenDaysRemaining', middleware, (req,res)=> {
+    db.get7DaysRemaining(req.decoded.username)
+        .then(data => {
+            if (data) {
+                return res.status(200).json({sevenDaysLeft	: data});
+            } else {
+                return res.status(409).json('No data found.');
+            }
+        });
+});
+
 /****************************************************
  *                                                   *
  * Getting the private announcements from the database   *
@@ -414,6 +466,8 @@ app.get('/api/coaches/get', (req, res) => {
         }
     });
 });
+
+
 
 const PORT = process.env.PORT;
 const server = app.listen(PORT, () => {
