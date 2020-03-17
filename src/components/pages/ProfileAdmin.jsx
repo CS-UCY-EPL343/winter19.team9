@@ -165,12 +165,13 @@ class ProfileAdmin extends Component {
 
 
     render() {
-        let { image } = this.state;
-       let imageURL = "https://www.w3schools.com/howto/img_avatar.png";
+        let {image} =  this.state;
+        let imageURL = "https://www.w3schools.com/howto/img_avatar.png";
         let $imagePreview = <img src={imageURL} alt={"Picture"}/>;
-        if(this.state.image !== '') {
-            imageURL = 'data:image/png;base64,' + new Buffer(this.state.image, 'binary').toString('base64');
+        if(image !== '') {
+             imageURL =  'data:image/png;base64,' +  new Buffer.from(image, 'binary').toString('base64');
             $imagePreview = (<img src={imageURL} alt={"Picture"}/>);
+            // console.log(image)
         }
 
         return (

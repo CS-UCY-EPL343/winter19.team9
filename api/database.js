@@ -262,7 +262,7 @@ function updateAnnouncement(announcement_id, title, message, level, username) {
 //mine
 function getUserInfo(name) {
     return new Promise((resolve, reject) => {
-        const sql = "SELECT * FROM ACCOUNT a, USERS u WHERE u.name = ? and u.User_ID = a.User_ID";
+        const sql = "SELECT * FROM ACCOUNT a, USERS u, PIC p WHERE u.name = ? and u.User_ID = a.User_ID and p.User_ID = u.User_ID";
         connection.query(sql, [name], function (err, rows) {
             if (err) reject(err);
             resolve(rows);
