@@ -165,13 +165,13 @@ class ProfileAdmin extends Component {
 
 
     render() {
-        let { image } = this.state;
-        let imageURL = "https://www.w3schools.com/howto/img_avatar.png";
-        let $imagePreview = <img src={imageURL} alt={"Picture"}/>;
-        if(this.state.image !== '') {
-            imageURL = 'data:image/png;base64,' + new Buffer(this.state.image, 'binary').toString('base64')
-            $imagePreview = (<img src={imageURL} alt={"Picture"}/>);
-        }
+        // let { image } = this.state;
+        // let imageURL = "https://www.w3schools.com/howto/img_avatar.png";
+        // let $imagePreview = <img src={imageURL} alt={"Picture"}/>;
+        // if(this.state.image !== '') {
+        //     imageURL = 'data:image/png;base64,' + new Buffer(this.state.image, 'binary').toString('base64')
+        //     $imagePreview = (<img src={imageURL} alt={"Picture"}/>);
+        // }
 
         return (
             <div id='profile' className="">
@@ -252,7 +252,10 @@ class ProfileAdmin extends Component {
                                     }).map((ann, index) => {
                                     return <Button className="nav-link menu-box-tab menu-text"
                                                    onClick={this.toggleAnnouncementsData} id={index}
-                                                   key={index}><i className="scnd-font-color fa fa-tasks"/> {ann.Title}
+                                                   key={index}><i className="scnd-font-color fa fa-tasks"/>
+                                                   {ann.Title}{<p> (</p>}{ann.TIMESTAMP[0]}
+                                                   {ann.TIMESTAMP[1]}{ann.TIMESTAMP[2]}{ann.TIMESTAMP[3]}{ann.TIMESTAMP[4]}{ann.TIMESTAMP[5]}
+                                                   {ann.TIMESTAMP[6]}{ann.TIMESTAMP[7]} {ann.TIMESTAMP[8] }{ann.TIMESTAMP[9] }{<p id="extra">)</p>}
                                     </Button>
                                 })}
 
