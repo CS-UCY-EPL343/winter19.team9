@@ -5,6 +5,9 @@ import {logOut, userData} from "../../repository";
 import {postuserData} from "../../repository";
 import {deleteUserData} from "../../repository";
 
+import * as blobUtil from "blob-util";
+
+
 class EditAccount extends Component {
     constructor(props) {
         super(props);
@@ -17,7 +20,8 @@ class EditAccount extends Component {
             Surname: '',
             password: '',
             confirmPassword: '',
-            image: ''
+            image: '',
+            bloob: ''
         };
     }
 
@@ -92,7 +96,14 @@ class EditAccount extends Component {
 
         };
 
-        reader.readAsDataURL(file)
+        reader.readAsDataURL(file);
+        // console.log(convertHex.bytesToHex(bytes))
+        let blob = blobUtil.imgSrcToBlob(file.src);
+        // console.log(blob);
+        // this.setState({image:blob});
+        // let imageData = fs.readFileSync(file.path);
+
+        this.setState({image: blob})
     }
 
     render() {
