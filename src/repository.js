@@ -118,6 +118,14 @@ export function removeAnnouncement(id) {
         .catch(() => Promise.reject('Authentication Failed!'));
 }
 
+export function deleteAnnouncement(id) {
+    return axios.post(`${BASE_URL}/api/announcements/private/delete`, {
+        'x-access-token': localStorage.getItem('x-access-token'), announcement_id: id,
+    })
+        .then(response => response.data)
+        .catch(() => Promise.reject('Authentication Failed!'));
+}
+
 export function addAnnouncement(title, message) {
     return axios.post(`${BASE_URL}/api/announcements/public/add`, {
         'x-access-token': localStorage.getItem('x-access-token'),

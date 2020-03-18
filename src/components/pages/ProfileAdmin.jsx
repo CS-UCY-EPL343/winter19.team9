@@ -4,8 +4,9 @@ import "../assets/styles/adminProfile.css"
 import {
     getPrivateAnnouncementsAdmin,
     userDetails,
-    updateAnnouncement,
-    addPrivateAnnouncement,
+    updateAnnouncement, removeAnnouncement,
+    deleteAnnouncement,
+    addPrivateAnnouncement
 } from "../../repository";
 import AnnouncementModal from "../common/AnnouncementModal";
 import {Button} from "reactstrap";
@@ -44,6 +45,7 @@ class ProfileAdmin extends Component {
         this.toggleAnnouncements = this.toggleAnnouncements.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleChange2 = this.handleChange2.bind(this);
+        this.onAnnouncementDelete = this.onAnnouncementDelete.bind(this);
 
     }
 
@@ -58,8 +60,8 @@ class ProfileAdmin extends Component {
     };
 
     onAnnouncementSubmit = (Title, Message, Ann_ID) => {
-        console.log(Title + ' ' + Message);
-        console.log(this.state.announcements[this.state.modalAnnId].Title + ' ' + this.state.announcements[this.state.modalAnnId].Message);
+        // console.log(Title + ' ' + Message);
+        // console.log(this.state.announcements[this.state.modalAnnId].Title + ' ' + this.state.announcements[this.state.modalAnnId].Message);
         if (Title === this.state.announcements[this.state.modalAnnId].Title && Message === this.state.announcements[this.state.modalAnnId].Message) {
             alert('Please give new data.');
             return;
@@ -90,6 +92,21 @@ class ProfileAdmin extends Component {
             });
             this.toggle();
         }).catch(err => alert(err));
+    };
+
+    onAnnouncementDelete = (ANNOUNCEMENT_ID) => {
+        if (this.state.level <= 1) {
+            return;
+        }
+
+        deleteAnnouncement(this.state.announcements[ANNOUNCEMENT_ID].ANNOUNCEMENT_ID).then(() => {
+            this.setState({
+                announcements: this.state.announcements.filter(
+                    ann => ann.ANNOUNCEMENT_ID
+                        !== this.state.announcements[ANNOUNCEMENT_ID].ANNOUNCEMENT_ID),
+            });
+        }).catch(err => alert(err));
+
     };
 
 
@@ -267,12 +284,14 @@ class ProfileAdmin extends Component {
                             </Button>
 
                             <AnnouncementModal onSubmit={this.onAnnouncementSubmit}
+                                               DeleteAnn = {this.onAnnouncementDelete}
                                                toggle={this.toggleAnnouncements}
                                                modal={this.state.modalAnnouncements}
                                                announcements={this.state.announcements}
                                                title={this.state.modalTitle}
                                                message={this.state.modalMessage}
                                                announcement_id={this.state.modalAnnId}
+                                               isPrivate={true}
                             />
 
                         </div>

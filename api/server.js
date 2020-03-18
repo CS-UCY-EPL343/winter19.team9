@@ -279,6 +279,17 @@ app.post('/api/announcements/remove', middleware, (req, res) => {
         .catch(() => res.status(404).json('Not Found'));
 });
 
+app.post('/api/announcements/private/delete', middleware, (req, res) => {
+    if (req.decoded.level === 'user') {
+        return res.status(401).json({message: 'Authentication failed'});
+    }
+    console.log(req.body.announcement_id);
+    db.deleteAnnouncement(req.body.announcement_id)
+        .then(
+            res.status(204).json({message: 'Announcement deleted successfully'}))
+        .catch(() => res.status(404).json('Not Found'));
+});
+
 /*************************************************************************/
 app.post('/api/user/post/data', middleware, (req, res) => {
 

@@ -13,7 +13,7 @@ class AnnouncementModal extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-
+        this.DeleteAnn = this.DeleteAnn.bind(this);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -41,6 +41,28 @@ class AnnouncementModal extends Component {
         this.setState({title: '', message: ''});
     };
 
+    // DeleteAnn = (ANNOUNCEMENT_ID) => {
+    //     if (this.state.level <= 1) {
+    //         return;
+    //     }
+    //
+    //     removeAnnouncement(ANNOUNCEMENT_ID).then(() => {
+    //         this.setState({
+    //             announcements: this.state.announcements.filter(
+    //                 ann => ann.ANNOUNCEMENT_ID
+    //                     !== ANNOUNCEMENT_ID),
+    //         });
+    //     }).catch(err => alert(err));
+    //
+    // };
+
+    DeleteAnn = (e) => {
+        e.preventDefault();
+        if (this.props.level !== -1) {
+            this.props.DeleteAnn(this.props.announcement_id);
+            this.props.toggle();
+        }
+    };
 
     render() {
         return (
@@ -88,6 +110,7 @@ class AnnouncementModal extends Component {
                     <Button onClick={this.props.toggle}>{this.props.btnCancel
                     || 'Cancel'}</Button>
                     <Button onClick={this.onSubmit}>{'Submit'}</Button>
+                    {this.props.isPrivate && <Button onClick={this.DeleteAnn}>{'Delete'}</Button>}
                 </ModalFooter>
             </Modal>
         );

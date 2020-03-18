@@ -155,6 +155,18 @@ function removeAnnouncement(id) {
     });
 }
 
+function deleteAnnouncement(id) {
+    return new Promise((resolve, reject) => {
+        const sql = 'DELETE FROM `ANNOUNCEMENT` WHERE `ANNOUNCEMENT_ID` = ?';
+        connection.query(sql, [id], function (err) {
+            if (err) {
+                return reject(err);
+            }
+            resolve();
+        });
+    });
+}
+
 function addAnnouncement(title, message, level, username) {
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM `ACCOUNT` WHERE `username`= ?';
@@ -471,6 +483,7 @@ module.exports = {
     getCoaches,
     createNewMessage,
     updateAnnouncement,
+    deleteAnnouncement,
     updateHomePageVisit,
     updateProfileVisit,
     updateClassesVisit,
