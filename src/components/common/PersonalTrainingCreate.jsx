@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import "../assets/styles/PersonalTrainingTimetable.css"
 import {
-    insertPT, postuserData
+    insertPT
 } from "../../repository";
 class PersonalTrainingCreate extends Component {
     constructor(props) {
@@ -26,7 +26,7 @@ class PersonalTrainingCreate extends Component {
             let ret = this.props.trainingSchedule.slice(0);
             let refID;
             this.setState({Coach_ID: this.props.coachID, User_ID: this.props.userID});
-            const items = ret.map((item, key) => {
+            ret.map((item) => {
                     if (item.Time < 10) {
                         this.setState({refID: item.Day + ".0" + item.Time});
                         refID = item.Day + ".0" + item.Time;
@@ -44,6 +44,8 @@ class PersonalTrainingCreate extends Component {
                             // console.log(" refIDs \n" + x);
                         });
                     }
+
+                    return item;
                 }
             );
 

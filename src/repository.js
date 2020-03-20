@@ -15,11 +15,13 @@ export function logIn(data) {
     }).catch(() => Promise.reject('Authentication Failed!'));
 }
 
-
+// noinspection JSUnusedLocalSymbols,JSUnusedGlobalSymbols
 export function images (file){
     return axios.post('/api/getProfilePic', { emp_id: 5 })
         .then(res => {
-            let imageURL = 'data:image/png;base64,' + new Buffer(res.data.profile_pic, 'binary').toString('base64')
+        // noinspection JSUnusedLocalSymbols,JSUnresolvedVariable
+        let imageURL = 'data:image/png;base64,' + new Buffer(res.data.profile_pic, 'binary').toString('base64');
+        console.log(imageURL);
         })
 
 }
@@ -255,6 +257,7 @@ export function getAllCoaches() {
 }
 
 //for image from database
+// noinspection JSUnusedGlobalSymbols
 export function UserPic(name) {
     return axios
         .post(`${BASE_URL}/api/user/UserPic`, {
@@ -306,6 +309,7 @@ export function isAuthenticated() {
     );
 }
 
+// noinspection JSUnusedGlobalSymbols
 export function hasPermissionFor(user) {
     if (!localStorage.getItem('x-access-token') ||
         !localStorage.getItem('x-access-token-expiration') > Date.now()) {

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import '../assets/styles/BookDropdown.css'
 // import {getClassDay, getPersonalTraining} from "../../repository";
-import {getAllCoaches} from "../../repository";
-import {useEffect} from "react";
+// import {getAllCoaches} from "../../repository";
+// import {useEffect} from "react";
 
 
 class SelectClassRegistration extends Component {
@@ -29,7 +29,7 @@ class SelectClassRegistration extends Component {
 
     };
 
-    onSubmit = (e) => {
+    onSubmit = () => {
         // console.log(this.state.day);
         this.setState({flag: true},
             () => {
@@ -38,7 +38,7 @@ class SelectClassRegistration extends Component {
             });
     };
 
-    onSubmit2 = (e) => {
+    onSubmit2 = () => {
         // console.log(this.state.day);
         this.setState({flag: false},
             () => {

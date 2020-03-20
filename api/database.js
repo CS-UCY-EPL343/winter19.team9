@@ -60,7 +60,7 @@ function dbLogIn(username, password) {
 function dbSignUp(data) {
   return new Promise((resolve, reject) => {
     let lvl = 'User';
-    const ins = 'INSERT INTO ACCOUNT(username,password,level,User_ID) values(?,?,?,?)';
+    const ins = 'INSERT INTO ACCOUNT("username","password","level","User_ID") values(?,?,?,?)';
     const insert = 'INSERT INTO USERS(Name, Surname, Bdate, Gender, Email, Medical_History, Age, Membership_ID) values(?,?,?,?,?,?,?,?)';
 
     connection.query(insert, [
@@ -107,38 +107,42 @@ function getUserData(user) {
   });
 }
 
-
-
-
 function base64ToHex(str) {
-
-    let atob = require('atob');
-    const raw = atob(str);
-    let result = '';
-    for (let i = 0; i < raw.length; i++) {
-        let hex = raw.charCodeAt(i).toString(16);
-        result += (hex.length === 2 ? hex : '0' + hex);
-    }
-    //console.log('0x' + result);
-    return (result);
+  let atob = require('atob');
+  const raw = atob(str);
+  let result = '';
+  // noinspection JSUnresolvedVariable
+  for (let i = 0; i < raw.length; i++) {
+    // noinspection JSUnresolvedFunction
+    let hex = raw.charCodeAt(i).toString(16);
+    result += (hex.length === 2 ? hex : '0' + hex);
+  }
+  //console.log('0x' + result);
+  return (result);
 }
 
-
 function postUserData(data) {
-    return new Promise((resolve, reject) => {
-        const x= data.imagePreviewUrl;
-        const byteString = x.split(',')[1];
-        const image = base64ToHex(byteString);
-        const sql = "UPDATE USERS, ACCOUNT, PIC SET  Name = ? , Surname = ? , Email = ? , password = ?, image = X? WHERE ACCOUNT.username = ? AND ACCOUNT.User_ID = USERS.User_ID AND PIC.User_ID = USERS.User_ID";
-        connection.query(sql, [data.Name, data.Surname, data.Email, data.password, [image],  data.username], function (err) {
-            if (err) {
-                console.log(err);
-                return reject(err)
-            }
-            console.log("1 record inserted");
-            return resolve('The data were saved successfully!');
-        });
+  return new Promise((resolve, reject) => {
+    const x = data.imagePreviewUrl;
+    const byteString = x.split(',')[1];
+    const image = base64ToHex(byteString);
+    const sql = 'UPDATE USERS, ACCOUNT, PIC SET  Name = ? , Surname = ? , Email = ? , password = ?, image = X? WHERE ACCOUNT.username = ? AND ACCOUNT.User_ID = USERS.User_ID AND PIC.User_ID = USERS.User_ID';
+    connection.query(sql, [
+      data.Name,
+      data.Surname,
+      data.Email,
+      data.password,
+      [image],
+      data.username,
+    ], function(err) {
+      if (err) {
+        console.log(err);
+        return reject(err);
+      }
+      console.log('1 record inserted');
+      return resolve('The data were saved successfully!');
     });
+  });
 }
 
 function deleteUserData(user) {
@@ -230,6 +234,7 @@ function addAnnouncement(title, message, level, username) {
             sql =
                 'INSERT INTO ANNOUNCEMENT (Title, Message, isPrivate, isActive, Coach_ID ) VALUES ( ? , ? , 0, 1, ? )';
           } else if (level === 'admin') {
+            // noinspection JSUnresolvedVariable
             id = rows[0].Owner_ID;
             sql =
                 'INSERT INTO ANNOUNCEMENT (Title, Message, isPrivate, isActive, Admin_ID ) VALUES ( ? , ? , 0, 1, ? )';
@@ -263,6 +268,7 @@ function addPrivateAnnouncement(title, message, level, username) {
             sql =
                 'INSERT INTO ANNOUNCEMENT (Title, Message, isPrivate, isActive, Coach_ID ) VALUES ( ? , ? , 1, 1, ? )';
           } else if (level === 'admin') {
+            // noinspection JSUnresolvedVariable
             id = rows[0].Owner_ID;
             sql =
                 'INSERT INTO ANNOUNCEMENT (Title, Message, isPrivate, isActive, Admin_ID ) VALUES ( ? , ? , 1, 1, ? )';
@@ -300,6 +306,7 @@ function updateAnnouncement(announcement_id, title, message, level, username) {
             sql =
                 'UPDATE ANNOUNCEMENT SET Title = ? , Message = ? , isPrivate = 1, isActive = 1 , Coach_ID = ?  WHERE ANNOUNCEMENT_ID = ? ';
           } else if (level === 'admin') {
+            // noinspection JSUnresolvedVariable
             id = rows[0].Owner_ID;
             sql =
                 'UPDATE ANNOUNCEMENT SET Title = ? , Message = ? , isPrivate = 1, isActive = 1 , Admin_ID = ? WHERE ANNOUNCEMENT_ID = ? ';
@@ -334,26 +341,30 @@ function enrollUser(CLASS_ID, User_ID) {
 
 //fetching the data for the personal training schedule
 function getPersonalTraining(User_ID) {
-    console.log("Testing 1234: " + User_ID);
-    return new Promise((resolve, reject) => {
-        const sql = "SELECT p.Day, p.Time FROM `PERSONAL_TRAINING` p WHERE p.User_ID = ? ";
-        connection.query(sql, [User_ID], function (err, rows) {
-            if (err) reject(err);
-            resolve(rows);
-        });
+  console.log('Testing 1234: ' + User_ID);
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT p.Day, p.Time FROM `PERSONAL_TRAINING` p WHERE p.User_ID = ? ';
+    connection.query(sql, [User_ID], function(err, rows) {
+      if (err) {
+        reject(err);
+      }
+      resolve(rows);
     });
+  });
 
 }
 
 //mine
 function getUserInfo(name) {
-    return new Promise((resolve, reject) => {
-        const sql = "SELECT * FROM ACCOUNT a, USERS u, PIC p WHERE u.name = ? and u.User_ID = a.User_ID and p.User_ID = u.User_ID";
-        connection.query(sql, [name], function (err, rows) {
-            if (err) reject(err);
-            resolve(rows);
-        });
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT * FROM ACCOUNT a, USERS u, PIC p WHERE u.name = ? and u.User_ID = a.User_ID and p.User_ID = u.User_ID';
+    connection.query(sql, [name], function(err, rows) {
+      if (err) {
+        reject(err);
+      }
+      resolve(rows);
     });
+  });
 }
 
 function getMessages(user) {
@@ -399,6 +410,7 @@ function createNewMessage(data, username) {
       if (err || rows[0] === undefined) {
         return reject(err);
       }
+      // noinspection JSUnresolvedVariable
       const fromId = rows[0].AccountID;
       const sql = 'INSERT INTO Messages(Title, Message, From_ID, To_ID) VALUES (?, ?, ?, ?)';
       connection.query(sql, [data.title, data.message, fromId, data.contact],
@@ -421,27 +433,29 @@ function createNewMessage(data, username) {
 }
 
 function getAllCoaches() {
-    return new Promise((resolve, reject) => {
-        const sql = 'SELECT Coach_ID, CoachName FROM `COACH` c WHERE 1';
-        connection.query(sql, [], function (err, rows) {
-            if (err) {
-                return reject(err);
-            }
-            resolve(rows);
-        });
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT Coach_ID, CoachName FROM `COACH` c WHERE 1';
+    connection.query(sql, [], function(err, rows) {
+      if (err) {
+        return reject(err);
+      }
+      resolve(rows);
     });
+  });
 }
 
 //insert to PersonalTraining
-function insertPT(data) {
-    return new Promise((resolve, reject) => {
-        // console.log(Name);
-        const sql = "INSERT INTO `PERSONAL_TRAINING` (`PT_ID`, `Day`, `Time`, `Coach_ID`, `User_ID`) VALUES (NULL, ?, ?, ?, ?);";
-        connection.query(sql, [], function (err, rows) {
-            if (err) reject(err);
-            resolve(rows);
-        });
+function insertPT() {
+  return new Promise((resolve, reject) => {
+    // console.log(Name);
+    const sql = 'INSERT INTO `PERSONAL_TRAINING` (`PT_ID`, `Day`, `Time`, `Coach_ID`, `User_ID`) VALUES (NULL, ?, ?, ?, ?);';
+    connection.query(sql, [], function(err, rows) {
+      if (err) {
+        reject(err);
+      }
+      resolve(rows);
     });
+  });
 }
 
 // for personal training
@@ -659,6 +673,7 @@ function updateClassesVisit() {
   });
 }
 
+// noinspection JSUnusedGlobalSymbols
 module.exports = {
   dbConnect,
   dbDisconnect,
@@ -693,14 +708,13 @@ module.exports = {
   updateClassesVisit,
   updateAboutUsVisit,
   updateDashboardVisit,
-    updateAboutUdVisit,
   addPrivateAnnouncement,
   getAllVisitCount,
   getAllUserTypeCount,
   getAdmins,
   checkConnection,
-    getPersonalTraining,
-    base64ToHex,
-    getAllCoaches,
-    insertPT
+  getPersonalTraining,
+  base64ToHex,
+  getAllCoaches,
+  insertPT,
 };
