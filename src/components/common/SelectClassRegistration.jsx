@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import '../assets/styles/BookDropdown.css'
+// import {getClassDay, getPersonalTraining} from "../../repository";
+import {getAllCoaches} from "../../repository";
+import {useEffect} from "react";
 
 
 class SelectClassRegistration extends Component {
@@ -9,15 +12,13 @@ class SelectClassRegistration extends Component {
         this.state = {
             day: '',
             time: '',
-            flag: false
+            flag: false,
+            Coach_ID:''
         };
 
         this.onSubmit = this.onSubmit.bind(this);
         this.onSubmit2 = this.onSubmit2.bind(this);
         this.handleChange = this.handleChange.bind(this);
-
-
-
     }
 
     handleChange = (e) => {
@@ -33,7 +34,7 @@ class SelectClassRegistration extends Component {
         this.setState({flag: true},
             () => {
                 // console.log(this.state.flag);
-                this.props.toogle(this.state.day, this.state.time, this.state.flag);
+                this.props.toogle(this.state.day, this.state.time, this.state.flag, this.state.Coach_ID);
             });
     };
 
@@ -42,9 +43,11 @@ class SelectClassRegistration extends Component {
         this.setState({flag: false},
             () => {
                 // console.log(this.state.flag);
-                this.props.toogle(this.state.day, this.state.time, this.state.flag);
+                this.props.toogle(this.state.day, this.state.time, this.state.flag, this.state.Coach_ID);
             });
     };
+
+
 
     render() {
         return (
@@ -84,6 +87,23 @@ class SelectClassRegistration extends Component {
                                 <option value="12">19:00-20:00</option>
                             </select>
                         </div>
+                    </div>
+                    <div className="row hidden">
+                        <div className="col-md-12 RowBlock">   {/*justify-content-center*/}
+                            <label htmlFor="DropClass">Coach:</label>
+
+                            <select className="form-control selectGroupPersonal" name="time" id="TimePers"
+                                    onChange={this.handleChange} required>
+                                <option value="" hidden>Select a Coach</option>
+                                {this.props.coaches.map((res, index) => {
+                                    return <option value={res.CoachName} key={index}>
+                                        {res.CoachName}
+                                    </option>
+                                })
+                                }
+                            </select>
+                        </div>
+
                     </div>
                     <div className="row">
                         <div className="col-md-6 RowBlock">

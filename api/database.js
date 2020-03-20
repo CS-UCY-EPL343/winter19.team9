@@ -107,20 +107,38 @@ function getUserData(user) {
   });
 }
 
+
+
+
+function base64ToHex(str) {
+
+    let atob = require('atob');
+    const raw = atob(str);
+    let result = '';
+    for (let i = 0; i < raw.length; i++) {
+        let hex = raw.charCodeAt(i).toString(16);
+        result += (hex.length === 2 ? hex : '0' + hex);
+    }
+    //console.log('0x' + result);
+    return (result);
+}
+
+
 function postUserData(data) {
-  return new Promise((resolve, reject) => {
-    const sql = 'UPDATE USERS, ACCOUNT SET  Name = ? , Surname = ? , Email = ? , password = ? WHERE ACCOUNT.username = ? AND ACCOUNT.User_ID = USERS.User_ID';
-    connection.query(sql,
-        [data.Name, data.Surname, data.Email, data.password, data.username],
-        function(err) {
-          if (err) {
-            console.log(err);
-            return reject(err);
-          }
-          console.log('1 record inserted');
-          return resolve('The data were saved successfully!');
+    return new Promise((resolve, reject) => {
+        const x= data.imagePreviewUrl;
+        const byteString = x.split(',')[1];
+        const image = base64ToHex(byteString);
+        const sql = "UPDATE USERS, ACCOUNT, PIC SET  Name = ? , Surname = ? , Email = ? , password = ?, image = X? WHERE ACCOUNT.username = ? AND ACCOUNT.User_ID = USERS.User_ID AND PIC.User_ID = USERS.User_ID";
+        connection.query(sql, [data.Name, data.Surname, data.Email, data.password, [image],  data.username], function (err) {
+            if (err) {
+                console.log(err);
+                return reject(err)
+            }
+            console.log("1 record inserted");
+            return resolve('The data were saved successfully!');
         });
-  });
+    });
 }
 
 function deleteUserData(user) {
@@ -314,17 +332,28 @@ function enrollUser(CLASS_ID, User_ID) {
   });
 }
 
+//fetching the data for the personal training schedule
+function getPersonalTraining(User_ID) {
+    console.log("Testing 1234: " + User_ID);
+    return new Promise((resolve, reject) => {
+        const sql = "SELECT p.Day, p.Time FROM `PERSONAL_TRAINING` p WHERE p.User_ID = ? ";
+        connection.query(sql, [User_ID], function (err, rows) {
+            if (err) reject(err);
+            resolve(rows);
+        });
+    });
+
+}
+
 //mine
 function getUserInfo(name) {
-  return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM ACCOUNT a, USERS u, PIC p WHERE u.name = ? and u.User_ID = a.User_ID and p.User_ID = u.User_ID';
-    connection.query(sql, [name], function(err, rows) {
-      if (err) {
-        reject(err);
-      }
-      resolve(rows);
+    return new Promise((resolve, reject) => {
+        const sql = "SELECT * FROM ACCOUNT a, USERS u, PIC p WHERE u.name = ? and u.User_ID = a.User_ID and p.User_ID = u.User_ID";
+        connection.query(sql, [name], function (err, rows) {
+            if (err) reject(err);
+            resolve(rows);
+        });
     });
-  });
 }
 
 function getMessages(user) {
@@ -391,6 +420,31 @@ function createNewMessage(data, username) {
   });
 }
 
+function getAllCoaches() {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT Coach_ID, CoachName FROM `COACH` c WHERE 1';
+        connection.query(sql, [], function (err, rows) {
+            if (err) {
+                return reject(err);
+            }
+            resolve(rows);
+        });
+    });
+}
+
+//insert to PersonalTraining
+function insertPT(data) {
+    return new Promise((resolve, reject) => {
+        // console.log(Name);
+        const sql = "INSERT INTO `PERSONAL_TRAINING` (`PT_ID`, `Day`, `Time`, `Coach_ID`, `User_ID`) VALUES (NULL, ?, ?, ?, ?);";
+        connection.query(sql, [], function (err, rows) {
+            if (err) reject(err);
+            resolve(rows);
+        });
+    });
+}
+
+// for personal training
 function getCoaches() {
   return new Promise((resolve, reject) => {
     const sql = 'SELECT ACCOUNT.AccountID, ACCOUNT.level, ACCOUNT.username, COACH.* FROM ACCOUNT JOIN COACH ON ACCOUNT.Coach_ID=COACH.Coach_ID';
@@ -589,7 +643,6 @@ function updateDashboardVisit() {
         reject(err);
       }
       resolve(rows);
-
     });
   });
 }
@@ -602,24 +655,9 @@ function updateClassesVisit() {
         reject(err);
       }
       resolve(rows);
-
     });
   });
 }
-
-function get7DaysRemaining(username) {
-
-}
-
-//
-// function getCoachID(Name, Day, Time) {
-//     return new Promise((resolve, reject) => {
-//         // console.log();
-//         // const sql = "SELECT DISTINCT c.Coach_ID FROM Class c WHERE c.Name
-// = ? AND c.Day = ? AND c.Time = ?"; const sql = "SELECT ca.Coach_ID FROM
-// COACH co, Class ca WHERE ca.Name = ? AND ca.Day = ? AND ca.Time = ? AND
-// co.Coach_ID = ca.Coach_ID"; connection.query(sql, [Name, Day, Time],
-// function (err, rows) { if(err) reject(err); resolve(rows); }); }); }
 
 module.exports = {
   dbConnect,
@@ -655,10 +693,14 @@ module.exports = {
   updateClassesVisit,
   updateAboutUsVisit,
   updateDashboardVisit,
-  get7DaysRemaining,
+    updateAboutUdVisit,
   addPrivateAnnouncement,
   getAllVisitCount,
   getAllUserTypeCount,
   getAdmins,
   checkConnection,
+    getPersonalTraining,
+    base64ToHex,
+    getAllCoaches,
+    insertPT
 };

@@ -1,19 +1,53 @@
 import React, {Component} from 'react';
 import "../assets/styles/PersonalTrainingTimetable.css"
-
+import {
+    insertPT, postuserData
+} from "../../repository";
 class PersonalTrainingCreate extends Component {
     constructor(props) {
         super(props);
         this.state = {
             refID: '',
             refIDs: [],
-            flag: false
+            trainingScheduleRet: [],
+            flag: false,
+            Coach_ID: '',
+            User_ID: ''
+            // addRefIDs: [],
+            // emptyTab: []
+            // exists: false
         };
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.day !== this.props.day || prevProps.time !== this.props.time || prevProps.flag !== this.props.flag) {
+        if (prevProps.day !== this.props.day || prevProps.time !== this.props.time || prevProps.flag !== this.props.flag
+            || prevProps.trainingSchedule !== this.props.trainingSchedule || prevProps.coachID !== this.props.coachID || prevProps.userID !== this.props.userID) {
+            // this.setState({addRefIDs: this.state.emptyTab});
+            let ret = this.props.trainingSchedule.slice(0);
             let refID;
+            this.setState({Coach_ID: this.props.coachID, User_ID: this.props.userID});
+            const items = ret.map((item, key) => {
+                    if (item.Time < 10) {
+                        this.setState({refID: item.Day + ".0" + item.Time});
+                        refID = item.Day + ".0" + item.Time;
+                    } else {
+                        this.setState({refID: item.Day + "." + item.Time});
+                        refID = item.Day + "." + item.Time;
+                    }
+
+                    // Create a new array based on current state:
+                    let x = this.state.refIDs;
+                    if (!x.includes(refID)) {
+                        x.push(refID);
+                        // x.push(this.state.addRefIDs);
+                        this.setState({refIDs: x}, () => {
+                            // console.log(" refIDs \n" + x);
+                        });
+                    }
+                }
+            );
+
+            // let refID;
             if (this.props.time < 10) {
                 this.setState({refID: this.props.day + ".0" + this.props.time});
                 refID = this.props.day + ".0" + this.props.time;
@@ -30,6 +64,8 @@ class PersonalTrainingCreate extends Component {
             if (!x.includes(refID) && this.props.flag === true) {
                 x.push(refID);
                 this.setState({refIDs: x});
+                insertPT(this.state).then(() => alert('Success')).catch(err => alert(err));
+
                 // console.log(x);
             } else {
                 if (x.includes(refID) && this.props.flag === false) {
