@@ -210,6 +210,27 @@ export function deleteUserData() {
 
 }
 
+
+//insert into personal training
+export function insertPT() {
+    return axios
+        .post(`${BASE_URL}/api/insert/PersonalTraining`, {
+            'x-access-token': localStorage.getItem('x-access-token'),
+        })
+        .then(response => response.data)
+        .catch(() => Promise.reject('Authentication Failed!'))
+}
+
+//for coaches for personal training
+export function getAllCoaches() {
+    return axios
+        .post(`${BASE_URL}/api/bookTraining/allCoaches`, {
+            'x-access-token': localStorage.getItem('x-access-token'),
+        })
+        .then(response => response.data)
+        .catch(() => Promise.reject('Authentication Failed!'))
+}
+
 //for image from database
 export function UserPic(name) {
     return axios
@@ -221,6 +242,16 @@ export function UserPic(name) {
         .catch(() => Promise.reject('Authentication Failed!'))
 }
 
+//fetching the data for the personal training schedule
+export function getPersonalTraining(User_ID){
+    return axios
+        .post(`${BASE_URL}/api/user/getPersonalTraining`, {
+            'x-access-token': localStorage.getItem('x-access-token'),
+            User_ID: User_ID
+        })
+        .then(response => response.data)
+        .catch(() => Promise.reject('Authentication Failed!'))
+}
 
 //mine
 export function userDetails(name) {

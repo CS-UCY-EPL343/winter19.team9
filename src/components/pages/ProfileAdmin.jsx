@@ -6,13 +6,13 @@ import {
     userDetails,
     updateAnnouncement, removeAnnouncement,
     deleteAnnouncement,
-    addPrivateAnnouncement
+    addPrivateAnnouncement,
+    getPersonalTraining, getAllCoaches
 } from "../../repository";
 import AnnouncementModal from "../common/AnnouncementModal";
 import {Button} from "reactstrap";
 import Box from "../common/SelectClassRegistration";
 import Timetable from "../common/PersonalTrainingCreate";
-
 
 class ProfileAdmin extends Component {
 
@@ -33,7 +33,11 @@ class ProfileAdmin extends Component {
             day: '',
             time: '',
             flag: false,
-            image: ''
+            image: '',
+            User_ID: '',
+            personalTraining: [],
+            selectedCoaches: [],
+            Coach_ID: ''
         };
         this.toggleAnnouncementsData = this.toggleAnnouncementsData.bind(this);
         this.onAnnouncementSubmit = this.onAnnouncementSubmit.bind(this);
@@ -46,6 +50,9 @@ class ProfileAdmin extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleChange2 = this.handleChange2.bind(this);
         this.onAnnouncementDelete = this.onAnnouncementDelete.bind(this);
+
+        this.handleCoach = this.handleCoach.bind(this);
+
 
     }
 
@@ -134,7 +141,6 @@ class ProfileAdmin extends Component {
     };
 
 
-
     toggle = () => {
         if (this.state.level <= 1) {
             return;
@@ -152,21 +158,50 @@ class ProfileAdmin extends Component {
         const user = this.state.searchResults.find(usr => usr.username === username);
         if (!user) return null;
 
-        this.setState({Name: user.Name, Surname: user.Surname, Email: user.Email, username, image : user.image});
+        this.setState({
+            Name: user.Name,
+            Surname: user.Surname,
+            Email: user.Email,
+            username,
+            image: user.image,
+            User_ID: user.User_ID,
+        }, () => {
+            // console.log(this.state.User_ID);
+            getPersonalTraining(user.User_ID).then(response => {
+                this.setState(
+                    {personalTraining: response}, () => {
+                        console.log(this.state.personalTraining);
+                        // if(this.state.personalTraining){
+                            this.handleCoach();
+                        // }
+                    });
+            });
+        });
 
         getPrivateAnnouncementsAdmin(username).then(response => {
             this.setState(
                 {announcements: response.data.announcements});
             console.log(this.state.announcements);
         });
+
+
+    };
+
+    handleCoach = () => {
+            getAllCoaches().then(response => {
+                this.setState(
+                    {selectedCoaches: response}, () => {
+                        console.log("Coaches array \n" + this.state.selectedCoaches);
+                    });
+            });
     };
 
     toggleAnnouncements = () => {
         this.setState({modalAnnouncements: !this.state.modalAnnouncements});
     };
 
-    handleDayTimeChange = (day, time, flag) => {
-        this.setState({day, time, flag});
+    handleDayTimeChange = (day, time, flag, Coach_ID) => {
+        this.setState({day, time, flag, Coach_ID});
     };
 
     toggleAnnouncementsData = (e) => {
@@ -182,11 +217,11 @@ class ProfileAdmin extends Component {
 
 
     render() {
-        let {image} =  this.state;
+        let {image} = this.state;
         let imageURL = "https://www.w3schools.com/howto/img_avatar.png";
         let $imagePreview = <img src={imageURL} alt={"Picture"}/>;
-        if(image !== '') {
-             imageURL =  'data:image/png;base64,' +  new Buffer.from(image, 'binary').toString('base64');
+        if (image !== '') {
+            imageURL = 'data:image/png;base64,' + new Buffer.from(image, 'binary').toString('base64');
             $imagePreview = (<img src={imageURL} alt={"Picture"}/>);
             // console.log(image)
         }
@@ -255,6 +290,11 @@ class ProfileAdmin extends Component {
                                     <input type="username" className="form-control" id="usernameIn"
                                            value={this.state.username} readOnly/>
                                 </div>
+                                <div className="form-group">
+                                    <label className="usernameIn">UserID</label>
+                                    <input type="userID" className="form-control" id="userID"
+                                           value={this.state.User_ID} readOnly/>
+                                </div>
 
 
                             </form>
@@ -271,9 +311,10 @@ class ProfileAdmin extends Component {
                                     return <Button className="nav-link menu-box-tab menu-text"
                                                    onClick={this.toggleAnnouncementsData} id={index}
                                                    key={index}><i className="scnd-font-color fa fa-tasks"/>
-                                                   {ann.Title}{<p> (</p>}{ann.TIMESTAMP[0]}
-                                                   {ann.TIMESTAMP[1]}{ann.TIMESTAMP[2]}{ann.TIMESTAMP[3]}{ann.TIMESTAMP[4]}{ann.TIMESTAMP[5]}
-                                                   {ann.TIMESTAMP[6]}{ann.TIMESTAMP[7]} {ann.TIMESTAMP[8] }{ann.TIMESTAMP[9] }{<p id="extra">)</p>}
+                                        {ann.Title}{<p> (</p>}{ann.TIMESTAMP[0]}
+                                        {ann.TIMESTAMP[1]}{ann.TIMESTAMP[2]}{ann.TIMESTAMP[3]}{ann.TIMESTAMP[4]}{ann.TIMESTAMP[5]}
+                                        {ann.TIMESTAMP[6]}{ann.TIMESTAMP[7]} {ann.TIMESTAMP[8]}{ann.TIMESTAMP[9]}{<p
+                                            id="extra">)</p>}
                                     </Button>
                                 })}
 
@@ -284,7 +325,7 @@ class ProfileAdmin extends Component {
                             </Button>
 
                             <AnnouncementModal onSubmit={this.onAnnouncementSubmit}
-                                               DeleteAnn = {this.onAnnouncementDelete}
+                                               DeleteAnn={this.onAnnouncementDelete}
                                                toggle={this.toggleAnnouncements}
                                                modal={this.state.modalAnnouncements}
                                                announcements={this.state.announcements}
@@ -294,6 +335,21 @@ class ProfileAdmin extends Component {
                                                isPrivate={true}
                             />
 
+
+                        </div>
+                        <div>
+                            <div className="container">
+                                <div className="row">
+                                    <div id="timeTableHeading">Create Personal Training Schedule</div>
+                                    <div className="col-md-8">
+                                        <Timetable day={this.state.day} time={this.state.time} flag={this.state.flag} trainingSchedule = {this.state.personalTraining}
+                                                   coachID = {this.state.Coach_ID} userID = {this.state.User_ID}/>
+                                    </div>
+                                    <div className="col-md-4">
+                                        <Box toogle={this.handleDayTimeChange} coaches={this.state.selectedCoaches}/>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>

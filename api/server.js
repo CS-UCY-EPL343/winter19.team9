@@ -325,6 +325,22 @@ app.post('/api/user/insert', (req, res) => {
         .catch(err => res.status(409).json(err));
 });
 
+//fetching the data for the personal training schedule
+app.post('/api/user/getPersonalTraining', middleware, (req, res) => {
+    if (req.decoded.level === 'user') {
+        return res.status(409).json('Authentication failed.');
+    }
+    db.getPersonalTraining(req.body.User_ID)
+        .then(data => {
+            if (data) {
+                return res.status(200).json(data)
+            } else {
+                return res.status(409).json('Authentication failed. User not found.');
+            }
+        })
+        .catch(err => res.status(409).json(err));
+});
+
 
 // mine
 app.post('/api/user/userDetails', middleware, (req, res) => {
@@ -376,6 +392,33 @@ app.post('/api/BookClass/ClassTime', middleware, (req, res) => {
         }
       })
       .catch(err => res.status(409).json(err));
+});
+
+//insert to PersonalTraining
+app.post('/api/insert/PersonalTraining', middleware, (req, res) => {
+    db.insertPT(req.body.data)
+        .then(data => {
+            if (data) {
+                return res.status(200).json(data)
+            } else {
+                return res.status(409).json('Authentication failed. User not found.');
+            }
+        })
+        .catch(err => res.status(409).json(err));
+});
+
+
+// fetcing coaches for personal training
+app.post('/api/bookTraining/allCoaches', middleware, (req, res) => {
+    db.getAllCoaches()
+        .then(data => {
+            if (data) {
+                return res.status(200).json(data)
+            } else {
+                return res.status(409).json('Authentication failed. User not found.');
+            }
+        })
+        .catch(err => res.status(409).json(err));
 });
 
 app.post('/api/BookClass/ClassCoach', middleware, (req, res) => {

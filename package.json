@@ -4,7 +4,10 @@
   "private": true,
   "homepage": "https://cs-ucy-epl343.github.io/winter19.team9/",
   "dependencies": {
+    "atob": "^2.1.2",
+    "atob-lite": "^2.0.0",
     "axios": "^0.19.2",
+    "base-64": "^0.1.0",
     "blob-util": "^2.0.2",
     "chart.js": "^2.9.3",
     "convert-hex": "^0.1.0",

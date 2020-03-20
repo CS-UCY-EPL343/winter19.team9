@@ -1,3 +1,5 @@
+
+
 const mysql = require('mysql');
 
 let connection = null; // Global
@@ -80,10 +82,30 @@ function getUserData(user) {
     });
 }
 
+
+
+
+function base64ToHex(str) {
+
+    let atob = require('atob');
+    const raw = atob(str);
+    let result = '';
+    for (let i = 0; i < raw.length; i++) {
+        let hex = raw.charCodeAt(i).toString(16);
+        result += (hex.length === 2 ? hex : '0' + hex);
+    }
+    //console.log('0x' + result);
+    return (result);
+}
+
+
 function postUserData(data) {
     return new Promise((resolve, reject) => {
-        const sql = "UPDATE USERS, ACCOUNT SET  Name = ? , Surname = ? , Email = ? , password = ? WHERE ACCOUNT.username = ? AND ACCOUNT.User_ID = USERS.User_ID";
-        connection.query(sql, [data.Name, data.Surname, data.Email, data.password, data.username], function (err) {
+        const x= data.imagePreviewUrl;
+        const byteString = x.split(',')[1];
+        const image = base64ToHex(byteString);
+        const sql = "UPDATE USERS, ACCOUNT, PIC SET  Name = ? , Surname = ? , Email = ? , password = ?, image = X? WHERE ACCOUNT.username = ? AND ACCOUNT.User_ID = USERS.User_ID AND PIC.User_ID = USERS.User_ID";
+        connection.query(sql, [data.Name, data.Surname, data.Email, data.password, [image],  data.username], function (err) {
             if (err) {
                 console.log(err);
                 return reject(err)
@@ -275,9 +297,23 @@ function enrollUser(CLASS_ID, User_ID) {
     });
 }
 
+//fetching the data for the personal training schedule
+function getPersonalTraining(User_ID) {
+    console.log("Testing 1234: " + User_ID);
+    return new Promise((resolve, reject) => {
+        const sql = "SELECT p.Day, p.Time FROM `PERSONAL_TRAINING` p WHERE p.User_ID = ? ";
+        connection.query(sql, [User_ID], function (err, rows) {
+            if (err) reject(err);
+            resolve(rows);
+        });
+    });
+
+}
 
 //mine
 function getUserInfo(name) {
+    console.log("Name 1234: " + name);
+
     return new Promise((resolve, reject) => {
         const sql = "SELECT * FROM ACCOUNT a, USERS u, PIC p WHERE u.name = ? and u.User_ID = a.User_ID and p.User_ID = u.User_ID";
         connection.query(sql, [name], function (err, rows) {
@@ -352,6 +388,31 @@ function createNewMessage(data, username) {
     });
 }
 
+function getAllCoaches() {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT Coach_ID, CoachName FROM `COACH` c WHERE 1';
+        connection.query(sql, [], function (err, rows) {
+            if (err) {
+                return reject(err);
+            }
+            resolve(rows);
+        });
+    });
+}
+
+//insert to PersonalTraining
+function insertPT(data) {
+    return new Promise((resolve, reject) => {
+        // console.log(Name);
+        const sql = "INSERT INTO `PERSONAL_TRAINING` (`PT_ID`, `Day`, `Time`, `Coach_ID`, `User_ID`) VALUES (NULL, ?, ?, ?, ?);";
+        connection.query(sql, [], function (err, rows) {
+            if (err) reject(err);
+            resolve(rows);
+        });
+    });
+}
+
+// for personal training
 function getCoaches() {
     return new Promise((resolve, reject) => {
         const sql = 'SELECT ACCOUNT.AccountID, ACCOUNT.level, COACH.CoachName, COACH.Surname FROM ACCOUNT JOIN COACH ON ACCOUNT.Coach_ID=COACH.Coach_ID';
@@ -524,4 +585,8 @@ module.exports = {
     updateClassesVisit,
     updateAboutUdVisit,
     get7DaysRemaining,
+    getPersonalTraining,
+    base64ToHex,
+    getAllCoaches,
+    insertPT
 };
