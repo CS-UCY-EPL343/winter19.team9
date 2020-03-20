@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Popup from "reactjs-popup";
 import ToggleModal from './ToggleModal';
 import PaymentModal from './PaymentModal';
 import {Button} from 'reactstrap';
@@ -11,7 +10,6 @@ import {
     getSevenDaysRemaining,
     getTotalMessages,
     getTotalPrivateAnnouncements,
-    updateProfileVisit
 } from '../../repository';
 
 class SettingsProfile extends Component {
@@ -54,10 +52,6 @@ class SettingsProfile extends Component {
     };
 
     componentDidMount() {
-
-
-        updateProfileVisit().then();
-
         getTotalPrivateAnnouncements().then(response => {
             console.log(response);
             this.setState(

@@ -64,28 +64,28 @@ export function getClasses() {
   return axios
       .post(`${BASE_URL}/api/BookClass/ClassName`, {'x-access-token': localStorage.getItem('x-access-token')})
       .then(response => response.data)
-      .catch(err => Promise.reject('Authentication Failed!'))
+      .catch(() => Promise.reject('Authentication Failed!'))
 }
 
 export function getClassDay(ClassName) {
   return axios
       .post(`${BASE_URL}/api/BookClass/ClassDay`, {'x-access-token': localStorage.getItem('x-access-token'), ClassName: ClassName})
       .then(response => response.data)
-      .catch(err => Promise.reject('Authentication Failed!'))
+      .catch(() => Promise.reject('Authentication Failed!'))
 }
 
 export function getClassTime(ClassName, ClassDay) {
   return axios
       .post(`${BASE_URL}/api/BookClass/ClassTime`, {'x-access-token': localStorage.getItem('x-access-token'), ClassName: ClassName, ClassDay: ClassDay})
       .then(response => response.data)
-      .catch(err => Promise.reject('Authentication Failed!'))
+      .catch(() => Promise.reject('Authentication Failed!'))
 }
 
 export function getClassCoach(ClassName, ClassDay, ClassTime) {
   return axios
       .post(`${BASE_URL}/api/BookClass/ClassCoach`, {'x-access-token': localStorage.getItem('x-access-token'), ClassName: ClassName, ClassDay: ClassDay, ClassTime: ClassTime})
       .then(response => response.data)
-      .catch(err => Promise.reject('Authentication Failed!'))
+      .catch(() => Promise.reject('Authentication Failed!'))
 }
 
 export function getUserID() {
@@ -107,7 +107,7 @@ export function getClassID(ClassName, ClassDay, ClassTime, CoachName) {
     return axios
         .post(`${BASE_URL}/api/BookClass/ClassID`, {'x-access-token': localStorage.getItem('x-access-token'), ClassName: ClassName, ClassDay: ClassDay, ClassTime: ClassTime, CoachName: CoachName})
         .then(response => response)
-        .catch(err => Promise.reject('Authentication Failed!'))
+        .catch(() => Promise.reject('Authentication Failed!'))
 }
 
 export function removeAnnouncement(id) {
@@ -157,15 +157,32 @@ export function updateAnnouncement(announcement_id, title, message) {
         .catch(() => Promise.reject('Authentication Failed!'));
 }
 
+export function allUsersCount(){
+    return axios.get(`${BASE_URL}/api/user/type/count`)
+    .then(response => response.data)
+    .catch(() => Promise.reject('Failed!!!'));
+}
 
-export function updateAboutUdVisit(){
-    return axios.post(`${BASE_URL}/api/AboutUs/visit/count`, {'x-access-token': localStorage.getItem('x-access-token')})
+export function allVisitCount(){
+    return axios.get(`${BASE_URL}/api/visit/count`)
+    .then(response => response.data)
+    .catch(() => Promise.reject('HomePage Count Failed!!!'));
+}
+
+export function loggedInVisit(){
+    return axios.post(`${BASE_URL}/api/logged/visit/count`, {'x-access-token': localStorage.getItem('x-access-token')})
+    .then(response => response.data)
+    .catch(() => Promise.reject('HomePage Count Failed!!!'));
+}
+
+export function updateAboutUsVisit(){
+    return axios.post(`${BASE_URL}/api/AboutUs/visit/count`)
         .then(response => response.data)
         .catch(() => Promise.reject('HomePage Count Failed!!!'));
 }
 
 export function updateClassesVisit(){
-    return axios.post(`${BASE_URL}/api/Classes/visit/count`, {'x-access-token': localStorage.getItem('x-access-token')})
+    return axios.post(`${BASE_URL}/api/Classes/visit/count`)
         .then(response => response.data)
         .catch(() => Promise.reject('HomePage Count Failed!!!'));
 }
@@ -176,8 +193,14 @@ export function updateProfileVisit(){
         .catch(() => Promise.reject('Profile Count Failed!!!'));
 }
 
+export function updateDashboardVisit(){
+    return axios.post(`${BASE_URL}/api/dashboard/visit/count`, {'x-access-token': localStorage.getItem('x-access-token')})
+    .then(response => response.data)
+    .catch(() => Promise.reject('Profile Count Failed!!!'));
+}
+
 export function updateHomePageVisit(){
-    return axios.post(`${BASE_URL}/api/homepage/visit/count`, {'x-access-token': localStorage.getItem('x-access-token')})
+    return axios.post(`${BASE_URL}/api/homepage/visit/count`)
         .then(response => response.data)
         .catch(() => Promise.reject('HomePage Count Failed!!!'));
 }
@@ -318,4 +341,9 @@ export function createNewMessage(data) {
 export function getCoaches() {
     return axios.get(`${BASE_URL}/api/coaches/get`)
         .then(response => response.data);
+}
+
+export function getAdmins() {
+    return axios.get(`${BASE_URL}/api/admins/get`)
+    .then(response => response.data);
 }

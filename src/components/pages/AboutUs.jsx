@@ -1,22 +1,23 @@
-import React, { Component } from "react";
-import ContactUs from "../common/ContactUs";
-import Team from "../common/Team";
-import {updateAboutUdVisit} from "../../repository";
+import React, {Component}                  from 'react';
+import ContactUs                           from '../common/ContactUs';
+import Team                                from '../common/Team';
+import {loggedInVisit, updateAboutUsVisit} from '../../repository';
 
 class AboutUs extends Component {
 
-    componentDidMount() {
-        updateAboutUdVisit().then();
-    }
+  componentDidMount() {
+    loggedInVisit().then();
+    updateAboutUsVisit().then();
+  }
 
-    render() {
-        return (
-            <div id={"about-us"}>
-                <Team />
-                <ContactUs />
-            </div>
-        );
-    }
+  render() {
+    return (
+        <div id = { 'about-us' }>
+          <Team />
+          <ContactUs />
+        </div>
+    );
+  }
 }
 
 export default AboutUs;

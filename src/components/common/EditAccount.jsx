@@ -112,10 +112,10 @@ class EditAccount extends Component {
 
         let $imagePreview = null;
         if (this.state.image !=='' ) {
-            $imagePreview = (<img src={imageURL} alt={"Picture"}/>);
+            $imagePreview = (<img src={imageURL} alt={"Profile Edit"}/>);
         }
         if (this.state.imagePreviewUrl) {
-            $imagePreview = (<img src={this.state.imagePreviewUrl} alt={"Picture"}/>);
+            $imagePreview = (<img src={this.state.imagePreviewUrl} alt={"Profile Edit"}/>);
         }
 
         return (
@@ -135,7 +135,7 @@ class EditAccount extends Component {
                     </div>
 
                 </div>
-                <form className="form-horizontal needs-validation" noValidate = "novalidate" role="form" onSubmit = { this.onSubmit }>
+                <form className="form-horizontal needs-validation" noValidate = "novalidate" onSubmit = { this.onSubmit }>
                     <h3>Personal info</h3>
                     <div className="form-group">
                         <label className="col-lg-6 control-label">First name:</label>

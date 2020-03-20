@@ -36,13 +36,12 @@ class LineChart extends Component {
     clearInterval(this.state.newNumber);
   }
 
-  getChartData() {
+  getChartData() {  // TODO
     let randomData = [];
     for (let x = 0; x < this.state.lineChart.labels; x++) {
       let number = Math.round(Math.random() * 100);
       this.setState({
         lineChart: {
-          labels: this.state.lineChart.labels,
           data  : this.state.lineChart.data.push(number),
         },
       });
@@ -81,10 +80,10 @@ class LineChart extends Component {
 
         if (this.chart.tooltip._active && this.chart.tooltip._active.length) {
           let activePoint = this.chart.tooltip._active[0],
-              ctx = this.chart.ctx,
-              x = activePoint.tooltipPosition().x,
-              topY = this.chart.legend.bottom,
-              bottomY = this.chart.chartArea.bottom;
+              ctx         = this.chart.ctx,
+              x           = activePoint.tooltipPosition().x,
+              topY        = this.chart.legend.bottom,
+              bottomY     = this.chart.chartArea.bottom;
 
           // draw line
           ctx.save();
@@ -92,11 +91,11 @@ class LineChart extends Component {
           ctx.moveTo(x, topY);
           ctx.lineTo(x, bottomY);
           ctx.lineWidth = 2;
-          ctx.strokeStyle = '#fff';
+          ctx.strokeStyle = '#FFFFFF';
           ctx.stroke();
           ctx.restore();
         }
-      }
+      },
     });
 
     const myLineChart = new Chart(ctx, {
@@ -110,13 +109,13 @@ class LineChart extends Component {
           display: false,
         },
         tooltips  : {
-          enabled           : true,
-          intersect         : false,
-          mode              : 'nearest',
-          titleFontSize     : 0,
-          titleSpacing      : 0,
-          titleMarginBottom : 0,
-          displayColors: false,
+          enabled          : true,
+          intersect        : false,
+          mode             : 'nearest',
+          titleFontSize    : 0,
+          titleSpacing     : 0,
+          titleMarginBottom: 0,
+          displayColors    : false,
         },
         elements  : {point: {radius: 0}},
         scales    : {
@@ -146,7 +145,7 @@ class LineChart extends Component {
     if (!this._isMounted) {
       return;
     }
-    value.data.datasets[0].data.push(Math.round(Math.random() * 100));
+    value.data.datasets[0].data.push(Math.round(Math.random() * 100));  // TODO
     value.data.datasets[0].data.shift(); // Remove first value
     let changeOne = value.data.datasets[0].data[value.data.datasets[0].data.length
                                                 - 2];

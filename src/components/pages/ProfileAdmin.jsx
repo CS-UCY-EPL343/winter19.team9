@@ -4,15 +4,12 @@ import "../assets/styles/adminProfile.css"
 import {
     getPrivateAnnouncementsAdmin,
     userDetails,
-    updateAnnouncement, removeAnnouncement,
+    updateAnnouncement,
     deleteAnnouncement,
-    addPrivateAnnouncement
-} from "../../repository";
+    addPrivateAnnouncement, loggedInVisit, updateProfileVisit,
+} from '../../repository';
 import AnnouncementModal from "../common/AnnouncementModal";
 import {Button} from "reactstrap";
-import Box from "../common/SelectClassRegistration";
-import Timetable from "../common/PersonalTrainingCreate";
-
 
 class ProfileAdmin extends Component {
 
@@ -47,6 +44,11 @@ class ProfileAdmin extends Component {
         this.handleChange2 = this.handleChange2.bind(this);
         this.onAnnouncementDelete = this.onAnnouncementDelete.bind(this);
 
+    }
+
+    componentDidMount() {
+        loggedInVisit().then();
+        updateProfileVisit().then();
     }
 
     onSubmit = (e) => {
@@ -110,7 +112,7 @@ class ProfileAdmin extends Component {
     };
 
 
-    onAnnouncementSubmit2 = (Title, Message, Ann_ID) => {
+    onAnnouncementSubmit2 = (Title, Message) => {
 
         if (Title === '' || Message === '') {
             alert('Please give correct data.');
@@ -175,7 +177,7 @@ class ProfileAdmin extends Component {
         this.toggleAnnouncements();
     };
 
-    toggleAnnouncementsData2 = (e) => {
+    toggleAnnouncementsData2 = () => {
 
         this.toggleAnnouncements();
     };

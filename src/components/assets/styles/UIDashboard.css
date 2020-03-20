@@ -191,16 +191,20 @@
 }
 
 #UIDashboard .staff .box .admin {
-    margin-bottom    : 20px;
+    margin-bottom    : 25px;
     overflow         : hidden;
     background-color : #313348;
     padding          : 10px;
 }
 
 #UIDashboard .staff .box .admin .img {
-    width        : 20%;
-    margin-right : 5%;
-    float        : left;
+    width          : 20%;
+    height         : 130px;
+    margin-right   : 5%;
+    float          : left;
+    text-align     : center;
+    vertical-align : middle;
+    padding-top    : 15px;
 }
 
 #UIDashboard .staff .box .admin .img img {
@@ -221,5 +225,25 @@
 }
 
 #UIDashboard .staff .box .info p {
-    color : #BBBBBB;
+    color  : #BBBBBB;
+    margin : 0;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    #UIDashboard .staff .box .admin .img {
+        width          : 5%;
+        margin-right   : 35%;
+    }
+    
+    #UIDashboard .staff .box .info {
+        width          : 50%;
+    }
+    
+    #UIDashboard .staff .box .info h3 {
+        font-size : 15px;
+    }
+    
+    #UIDashboard .staff .box .info p {
+        font-size : 12px;
+    }
 }

@@ -7,14 +7,15 @@ import class4 from '../assets/img/classes/classes-4.jpg';
 import class5 from '../assets/img/classes/classes-5.jpg';
 import class6 from '../assets/img/classes/classes-6.jpg';
 import timetableimg from '../assets/img/classes/timetableimg.jpg';
-import { AnimatedOnScroll } from 'react-animated-css-onscroll';
-import {updateClassesVisit} from "../../repository";
+import { AnimatedOnScroll }                from 'react-animated-css-onscroll';
+import {loggedInVisit, updateClassesVisit} from "../../repository";
 
 
 
 class Classes extends Component {
 
     componentDidMount() {
+        loggedInVisit().then();
         updateClassesVisit().then();
     }
 
