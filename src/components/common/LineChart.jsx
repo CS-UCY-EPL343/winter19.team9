@@ -13,7 +13,7 @@ class LineChart extends Component {
       },
       percentChange    : 0,
       percentComparison: 'Up',
-      lastNumber       : '100',
+      lastNumber       : '0',
     };
 
     this.getChartData = this.getChartData.bind(this);
@@ -36,16 +36,15 @@ class LineChart extends Component {
     clearInterval(this.state.newNumber);
   }
 
-  getChartData() {  // TODO
+  getChartData() {
     let randomData = [];
     for (let x = 0; x < this.state.lineChart.labels; x++) {
-      let number = Math.round(Math.random() * 100);
       this.setState({
         lineChart: {
-          data  : this.state.lineChart.data.push(number),
+          data: this.state.lineChart.data.push(0),
         },
       });
-      randomData.push(number);
+      randomData.push(0);
     }
 
     this.setState({
@@ -136,16 +135,17 @@ class LineChart extends Component {
     const self = this;
     this.setState({
       newNumber: setInterval(function() {
-        self.updateChart(myLineChart);
+        self.updateChart(myLineChart).then();
       }, this.props.chartSpeed),
     });
   }
 
-  updateChart(value) {
+  async updateChart(value) {
     if (!this._isMounted) {
       return;
     }
-    value.data.datasets[0].data.push(Math.round(Math.random() * 100));  // TODO
+    let number = await this.props.getData();
+    value.data.datasets[0].data.push(number);
     value.data.datasets[0].data.shift(); // Remove first value
     let changeOne = value.data.datasets[0].data[value.data.datasets[0].data.length
                                                 - 2];
@@ -158,8 +158,9 @@ class LineChart extends Component {
       this.setState({percentComparsion: 'Up'});
     }
 
-    let changeNumber = (
-                           changeOne / changeTwo) * 10;
+    let changeNumber = changeOne === changeTwo ? 0 : !changeOne
+        ? 100
+        : !changeTwo ? -100 : (changeOne / changeTwo) * 10;
     this.setState({
       percentChange: changeNumber.toFixed(2),
       lastNumber   : (

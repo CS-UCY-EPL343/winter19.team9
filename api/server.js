@@ -22,6 +22,7 @@ const transport = {
 };
 const transporter = nodemailer.createTransport(transport);
 
+// noinspection JSUnresolvedFunction
 transporter.verify((error, success) => {
   if (error) {
     console.log(error);
@@ -34,6 +35,7 @@ app.use(bodyParser.json({limit: '10mb', extended: true}));
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 app.use(cors());
 
+// noinspection JSUnresolvedFunction
 app.post('/api/email', (req, res) => {
   const name = req.body.name;
   const email = req.body.email;
@@ -88,6 +90,7 @@ app.post('/api/email', (req, res) => {
   });
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/auth', (req, res) => {
   db.dbLogIn(req.body.name, req.body.password).then(user => {
     if (!user) {
@@ -107,11 +110,12 @@ app.post('/api/auth', (req, res) => {
   }).catch(err => res.status(409).json(err));
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/userLevel', middleware, (req, res) => {
   res.json({'userLevel': req.decoded.level});
 });
 
-// template
+// noinspection JSUnresolvedFunction
 app.post('/api/user/data', middleware, (req, res) => {
   db.getUserData(req.decoded.username).then(data => {
     if (data) {
@@ -122,6 +126,7 @@ app.post('/api/user/data', middleware, (req, res) => {
   }).catch(err => res.status(401).json(err));
 });
 
+// noinspection JSUnresolvedFunction
 app.get('/api/user/type/count', (req, res) => {
   db.getAllUserTypeCount().then(response => {
     res.status(200).json({
@@ -130,6 +135,21 @@ app.get('/api/user/type/count', (req, res) => {
   }).catch(() => res.status(404).json('Not Found'));
 });
 
+// noinspection JSUnresolvedFunction
+app.get('/api/user/count', (req, res) => {
+  db.getUserCount().then(response => {
+    res.status(200).json({count: response});
+  }).catch(() => res.status(404).json('Not Found'));
+});
+
+// noinspection JSUnresolvedFunction
+app.get('/api/page/visits/count', (req, res) => {
+  db.getPageVisitsCount().then(response => {
+    res.status(200).json({count: response});
+  }).catch(() => res.status(404).json('Not Found'));
+});
+
+// noinspection JSUnresolvedFunction
 app.get('/api/visit/count', (req, res) => {
   db.getAllVisitCount().then(response => {
     res.status(200).json({
@@ -138,6 +158,14 @@ app.get('/api/visit/count', (req, res) => {
   }).catch(() => res.status(404).json('Not Found'));
 });
 
+// noinspection JSUnresolvedFunction
+app.get('/api/enroll/count', (req, res) => {
+  db.getEnrollCount().then(response => {
+    res.status(200).json({count: response,});
+  }).catch(() => res.status(404).json('Not Found'));
+});
+
+// noinspection JSUnresolvedFunction
 app.post('/api/logged/visit/count', middleware, (req, res) => {
   db.updateLoggedInVisit().then(() => {
     res.status(200).json({
@@ -146,6 +174,7 @@ app.post('/api/logged/visit/count', middleware, (req, res) => {
   }).catch(() => res.status(404).json('Not Found'));
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/AboutUs/visit/count', (req, res) => {
   db.updateAboutUsVisit().then(() => {
     res.status(200).json({
@@ -154,6 +183,7 @@ app.post('/api/AboutUs/visit/count', (req, res) => {
   }).catch(() => res.status(404).json('Not Found'));
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/Classes/visit/count', (req, res) => {
   db.updateClassesVisit().then(() => {
     res.status(200).json({
@@ -162,6 +192,7 @@ app.post('/api/Classes/visit/count', (req, res) => {
   }).catch(() => res.status(404).json('Not Found'));
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/homepage/visit/count', (req, res) => {
   db.updateHomePageVisit().then(() => {
     res.status(200).json({
@@ -170,6 +201,7 @@ app.post('/api/homepage/visit/count', (req, res) => {
   }).catch(() => res.status(404).json('Not Found'));
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/profile/visit/count', middleware, (req, res) => {
   db.updateProfileVisit(req.decoded.level).then(() => {
     res.status(200).json({
@@ -178,6 +210,7 @@ app.post('/api/profile/visit/count', middleware, (req, res) => {
   }).catch(() => res.status(404).json('Not Found'));
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/dashboard/visit/count', middleware, (req, res) => {
   db.updateDashboardVisit().then(() => {
     res.status(200).json({
@@ -186,22 +219,13 @@ app.post('/api/dashboard/visit/count', middleware, (req, res) => {
   }).catch(() => res.status(404).json('Not Found'));
 });
 
-app.post('/api/user/getSevenDaysRemaining', middleware, (req, res) => {
-  db.get7DaysRemaining(req.decoded.username).then(data => {
-    if (data) {
-      return res.status(200).json({sevenDaysLeft: data});
-    } else {
-      return res.status(409).json('No data found.');
-    }
-  });
-});
-
 /****************************************************
  *                                                   *
  * Getting the private announcements from the database   *
  *                                                   *
  ***************************************************/
 
+// noinspection JSUnresolvedFunction
 app.post('/api/announcements/private', middleware, (req, res) => {
   db.getPrivateAnnouncements(req.decoded.username).then(data => {
     if (data) {
@@ -212,6 +236,7 @@ app.post('/api/announcements/private', middleware, (req, res) => {
   });
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/announcements/admin/private', middleware, (req, res) => {
   db.getPrivateAnnouncements(req.body.username).then(data => {
     if (data) {
@@ -222,6 +247,7 @@ app.post('/api/announcements/admin/private', middleware, (req, res) => {
   });
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/announcements/private/total', middleware, (req, res) => {
   db.getTotalAnnouncements(req.decoded.username).then(data => {
     if (data) {
@@ -232,6 +258,7 @@ app.post('/api/announcements/private/total', middleware, (req, res) => {
   });
 });
 
+// noinspection JSUnresolvedFunction
 app.get('/api/announcements/public', (req, res) => {
   db.getPublicAnnouncements().then(data => {
     if (data) {
@@ -242,6 +269,7 @@ app.get('/api/announcements/public', (req, res) => {
   });
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/announcements/private/update', middleware, (req, res) => {
   if (req.decoded.level === 'user') {
     return res.status(401).json({message: 'Authentication failed'});
@@ -256,7 +284,9 @@ app.post('/api/announcements/private/update', middleware, (req, res) => {
     });
   }).catch(() => res.status(404).json('Not Found'));
 });
+// noinspection JSUnresolvedFunction
 app.post('/api/getProfilePic', middleware, (req, res) => {
+  // noinspection JSUnresolvedFunction
   db.profileimage(req.body.emp_id).then(profile => {
     res.json({success: true, data: profile});
   }).catch(() => {
@@ -264,6 +294,7 @@ app.post('/api/getProfilePic', middleware, (req, res) => {
   });
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/announcements/public/add', middleware, (req, res) => {
   if (req.decoded.level === 'user') {
     return res.status(401).json({message: 'Authentication failed'});
@@ -275,6 +306,7 @@ app.post('/api/announcements/public/add', middleware, (req, res) => {
   })).catch(() => res.status(404).json('Not Found'));
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/announcements/private/add', middleware, (req, res) => {
   if (req.decoded.level === 'user') {
     return res.status(401).json({message: 'Authentication failed'});
@@ -286,42 +318,47 @@ app.post('/api/announcements/private/add', middleware, (req, res) => {
   })).catch(() => res.status(404).json('Not Found'));
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/announcements/remove', middleware, (req, res) => {
   if (req.decoded.level === 'user') {
     return res.status(401).json({message: 'Authentication failed'});
   }
-  db.removeAnnouncement(req.body.id).
-      then(
-          res.status(204).json({message: 'Announcement deleted successfully'})).
-      catch(() => res.status(404).json('Not Found'));
+  db.removeAnnouncement(req.body.id)
+      .then(
+          res.status(204).json({message: 'Announcement deleted successfully'}))
+      .catch(() => res.status(404).json('Not Found'));
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/announcements/private/delete', middleware, (req, res) => {
   if (req.decoded.level === 'user') {
     return res.status(401).json({message: 'Authentication failed'});
   }
   console.log(req.body.announcement_id);
-  db.deleteAnnouncement(req.body.announcement_id).
-      then(
-          res.status(204).json({message: 'Announcement deleted successfully'})).
-      catch(() => res.status(404).json('Not Found'));
+  db.deleteAnnouncement(req.body.announcement_id)
+      .then(
+          res.status(204).json({message: 'Announcement deleted successfully'}))
+      .catch(() => res.status(404).json('Not Found'));
 });
 
 /*************************************************************************/
+// noinspection JSUnresolvedFunction
 app.post('/api/user/post/data', middleware, (req, res) => {
 
-  db.postUserData(req.body.data).
-      then(response => res.status(200).json({message: response})).
-      catch(err => res.status(409).json(err));
+  db.postUserData(req.body.data)
+      .then(response => res.status(200).json({message: response}))
+      .catch(err => res.status(409).json(err));
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/BookClass/Enroll', middleware, (req, res) => {
-  db.enrollUser(req.body.CLASS_ID, req.body.User_ID).
-      then(response => res.status(200).json({message: response})).
-      catch(err => res.status(409).json(err));
+  db.enrollUser(req.body.CLASS_ID, req.body.User_ID)
+      .then(response => res.status(200).json({message: response}))
+      .catch(err => res.status(409).json(err));
 });
 /*************************************************************************/
 /*************************************************************************/
+// noinspection JSUnresolvedFunction
 app.post('/api/user/delete/data', middleware, (req, res) => {
   db.deleteUserData(req.decoded.username).then(data => {
     if (data) {
@@ -334,31 +371,31 @@ app.post('/api/user/delete/data', middleware, (req, res) => {
 });
 /*************************************************************************/
 
+// noinspection JSUnresolvedFunction
 app.post('/api/user/insert', (req, res) => {
   console.log(req.body);
-  db.dbSignUp(req.body).
-      then(response => res.status(200).json({message: response})).
-      catch(err => res.status(409).json(err));
+  db.dbSignUp(req.body)
+      .then(response => res.status(200).json({message: response}))
+      .catch(err => res.status(409).json(err));
 });
 
 //fetching the data for the personal training schedule
+// noinspection JSUnresolvedFunction
 app.post('/api/user/getPersonalTraining', middleware, (req, res) => {
-    if (req.decoded.level === 'user') {
-        return res.status(409).json('Authentication failed.');
+  if (req.decoded.level === 'user') {
+    return res.status(409).json('Authentication failed.');
+  }
+  db.getPersonalTraining(req.body.User_ID).then(data => {
+    if (data) {
+      return res.status(200).json(data);
+    } else {
+      return res.status(409).json('Authentication failed. User not found.');
     }
-    db.getPersonalTraining(req.body.User_ID)
-        .then(data => {
-            if (data) {
-                return res.status(200).json(data)
-            } else {
-                return res.status(409).json('Authentication failed. User not found.');
-            }
-        })
-        .catch(err => res.status(409).json(err));
+  }).catch(err => res.status(409).json(err));
 });
 
-
 // mine
+// noinspection JSUnresolvedFunction
 app.post('/api/user/userDetails', middleware, (req, res) => {
   if (req.decoded.level === 'user') {
     return res.status(409).json('Authentication failed.');
@@ -372,6 +409,7 @@ app.post('/api/user/userDetails', middleware, (req, res) => {
   }).catch(err => res.status(409).json(err));
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/BookClass/ClassName', middleware, (req, res) => {
   db.getClasses().then(data => {
     if (data) {
@@ -382,6 +420,7 @@ app.post('/api/BookClass/ClassName', middleware, (req, res) => {
   }).catch(err => res.status(409).json(err));
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/BookClass/ClassDay', middleware, (req, res) => {
   db.getClassDay(req.body.ClassName).then(data => {
     if (data) {
@@ -392,6 +431,7 @@ app.post('/api/BookClass/ClassDay', middleware, (req, res) => {
   }).catch(err => res.status(409).json(err));
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/BookClass/ClassTime', middleware, (req, res) => {
   db.getClassTime(req.body.ClassName, req.body.ClassDay).then(data => {
     if (data) {
@@ -403,44 +443,43 @@ app.post('/api/BookClass/ClassTime', middleware, (req, res) => {
 });
 
 //insert to PersonalTraining
+// noinspection JSUnresolvedFunction
 app.post('/api/insert/PersonalTraining', middleware, (req, res) => {
-    db.insertPT(req.body.data)
-        .then(data => {
-            if (data) {
-                return res.status(200).json(data)
-            } else {
-                return res.status(409).json('Authentication failed. User not found.');
-            }
-        })
-        .catch(err => res.status(409).json(err));
+  db.insertPT(req.body.data).then(data => {
+    if (data) {
+      return res.status(200).json(data);
+    } else {
+      return res.status(409).json('Authentication failed. User not found.');
+    }
+  }).catch(err => res.status(409).json(err));
 });
-
 
 // fetcing coaches for personal training
+// noinspection JSUnresolvedFunction
 app.post('/api/bookTraining/allCoaches', middleware, (req, res) => {
-    db.getAllCoaches()
-        .then(data => {
-            if (data) {
-                return res.status(200).json(data)
-            } else {
-                return res.status(409).json('Authentication failed. User not found.');
-            }
-        })
-        .catch(err => res.status(409).json(err));
+  db.getAllCoaches().then(data => {
+    if (data) {
+      return res.status(200).json(data);
+    } else {
+      return res.status(409).json('Authentication failed. User not found.');
+    }
+  }).catch(err => res.status(409).json(err));
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/BookClass/ClassCoach', middleware, (req, res) => {
-  db.getClassCoach(req.body.ClassName, req.body.ClassDay, req.body.ClassTime).
-      then(data => {
+  db.getClassCoach(req.body.ClassName, req.body.ClassDay, req.body.ClassTime)
+      .then(data => {
         if (data) {
           return res.status(200).json(data);
         } else {
           return res.status(409).json('Authentication failed. User not found.');
         }
-      }).
-      catch(err => res.status(409).json(err));
+      })
+      .catch(err => res.status(409).json(err));
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/BookClass/UserID', middleware, (req, res) => {
   db.getUserID(req.decoded.username).then(data => {
     if (data) {
@@ -459,6 +498,7 @@ app.post('/api/BookClass/UserID', middleware, (req, res) => {
 //             } else {
 //                 return res.status(409).json('Authentication failed. User not
 // found.'); } }) .catch(err => res.status(409).json(err)); });
+// noinspection JSUnresolvedFunction
 app.post('/api/BookClass/ClassID', middleware, (req, res) => {
   db.getClassID(req.body.ClassName, req.body.ClassDay, req.body.ClassTime,
       req.body.CoachName).then(data => {
@@ -470,6 +510,7 @@ app.post('/api/BookClass/ClassID', middleware, (req, res) => {
   }).catch(err => res.status(409).json(err));
 });
 /***********************************************/
+// noinspection JSUnresolvedFunction
 app.post('/api/messages/get', middleware, (req, res) => {
   db.getMessages(req.decoded.username).then(data => {
     if (data) {
@@ -481,6 +522,7 @@ app.post('/api/messages/get', middleware, (req, res) => {
   }).catch(err => res.status(409).json(err));
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/messages/total', middleware, (req, res) => {
   db.getMessagesCount(req.decoded.username).then(data => {
     if (data) {
@@ -492,6 +534,7 @@ app.post('/api/messages/total', middleware, (req, res) => {
   }).catch(err => res.status(409).json(err));
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/messages/unread', middleware, (req, res) => {
   db.makeMessagesRead(req.body.newMessages).then(data => {
     if (data) {
@@ -503,6 +546,7 @@ app.post('/api/messages/unread', middleware, (req, res) => {
   }).catch(err => res.status(409).json(err));
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/messages/new', middleware, (req, res) => {
   db.createNewMessage(req.body.data, req.decoded.username).then(data => {
     if (data) {
@@ -514,6 +558,7 @@ app.post('/api/messages/new', middleware, (req, res) => {
   }).catch(err => res.status(409).json(err));
 });
 
+// noinspection JSUnresolvedFunction
 app.get('/api/coaches/get', (req, res) => {
   db.getCoaches().then(data => {
     if (data) {
@@ -524,8 +569,50 @@ app.get('/api/coaches/get', (req, res) => {
   });
 });
 
+// noinspection JSUnresolvedFunction
 app.get('/api/admins/get', (req, res) => {
   db.getAdmins().then(data => {
+    if (data) {
+      return res.status(200).json(data);
+    } else {
+      return res.status(404).json('Not found.');
+    }
+  });
+});
+
+// noinspection JSUnresolvedFunction
+app.get('/api/server/connections', (req, res) => {
+  if (!connections) {
+    return res.status(404).json('Not found.');
+  }
+  return res.status(200).json({connections: connections.length});
+});
+
+// noinspection JSUnresolvedFunction
+app.get('/api/chart/pie/gender', (req, res) => {
+  db.getGenderChart().then(data => {
+    if (data) {
+      return res.status(200).json(data);
+    } else {
+      return res.status(404).json('Not found.');
+    }
+  });
+});
+
+// noinspection JSUnresolvedFunction
+app.get('/api/chart/pie/enroll', (req, res) => {
+  db.getClassDaysChart().then(data => {
+    if (data) {
+      return res.status(200).json(data);
+    } else {
+      return res.status(404).json('Not found.');
+    }
+  });
+});
+
+// noinspection JSUnresolvedFunction
+app.get('/api/chart/pie/personal', (req, res) => {
+  db.getPersonalDaysChart().then(data => {
     if (data) {
       return res.status(200).json(data);
     } else {

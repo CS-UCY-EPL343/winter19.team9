@@ -4,8 +4,10 @@ import Chart              from 'chart.js';
 class PieChart extends Component {
   constructor(props) {
     super(props);
+    // noinspection JSUnresolvedVariable
     this.state = {
-      animationTime: this.props.timeMS,
+      myChart      : null,
+      animationTime: this.props.timeMS || 1000,
     };
   }
 
@@ -13,40 +15,51 @@ class PieChart extends Component {
     this.createChart();
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.data !== this.props.data) {
+      this.state.myChart.destroy();
+      this.createChart();
+    }
+  }
+
   createChart() {
+    const colors = ['#4BC0C0', '#FF6384', '#FFCD56','#3FC62E', '#e55aff'];
+    const hoverColors = ['#287FC0', '#FF001C', '#F6EC04', '#17920F', '#9e00ff'];
     let ctx = document.getElementById(this.props.id);
     let data = {
-      labels  : ['New', 'Returning'],
+      labels  : this.props.labels,
       datasets: [
         {
-          data                : [this.props.new, this.props.returning],
-          backgroundColor     : [
-            '#FF6384',
-            '#36A2EB',
-          ],
-          hoverBackgroundColor: [
-            '#FF6384',
-            '#36A2EB',
-          ],
-          borderColor         : ['#252830', '#252830'],
+          data                : this.props.data,
+          backgroundColor     : colors,
+          hoverBackgroundColor: hoverColors,
+          borderColor         : '#252830',
         },
       ],
     };
-    new Chart(ctx, {
+    const myChart = new Chart(ctx, {
       type   : 'doughnut',
       data   : data,
       options: {
         cutoutPercentage: 80,
         legend          : {
-          display: false,
+          display  : true,
+          align    : 'center',
+          fullWidth: true,
+        },
+        tooltips        : {
+          enabled    : true,
+          borderColor: 'white',
         },
         animation       : {
           animateScale: true,
-          duration: this.state.animationTime || 1000,
+          duration    : this.state.animationTime,
         },
         responsive      : true,
       },
     });
+
+    this.setState({myChart});
   }
 
   render() {
@@ -58,9 +71,9 @@ class PieChart extends Component {
                     height = "400"
             />
           </div>
-          <div className = "text-center"><strong>{ this.props.title }</strong>
+          <div className = "text-center">
+            <strong>{ this.props.title }</strong>
           </div>
-          <h4 className = "text-center">{ this.props.new } vs. { this.props.returning }</h4>
         </div>
     );
   }

@@ -11,14 +11,21 @@ import {
   allVisitCount,
   loggedInVisit,
   updateDashboardVisit,
-}                         from '../../repository';
+  getServerConnections,
+  getUserCount,
+  getPageVisits,
+  getEnrollCount,
+  getGenderChart,
+  getClassDaysChart, getPersonalDaysChart,
+} from '../../repository';
 
 class UIDashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedGraph  : '1',
-      graphData      : {
+      // Set to first option of select
+      selectedGraph: '1',
+      graphData    : {
         title: 'Chart 1',
         type : 'bar',
         xs   : ['January', 'February', 'March', 'April', 'May', 'June'],
@@ -26,23 +33,12 @@ class UIDashboard extends Component {
           {label: 'Lost', data: [45, 25, 40, 20, 45, 20]},
           {label: 'Success', data: [20, 40, 20, 45, 25, 60]},
         ],
-      },  // Set to first option of select
+      },
       // Donought chats data
-      traffic        : {
-        id       : 'traffic',
-        new      : 80,
-        returning: 50,
-      },
-      profit         : {
-        id       : 'profit',
-        new      : 100,
-        returning: 25,
-      },
-      reveanue       : {
-        id       : 'reveanue',
-        new      : 300,
-        returning: 1500,
-      },
+      genders: {id    : 'gender', data: [], labels: []},
+      enroll : {id    : 'enroll', data: [], labels: []},
+      personal : {id    : 'personal', data: [], labels: []},
+      // Leaderboards data
       uiDataPageViews: [],
       uiDataUserTypes: [],
     };
@@ -55,8 +51,30 @@ class UIDashboard extends Component {
   componentDidMount() {
     loggedInVisit().then();
     updateDashboardVisit().then();
+
     allVisitCount().then(response => this.visitCounts(response));
     allUsersCount().then(response => this.userCounts(response));
+    getGenderChart().then(response => this.setState({
+      genders: {
+        id    : 'gender',
+        labels: ['Male', 'Female'],
+        data  : response.map(val => val.count),
+      },
+    }));
+    getClassDaysChart().then(response => this.setState({
+      enroll: {
+        id    : 'enroll',
+        labels: response.map(val => val.Day),
+        data  : response.map(val => val.count),
+      },
+    }));
+    getPersonalDaysChart().then(response => this.setState({
+      personal: {
+        id    : 'personal',
+        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        data  : response.map(val => val.count),
+      },
+    }));
   }
 
   userCounts(response) {
@@ -156,42 +174,46 @@ class UIDashboard extends Component {
           <div className = "container">
             { (this.props.userLevel === 'admin') ? '' : <Redirect to = "/" /> }
             <div className = "row line__chart-wrapper">
-              <LineChart id = "test-1"
+              <LineChart id = "server-connections"
                          chartSpeed = "4250"
                          bgColor = "#1BC98E"
-                         title = "Page Views"
+                         title = "Server"
+                         getData = { getServerConnections }
               />
-              <LineChart id = "test-2"
+              <LineChart id = "page-visits"
                          chartSpeed = "6100"
                          bgColor = "#E64759"
-                         title = "Emails"
+                         title = "Page Visits"
+                         getData = { getPageVisits }
               />
-              <LineChart id = "test-3"
+              <LineChart id = "user-count"
                          chartSpeed = "4900"
                          bgColor = "#9F86FF"
                          title = "Users"
+                         getData = { getUserCount }
               />
-              <LineChart id = "test-4"
+              <LineChart id = "enrollment-count"
                          chartSpeed = "3200"
                          bgColor = "#E4D836"
-                         title = "Sales"
+                         title = "Enrolled"
+                         getData = { getEnrollCount }
               />
             </div>
             <div className = "row pie__chart-wrapper">
-              <PieChart title = "Traffic"
-                        new = { this.state.traffic.new }
-                        returning = { this.state.traffic.returning }
-                        id = { this.state.traffic.id }
+              <PieChart title = "Genders"
+                        data = { this.state.genders.data }
+                        labels = { this.state.genders.labels }
+                        id = { this.state.genders.id }
               />
-              <PieChart title = "Profit"
-                        new = { this.state.profit.new }
-                        returning = { this.state.profit.returning }
-                        id = { this.state.profit.id }
+              <PieChart title = "Enrolled Classes"
+                        data = { this.state.enroll.data }
+                        labels = { this.state.enroll.labels }
+                        id = { this.state.enroll.id }
               />
-              <PieChart title = "Reveanue"
-                        new = { this.state.reveanue.new }
-                        returning = { this.state.reveanue.returning }
-                        id = { this.state.reveanue.id }
+              <PieChart title = "Personal Classes"
+                        data = { this.state.personal.data }
+                        labels = { this.state.personal.labels }
+                        id = { this.state.personal.id }
               />
             </div>
             <div className = "select-chart">

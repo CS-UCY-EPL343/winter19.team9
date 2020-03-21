@@ -588,6 +588,78 @@ function getAllUserTypeCount() {
   });
 }
 
+function getUserCount() {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT COUNT(*) AS "count" FROM `USERS`';
+    connection.query(sql, function(err, rows) {
+      if (err) {
+        reject(err);
+      }
+      resolve(rows);
+    });
+  });
+}
+
+function getPageVisitsCount() {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT (SUM(HOME_PAGE) + SUM(CLASSES) + SUM(ABOUT_US) + SUM(PROFILE_USER) + SUM(PROFILE_COACH) + SUM(PROFILE_ADMIN) + SUM(ADMIN_DASHBOARD)) AS "count" FROM `PageVisit`';
+    connection.query(sql, function(err, rows) {
+      if (err) {
+        reject(err);
+      }
+      resolve(rows);
+    });
+  });
+}
+
+function getEnrollCount() {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT COUNT(*) AS "count" FROM `ENROL`';
+    connection.query(sql, function(err, rows) {
+      if (err) {
+        reject(err);
+      }
+      resolve(rows);
+    });
+  });
+}
+
+function getGenderChart() {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT COUNT(*) AS "count" FROM `USERS` GROUP BY `Gender` ORDER BY Gender ASC';
+    connection.query(sql, function(err, rows) {
+      if (err) {
+        reject(err);
+      }
+      resolve(rows);
+    });
+  });
+}
+
+function getClassDaysChart() {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT Class.Day, COUNT(*) AS "count" FROM `ENROL` JOIN `Class` ON `ENROL`.`CLASS_ID` = `Class`.`ClassID` GROUP BY `Class`.`Day`';
+    connection.query(sql, function(err, rows) {
+      if (err) {
+        reject(err);
+      }
+      resolve(rows);
+    });
+  });
+}
+
+function getPersonalDaysChart() {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT PERSONAL_TRAINING.Day, COUNT(*) AS "count" FROM `PERSONAL_TRAINING` GROUP BY `PERSONAL_TRAINING`.`Day` ORDER BY `PERSONAL_TRAINING`.`Day` ASC';
+    connection.query(sql, function(err, rows) {
+      if (err) {
+        reject(err);
+      }
+      resolve(rows);
+    });
+  });
+}
+
 function updateLoggedInVisit() {
   return new Promise((resolve, reject) => {
     const sql = 'UPDATE PageVisit Set LOGGED_IN=LOGGED_IN+1';
@@ -717,4 +789,10 @@ module.exports = {
   base64ToHex,
   getAllCoaches,
   insertPT,
+  getUserCount,
+  getPageVisitsCount,
+  getEnrollCount,
+  getGenderChart,
+  getClassDaysChart,
+  getPersonalDaysChart,
 };
