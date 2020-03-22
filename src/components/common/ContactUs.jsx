@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import '../assets/styles/About.css';
 import {sendEmail}        from '../../repository';
+import FontAwesome from 'react-fontawesome'
+
 
 class ContactUs extends Component {
   constructor(props) {
@@ -46,7 +48,7 @@ class ContactUs extends Component {
   render() {
     return (
         <section className = "page-section" id = "contact">
-          <div className = "container">
+          <div className = "container-fluid">
             <div className = "row">
               <div className = "col-lg-12 text-center col-md-12 col-sm-12">
                 <h1 className = "section-heading">
@@ -165,19 +167,16 @@ class ContactUs extends Component {
                   Phone: 22-260001
                   <br />
                   Email: info@fitnessfactorynic.com.cy
+                  <br/>
                 </p>
-                <a href = "https://www.facebook.com/fitnessfactorynicosia/">
-                  <i className = "fa fa-twitter" />
-                </a>
-                <a href = "https://www.facebook.com/fitnessfactorynicosia/">
-                  <i className = "fa fa-facebook" />
-                </a>
-                <a href = "https://www.instagram.com/fitness_factory_nicosia/">
-                  <i className = "fa fa-instagram" />
-                </a>
-                <a href = "https://cy.linkedin.com/in/constantinos-christou-ba56b6187">
-                  <i className = "fa fa-linkedin" />
-                </a>
+                <p>
+                  <a href = "https://www.facebook.com/fitnessfactorynicosia/">
+                    <i className = "fa fa-facebook" />
+                  </a>
+                  <a href = "https://www.instagram.com/fitness_factory_nicosia/">
+                    <i className = "fa fa-instagram" />
+                  </a>
+                </p>
               </div>
               <div className = "col-lg-6 col-md-12 col-sm-12 text-center">
                 <div className = "mapouter">
@@ -194,7 +193,6 @@ class ContactUs extends Component {
                         marginWidth = "0"
                     />
                     <a href = "https://www.embedgooglemap.net/blog/divi-discount-code-elegant-themes-coupon/">
-                      embedgooglemap.net
                     </a>
                   </div>
                 </div>

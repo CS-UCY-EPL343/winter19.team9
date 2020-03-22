@@ -203,7 +203,7 @@ h6 {
 
 #footer .row div {
     text-align : center;
-    padding    : 20px 0;
+    padding    : 6px 0;
 }
 
 #footer p {
@@ -220,6 +220,40 @@ h6 {
     color  : #D90429;
     border : none;
 }
+
+#help-footer .row div {
+    text-align : center;
+    padding    : 6px 0;
+}
+
+#help-footer p {
+    text-align: center;
+    color: #edf2f4;
+    border: none;
+}
+
+.Nav_link:link {
+    color: #edf2f4;
+    padding    : 6px 0;
+    text-align : center;
+}
+.Nav_link:visited {
+    color: #edf2f4;
+    padding    : 6px 0;
+    text-align : center;
+}
+.Nav_link:hover {
+    color: #d90429;
+    padding    : 6px 0;
+    text-align : center;
+}
+.Nav_link:active {
+    color: #d90429;
+    padding    : 6px 0;
+    text-align : center;
+}
+
+
 
 #copyrights {
     padding          : 15px 0;

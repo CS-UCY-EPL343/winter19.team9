@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import '../assets/styles/homePage.css'
+import FontAwesome from "react-fontawesome";
 
 class ServiceGoal extends Component {
     render() {
@@ -6,7 +8,10 @@ class ServiceGoal extends Component {
             <div className = { 'col-xl-3 col-lg-6 col-md-6' }>
                 <div className = { 'service-box' }>
                     <div className = { 'service-box-icon' }>
-                        <i className = { this.props.icon } />
+                        <FontAwesome
+                            name={this.props.icon}
+                            size="1x"
+                        />
                     </div>
                     <div className = { 'service-box-content' }>
                         <h1 className = { 'service-box-title' }>{ this.props.title }</h1>

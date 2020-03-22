@@ -11,11 +11,11 @@ import TeamMember from "./TeamMember";
 
 const coaches = [
 
-    {className: '', src: coach1, name: 'Andreas Evagorou', text: 'By combining the movement one conducts in their ' +
+    {className: '', src: coach2, name: 'Marinos Papakyriakou', text: 'By combining the movement one conducts in their ' +
                                     'everyday lives, from housewives and young children to professional ' +
                                     'athletes and special forces individuals, in Fitness Factory is the ' +
                                     'ultimate workout!'},
-    {className: 'timeline-inverted', src: coach2, name: 'Marinos Papakyriakou', text: 'The workouts will keep you honest and ' +
+    {className: 'timeline-inverted', src: coach4, name: 'Andreas Ketwnis', text: 'The workouts will keep you honest and ' +
             'force you to attack your weaknesses, making you a better all-around ' +
             'athlete. This is something that nearly everyone avoids when training ' +
             'on their own, which severely limits progress.'},
@@ -23,7 +23,7 @@ const coaches = [
             'everyday lives, from housewives and young children to professional ' +
             'athletes and special forces individuals, in Fitness Factory is the ' +
             'ultimate workout!'},
-    {className: 'timeline-inverted', src: coach4, name: 'Andreas Ketwnis', text: 'The workouts will keep you honest and ' +
+    {className: 'timeline-inverted', src: coach1, name: 'Andreas Evagorou', text: 'The workouts will keep you honest and ' +
             'force you to attack your weaknesses, making you a better all-around ' +
             'athlete. This is something that nearly everyone avoids when training ' +
             'on their own, which severely limits progress.'},
@@ -38,7 +38,7 @@ class Team extends Component {
     render() {
         return (
             <section className="page-section" id="about">
-                <div className="container">
+                <div className="container-fluid">
                     <div className="row">
                         <div className="col-lg-12 text-center">
                             <h2 id="test" className="section-heading text-uppercase">Our trainers</h2>

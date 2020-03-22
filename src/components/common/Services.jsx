@@ -4,6 +4,7 @@ import ServiceGoal          from './ServiceGoal';
 import { AnimatedOnScroll } from 'react-animated-css-onscroll';
 import bgImage              from '../assets/img/logos/ffLogoTransparent.png';
 
+
 class Services extends Component {
     render() {
         return (
@@ -38,14 +39,14 @@ class Services extends Component {
                                 <div className = { 'col-lg-12' }>
                                     <div className = { 'row d-flex justify-content-between' }>
                                         <ServiceGoal
-                                            icon = { 'fas fa-heartbeat' }
+                                            icon = { "heartbeat" }
                                             title = { 'Health' }
                                             message = { 'Extensa ubi lor emittet sui incipio mallent hos sentire. Et at '
                                                         + 'cogor vapor vocem quare. Quinque ex vestiri de ii pretium.' }
                                         />
 
                                         <ServiceGoal
-                                            icon = { 'fas fa-dumbbell' }
+                                            icon = { "dumbbell" }
                                             title = { 'Strength' }
                                             message = { 'Me notaverim ne opinionis ii detrahere. Non mox rerum istam '
                                                         + 'sonos. Ens dem recensenda percipimus mox realitatem. Suo '
@@ -59,7 +60,7 @@ class Services extends Component {
                                 <div className = { 'col-lg-12' }>
                                     <div className = { 'row d-flex justify-content-between' }>
                                         <ServiceGoal
-                                            icon = { 'fas fa-fist-raised' }
+                                            icon = { 'fist-raised' }
                                             title = { 'Energy' }
                                             message = { 'Nul opinionum sim procuravi perductae his omniscium devenimus '
                                                         + 'objectiva. Admitto nullibi im allatae incumbo ab. Cognitu '
@@ -67,7 +68,7 @@ class Services extends Component {
                                         />
 
                                         <ServiceGoal
-                                            icon = { 'fas fa-running' }
+                                            icon = { 'running' }
                                             title = { 'Running' }
                                             message = { 'Ero parentibus complector expectanti vos faciliorem conjunctam '
                                                         + 'incrementi. Re magnum ac de nescio fallat pictas in.' }
@@ -80,7 +81,7 @@ class Services extends Component {
                                 <div className = { 'col-lg-12' }>
                                     <div className = { 'row d-flex justify-content-between' }>
                                         <ServiceGoal
-                                            icon = { 'fas fa-weight-hanging' }
+                                            icon = { 'weight-hanging' }
                                             title = { 'Equipment' }
                                             message = { 'Expectem decipior eam abducere doctrina ero habuimus sae '
                                                         + 'cavendum. Tractatu admittit ut de cavendum occurrit invenero '
@@ -88,7 +89,7 @@ class Services extends Component {
                                         />
 
                                         <ServiceGoal
-                                            icon = { 'fas fa-medal' }
+                                            icon = { 'medal' }
                                             title = { 'Winner' }
                                             message = { 'De excaecant vi quaslibet is inquirere. Hoc usu digna solis '
                                                         + 'fieri. Rum ima concipitur producatur cui requiratur.' }

@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://cs-ucy-epl343.github.io/winter19.team9/",
   "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^5.12.1",
     "atob": "^2.1.2",
     "atob-lite": "^2.0.0",
     "axios": "^0.19.2",
@@ -13,6 +14,7 @@
     "convert-hex": "^0.1.0",
     "history": "^4.10.1",
     "leaflet": "^1.5.1",
+    "mdbreact": "^4.25.4",
     "node": "^13.10.1",
     "react": "^16.11.0",
     "react-animate-on-scroll": "^2.1.5",
@@ -21,6 +23,7 @@
     "react-bootstrap-modal": "^4.2.0",
     "react-confirm-alert": "^2.5.1",
     "react-dom": "^16.11.0",
+    "react-fontawesome": "^1.7.1",
     "react-paypal-express-checkout": "^1.0.5",
     "react-recaptcha": "^2.3.10",
     "react-scripts": "^3.3.1",
@@ -55,6 +58,7 @@
   },
   "devDependencies": {
     "concurrently": "^5.1.0",
+    "font-awesome": "^4.7.0",
     "gh-pages": "^2.1.1",
     "react-router-dom": "^5.1.2",
     "reactjs-popup": "^1.5.0",

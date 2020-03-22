@@ -59,8 +59,8 @@ function dbLogIn(username, password) {
 
 function dbSignUp(data) {
   return new Promise((resolve, reject) => {
-    let lvl = 'User';
-    const ins = 'INSERT INTO ACCOUNT("username","password","level","User_ID") values(?,?,?,?)';
+    let lvl = 'user';
+    const ins = 'INSERT INTO ACCOUNT(username, password, level, User_ID) values(?,?,?,?)';
     const insert = 'INSERT INTO USERS(Name, Surname, Bdate, Gender, Email, Medical_History, Age, Membership_ID) values(?,?,?,?,?,?,?,?)';
 
     connection.query(insert, [
