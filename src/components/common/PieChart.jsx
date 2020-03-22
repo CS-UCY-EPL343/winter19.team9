@@ -23,8 +23,30 @@ class PieChart extends Component {
   }
 
   createChart() {
-    const colors = ['#4BC0C0', '#FF6384', '#FFCD56','#3FC62E', '#e55aff'];
-    const hoverColors = ['#287FC0', '#FF001C', '#F6EC04', '#17920F', '#9e00ff'];
+    const colors = [
+      '#4BC0C0',
+      '#FF6384',
+      '#FFCD56',
+      '#3FC62E',
+      '#E55AFF',
+      '#CB843F',
+      '#F583FF',
+      '#49FF60',
+      '#4CC6BF',
+      '#F3F6FF',
+    ];
+    const hoverColors = [
+      '#287FC0',
+      '#FF001C',
+      '#F6EC04',
+      '#17920F',
+      '#9E00FF',
+      '#CB5F0B',
+      '#EA1DFF',
+      '#12D021',
+      '#0D9DB4',
+      '#343438',
+    ];
     let ctx = document.getElementById(this.props.id);
     let data = {
       labels  : this.props.labels,

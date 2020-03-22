@@ -16,31 +16,28 @@ import {
   getPageVisits,
   getEnrollCount,
   getGenderChart,
-  getClassDaysChart, getPersonalDaysChart,
-} from '../../repository';
+  getClassDaysChart,
+  getPersonalDaysChart,
+  getAgeRange,
+  getCoachesDayWork,
+  getCoachesPersonalWork,
+}                         from '../../repository';
 
 class UIDashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       // Set to first option of select
-      selectedGraph: '1',
-      graphData    : {
-        title: 'Chart 1',
-        type : 'bar',
-        xs   : ['January', 'February', 'March', 'April', 'May', 'June'],
-        ys   : [
-          {label: 'Lost', data: [45, 25, 40, 20, 45, 20]},
-          {label: 'Success', data: [20, 40, 20, 45, 25, 60]},
-        ],
-      },
+      firstGraphLoaded: false,
+      selectedGraph   : 0,
+      graphData       : [],
       // Donought chats data
-      genders: {id    : 'gender', data: [], labels: []},
-      enroll : {id    : 'enroll', data: [], labels: []},
-      personal : {id    : 'personal', data: [], labels: []},
+      genders         : {id: 'gender', data: [], labels: []},
+      enroll          : {id: 'enroll', data: [], labels: []},
+      personal        : {id: 'personal', data: [], labels: []},
       // Leaderboards data
-      uiDataPageViews: [],
-      uiDataUserTypes: [],
+      uiDataPageViews : [],
+      uiDataUserTypes : [],
     };
 
     this.handleChart = this.handleChart.bind(this);
@@ -49,11 +46,13 @@ class UIDashboard extends Component {
   }
 
   componentDidMount() {
+    // Page Visits
     loggedInVisit().then();
     updateDashboardVisit().then();
-
+    // Leaderboards
     allVisitCount().then(response => this.visitCounts(response));
     allUsersCount().then(response => this.userCounts(response));
+    // Pie Charts
     getGenderChart().then(response => this.setState({
       genders: {
         id    : 'gender',
@@ -75,6 +74,126 @@ class UIDashboard extends Component {
         data  : response.map(val => val.count),
       },
     }));
+    // Graphs
+    this.getGraphData();
+  }
+
+  getGraphData() {
+    getCoachesDayWork().then(response => {
+      let graphData = [...this.state.graphData];
+      const finalCoachData = [];
+      this.groupBy(response, response => response.Coach_ID)
+          .forEach(val => {
+            const coachData = {
+              label: `${ val[0].CoachName } ${ val[0].Surname }`,
+              data : [0, 0, 0, 0, 0, 0, 0],
+            };
+            for (let v of val) {
+              const dayIndex = this.dayToIndex(v.Day);
+              if (dayIndex === -1) {
+                continue;
+              }
+              // noinspection JSUnresolvedVariable
+              coachData.data[dayIndex] += v.Participants;
+            }
+            finalCoachData.push(coachData);
+          });
+      graphData.push({
+        title: 'Participants in Coaches Classes',
+        type : 'line',
+        xs   : [
+          'Monday',
+          'Tuesday',
+          'Wednesday',
+          'Thursday',
+          'Friday',
+          'Saturday',
+          'Sunday',
+        ],
+        ys   : finalCoachData,
+      });
+      this.setState({graphData, firstGraphLoaded: true});
+    })
+        .then(() => getCoachesPersonalWork().then(response => {
+          let graphData = [...this.state.graphData];
+          const finalCoachData = [];
+          this.groupBy(response, response => response.Coach_ID)
+              .forEach(val => {
+                const coachData = {
+                  label: `${ val[0].CoachName } ${ val[0].Surname }`,
+                  data : [0, 0, 0, 0, 0, 0, 0],
+                };
+                for (let v of val) {
+                  const dayIndex = v.Day;
+                  if (dayIndex < 0 || dayIndex > 6) {
+                    continue;
+                  }
+                  // noinspection JSUnresolvedVariable
+                  coachData.data[dayIndex] += v.Participants;
+                }
+                finalCoachData.push(coachData);
+              });
+          graphData.push({
+            title: 'Participants in Coaches Personal Classes',
+            type : 'line',
+            xs   : [
+              'Monday',
+              'Tuesday',
+              'Wednesday',
+              'Thursday',
+              'Friday',
+              'Saturday',
+              'Sunday',
+            ],
+            ys   : finalCoachData,
+          });
+          this.setState({graphData, firstGraphLoaded: true});
+        }))
+        .then(() => getAgeRange().then(response => {
+          let graphData = [...this.state.graphData];
+          graphData.push({
+            title: 'Age Range User Count',
+            type : 'bar',
+            xs   : Object.keys(response),
+            ys   : [{label: 'Users', data: Object.values(response)}],
+          });
+          this.setState({graphData});
+        }));
+  }
+
+  dayToIndex = (day) => {
+    switch (day) {
+      case 'Monday':
+        return 0;
+      case 'Tuesday':
+        return 1;
+      case 'Wednesday':
+        return 2;
+      case 'Thursday':
+        return 3;
+      case 'Friday':
+        return 4;
+      case 'Saturday':
+        return 5;
+      case 'Sunday':
+        return 6;
+      default:
+        return -1;
+    }
+  };
+
+  groupBy(list, keyGetter) {
+    const map = new Map();
+    list.forEach((item) => {
+      const key = keyGetter(item);
+      const collection = map.get(key);
+      if (!collection) {
+        map.set(key, [item]);
+      } else {
+        collection.push(item);
+      }
+    });
+    return map;
   }
 
   userCounts(response) {
@@ -126,46 +245,7 @@ class UIDashboard extends Component {
   };
 
   handleChart(e) {
-    this.setState({
-      [e.target.name]: e.target.value,
-    }, () => {
-      // Get data from database
-      if (this.state.selectedGraph === '1') {
-        this.setState({
-          graphData: {
-            title: 'Chart 1',
-            type : 'bar',
-            xs   : ['January', 'February', 'March', 'April', 'May', 'June'],
-            ys   : [
-              {label: 'Lost', data: [45, 25, 40, 20, 45, 20]},
-              {label: 'Success', data: [20, 40, 20, 45, 25, 60]},
-            ],
-          },
-        });
-      } else if (this.state.selectedGraph === '2') {
-        this.setState({
-          graphData: {
-            title: 'Chart 2',
-            type : 'line',
-            xs   : [
-              'January',
-              'February',
-              'March',
-              'April',
-              'May',
-              'June',
-              'July',
-              'August',
-            ],
-            ys   : [
-              {label: 'Day', data: [5, 10, 5, 8, 20, 30, 20, 10]},
-              {label: 'Week', data: [20, 14, 20, 25, 10, 15, 25, 10]},
-              {label: 'Month', data: [40, 20, 5, 10, 30, 15, 15, 10]},
-            ],
-          },
-        });
-      }
-    });
+    this.setState({[e.target.name]: Number(e.target.value)});
   }
 
   render() {
@@ -219,21 +299,24 @@ class UIDashboard extends Component {
             <div className = "select-chart">
               <select name = "selectedGraph" onChange = { this.handleChart }>
                 {/*<option selected disabled>Choose a chart to display</option>*/ }
-                <option value = "1">Chart 1</option>
-                <option value = "2">Chart 2</option>
+                <option value = "0">Participants in Coaches Classes</option>
+                <option value = "1">Participants in Coaches Personal Classes
+                </option>
+                <option value = "2">Age Range User Count</option>
               </select>
             </div>
-            <Graphs graphData = { this.state.graphData } />
+            { this.state.firstGraphLoaded &&
+              <Graphs graphData = { this.state.graphData[this.state.selectedGraph] } /> }
             <StaffList />
             <div className = "row leaderboards">
               <LeaderBoard data = { this.state.uiDataUserTypes }
-                           sortAsc = { true }
+                           sortAsc = { false }
                            title = "User Types"
                            dataSort = "count"
                            dataTitle = "type"
               />
               <LeaderBoard data = { this.state.uiDataPageViews }
-                           sortAsc = { false }
+                           sortAsc = { true }
                            title = "Most Visited Pages"
                            dataSort = "views"
                            dataTitle = "page"

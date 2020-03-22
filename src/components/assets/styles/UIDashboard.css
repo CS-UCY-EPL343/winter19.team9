@@ -35,7 +35,7 @@
 #UIDashboard .select-chart {
     position      : relative;
     display       : flex;
-    width         : 20em;
+    width         : 25em;
     height        : 3em;
     line-height   : 3;
     background    : #2C3E50;
