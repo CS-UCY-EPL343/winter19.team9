@@ -621,6 +621,39 @@ app.get('/api/chart/pie/personal', (req, res) => {
   });
 });
 
+// noinspection JSUnresolvedFunction
+app.get('/api/chart/bar/age', (req, res) => {
+  db.getAgeRange().then(data => {
+    if (data) {
+      return res.status(200).json(data);
+    } else {
+      return res.status(404).json('Not found.');
+    }
+  });
+});
+
+// noinspection JSUnresolvedFunction
+app.get('/api/chart/line/coaches/week-work', (req, res) => {
+  db.getCoachesDayWork().then(data => {
+    if (data) {
+      return res.status(200).json(data);
+    } else {
+      return res.status(404).json('Not found.');
+    }
+  });
+});
+
+// noinspection JSUnresolvedFunction
+app.get('/api/chart/line/coaches/personal-work', (req, res) => {
+  db.getCoachesPersonalWork().then(data => {
+    if (data) {
+      return res.status(200).json(data);
+    } else {
+      return res.status(404).json('Not found.');
+    }
+  });
+});
+
 const PORT = process.env.PORT;
 const server = app.listen(PORT, () => {
   console.log('Running on port: ' + PORT);

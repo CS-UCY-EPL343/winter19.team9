@@ -24,14 +24,41 @@ class Graphs extends Component {
     Chart.defaults.scale.gridLines.zeroLineColor = 'rgba(255, 255, 255, 0.1)';
     Chart.defaults.scale.gridLines.color = 'rgba(255, 255, 255, 0.02)';
 
-    const colors = ['#4BC0C0', '#FF6384', '#FFCD56', '#3fc62e'];
+    const colors = [
+      '#4BC0C0',
+      '#FF6384',
+      '#FFCD56',
+      '#3FC62E',
+      '#E55AFF',
+      '#CB843F',
+      '#F583FF',
+      '#49FF60',
+      '#4CC6BF',
+      '#F3F6FF',
+    ];
+    const hoverColors = [
+      '#287FC0',
+      '#FF001C',
+      '#F6EC04',
+      '#17920F',
+      '#9E00FF',
+      '#CB5F0B',
+      '#EA1DFF',
+      '#12D021',
+      '#0D9DB4',
+      '#343438',
+    ];
     const ys = this.props.graphData.ys.map((data, index) => {
       data['fill'] = false;
       data['lineTension'] = .4;
       data['pointBorderColor'] = false;
-      data['borderColor'] = colors[index];
+      this.props.graphData.type === 'bar'
+          ? data['borderColor'] = colors
+          : data['borderColor'] = colors[index];
       data['borderWidth'] = 2;
-      data['backgroundColor'] = colors[index];
+      this.props.graphData.type === 'bar'
+          ? data['backgroundColor'] = colors
+          : data['backgroundColor'] = colors[index];
       data['showLine'] = true;
       return data;
     });
@@ -39,8 +66,10 @@ class Graphs extends Component {
     const myChart = new Chart(chart1, {
       type   : this.props.graphData.type,
       data   : {
-        labels  : this.props.graphData.xs,
-        datasets: ys,
+        labels              : this.props.graphData.xs,
+        datasets            : ys,
+        hoverBackgroundColor: hoverColors,
+        borderColor         : '#252830',
       },
       options: {
         title           : {display: false},
@@ -50,8 +79,8 @@ class Graphs extends Component {
         defaultFontColor: '#999999',
         defaultFontSize : 10,
         tooltips        : {
-          enabled: true,
-          borderColor: 'white'
+          enabled    : true,
+          borderColor: 'white',
         },
         legend          : {
           display  : true,
@@ -70,7 +99,7 @@ class Graphs extends Component {
             <div className = "row">
               <div className = "col-md-12">
                 <div className = "chart-container">
-                  <h3>{ this.props.graphData.title }</h3>
+                  {/*<h3>{ this.props.graphData.title }</h3>*/ }
                   <canvas id = "myChart" />
                 </div>
               </div>

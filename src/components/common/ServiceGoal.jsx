@@ -10,7 +10,7 @@ class ServiceGoal extends Component {
                     <div className = { 'service-box-icon' }>
                         <FontAwesome
                             name={this.props.icon}
-                            size="1x"
+                            size="2x"
                         />
                     </div>
                     <div className = { 'service-box-content' }>

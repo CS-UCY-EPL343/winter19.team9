@@ -745,6 +745,42 @@ function updateClassesVisit() {
   });
 }
 
+function getAgeRange() {
+  return new Promise((resolve, reject) => {
+    const sql = 'CALL getAgeRange()';
+    connection.query(sql, function(err, rows) {
+      if (err) {
+        reject(err);
+      }
+      resolve(rows);
+    });
+  });
+}
+
+function getCoachesDayWork() {
+  return new Promise((resolve, reject) => {
+    const sql = 'CALL getCoachesDayWork()';
+    connection.query(sql, function(err, rows) {
+      if (err) {
+        reject(err);
+      }
+      resolve(rows);
+    });
+  });
+}
+
+function getCoachesPersonalWork() {
+  return new Promise((resolve, reject) => {
+    const sql = 'CALL getCoachesPersonalWork()';
+    connection.query(sql, function(err, rows) {
+      if (err) {
+        reject(err);
+      }
+      resolve(rows);
+    });
+  });
+}
+
 // noinspection JSUnusedGlobalSymbols
 module.exports = {
   dbConnect,
@@ -795,4 +831,7 @@ module.exports = {
   getGenderChart,
   getClassDaysChart,
   getPersonalDaysChart,
+  getAgeRange,
+  getCoachesDayWork,
+  getCoachesPersonalWork,
 };

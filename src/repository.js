@@ -431,3 +431,18 @@ export function getPersonalDaysChart() {
   return axios.get(`${ BASE_URL }/api/chart/pie/personal`)
       .then(response => response.data)
 }
+
+export function getAgeRange() {
+  return axios.get(`${ BASE_URL }/api/chart/bar/age`)
+      .then(response => response.data[0][0])
+}
+
+export function getCoachesDayWork() {
+  return axios.get(`${ BASE_URL }/api/chart/line/coaches/week-work`)
+      .then(response => response.data[0])
+}
+
+export function getCoachesPersonalWork() {
+  return axios.get(`${ BASE_URL }/api/chart/line/coaches/personal-work`)
+      .then(response => response.data[0])
+}
