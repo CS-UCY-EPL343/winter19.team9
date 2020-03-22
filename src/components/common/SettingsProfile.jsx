@@ -18,6 +18,7 @@ class SettingsProfile extends Component {
         this.state = {
             modalPayment: false,
             modalAnnouncements: false,
+            modalAnnouncements2: false,
             modalMessages: false,
             modalEditAccount: false,
             TotalMessages: 0,
@@ -27,6 +28,7 @@ class SettingsProfile extends Component {
         };
         this.togglePayment = this.togglePayment.bind(this);
         this.toggleAnnouncements = this.toggleAnnouncements.bind(this);
+        this.toggleAnnouncements2 = this.toggleAnnouncements2.bind(this);
         this.toggleTotalMessages = this.toggleTotalMessages.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
     };
@@ -43,6 +45,9 @@ class SettingsProfile extends Component {
     };
     toggleAnnouncements = () => {
         this.setState({modalAnnouncements: !this.state.modalAnnouncements});
+    };
+    toggleAnnouncements2 = () => {
+        this.setState({modalAnnouncements2: !this.state.modalAnnouncements2});
     };
     toggleEditAccount = () => {
         this.setState({modalEditAccount: !this.state.modalEditAccount});
@@ -152,6 +157,7 @@ class SettingsProfile extends Component {
                                 />
                             </div>
                         </li>
+
                         <li id="editAccount">
                             <Button className={'nav-link menu-box-tab menu-text '}
                                     onClick={this.toggleEditAccount}

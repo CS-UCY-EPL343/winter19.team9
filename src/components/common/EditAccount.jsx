@@ -17,7 +17,7 @@ class EditAccount extends Component {
             Surname: '',
             password: '',
             confirmPassword: '',
-            image: '',
+            image: ''
         };
     }
 
@@ -91,7 +91,16 @@ class EditAccount extends Component {
             });
 
         };
-        reader.readAsDataURL(file);
+        if(file.size>5000000) {
+            alert("Maximum File Size must be 5Mb!");
+            return;
+        }
+        //let x = this.state.imagePreviewUrl;
+       // let byteString = x.split(',')[1];
+
+        // let blob = base64ToBlob(byteString, 'image/jpg');
+
+        reader.readAsDataURL(file)
     }
 
     render() {
@@ -100,10 +109,10 @@ class EditAccount extends Component {
 
         let $imagePreview = null;
         if (this.state.image !=='' ) {
-            $imagePreview = (<img src={imageURL} alt={"Profile Edit"}/>);
+            $imagePreview = (<img src={imageURL} alt={"Picture"}/>);
         }
         if (this.state.imagePreviewUrl) {
-            $imagePreview = (<img src={this.state.imagePreviewUrl} alt={"Profile Edit"}/>);
+            $imagePreview = (<img src={this.state.imagePreviewUrl} alt={"Picture"}/>);
         }
 
         return (
@@ -123,7 +132,7 @@ class EditAccount extends Component {
                     </div>
 
                 </div>
-                <form className="form-horizontal needs-validation" noValidate = "novalidate" onSubmit = { this.onSubmit }>
+                <form className="form-horizontal needs-validation" noValidate = "novalidate" role="form" onSubmit = { this.onSubmit }>
                     <h3>Personal info</h3>
                     <div className="form-group">
                         <label className="col-lg-6 control-label">First name:</label>

@@ -7,15 +7,19 @@
     "@fortawesome/free-solid-svg-icons": "^5.12.1",
     "atob": "^2.1.2",
     "atob-lite": "^2.0.0",
+    "atob": "^2.1.2",
     "axios": "^0.19.2",
-    "base-64": "^0.1.0",
-    "blob-util": "^2.0.2",
+    "base64toblob": "0.0.2",
+    "blob": "^0.1.0",
     "chart.js": "^2.9.3",
-    "convert-hex": "^0.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
     "history": "^4.10.1",
+    "jsonwebtoken": "^8.5.1",
     "leaflet": "^1.5.1",
-    "mdbreact": "^4.25.4",
+    "mysql": "^2.18.1",
     "node": "^13.10.1",
+    "nodemailer": "^6.4.5",
     "react": "^16.11.0",
     "react-animate-on-scroll": "^2.1.5",
     "react-animated-css-onscroll": "^1.2.1",
@@ -23,14 +27,12 @@
     "react-bootstrap-modal": "^4.2.0",
     "react-confirm-alert": "^2.5.1",
     "react-dom": "^16.11.0",
-    "react-fontawesome": "^1.7.1",
     "react-paypal-express-checkout": "^1.0.5",
     "react-recaptcha": "^2.3.10",
     "react-scripts": "^3.3.1",
     "react-slick": "^0.25.2",
     "reactjs-popup": "^1.5.0",
-    "slick-carousel": "^1.8.1",
-    "to-hex": "0.0.11"
+    "slick-carousel": "^1.8.1"
   },
   "scripts": {
     "predeploy": "npm run build",
@@ -58,10 +60,8 @@
   },
   "devDependencies": {
     "concurrently": "^5.1.0",
-    "font-awesome": "^4.7.0",
     "gh-pages": "^2.1.1",
     "react-router-dom": "^5.1.2",
-    "reactjs-popup": "^1.5.0",
     "reactstrap": "latest"
   }
 }

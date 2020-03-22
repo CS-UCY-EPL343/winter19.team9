@@ -13,117 +13,113 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const transport = {
-  host: 'smtp.mailtrap.io',
-  port: 2525,
-  auth: {
-    user: creds.USER,
-    pass: creds.PASS,
-  },
+    host: 'smtp.mailtrap.io',
+    port: 2525,
+    auth: {
+        user: creds.USER,
+        pass: creds.PASS,
+    },
 };
 const transporter = nodemailer.createTransport(transport);
 
-// noinspection JSUnresolvedFunction
 transporter.verify((error, success) => {
-  if (error) {
-    console.log(error);
-  } else if (success) {
-    console.log('\x1b[32m%s\x1b[0m', 'Server is ready to take messages');
-  }
+    if (error) {
+        console.log(error);
+    } else if (success) {
+        console.log('\x1b[32m%s\x1b[0m', 'Server is ready to take messages');
+    }
 });
 
 app.use(bodyParser.json({limit: '10mb', extended: true}));
-app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
+app.use(bodyParser.urlencoded({limit: '10mb',extended: true}));
 app.use(cors());
 
-// noinspection JSUnresolvedFunction
 app.post('/api/email', (req, res) => {
-  const name = req.body.name;
-  const email = req.body.email;
-  const phone = req.body.phone;
-  const message = req.body.message;
-  const content = `Name: ${ name } \nEmail: ${ email } \nPhone: ${ phone } \nMessage: ${ message } `;
+    const name = req.body.name;
+    const email = req.body.email;
+    const phone = req.body.phone;
+    const message = req.body.message;
+    const content = `Name: ${name} \nEmail: ${email} \nPhone: ${phone} \nMessage: ${message} `;
 
-  const mail = {
-    from   : email,
-    to     : creds.EMAIL,
-    subject: 'Fitness Factory Nicosia - Contact Request',
-    text   : content,
-  };
-
-  // Send email from user
-  transporter.sendMail(mail, (err) => {
-    if (err) {
-      res.status(400).json({
-        status: 'fail',
-      });
-    } else {
-      res.status(200).json({
-        status: 'success',
-      });
-
-      // Send response email
-      transporter.sendMail({
-        from       : creds.EMAIL,
-        to         : email,
-        subject    : 'Fitness Factory Nicosia - Submission was successful',
-        text       : ``
-                     +
-                     `Form details\nName: ${ name }\nEmail: ${ email }\nMessage: ${ message }`,
-        html       : `<p>Thank you for contacting us! We'll get back to you ASAP!</p><br>
-                      <p><strong>Form details</strong><br>Name: ${ name }<br>Email: ${ email }<br>Phone: ${ phone }<br>Message: ${ message }</p>
-                      <img style="width:250px; margin: 0 auto; display: block;"  src="cid:ea4a40c0-bc9d-4a50-ab26-d3031eba602c" alt="FFN-logo"/>`,
-        attachments: [
-          {
-            filename: 'fitnessFactoryLogo-min.png',
-            path    : './fitnessFactoryLogo-min.png',
-            cid     : 'ea4a40c0-bc9d-4a50-ab26-d3031eba602c',
-          },
-        ],
-      }, function(error, info) {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log('\x1b[32m%s\x1b[0m', 'Message sent: ' + info.response);
-        }
-      });
-    }
-  });
-});
-
-// noinspection JSUnresolvedFunction
-app.post('/api/auth', (req, res) => {
-  db.dbLogIn(req.body.name, req.body.password).then(user => {
-    if (!user) {
-      return res.status('409').json('Authentication failed. User not found.');
-    }
-    // create a token using user name and password valid for 2 hours
-    let token = jwt.sign({username: user.username, level: user.level},
-        process.env.JWT_SECRET, {expiresIn: '2h'});
-    let response = {
-      message: 'Token Created, Authentication Successful!',
-      token  : token,
-      level  : user.level,
+    const mail = {
+        from: email,
+        to: creds.EMAIL,
+        subject: 'Fitness Factory Nicosia - Contact Request',
+        text: content,
     };
 
-    // return the information including token as JSON
-    return res.status(200).json(response);
-  }).catch(err => res.status(409).json(err));
+    // Send email from user
+    transporter.sendMail(mail, (err) => {
+        if (err) {
+            res.status(400).json({
+                status: 'fail',
+            });
+        } else {
+            res.status(200).json({
+                status: 'success'
+            });
+
+            // Send response email
+            transporter.sendMail({
+                from: creds.EMAIL,
+                to: email,
+                subject: 'Fitness Factory Nicosia - Submission was successful',
+                text: ``
+                    +
+                    `Form details\nName: ${name}\nEmail: ${email}\nMessage: ${message}`,
+                html: `<p>Thank you for contacting us! We'll get back to you ASAP!</p><br>
+                      <p><strong>Form details</strong><br>Name: ${name}<br>Email: ${email}<br>Phone: ${phone}<br>Message: ${message}</p>
+                      <img style="width:250px; margin: 0 auto; display: block;"  src="cid:ea4a40c0-bc9d-4a50-ab26-d3031eba602c" alt="FFN-logo"/>`,
+                attachments: [
+                    {
+                        filename: 'fitnessFactoryLogo-min.png',
+                        path: './fitnessFactoryLogo-min.png',
+                        cid: 'ea4a40c0-bc9d-4a50-ab26-d3031eba602c',
+                    },
+                ],
+            }, function (error, info) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log('\x1b[32m%s\x1b[0m', 'Message sent: ' + info.response);
+                }
+            });
+        }
+    });
 });
 
-// noinspection JSUnresolvedFunction
+app.post('/api/auth', (req, res) => {
+    db.dbLogIn(req.body.name, req.body.password).then(user => {
+        if (!user) {
+            return res.status('409').json('Authentication failed. User not found.');
+        }
+        // create a token using user name and password valid for 2 hours
+        let token = jwt.sign({username: user.username, level: user.level},
+            process.env.JWT_SECRET, {expiresIn: '2h'});
+        let response = {
+            message: 'Token Created, Authentication Successful!',
+            token: token,
+            level: user.level,
+        };
+
+        // return the information including token as JSON
+        return res.status(200).json(response);
+    }).catch(err => res.status(409).json(err));
+});
+
 app.post('/api/userLevel', middleware, (req, res) => {
-  res.json({'userLevel': req.decoded.level});
+    res.json({'userLevel': req.decoded.level});
 });
 
-// noinspection JSUnresolvedFunction
+// template
 app.post('/api/user/data', middleware, (req, res) => {
-  db.getUserData(req.decoded.username).then(data => {
-    if (data) {
-      return res.status(200).json(data);
-    } else {
-      return res.status(409).json('Authentication failed. User not found.');
-    }
-  }).catch(err => res.status(401).json(err));
+    db.getUserData(req.decoded.username).then(data => {
+        if (data) {
+            return res.status(200).json(data);
+        } else {
+            return res.status(409).json('Authentication failed. User not found.');
+        }
+    }).catch(err => res.status(401).json(err));
 });
 
 // noinspection JSUnresolvedFunction
@@ -225,158 +221,138 @@ app.post('/api/dashboard/visit/count', middleware, (req, res) => {
  *                                                   *
  ***************************************************/
 
-// noinspection JSUnresolvedFunction
 app.post('/api/announcements/private', middleware, (req, res) => {
-  db.getPrivateAnnouncements(req.decoded.username).then(data => {
-    if (data) {
-      return res.status(200).json({announcements: data});
-    } else {
-      return res.status(409).json('No data found.');
-    }
-  });
+    db.getPrivateAnnouncements(req.decoded.username)
+        .then(data => {
+            if (data) {
+                return res.status(200).json({announcements: data});
+            } else {
+                return res.status(409).json('No data found.');
+            }
+        });
 });
 
-// noinspection JSUnresolvedFunction
 app.post('/api/announcements/admin/private', middleware, (req, res) => {
-  db.getPrivateAnnouncements(req.body.username).then(data => {
-    if (data) {
-      return res.status(200).json({announcements: data});
-    } else {
-      return res.status(409).json('No data found.');
-    }
-  });
+    db.getPrivateAnnouncements(req.body.username)
+        .then(data => {
+            if (data) {
+                return res.status(200).json({announcements: data});
+            } else {
+                return res.status(409).json('No data found.');
+            }
+        });
 });
 
-// noinspection JSUnresolvedFunction
 app.post('/api/announcements/private/total', middleware, (req, res) => {
-  db.getTotalAnnouncements(req.decoded.username).then(data => {
-    if (data) {
-      return res.status(200).json({TotalAnnouncement: data});
-    } else {
-      return res.status(409).json('No data found.');
-    }
-  });
+    db.getTotalAnnouncements(req.decoded.username)
+        .then(data => {
+            if (data) {
+                return res.status(200).json({TotalAnnouncement: data});
+            } else {
+                return res.status(409).json('No data found.');
+            }
+        });
 });
 
-// noinspection JSUnresolvedFunction
+
 app.get('/api/announcements/public', (req, res) => {
-  db.getPublicAnnouncements().then(data => {
-    if (data) {
-      return res.status(200).json({announcements: data});
-    } else {
-      return res.status(404).json('Not found.');
-    }
-  });
-});
-
-// noinspection JSUnresolvedFunction
-app.post('/api/announcements/private/update', middleware, (req, res) => {
-  if (req.decoded.level === 'user') {
-    return res.status(401).json({message: 'Authentication failed'});
-  }
-  db.updateAnnouncement(req.body.announcement_id, req.body.title,
-      req.body.message, req.decoded.level,
-      req.decoded.username).then(response => {
-    console.log(response);
-    res.status(200).json({
-      message        : 'Announcement updated successfully',
-      ANNOUNCEMENT_ID: response.ANNOUNCEMENT_ID,
+    db.getPublicAnnouncements().then(data => {
+        if (data) {
+            return res.status(200).json({announcements: data});
+        } else {
+            return res.status(404).json('Not found.');
+        }
     });
-  }).catch(() => res.status(404).json('Not Found'));
-});
-// noinspection JSUnresolvedFunction
-app.post('/api/getProfilePic', middleware, (req, res) => {
-  // noinspection JSUnresolvedFunction
-  db.profileimage(req.body.emp_id).then(profile => {
-    res.json({success: true, data: profile});
-  }).catch(() => {
-    console.log('in error :: /api/getProfilePic');
-  });
 });
 
-// noinspection JSUnresolvedFunction
+app.post('/api/announcements/private/update', middleware, (req, res) => {
+    if (req.decoded.level === 'user') {
+        return res.status(401).json({message: 'Authentication failed'});
+    }
+    db.updateAnnouncement(req.body.announcement_id, req.body.title, req.body.message, req.decoded.level,
+        req.decoded.username).then(response => {
+        console.log(response);
+        res.status(200).json({
+            message: 'Announcement updated successfully',
+            ANNOUNCEMENT_ID: response.ANNOUNCEMENT_ID,
+        })
+    }).catch(() => res.status(404).json('Not Found'));
+});
+app.post('/api/getProfilePic', middleware,(req, res) => {
+    db.profileimage(req.body.emp_id)
+        .then(profile => {
+            res.json({ success: true, data: profile })
+        })
+        .catch(err => {
+            console.log('in error :: /api/getProfilePic')
+        })
+})
+
 app.post('/api/announcements/public/add', middleware, (req, res) => {
-  if (req.decoded.level === 'user') {
-    return res.status(401).json({message: 'Authentication failed'});
-  }
-  db.addAnnouncement(req.body.title, req.body.message, req.decoded.level,
-      req.decoded.username).then(response => res.status(200).json({
-    message        : 'Announcement inserted successfully',
-    ANNOUNCEMENT_ID: response.id,
-  })).catch(() => res.status(404).json('Not Found'));
+    if (req.decoded.level === 'user') {
+        return res.status(401).json({message: 'Authentication failed'});
+    }
+    db.addAnnouncement(req.body.title, req.body.message, req.decoded.level,
+        req.decoded.username).then(response => res.status(200).json({
+        message: 'Announcement inserted successfully',
+        ANNOUNCEMENT_ID: response.id,
+    })).catch(() => res.status(404).json('Not Found'));
 });
 
-// noinspection JSUnresolvedFunction
 app.post('/api/announcements/private/add', middleware, (req, res) => {
-  if (req.decoded.level === 'user') {
-    return res.status(401).json({message: 'Authentication failed'});
-  }
-  db.addPrivateAnnouncement(req.body.title, req.body.message, req.decoded.level,
-      req.decoded.username).then(response => res.status(200).json({
-    message        : 'Announcement inserted successfully',
-    ANNOUNCEMENT_ID: response.id,
-  })).catch(() => res.status(404).json('Not Found'));
+    if (req.decoded.level === 'user') {
+        return res.status(401).json({message: 'Authentication failed'});
+    }
+    db.addPrivateAnnouncement(req.body.title, req.body.message, req.body.username ,req.decoded.level,
+        req.decoded.username).then(response => res.status(200).json({
+        message: 'Announcement inserted successfully',
+        ANNOUNCEMENT_ID: response.id,
+    })).catch(() => res.status(404).json('Not Found'));
 });
 
-// noinspection JSUnresolvedFunction
 app.post('/api/announcements/remove', middleware, (req, res) => {
-  if (req.decoded.level === 'user') {
-    return res.status(401).json({message: 'Authentication failed'});
-  }
-  db.removeAnnouncement(req.body.id)
-      .then(
-          res.status(204).json({message: 'Announcement deleted successfully'}))
-      .catch(() => res.status(404).json('Not Found'));
-});
-
-// noinspection JSUnresolvedFunction
-app.post('/api/announcements/private/delete', middleware, (req, res) => {
-  if (req.decoded.level === 'user') {
-    return res.status(401).json({message: 'Authentication failed'});
-  }
-  console.log(req.body.announcement_id);
-  db.deleteAnnouncement(req.body.announcement_id)
-      .then(
-          res.status(204).json({message: 'Announcement deleted successfully'}))
-      .catch(() => res.status(404).json('Not Found'));
+    if (req.decoded.level === 'user') {
+        return res.status(401).json({message: 'Authentication failed'});
+    }
+    db.removeAnnouncement(req.body.id)
+        .then(
+            res.status(204).json({message: 'Announcement deleted successfully'}))
+        .catch(() => res.status(404).json('Not Found'));
 });
 
 /*************************************************************************/
-// noinspection JSUnresolvedFunction
 app.post('/api/user/post/data', middleware, (req, res) => {
 
-  db.postUserData(req.body.data)
-      .then(response => res.status(200).json({message: response}))
-      .catch(err => res.status(409).json(err));
+    db.postUserData(req.body.data)
+        .then(response => res.status(200).json({message: response}))
+        .catch(err => res.status(409).json(err));
 });
 
-// noinspection JSUnresolvedFunction
 app.post('/api/BookClass/Enroll', middleware, (req, res) => {
-  db.enrollUser(req.body.CLASS_ID, req.body.User_ID)
-      .then(response => res.status(200).json({message: response}))
-      .catch(err => res.status(409).json(err));
+    db.enrollUser(req.body.CLASS_ID, req.body.User_ID)
+        .then(response => res.status(200).json({message: response}))
+        .catch(err => res.status(409).json(err));
 });
 /*************************************************************************/
 /*************************************************************************/
-// noinspection JSUnresolvedFunction
 app.post('/api/user/delete/data', middleware, (req, res) => {
-  db.deleteUserData(req.decoded.username).then(data => {
-    if (data) {
-      return res.status(200).json(data);
-    } else {
+    db.deleteUserData(req.decoded.username).then(data => {
+        if (data) {
+            return res.status(200).json(data)
+        } else {
 
-      return res.status(409).json('Authentication failed. User not found.');
-    }
-  }).catch(err => res.status(409).json(err));
+            return res.status(409).json('Authentication failed. User not found.');
+        }
+    })
+        .catch(err => res.status(409).json(err));
 });
 /*************************************************************************/
 
-// noinspection JSUnresolvedFunction
 app.post('/api/user/insert', (req, res) => {
-  console.log(req.body);
-  db.dbSignUp(req.body)
-      .then(response => res.status(200).json({message: response}))
-      .catch(err => res.status(409).json(err));
+    console.log(req.body);
+    db.dbSignUp(req.body)
+        .then(response => res.status(200).json({message: response}))
+        .catch(err => res.status(409).json(err));
 });
 
 //fetching the data for the personal training schedule
@@ -395,83 +371,38 @@ app.post('/api/user/getPersonalTraining', middleware, (req, res) => {
 });
 
 // mine
-// noinspection JSUnresolvedFunction
 app.post('/api/user/userDetails', middleware, (req, res) => {
-  if (req.decoded.level === 'user') {
-    return res.status(409).json('Authentication failed.');
-  }
-  db.getUserInfo(req.body.name).then(data => {
-    if (data) {
-      return res.status(200).json(data);
-    } else {
-      return res.status(409).json('Authentication failed. User not found.');
+    if (req.decoded.level === 'user') {
+        return res.status(409).json('Authentication failed.');
     }
-  }).catch(err => res.status(409).json(err));
+    db.getUserInfo(req.body.name)
+        .then(data => {
+            if (data) {
+                return res.status(200).json(data)
+            } else {
+                return res.status(409).json('Authentication failed. User not found.');
+            }
+        })
+        .catch(err => res.status(409).json(err));
 });
 
-// noinspection JSUnresolvedFunction
 app.post('/api/BookClass/ClassName', middleware, (req, res) => {
-  db.getClasses().then(data => {
-    if (data) {
-      return res.status(200).json(data);
-    } else {
-      return res.status(409).json('Authentication failed. User not found.');
-    }
-  }).catch(err => res.status(409).json(err));
+    db.getClasses()
+        .then(data => {
+            if (data) {
+                return res.status(200).json(data)
+            } else {
+                return res.status(409).json('Authentication failed. User not found.');
+            }
+        })
+        .catch(err => res.status(409).json(err));
 });
 
-// noinspection JSUnresolvedFunction
 app.post('/api/BookClass/ClassDay', middleware, (req, res) => {
-  db.getClassDay(req.body.ClassName).then(data => {
-    if (data) {
-      return res.status(200).json(data);
-    } else {
-      return res.status(409).json('Authentication failed. User not found.');
-    }
-  }).catch(err => res.status(409).json(err));
-});
-
-// noinspection JSUnresolvedFunction
-app.post('/api/BookClass/ClassTime', middleware, (req, res) => {
-  db.getClassTime(req.body.ClassName, req.body.ClassDay).then(data => {
-    if (data) {
-      return res.status(200).json(data);
-    } else {
-      return res.status(409).json('Authentication failed. User not found.');
-    }
-  }).catch(err => res.status(409).json(err));
-});
-
-//insert to PersonalTraining
-// noinspection JSUnresolvedFunction
-app.post('/api/insert/PersonalTraining', middleware, (req, res) => {
-  db.insertPT(req.body.data).then(data => {
-    if (data) {
-      return res.status(200).json(data);
-    } else {
-      return res.status(409).json('Authentication failed. User not found.');
-    }
-  }).catch(err => res.status(409).json(err));
-});
-
-// fetcing coaches for personal training
-// noinspection JSUnresolvedFunction
-app.post('/api/bookTraining/allCoaches', middleware, (req, res) => {
-  db.getAllCoaches().then(data => {
-    if (data) {
-      return res.status(200).json(data);
-    } else {
-      return res.status(409).json('Authentication failed. User not found.');
-    }
-  }).catch(err => res.status(409).json(err));
-});
-
-// noinspection JSUnresolvedFunction
-app.post('/api/BookClass/ClassCoach', middleware, (req, res) => {
-  db.getClassCoach(req.body.ClassName, req.body.ClassDay, req.body.ClassTime)
+  db.getClassDay(req.body.ClassName)
       .then(data => {
         if (data) {
-          return res.status(200).json(data);
+          return res.status(200).json(data)
         } else {
           return res.status(409).json('Authentication failed. User not found.');
         }
@@ -479,15 +410,38 @@ app.post('/api/BookClass/ClassCoach', middleware, (req, res) => {
       .catch(err => res.status(409).json(err));
 });
 
-// noinspection JSUnresolvedFunction
+app.post('/api/BookClass/ClassTime', middleware, (req, res) => {
+  db.getClassTime(req.body.ClassName, req.body.ClassDay)
+      .then(data => {
+        if (data) {
+          return res.status(200).json(data)
+        } else {
+          return res.status(409).json('Authentication failed. User not found.');
+        }
+      })
+      .catch(err => res.status(409).json(err));
+});
+
+app.post('/api/BookClass/ClassCoach', middleware, (req, res) => {
+  db.getClassCoach(req.body.ClassName, req.body.ClassDay, req.body.ClassTime)
+      .then(data => {
+        if (data) {
+          return res.status(200).json(data)
+        } else {
+          return res.status(409).json('Authentication failed. User not found.');
+        }
+      })
+      .catch(err => res.status(409).json(err));
+});
+
 app.post('/api/BookClass/UserID', middleware, (req, res) => {
-  db.getUserID(req.decoded.username).then(data => {
-    if (data) {
-      return res.status(200).json(data);
-    } else {
-      return res.status(409).json('Authentication failed. User not found.');
-    }
-  }).catch(err => res.status(401).json(err));
+    db.getUserID(req.decoded.username).then(data => {
+        if (data) {
+            return res.status(200).json(data);
+        } else {
+            return res.status(409).json('Authentication failed. User not found.');
+        }
+    }).catch(err => res.status(401).json(err));
 });
 
 // app.post('/api/BookClass/CoachID', middleware, (req, res) => {
@@ -496,118 +450,76 @@ app.post('/api/BookClass/UserID', middleware, (req, res) => {
 //             if (data) {
 //                 return res.status(200).json(data)
 //             } else {
-//                 return res.status(409).json('Authentication failed. User not
-// found.'); } }) .catch(err => res.status(409).json(err)); });
-// noinspection JSUnresolvedFunction
+//                 return res.status(409).json('Authentication failed. User not found.');
+//             }
+//         })
+//         .catch(err => res.status(409).json(err));
+// });
+//
 app.post('/api/BookClass/ClassID', middleware, (req, res) => {
-  db.getClassID(req.body.ClassName, req.body.ClassDay, req.body.ClassTime,
-      req.body.CoachName).then(data => {
-    if (data) {
-      return res.status(200).json({ClassID: data});
-    } else {
-      return res.status(409).json('Authentication failed. User not found.');
-    }
-  }).catch(err => res.status(409).json(err));
+    db.getClassID(req.body.ClassName, req.body.ClassDay, req.body.ClassTime, req.body.CoachName)
+        .then(data => {
+            if (data) {
+                return res.status(200).json({ClassID: data})
+            } else {
+                return res.status(409).json('Authentication failed. User not found.');
+            }
+        })
+        .catch(err => res.status(409).json(err));
 });
 /***********************************************/
-// noinspection JSUnresolvedFunction
 app.post('/api/messages/get', middleware, (req, res) => {
-  db.getMessages(req.decoded.username).then(data => {
-    if (data) {
-      return res.status(200).json({messages: data});
-    } else {
+    db.getMessages(req.decoded.username).then(data => {
+        if (data) {
+            return res.status(200).json({messages: data});
+        } else {
 
-      return res.status(409).json('Authentication failed. User not found.');
-    }
-  }).catch(err => res.status(409).json(err));
+            return res.status(409).json('Authentication failed. User not found.');
+        }
+    }).catch(err => res.status(409).json(err));
 });
 
-// noinspection JSUnresolvedFunction
 app.post('/api/messages/total', middleware, (req, res) => {
-  db.getMessagesCount(req.decoded.username).then(data => {
-    if (data) {
-      return res.status(200).json({count: data});
-    } else {
+    db.getMessagesCount(req.decoded.username).then(data => {
+        if (data) {
+            return res.status(200).json({count: data});
+        } else {
 
-      return res.status(409).json('Authentication failed. User not found.');
-    }
-  }).catch(err => res.status(409).json(err));
+            return res.status(409).json('Authentication failed. User not found.');
+        }
+    }).catch(err => res.status(409).json(err));
 });
 
-// noinspection JSUnresolvedFunction
 app.post('/api/messages/unread', middleware, (req, res) => {
-  db.makeMessagesRead(req.body.newMessages).then(data => {
-    if (data) {
-      return res.status(200).json(data);
-    } else {
+    db.makeMessagesRead(req.body.newMessages).then(data => {
+        if (data) {
+            return res.status(200).json(data);
+        } else {
 
-      return res.status(409).json('Authentication failed. User not found.');
-    }
-  }).catch(err => res.status(409).json(err));
+            return res.status(409).json('Authentication failed. User not found.');
+        }
+    }).catch(err => res.status(409).json(err));
 });
 
-// noinspection JSUnresolvedFunction
 app.post('/api/messages/new', middleware, (req, res) => {
-  db.createNewMessage(req.body.data, req.decoded.username).then(data => {
-    if (data) {
-      return res.status(200).json(data);
-    } else {
+    db.createNewMessage(req.body.data, req.decoded.username).then(data => {
+        if (data) {
+            return res.status(200).json(data);
+        } else {
 
-      return res.status(409).json('Authentication failed. User not found.');
-    }
-  }).catch(err => res.status(409).json(err));
+            return res.status(409).json('Authentication failed. User not found.');
+        }
+    }).catch(err => res.status(409).json(err));
 });
 
-// noinspection JSUnresolvedFunction
 app.get('/api/coaches/get', (req, res) => {
-  db.getCoaches().then(data => {
-    if (data) {
-      return res.status(200).json(data);
-    } else {
-      return res.status(404).json('Not found.');
-    }
-  });
-});
-
-// noinspection JSUnresolvedFunction
-app.get('/api/admins/get', (req, res) => {
-  db.getAdmins().then(data => {
-    if (data) {
-      return res.status(200).json(data);
-    } else {
-      return res.status(404).json('Not found.');
-    }
-  });
-});
-
-// noinspection JSUnresolvedFunction
-app.get('/api/server/connections', (req, res) => {
-  if (!connections) {
-    return res.status(404).json('Not found.');
-  }
-  return res.status(200).json({connections: connections.length});
-});
-
-// noinspection JSUnresolvedFunction
-app.get('/api/chart/pie/gender', (req, res) => {
-  db.getGenderChart().then(data => {
-    if (data) {
-      return res.status(200).json(data);
-    } else {
-      return res.status(404).json('Not found.');
-    }
-  });
-});
-
-// noinspection JSUnresolvedFunction
-app.get('/api/chart/pie/enroll', (req, res) => {
-  db.getClassDaysChart().then(data => {
-    if (data) {
-      return res.status(200).json(data);
-    } else {
-      return res.status(404).json('Not found.');
-    }
-  });
+    db.getCoaches().then(data => {
+        if (data) {
+            return res.status(200).json(data);
+        } else {
+            return res.status(404).json('Not found.');
+        }
+    });
 });
 
 // noinspection JSUnresolvedFunction
@@ -623,59 +535,64 @@ app.get('/api/chart/pie/personal', (req, res) => {
 
 const PORT = process.env.PORT;
 const server = app.listen(PORT, () => {
-  console.log('Running on port: ' + PORT);
-  startDatabaseConnection(0).then();
+    console.log('Running on port: ' + PORT);
+    if (db.dbConnect() === null) {
+        shutDown();
+    }
 });
 
+setInterval(() => server.getConnections(
+    (err, connections) => console.log(
+        `${connections} connections currently open`),
+), 1000);
 process.on('SIGTERM', shutDown);
 process.on('SIGINT', shutDown);
 
 let connections = [];
 let connectionsInterval, checkConnectionInterval;
 
-async function startDatabaseConnection(callCount) {
-  await db.dbConnect().then(() => {
-    connectionsInterval = setInterval(() => server.getConnections(
+// app.post('/api/announcement/getAll', (req, res) => {
+//     let announcement = connections[0].query('SELECT AN.TIMESTAMP\t, C.Name ,
+// C.Surname , AN.Text\n' + 'FROM ACCOUNT A, ANNOUNCEMENT AN, COACH C\n' +
+// 'WHERE A.username='+req.username+' AND AN.User_ID=A.User_ID AND
+// C.Coach_ID=AN.Coach_ID'); return announcement; });
+
+function startDatabaseConnection(callCount) {
+  try {
+    db.dbConnect();
+    setInterval(() => server.getConnections(
         (err, connections) => console.log(
             `${ connections } connections currently open`),
     ), 1000);
-    checkConnectionInterval =
-        setInterval(() => db.checkConnection().catch(() => {
-          clearInterval(connectionsInterval);
-          startDatabaseConnection(0);
-          clearInterval(checkConnectionInterval);
-        }), 10000);
-  }).catch(() => {
-    if (callCount >= 12) {  // 2 minutes keep alive
+  } catch (err) {
+    if (callCount >= 10) {
       shutDown();
     }
     console.log('\x1b[31m%s\x1b[0m', 'Cant connect to database. Retrying...');
     setTimeout(() => startDatabaseConnection(callCount + 1), 10000);
-  });
+  }
 }
 
 server.on('connection', connection => {
-  connections.push(connection);
-  connection.on('close', () => connections =
-      connections.filter(curr => curr !== connection));
+    connections.push(connection);
+    connection.on('close', () => connections =
+        connections.filter(curr => curr !== connection));
 });
 
 function shutDown() {
-  clearInterval(connectionsInterval);
-  clearInterval(checkConnectionInterval);
-  console.log('\x1b[33m%s\x1b[0m',
-      'Received kill signal, shutting down gracefully');
-  server.close(() => {
-    console.log('\x1b[33m%s\x1b[0m', 'Closed out remaining connections');
-    process.exit(0);
-  });
-  console.log('\x1b[31m%s\x1b[0m', 'Database closed');
-  setTimeout(() => {
-    console.error('\x1b[31m%s\x1b[0m',
-        'Could not close connections in time, forcefully shutting down');
-    process.exit(1);
-  }, 10000);
+    console.log('\x1b[33m%s\x1b[0m',
+        'Received kill signal, shutting down gracefully');
+    server.close(() => {
+        console.log('\x1b[33m%s\x1b[0m', 'Closed out remaining connections');
+        process.exit(0);
+    });
+    console.log('\x1b[31m%s\x1b[0m', 'Database closed');
+    setTimeout(() => {
+        console.error('\x1b[31m%s\x1b[0m',
+            'Could not close connections in time, forcefully shutting down');
+        process.exit(1);
+    }, 10000);
 
-  connections.forEach(curr => curr.end());
-  setTimeout(() => connections.forEach(curr => curr.destroy()), 5000);
+    connections.forEach(curr => curr.end());
+    setTimeout(() => connections.forEach(curr => curr.destroy()), 5000);
 }
