@@ -58,29 +58,27 @@ class Navigation extends Component {
                                 <NavLink className = "nav-link" to = "/classes">Classes</NavLink>
                             </li>
                             { isAuthenticated() &&
-                              (
-                                  this.props.userLevel === 'user' ?
+                              <>
+                                  {this.props.userLevel === 'user' &&
                                   <li className = "nav-item">
                                       <NavLink className = "nav-link" to = "/user/profile">Profile</NavLink>
-                                  </li>
-                                                                  :
-                                  this.props.userLevel === 'coach' ?
+                                  </li>}
+
+                                  {this.props.userLevel === 'coach' &&
                                   <li className = "nav-item">
                                       <NavLink className = "nav-link" to = "/coach/profile">Profile</NavLink>
-                                  </li>
-                                                                   :
-                                  this.props.userLevel === 'admin' ?
-                                      <>
-                                          <li className = "nav-item">
-                                              <NavLink className = "nav-link" to = "/admin/profile">Profile</NavLink>
-                                          </li>
-                                          <li className = "nav-item">
-                                              <NavLink className = "nav-link" to = "/admin/profile/dashboard">Dashboard</NavLink>
-                                          </li>
-                                      </>
-                                                                   :
-                                  ""
-                              )
+                                  </li>}
+
+                                  {this.props.userLevel === 'admin' &&
+                                      <li className = "nav-item">
+                                          <NavLink className = "nav-link" to = "/admin/profile">Profile</NavLink>
+                                      </li>}
+
+                                  {this.props.userLevel === 'admin' &&
+                                      <li className = "nav-item">
+                                          <NavLink className = "nav-link" to = "/admin/dashboard">Dashboard</NavLink>
+                                      </li>}
+                                </>
                             }
                             <li className = "nav-item">
                                 <NavLink className = "nav-link" to = "/about">About Us</NavLink>

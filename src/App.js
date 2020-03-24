@@ -26,8 +26,8 @@ class App extends Component {
   };
 
   componentDidMount() {
-    const path = localStorage.getItem('path') || '/';
-    history.push(path);
+    // const path = localStorage.getItem('path') || '/';
+    // history.push(path);
 
     // Persist on state
     if (isAuthenticated()) {
@@ -76,7 +76,7 @@ class App extends Component {
                               userLevel = { this.state.userLevel }
                 />
                 <PrivateRoute exact
-                              path = "/admin/profile/dashboard"
+                              path = "/admin/dashboard"
                               component = { UIDashboard }
                               userLevel = { this.state.userLevel }
                 />
