@@ -60,7 +60,7 @@ class Services extends Component {
                                 <div className = { 'col-lg-12' }>
                                     <div className = { 'row d-flex justify-content-between' }>
                                         <ServiceGoal
-                                            icon = { 'fist-raised' }
+                                            icon = { 'HandRock' }
                                             title = { 'Energy' }
                                             message = { 'Nul opinionum sim procuravi perductae his omniscium devenimus '
                                                         + 'objectiva. Admitto nullibi im allatae incumbo ab. Cognitu '
@@ -68,7 +68,7 @@ class Services extends Component {
                                         />
 
                                         <ServiceGoal
-                                            icon = { 'running' }
+                                            icon = { 'walking' }
                                             title = { 'Running' }
                                             message = { 'Ero parentibus complector expectanti vos faciliorem conjunctam '
                                                         + 'incrementi. Re magnum ac de nescio fallat pictas in.' }
@@ -81,7 +81,7 @@ class Services extends Component {
                                 <div className = { 'col-lg-12' }>
                                     <div className = { 'row d-flex justify-content-between' }>
                                         <ServiceGoal
-                                            icon = { 'weight-hanging' }
+                                            icon = { 'weight' }
                                             title = { 'Equipment' }
                                             message = { 'Expectem decipior eam abducere doctrina ero habuimus sae '
                                                         + 'cavendum. Tractatu admittit ut de cavendum occurrit invenero '

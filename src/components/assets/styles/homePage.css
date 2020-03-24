@@ -125,6 +125,7 @@
     letter-spacing : 1px;
     color          : #8D99AE;
     font-weight    : 400;
+    margin-left: 0;
 }
 
 @media (max-width : 1200px) {

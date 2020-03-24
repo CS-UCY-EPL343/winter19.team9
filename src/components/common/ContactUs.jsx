@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import '../assets/styles/About.css';
 import {sendEmail}        from '../../repository';
-import FontAwesome from 'react-fontawesome'
 
 
 class ContactUs extends Component {

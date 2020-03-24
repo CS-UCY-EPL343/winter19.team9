@@ -183,6 +183,13 @@
     margin-top : 25px;
 }
 
+#UIDashboard .staff .box .add-admin {
+    margin: 5px auto;
+    width: 100%;
+    font-weight: bold;
+    font-size: 20px;
+}
+
 #UIDashboard .staff .box > h3 {
     color       : #CCCCCC;
     font-family : Calibri, sans-serif;
@@ -214,7 +221,7 @@
 }
 
 #UIDashboard .staff .box .info {
-    width          : 75%;
+    width          : 50%;
     color          : #EEEEEE;
     float          : left;
     vertical-align : middle;
@@ -229,14 +236,39 @@
     margin : 0;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 992px) {
+#UIDashboard .staff .box .admin .delete-admin {
+    width          : 25%;
+    height         : 100%;
+    float          : right;
+    text-align     : right;
+    vertical-align : middle;
+    padding-top    : 20px;
+    padding-right  : 20px;
+    background-color: transparent;
+    border: transparent;
+    font-size: 55px;
+    color: white;
+}
+
+#UIDashboard .staff .box .admin .delete-admin i:hover {
+    color  : red;
+    cursor : pointer;
+}
+
+@media only screen and (min-width : 768px) and (max-width : 992px) {
     #UIDashboard .staff .box .admin .img {
-        width          : 5%;
-        margin-right   : 35%;
+        width        : 5%;
+        margin-right : 25%;
+    }
+    
+    #UIDashboard .staff .box .admin .img img {
+        border-radius : 50%;
+        width         : 75px;
+        height        : 75px;
     }
     
     #UIDashboard .staff .box .info {
-        width          : 50%;
+        width : 50%;
     }
     
     #UIDashboard .staff .box .info h3 {
@@ -245,5 +277,13 @@
     
     #UIDashboard .staff .box .info p {
         font-size : 12px;
+    }
+    
+    #UIDashboard .staff .box .admin .delete-admin {
+        text-align     : center;
+        width          : 20%;
+        float          : right;
+        vertical-align : middle;
+        padding-right  : 0;
     }
 }

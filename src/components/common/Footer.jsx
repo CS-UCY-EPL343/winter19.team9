@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { NavLink }        from 'react-router-dom';
 import '../assets/styles/homePage.css';
+import * as Icons from "@fortawesome/fontawesome-free-solid"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Footer extends Component {
     render() {
@@ -34,6 +36,9 @@ class Footer extends Component {
                         <div id="help-footer" className="col-lg-3 col-md-12 col-sm-12">
                             <h2>Get Help</h2>
                             <div>
+                                <p><i className="fa fa-home footer-icon"/> <NavLink className="Nav_link" to="/">Home Page</NavLink></p>
+                            </div>
+                            <div>
                               <p><i className="fa fa-phone footer-icon"/> <NavLink className="Nav_link" to="/about">Contact Us</NavLink></p>
                             </div>
                             <div>
@@ -50,7 +55,7 @@ class Footer extends Component {
                 </div>
                 <div id="copyrights" className="container-fluid">
                     <div className="row justify-content-center">
-                        <p><i className="fas fa-copyright"/> Copyrights Fitness Factory Nicosia</p>
+                        <p><FontAwesomeIcon icon={Icons.faCopyright} size="sm" /> Copyrights Fitness Factory Nicosia</p>
                     </div>
                 </div>
             </footer>

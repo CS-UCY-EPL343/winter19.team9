@@ -23,6 +23,7 @@
 }
 #LoginModal .subtitle{
     color: #edf2f4;
+    padding-right: 5px;
 }
 /*#LoginModal a,input[type="submit"],.form__link{*/
 /*    -webkit-transition: all .25s ease;*/
@@ -119,10 +120,11 @@
     padding: 2rem;
 }
 #LoginModal .form__signup {
-    padding: 2rem;
+    /*padding: 2rem;*/
+    text-align: center;
 }
 #LoginModal .form__header {
-    font-family: cursive, sans-serif;
+    font-family: 'Roboto Slab', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     margin-bottom: 2rem;
     font-size: 50px;
     font-weight: 700;
@@ -154,17 +156,93 @@
     /*border-left: 1px solid #e1e1e1;*/
     /*border-bottom-left-radius: 2px;*/
 }
+#LoginModal .label__style{
+    position: relative;
+    margin: 0 8px;
+    padding-left: 35px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#LoginModal .label__style input{
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+#LoginModal .checkmark{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+#LoginModal .label__style:hover input ~ .checkmark{
+    background-color: #999999;
+}
+#LoginModal .label__style input:checked ~ .checkmark{
+    background-color: #ef233c;
+}
+#LoginModal .label__style input:checked ~ .checkmark.after{
+    display: block;
+}
+#LoginModal .label__style .checkmark:after{
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #e1e1e1;
+}
+#LoginModal .checkmark:after{
+    content: "";
+    position: absolute;
+    display: none;
+}
+#LoginModal .form-check{
+    text-align: center;
+}
+/*#LoginModal .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {*/
+/*    color: #fff;*/
+
+/*}*/
+/*#LoginModal .btn.focus,.btn:focus{*/
+/*    outline:0;*/
+/*    box-shadow: #e1e1e1;*/
+/*}*/
+#LoginModal .form__radio{
+    color: #e1e1e1;
+    background-color: #1b1b1b;
+}
+/*#LoginModal .btn-primary{*/
+/*    background-color: #353535;*/
+/*    border-color: #e1e1e1;*/
+/*    padding: 10px 30px;*/
+/*}*/
+/*#LoginModal .btn-primary.focus, .btn-primary:focus{*/
+/*    box-shadow: 0 0 0 0.2rem rgba(239,35,60,0.5);*/
+/*}*/
+/*#LoginModal .btn-success:active{*/
+/*    background-color: #ef233c;*/
+/*}*/
 #LoginModal #pword, #username{
-    width: 300px;
+    width: 75%;
     padding: 5px 16px 5px 0;
     margin: 8px 0;
+    border-radius: 1px 1px;
 }
+
 #LoginModal .form__element{
     padding-top: 5px;
     padding-right: 1rem;
     padding-bottom: 5px;
     /*width: 15.875rem;*/
-    width: 300px;
+    width: 75%;
     border-top: 1px solid #e1e1e1;
     border-right: 1px #e1e1e1;
     border-bottom: 1px solid #e1e1e1;
@@ -198,13 +276,11 @@
 }
 #LoginModal .signUpName{
     padding: 5px 16px 5px 0;
-    width: 36%;
-    margin-right: 12px;
+    width: 37.5%;
 }
 #LoginModal #signUpUsername{
     padding: 5px 16px 5px 0;
-    width: 300px;
-    margin: 8px 1px;
+    width: 75%;
 }
 /*#LoginModal .checkbox--forget:checked + .icon--checkbox {*/
 /*    opacity: 1;*/
@@ -327,11 +403,6 @@
     padding: 5px 16px 5px 0;
 }
 
-#LoginModal #gender{
-    margin: 1px 0;
-    padding: 5px 16px 5px 0;
-    font-size: 1.2rem;
-}
 #LoginModal #remember-me > input {
     display: inline-block;
     width: 20px;
@@ -416,29 +487,29 @@
         display: block;
         float: none;
     }
-
+    
     #LoginModal #signup {
         font-size: 14px;
         display: block;
         float: none;
         padding-bottom: 3px;
     }
-
+    
     #LoginModal .cancelbtn {
         /*width: 100%;*/
     }
-
-
+    
+    
     #LoginModal .fancy {
         line-height: 0.5;
         text-align: center;
     }
-
+    
     #LoginModal .fancy span {
         display: inline-block;
         position: relative;
     }
-
+    
     .fancy span:before,
     .fancy span:after {
         content: "";
@@ -450,24 +521,24 @@
         top: 0;
         width: 350%;
     }
-
+    
     .fancy span:before {
         right: 100%;
         margin-right: 15px;
     }
-
+    
     .fancy span:after {
         left: 100%;
         margin-left: 15px;
     }
-
-
+    
+    
     #LoginModal .cursive {
         font-family: 'Rubik', sans-serif;
         font-size: large;
         padding-bottom: 5px;
     }
-
+    
     #LoginModal .cursive2 {
         font-family: 'Rubik', sans-serif;
         font-size: small;
@@ -492,21 +563,21 @@
         float: none;
         padding-bottom: 3px;
     }
-
+    
     #LoginModal .cancelbtn {
         /*width: 100%;*/
     }
-
+    
     .fancy {
         line-height: 0.5;
         text-align: center;
     }
-
+    
     .fancy span {
         display: inline-block;
         position: relative;
     }
-
+    
     .fancy span:before,
     .fancy span:after {
         content: "";
@@ -518,7 +589,7 @@
         top: 0;
         width: 250%;
     }
-
+    
     .fancy span:before {
         right: 100%;
         margin-right: 15px;
@@ -546,34 +617,34 @@
         display: block;
         float: none;
     }
-
+    
     #LoginModal #signup {
         font-size: 14px;
         display: block;
         float: none;
-
+        
     }
-
+    
     #LoginModal .cancelbtn {
         width: 100%;
     }
-
+    
     #LoginModal .imgcontainer .brands {
         font-size: 35px;
         height: 8px;
         text-align: center;
     }
-
+    
     .fancy {
         line-height: 0.5;
         text-align: center;
     }
-
+    
     .fancy span {
         display: inline-block;
         position: relative;
     }
-
+    
     .fancy span:before,
     .fancy span:after {
         content: "";
@@ -585,30 +656,30 @@
         top: 0;
         width: 580%;
     }
-
+    
     .fancy span:before {
         right: 100%;
         margin-right: 15px;
     }
-
+    
     .fancy span:after {
         left: 100%;
         margin-left: 15px;
     }
-
-
+    
+    
     #LoginModal .cursive {
         font-family: 'Rubik', sans-serif;
         font-size: large;
         padding-bottom: 5px;
     }
-
+    
     #LoginModal .cursive2 {
         font-family: 'Rubik', sans-serif;
         font-size: medium;
         padding-bottom: 5px;
     }
-
+    
 }
 
 
