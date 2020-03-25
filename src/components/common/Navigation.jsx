@@ -25,9 +25,9 @@ class Navigation extends Component {
     };
 
     onLogOut = () => {
-        this.setState({ userLevel: undefined });
+        this.setState({ userLevel: undefined, modal: false });
         logOut();
-        window.location.reload();
+        // window.location.reload();
     };
 
     render() {

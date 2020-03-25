@@ -35,6 +35,7 @@
     "react-slick": "^0.25.2",
     "reactjs-popup": "^1.5.0",
     "slick-carousel": "^1.8.1",
+    "tabletop": "^1.6.2",
     "to-hex": "0.0.11"
   },
   "scripts": {

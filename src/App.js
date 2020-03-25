@@ -9,8 +9,6 @@ import ProfileAdmin                    from './components/pages/ProfileAdmin';
 import Classes                         from './components/pages/Classes';
 import ScrollToTop                     from './components/common/ScrollToTop';
 import PrivateRoute                    from './components/PrivateRoute';
-// import NotFound                            from
-// './components/common/NotFound';
 import history                         from './history';
 import {getUserLevel, isAuthenticated} from './repository';
 import UIDashboard                     from './components/pages/UIDashboard';
@@ -20,15 +18,12 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userLevel: undefined,
+      userLevel     : undefined,
     };
     this.setUserLevel = this.setUserLevel.bind(this);
   };
 
   componentDidMount() {
-    // const path = localStorage.getItem('path') || '/';
-    // history.push(path);
-
     // Persist on state
     if (isAuthenticated()) {
       getUserLevel().then(level => this.setUserLevel(level));
@@ -47,18 +42,26 @@ class App extends Component {
             <Switch>
               <PageWrapper userLevel = { this.state.userLevel }
                            setUserLevel = { this.setUserLevel }
+                           stylesheetData = { this.props.stylesheetData }
               >
                 <Route exact
                        path = "/"
                        component = { (props) => <Home { ...props }
-                                                      userLevel = { this.state.userLevel }
+                                                      stylesheetData = { this.props.stylesheetData }
                        /> }
                 />
                 <Route exact
                        path = "/about"
-                       component = { AboutUs }
+                       component = { (props) => <AboutUs { ...props }
+                                                         stylesheetData = { this.props.stylesheetData }
+                       /> }
                 />
-                <Route exact path = "/classes" component = { Classes } />
+                <Route exact
+                       path = "/classes"
+                       component = { (props) => <Classes { ...props }
+                                                         stylesheetData = { this.props.stylesheetData }
+                       /> }
+                />
 
                 <PrivateRoute exact
                               path = "/user/profile"

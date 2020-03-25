@@ -74,7 +74,7 @@
 	height: 5000px;
 }
 
-#single-classes:hover {
+#classes .single-classes:hover {
 	transition: .4s;
 	transform: scale(1.05);
 	box-shadow: inset;

@@ -1,76 +1,56 @@
-import React, { Component, useState } from 'react';
-import { Carousel }                   from 'react-bootstrap';
+import React, {Component} from 'react';
+import {Carousel}         from 'react-bootstrap';
 // Images
-import img1                           from '../assets/img/facilities/MK7_2008.jpg';
-import img2                           from '../assets/img/facilities/MK7_2011.jpg';
-import img3                           from '../assets/img/facilities/MK7_2019.jpg';
-import img4                           from '../assets/img/facilities/MK7_2044.jpg';
 
-// Carousel Items
-const carousel = [
-    {
-        src  : img1,
-        label: 'First slide label',
-        text : 'Nulla vitae elit libero, a pharetra augue mollis interdum.'
-    },
-    {
-        src  : img2,
-        label: 'Second slide label',
-        text : 'Ab continet efficere si at liberius differre impulsum.'
-    },
-    {
-        src  : img3,
-        label: 'Third slide label',
-        text : 'Mo co exhibentur praesertim varietates ha.'
-    },
-    {
-        src  : img4,
-        label: 'Forth slide label',
-        text : 'Paulo ipsos ei istud se at supra entis de.'
-    }
-];
-
-function ControlledCarousel() {
-    const [index, setIndex] = useState(0);
-    const [direction, setDirection] = useState(null);
-
-    const handleSelect = (selectedIndex, e) => {
-        setIndex(selectedIndex);
-        setDirection(e.direction);
+class ControlledCarousel extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      index    : 0,
+      direction: null,
     };
 
+    this.handleSelect = this.handleSelect.bind(this);
+  }
+
+  handleSelect = (selectedIndex, e) => {
+    this.setState({index: selectedIndex, direction: e.direction});
+  };
+
+  render() {
     return (
-        <Carousel activeIndex = { index }
-                  direction = { direction }
-                  onSelect = { handleSelect }
+        <Carousel activeIndex = { this.state.index }
+                  direction = { this.state.direction }
+                  onSelect = { this.handleSelect }
                   pauseOnHover = { true }
                   touch = { true }
         >
-            { carousel.map((item, index) => {
-                return (
-                    <Carousel.Item key = { index }>
-                        <img
-                            className = "d-block img-responsive fit-image"
-                            src = { item.src }
-                            alt = { item.label }
-                        />
-                        <Carousel.Caption>
-                            <h3>{ item.label }</h3>
-                            <p>{ item.text }</p>
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                );
-            }) }
+          { this.props.stylesheetData['Home']['carousel'].map((item, index) => {
+            return (
+                <Carousel.Item key = { index }>
+                  <img
+                      className = "d-block img-responsive fit-image"
+                      src = { process.env.PUBLIC_URL + item.src }
+                      alt = { item.label }
+                  />
+                  <Carousel.Caption>
+                    <h3>{ item.label }</h3>
+                    <p>{ item.text }</p>
+                  </Carousel.Caption>
+                </Carousel.Item>
+            );
+          }) }
         </Carousel>
     );
+  }
 }
 
 class CarouselHp extends Component {
-    render() {
-        return (
-            <ControlledCarousel />
-        );
-    }
+  render() {
+    return (
+        <ControlledCarousel stylesheetData = { this.props.stylesheetData } />
+    );
+  }
 }
 
 export default CarouselHp;
