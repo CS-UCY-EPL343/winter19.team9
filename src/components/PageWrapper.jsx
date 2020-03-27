@@ -18,7 +18,6 @@ class PageWrapper extends Component {
 
                 {/* Back To Top Button */ }
                 <button data-hash = "top-of-page" id = "to-top" className = "button" type = "button">Top</button>
-
             </div>
         );
     }

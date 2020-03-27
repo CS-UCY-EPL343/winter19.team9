@@ -1,18 +1,29 @@
-import React             from 'react';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faSync}          from '@fortawesome/free-solid-svg-icons';
+import React, {Component} from 'react';
 import './assets/styles/Spinner.css';
 
-// noinspection JSUnresolvedVariable
-export default props =>
-    <div className = { `${ props.spinning
-        ? 'spinner-fadeIn'
-        : 'spinner-fadeOut' } d-flex justify-content-center w-25 mx-auto` }
-         style = { {height: '60vh', paddingTop: '25vh'} }
-    >
-      <FontAwesomeIcon className = { 'w-25 mx-auto' }
-                       icon = { faSync }
-                       size = { props.size }
-                       spin = { props.spinning }
-      />
-    </div>
+class Spinner extends Component {
+  render() {
+    return (
+        <div id = "wrapper">
+          <div className = "profile-main-loader">
+            <div className = "loader">
+              <svg className = "circular-loader"
+                   viewBox = "25 25 50 50"
+              >
+                <circle className = "loader-path"
+                        cx = "50"
+                        cy = "50"
+                        r = "20"
+                        fill = "none"
+                        stroke = "#D90429"
+                        strokeWidth = "2"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+    );
+  }
+}
+
+export default Spinner;

@@ -256,92 +256,94 @@ class UIDashboard extends Component {
 
   render() {
     return (
-        <div id = "UIDashboard">
-          { this.state.loading ? <Spinner size = '8x'
-                                          spinning = { this.state.loading }
-              /> :
-              <AnimatedOnScroll animationIn = "fadeIn">
-                <div className = { 'container' }>
-                  { (this.props.userLevel === 'admin') ? '' :
-                      <Redirect to = "/" /> }
-                  <div className = "row line__chart-wrapper">
-                    <LineChart id = "server-connections"
-                               chartSpeed = "4250"
-                               bgColor = "#1BC98E"
-                               title = "Server"
-                               getData = { getServerConnections }
-                    />
-                    <LineChart id = "page-visits"
-                               chartSpeed = "6100"
-                               bgColor = "#E64759"
-                               title = "Page Visits"
-                               getData = { getPageVisits }
-                    />
-                    <LineChart id = "user-count"
-                               chartSpeed = "4900"
-                               bgColor = "#9F86FF"
-                               title = "Users"
-                               getData = { getUserCount }
-                    />
-                    <LineChart id = "enrollment-count"
-                               chartSpeed = "3200"
-                               bgColor = "#E4D836"
-                               title = "Enrolled"
-                               getData = { getEnrollCount }
-                    />
+        <>
+          { this.state.loading ?
+              <Spinner />
+              :
+              <div id = "UIDashboard">
+                <AnimatedOnScroll animationIn = "fadeIn">
+                  <div className = { 'container' }>
+                    { (this.props.userLevel === 'admin') ? '' :
+                        <Redirect to = "/" /> }
+                    <div className = "row line__chart-wrapper">
+                      <LineChart id = "server-connections"
+                                 chartSpeed = "4250"
+                                 bgColor = "#1BC98E"
+                                 title = "Server"
+                                 getData = { getServerConnections }
+                      />
+                      <LineChart id = "page-visits"
+                                 chartSpeed = "6100"
+                                 bgColor = "#E64759"
+                                 title = "Page Visits"
+                                 getData = { getPageVisits }
+                      />
+                      <LineChart id = "user-count"
+                                 chartSpeed = "4900"
+                                 bgColor = "#9F86FF"
+                                 title = "Users"
+                                 getData = { getUserCount }
+                      />
+                      <LineChart id = "enrollment-count"
+                                 chartSpeed = "3200"
+                                 bgColor = "#E4D836"
+                                 title = "Enrolled"
+                                 getData = { getEnrollCount }
+                      />
+                    </div>
+                    <div className = "row pie__chart-wrapper">
+                      <PieChart title = "Genders"
+                                data = { this.state.genders.data }
+                                labels = { this.state.genders.labels }
+                                id = { this.state.genders.id }
+                      />
+                      <PieChart title = "Enrolled Classes"
+                                data = { this.state.enroll.data }
+                                labels = { this.state.enroll.labels }
+                                id = { this.state.enroll.id }
+                      />
+                      <PieChart title = "Personal Classes"
+                                data = { this.state.personal.data }
+                                labels = { this.state.personal.labels }
+                                id = { this.state.personal.id }
+                      />
+                    </div>
+                    <div className = "select-chart">
+                      <select name = "selectedGraph"
+                              onChange = { this.handleChart }
+                      >
+                        {/*<option selected disabled>Choose a chart to display</option>*/ }
+                        <option value = "0">Participants in Coaches Classes
+                        </option>
+                        <option value = "1">Participants in Coaches Personal
+                                            Classes
+                        </option>
+                        <option value = "2">Age Range User Count</option>
+                      </select>
+                    </div>
+                    { this.state.firstGraphLoaded &&
+                      <Graphs graphData = { this.state.graphData[this.state.selectedGraph] } /> }
+                    <StaffList />
+                    <div className = "row leaderboards">
+                      <LeaderBoard data = { this.state.uiDataUserTypes }
+                                   sortAsc = { false }
+                                   title = "User Types"
+                                   dataSort = "count"
+                                   dataTitle = "type"
+                      />
+                      <LeaderBoard data = { this.state.uiDataPageViews }
+                                   sortAsc = { true }
+                                   title = "Most Visited Pages"
+                                   dataSort = "views"
+                                   dataTitle = "page"
+                                   numberComma = "true"
+                      />
+                    </div>
                   </div>
-                  <div className = "row pie__chart-wrapper">
-                    <PieChart title = "Genders"
-                              data = { this.state.genders.data }
-                              labels = { this.state.genders.labels }
-                              id = { this.state.genders.id }
-                    />
-                    <PieChart title = "Enrolled Classes"
-                              data = { this.state.enroll.data }
-                              labels = { this.state.enroll.labels }
-                              id = { this.state.enroll.id }
-                    />
-                    <PieChart title = "Personal Classes"
-                              data = { this.state.personal.data }
-                              labels = { this.state.personal.labels }
-                              id = { this.state.personal.id }
-                    />
-                  </div>
-                  <div className = "select-chart">
-                    <select name = "selectedGraph"
-                            onChange = { this.handleChart }
-                    >
-                      {/*<option selected disabled>Choose a chart to display</option>*/ }
-                      <option value = "0">Participants in Coaches Classes
-                      </option>
-                      <option value = "1">Participants in Coaches Personal
-                                          Classes
-                      </option>
-                      <option value = "2">Age Range User Count</option>
-                    </select>
-                  </div>
-                  { this.state.firstGraphLoaded &&
-                    <Graphs graphData = { this.state.graphData[this.state.selectedGraph] } /> }
-                  <StaffList />
-                  <div className = "row leaderboards">
-                    <LeaderBoard data = { this.state.uiDataUserTypes }
-                                 sortAsc = { false }
-                                 title = "User Types"
-                                 dataSort = "count"
-                                 dataTitle = "type"
-                    />
-                    <LeaderBoard data = { this.state.uiDataPageViews }
-                                 sortAsc = { true }
-                                 title = "Most Visited Pages"
-                                 dataSort = "views"
-                                 dataTitle = "page"
-                                 numberComma = "true"
-                    />
-                  </div>
-                </div>
-              </AnimatedOnScroll>
+                </AnimatedOnScroll>
+              </div>
           }
-        </div>
+        </>
     );
   }
 }
