@@ -20,12 +20,8 @@ class LoginModal extends Component {
             repeatedPassword:'',
             email:'',
             gender:'',
-            med: null,
             age:'',
             bDate:'',
-            toggle: true,
-            value: true,
-            isVerified: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.onRadioChange = this.onRadioChange.bind(this);
@@ -38,7 +34,7 @@ class LoginModal extends Component {
         if(response){
             this.setState({isVerified : true})
         }
-    }
+    };
     handleChange = (e) => {
         if(e.target.name === 'bDate'){
             this.setState({[e.target.name]: e.target.value});

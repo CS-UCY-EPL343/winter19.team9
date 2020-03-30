@@ -1,3 +1,9 @@
+#top-of-page {
+    position         : relative;
+    min-height       : 100vh;
+    background-color : #252830;
+}
+
 /* Carousel */
 .carousel {
     height              : 40rem;
@@ -125,6 +131,7 @@
     letter-spacing : 1px;
     color          : #8D99AE;
     font-weight    : 400;
+    margin-left    : 0;
 }
 
 @media (max-width : 1200px) {

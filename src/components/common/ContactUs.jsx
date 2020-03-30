@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import '../assets/styles/About.css';
 import {sendEmail}        from '../../repository';
-import FontAwesome from 'react-fontawesome'
 
 
 class ContactUs extends Component {
@@ -162,18 +161,18 @@ class ContactUs extends Component {
                 <h2>Contact Information</h2>
                 <p>
                   { ' ' }
-                  Address: Engomi 2409 - Nicosia
+                  Address: {this.props.contact.address}
                   <br />
-                  Phone: 22-260001
+                  Phone: {this.props.contact.phone}
                   <br />
-                  Email: info@fitnessfactorynic.com.cy
+                  Email: {this.props.contact.email}
                   <br/>
                 </p>
                 <p>
-                  <a href = "https://www.facebook.com/fitnessfactorynicosia/">
+                  <a href = {this.props.contact.facebook}>
                     <i className = "fa fa-facebook" />
                   </a>
-                  <a href = "https://www.instagram.com/fitness_factory_nicosia/">
+                  <a href = {this.props.contact.instagram}>
                     <i className = "fa fa-instagram" />
                   </a>
                 </p>

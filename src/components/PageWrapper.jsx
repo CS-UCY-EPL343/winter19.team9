@@ -1,6 +1,6 @@
-import React, { Component }              from 'react';
-import Navigation                        from './common/Navigation';
-import Footer                            from './common/Footer';
+import React, { Component } from 'react';
+import Navigation           from './common/Navigation';
+import Footer               from './common/Footer';
 
 class PageWrapper extends Component {
     render() {
@@ -14,11 +14,10 @@ class PageWrapper extends Component {
 
                 { childrenWithProps }
 
-                <Footer />
+                <Footer  stylesheetData = { this.props.stylesheetData['Footer'] } />
 
                 {/* Back To Top Button */ }
                 <button data-hash = "top-of-page" id = "to-top" className = "button" type = "button">Top</button>
-
             </div>
         );
     }
