@@ -25,7 +25,6 @@ export function images(file) {
   });
 
 }
-
 export function userData() {
   return axios.post(`${ BASE_URL }/api/user/data`, {
     'x-access-token': localStorage.getItem('x-access-token'),
@@ -117,10 +116,10 @@ export function getUserID() {
 
 // export function getCoachID(ClassName, ClassDay, ClassTime) {
 //     return axios
-//         .post(`${BASE_URL}/api/BookClass/CoachID`, {'x-access-token':
-// localStorage.getItem('x-access-token'), ClassName: ClassName, ClassDay:
-// ClassDay, ClassTime: ClassTime}) .then(response => response.data) .catch(err
-// => Promise.reject('Authentication Failed!')) }
+//         .post(`${BASE_URL}/api/BookClass/CoachID`, {'x-access-token': localStorage.getItem('x-access-token'), ClassName: ClassName, ClassDay: ClassDay, ClassTime: ClassTime})
+//         .then(response => response.data)
+//         .catch(err => Promise.reject('Authentication Failed!'))
+// }
 
 export function getClassID(ClassName, ClassDay, ClassTime, CoachName) {
   return axios.post(`${ BASE_URL }/api/BookClass/ClassID`, {
@@ -276,12 +275,25 @@ export function deleteUserData() {
 }
 
 //insert into personal training
-export function insertPT() {
-  return axios.post(`${ BASE_URL }/api/insert/PersonalTraining`, {
-    'x-access-token': localStorage.getItem('x-access-token'),
-  })
-      .then(response => response.data)
-      .catch(() => Promise.reject('Authentication Failed!'));
+export function insertPT(data) {
+    return axios
+        .post(`${BASE_URL}/api/insert/PersonalTraining`, {
+            'x-access-token': localStorage.getItem('x-access-token'),
+            data: data
+        })
+        .then(response => response.data)
+        .catch(() => Promise.reject('Authentication Failed!'))
+}
+
+//delete from personal training
+export function deletePT(data) {
+    return axios
+        .post(`${BASE_URL}/api/delete/PersonalTraining`, {
+            'x-access-token': localStorage.getItem('x-access-token'),
+            data: data
+        })
+        .then(response => response.data)
+        .catch(() => Promise.reject('Authentication Failed!'))
 }
 
 //for coaches for personal training
@@ -312,6 +324,29 @@ export function getPersonalTraining(User_ID) {
   })
       .then(response => response.data)
       .catch(() => Promise.reject('Authentication Failed!'));
+}
+
+
+//fetching the data for the personal training schedule
+export function getCoachTraining(Coach_ID){
+    return axios
+        .post(`${BASE_URL}/api/coach/getCoachTraining`, {
+            'x-access-token': localStorage.getItem('x-access-token'),
+            Coach_ID: Coach_ID
+        })
+        .then(response => response.data)
+        .catch(() => Promise.reject('Authentication Failed!'))
+}
+
+//fetch pic
+export function userPic(User_ID) {
+    return axios
+        .post(`${BASE_URL}/api/user/userPic`, {
+            'x-access-token': localStorage.getItem('x-access-token'),
+            User_ID: User_ID
+        })
+        .then(response => response.data)
+        .catch(() => Promise.reject('Authentication Failed!'))
 }
 
 //mine
