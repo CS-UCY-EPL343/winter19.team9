@@ -121,6 +121,7 @@ function base64ToHex(str) {
   return (result);
 }
 
+
 function postUserData(data) {
   return new Promise((resolve, reject) => {
     const x = data.imagePreviewUrl;
@@ -339,6 +340,32 @@ function enrollUser(CLASS_ID, User_ID) {
   });
 }
 
+function unenrollUser(CLASS_ID, User_ID) {
+    return new Promise((resolve, reject) => {
+        const sql = "DELETE FROM ENROL WHERE CLASS_ID = ? AND User_ID = ?";
+        connection.query(sql, [CLASS_ID, User_ID], function(err) {
+            if(err) {console.log(err); return reject(err)}
+            console.log("Unenrolled from class successfully");
+            return resolve('The data were saved successfully!');
+        });
+    });
+}
+
+//******************************************************************************************
+
+function addClassCodes(DayCode, TimeCode, CLASS_ID) {
+    return new Promise((resolve, reject) => {
+        const sql = "UPDATE Class SET DayCode = ?, TimeCode = ? WHERE CLASS_ID = ?";
+        connection.query(sql, [DayCode, TimeCode, CLASS_ID], function(err) {
+            if(err) {console.log(err); return reject(err)}
+            console.log("1 record inserted");
+            return resolve('The data were saved successfully!');
+        });
+    });
+}
+
+//***************************************************************************************
+
 //fetching the data for the personal training schedule
 function getPersonalTraining(User_ID) {
   console.log('Testing 1234: ' + User_ID);
@@ -351,6 +378,19 @@ function getPersonalTraining(User_ID) {
       resolve(rows);
     });
   });
+
+}
+
+
+function getClassSchedule(User_ID) {
+    // console.log("Testing 1234: " + User_ID);
+    return new Promise((resolve, reject) => {
+        const sql = "SELECT c.ClassID, c.DayCode, c.TimeCode, c.Name FROM Class c, ENROL e WHERE e.User_ID = ? AND c.ClassID = e.CLASS_ID";
+        connection.query(sql, [User_ID], function (err, rows) {
+            if (err) reject(err);
+            resolve(rows);
+        });
+    });
 
 }
 
@@ -495,6 +535,18 @@ function getClasses() {
     });
   });
 }
+
+
+function getClassName(ClassID) {
+    return new Promise((resolve, reject) => {
+        const sql = "SELECT Name FROM Class WHERE ClassID = ?";
+        connection.query(sql, [ClassID], function (err, rows) {
+            if(err) reject(err);
+            resolve(rows[0]);
+        });
+    });
+}
+
 
 function getClassDay(Name) {
   return new Promise((resolve, reject) => {
@@ -781,6 +833,19 @@ function getCoachesPersonalWork() {
   });
 }
 
+//
+// function getCoachID(Name, Day, Time) {
+//     return new Promise((resolve, reject) => {
+//         // console.log();
+//         // const sql = "SELECT DISTINCT c.Coach_ID FROM Class c WHERE c.Name = ? AND c.Day = ? AND c.Time = ?";
+//         const sql = "SELECT ca.Coach_ID FROM COACH co, Class ca WHERE ca.Name = ? AND ca.Day = ? AND ca.Time = ? AND co.Coach_ID = ca.Coach_ID";
+//         connection.query(sql, [Name, Day, Time], function (err, rows) {
+//             if(err) reject(err);
+//             resolve(rows);
+//         });
+//     });
+// }
+
 // noinspection JSUnusedGlobalSymbols
 module.exports = {
   dbConnect,
@@ -834,4 +899,8 @@ module.exports = {
   getAgeRange,
   getCoachesDayWork,
   getCoachesPersonalWork,
+  getClassSchedule,
+  addClassCodes,
+  unenrollUser,
+  getClassName
 };

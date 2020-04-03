@@ -356,6 +356,12 @@ app.post('/api/BookClass/Enroll', middleware, (req, res) => {
       .then(response => res.status(200).json({message: response}))
       .catch(err => res.status(409).json(err));
 });
+
+app.post('/api/BookClass/Unenroll', middleware, (req, res) => {
+    db.unenrollUser(req.body.CLASS_ID, req.body.User_ID)
+        .then(response => res.status(200).json({message: response}))
+        .catch(err => res.status(409).json(err));
+});
 /*************************************************************************/
 /*************************************************************************/
 // noinspection JSUnresolvedFunction
@@ -394,6 +400,20 @@ app.post('/api/user/getPersonalTraining', middleware, (req, res) => {
   }).catch(err => res.status(409).json(err));
 });
 
+app.post('/api/user/getClassSchedule', middleware, (req, res) => {
+    console.log("It's a me!");
+    console.log(req.body.User_ID);
+    db.getClassSchedule(req.body.User_ID)
+        .then(data => {
+            if (data) {
+                return res.status(200).json(data)
+            } else {
+                return res.status(409).json('Authentication failed. User not found.');
+            }
+        })
+        .catch(err => res.status(409).json(err));
+});
+
 // mine
 // noinspection JSUnresolvedFunction
 app.post('/api/user/userDetails', middleware, (req, res) => {
@@ -418,6 +438,18 @@ app.post('/api/BookClass/ClassName', middleware, (req, res) => {
       return res.status(409).json('Authentication failed. User not found.');
     }
   }).catch(err => res.status(409).json(err));
+});
+
+app.post('/api/BookClass/ClassNames', middleware, (req, res) => {
+    db.getClassName(req.body.ClassID)
+        .then(data => {
+            if (data) {
+                return res.status(200).json(data.Name)
+            } else {
+                return res.status(409).json('Authentication failed. User not found.');
+            }
+        })
+        .catch(err => res.status(409).json(err));
 });
 
 // noinspection JSUnresolvedFunction
@@ -496,9 +528,12 @@ app.post('/api/BookClass/UserID', middleware, (req, res) => {
 //             if (data) {
 //                 return res.status(200).json(data)
 //             } else {
-//                 return res.status(409).json('Authentication failed. User not
-// found.'); } }) .catch(err => res.status(409).json(err)); });
-// noinspection JSUnresolvedFunction
+//                 return res.status(409).json('Authentication failed. User not found.');
+//             }
+//         })
+//         .catch(err => res.status(409).json(err));
+// });
+//
 app.post('/api/BookClass/ClassID', middleware, (req, res) => {
   db.getClassID(req.body.ClassName, req.body.ClassDay, req.body.ClassTime,
       req.body.CoachName).then(data => {

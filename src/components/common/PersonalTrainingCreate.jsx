@@ -53,6 +53,7 @@ class PersonalTrainingCreate extends Component {
             if (this.props.time < 10) {
                 this.setState({refID: this.props.day + ".0" + this.props.time});
                 refID = this.props.day + ".0" + this.props.time;
+                //na valei dame to props.day je kserogo sto state tou gia na to steilei meta stin vasi
             } else {
                 this.setState({refID: this.props.day + "." + this.props.time});
                 refID = this.props.day + "." + this.props.time;
@@ -66,19 +67,19 @@ class PersonalTrainingCreate extends Component {
             if (!x.includes(refID) && this.props.flag === true) {
                 x.push(refID);
                 this.setState({refIDs: x});
+                //vallei ta pramata pou ethkialeksen o coach, stin vasi
                 insertPT(this.state).then(() => alert('Success')).catch(err => alert(err));
-
                 // console.log(x);
             } else {
                 if (x.includes(refID) && this.props.flag === false) {
                     const newList = this.state.refIDs.slice(0);
+                    //pkiannei to refID
                     newList.splice(this.state.refIDs.indexOf(refID), 1);
                     this.setState({refIDs: newList}, () => {
                         console.log(this.state.refIDs)
                     });
                 }
             }
-
         }
     }
 

@@ -70,11 +70,32 @@ export function getPublicAnnouncements() {
       .then(response => response);
 }
 
+export function getDayCode() {
+    return axios
+        .post(`${BASE_URL}/api/BookClass/ClassDayCode`, {'x-access-token': localStorage.getItem('x-access-token')})
+        .then(response => response.data)
+        .catch(err => Promise.reject('Authentication Failed!'))
+}
+
+export function getTimeCode() {
+    return axios
+        .post(`${BASE_URL}/api/BookClass/ClassTimeCode`, {'x-access-token': localStorage.getItem('x-access-token')})
+        .then(response => response.data)
+        .catch(err => Promise.reject('Authentication Failed!'))
+}
+
 export function getClasses() {
   return axios.post(`${ BASE_URL }/api/BookClass/ClassName`,
       {'x-access-token': localStorage.getItem('x-access-token')})
       .then(response => response.data)
       .catch(() => Promise.reject('Authentication Failed!'));
+}
+
+export function getClassName(ClassID) {
+    return axios
+        .post(`${BASE_URL}/api/BookClass/ClassNames`, {'x-access-token': localStorage.getItem('x-access-token'), ClassID: ClassID})
+        .then(response => response.data)
+        .catch(err => Promise.reject('Authentication Failed!'))
 }
 
 export function getClassDay(ClassName) {
@@ -133,6 +154,8 @@ export function getClassID(ClassName, ClassDay, ClassTime, CoachName) {
       .then(response => response)
       .catch(() => Promise.reject('Authentication Failed!'));
 }
+
+
 
 export function removeAnnouncement(id) {
   return axios.post(`${ BASE_URL }/api/announcements/remove`, {
@@ -265,6 +288,13 @@ export function enrollUser(CLASS_ID, User_ID) {
       .catch(() => Promise.reject('Authentication Failed!'));
 }
 
+export function unenrollUser(CLASS_ID, User_ID) {
+    return axios
+        .post(`${BASE_URL}/api/BookClass/Unenroll`, {'x-access-token': localStorage.getItem('x-access-token'), CLASS_ID : CLASS_ID, User_ID : User_ID})
+        .then(response => response.message)
+        .catch(() => Promise.reject('Authentication Failed!'))
+}
+
 export function deleteUserData() {
   return axios.post(`${ BASE_URL }/api/user/delete/data`, {
     'x-access-token': localStorage.getItem('x-access-token'),
@@ -312,6 +342,17 @@ export function getPersonalTraining(User_ID) {
   })
       .then(response => response.data)
       .catch(() => Promise.reject('Authentication Failed!'));
+}
+
+//Gets the class schedule of the user with the given User_ID
+export function getClassSchedule(User_ID){
+    return axios
+        .post(`${BASE_URL}/api/user/getClassSchedule`, {
+            'x-access-token': localStorage.getItem('x-access-token'),
+            User_ID: User_ID
+        })
+        .then(response => response.data)
+        .catch(() => Promise.reject('Authentication Failed!'))
 }
 
 //mine
