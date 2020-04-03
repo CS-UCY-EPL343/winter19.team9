@@ -76,6 +76,7 @@ class Graphs extends Component {
         animation       : {duration: 2000},
         responsive      : true,
         aspectRatio     : 3,
+        maintainAspectRatio: true,
         defaultFontColor: '#999999',
         defaultFontSize : 10,
         tooltips        : {
@@ -100,7 +101,7 @@ class Graphs extends Component {
               <div className = "col-md-12">
                 <div className = "chart-container">
                   {/*<h3>{ this.props.graphData.title }</h3>*/ }
-                  <canvas id = "myChart" />
+                  <canvas id = "myChart" style={{height: '200px'}} />
                 </div>
               </div>
             </div>

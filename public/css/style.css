@@ -146,6 +146,7 @@ h6 {
     vertical-align   : middle;
     user-select      : none;
     border           : 1px solid #6C757D;
+    width: 100%;
 }
 
 #mainNav #navbarResponsive ul .login {

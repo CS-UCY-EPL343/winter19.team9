@@ -66,7 +66,9 @@ class Footer extends Component {
                 <h2>About The Club</h2>
                 { this.props.stylesheetData['about-club'].map((v, i) => {
                   return (
-                      <p key = { i }>{ v }</p>
+                      <div key = { i } style = { {padding: 0} }>
+                        <p>{ v }</p>
+                      </div>
                   );
                 }) }
               </div>

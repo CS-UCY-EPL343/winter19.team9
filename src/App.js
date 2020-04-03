@@ -118,8 +118,10 @@ class App extends Component {
         jsonFooter['about-us']['email'] = footer.elements[1][col];
       }
       if (col.includes('about-club')) {
-        for (let index of footer.columnNames) {
-          jsonFooter['about-club'].push(footer.elements[1][index]);
+        for (let index of footer.elements) {
+          if (index['about-club']) {
+            jsonFooter['about-club'].push(index['about-club']);
+          }
         }
       }
     });
@@ -154,18 +156,21 @@ class App extends Component {
                         <Route exact
                                path = "/"
                                component = { (props) => <Home { ...props }
+                                                              userLevel = { this.state.userLevel }
                                                               stylesheetData = { this.state.stylesheetData }
                                /> }
                         />
                         <Route exact
                                path = "/about"
                                component = { (props) => <AboutUs { ...props }
+                                                                 userLevel = { this.state.userLevel }
                                                                  stylesheetData = { this.state.stylesheetData }
                                /> }
                         />
                         <Route exact
                                path = "/classes"
                                component = { (props) => <Classes { ...props }
+                                                                 userLevel = { this.state.userLevel }
                                                                  stylesheetData = { this.state.stylesheetData }
                                /> }
                         />
