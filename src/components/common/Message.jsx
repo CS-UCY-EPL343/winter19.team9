@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import '../assets/styles/Message.css';
 import adminAvatar        from '../assets/img/logos/fitnessFactoryLogo.png';
 
-const userAvatar = 'https://raw.githubusercontent.com/isopho01/EPL344_HW4/master/images/avatar.png?token=AG24XEROEGXMLVMTDFMZMYK6K3SW2';
+const userAvatar = 'https://raw.githubusercontent.com/isopho01/EPL344_HW4/master/images/avatar.png?token=AG24XEQAFA6SJSHNM66256K6SDJCC';
 
 class Message extends Component {
   render() {

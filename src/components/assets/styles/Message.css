@@ -20,7 +20,7 @@
 
 .msg-card .msg-content.left {
     /*float: right;*/
-    text-align   : right;
+    text-align : right;
     /*padding-left : 75px;*/
 }
 
@@ -48,6 +48,7 @@
 }
 
 .msg-card .card-text {
+    margin         : 0;
     font-size      : 14px;
     letter-spacing : 1px;
     color          : #8D99AE;
@@ -67,6 +68,7 @@
 
 .msg-card .msg-timestamp.left {
     left : 15px;
+    margin-left: 0;
 }
 
 .msg-card:hover {
