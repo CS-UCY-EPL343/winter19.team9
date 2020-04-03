@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {validURL}         from '../../repository';
 
 class TeamMember extends Component {
   render() {
@@ -6,7 +7,9 @@ class TeamMember extends Component {
         <li className = { this.props.className }>
           <div className = "timeline-image">
             <img className = "rounded-circle img-fluid"
-                 src = { process.env.PUBLIC_URL + this.props.src }
+                 src = { validURL(this.props.src)
+                     ? this.props.src
+                     : process.env.PUBLIC_URL + this.props.src }
                  alt = ""
             />
           </div>

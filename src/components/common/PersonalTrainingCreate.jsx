@@ -1,83 +1,188 @@
 import React, {Component} from 'react';
 import "../assets/styles/PersonalTrainingTimetable.css"
 import {
-    insertPT
+    insertPT, deletePT, getCoachTraining
 } from "../../repository";
+
 class PersonalTrainingCreate extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            refID: '',
+            // refID: '',
             refIDs: [],
-            trainingScheduleRet: [],
+            coachIDs: [],
             flag: false,
             Coach_ID: '',
-            User_ID: ''
+            User_ID: '',
+            day: '',
+            time: '',
+            refIDsCoach: []
             // addRefIDs: [],
             // emptyTab: []
             // exists: false
         };
+        this.clearArray = this.clearArray.bind(this);
+        this.settingRefIDsCoachIDs = this.settingRefIDsCoachIDs.bind(this);
+        this.settingRefIDsCoach = this.settingRefIDsCoach.bind(this);
+        this.insertDeleteMethodStates = this.insertDeleteMethodStates.bind(this);
     }
+
+    clearArray(newArr, coachID, userID) {
+        this.setState({
+            refIDsCoach: newArr,
+            refIDs: newArr,
+            coachIDs: newArr,
+            Coach_ID: coachID,
+            User_ID: userID
+        });
+    }
+
+
+    settingRefIDsCoachIDs(x, y) {
+        this.setState({
+            refIDs: x,
+            coachIDs: y
+        }, () => {  //
+            console.log(" refIDs \n" + x);
+            console.log(" coachIDs \n" + y);
+        });
+    }
+
+    settingRefIDsCoach(x) {
+        this.setState({refIDsCoach: x}, () => {
+            console.log(" coachRefIDs \n" + this.state.refIDsCoach);
+        });
+    }
+
+    insertDeleteMethodStates(x, z) {
+        this.setState({
+            refIDs: x,
+            coachIDs: z,
+            time: this.props.time,
+            day: this.props.day
+        }, () => {
+            // console.log("CoachID, UserID, Day, time " + this.state.Coach_ID + " " + this.state.User_ID + "  " + this.state.day + " " + this.state.time);
+            if (this.props.flag === true)
+                insertPT(this.state).then(); //() => alert('Successful insertion')).catch(err => alert(err));
+            else
+                deletePT(this.state).then(); //() => alert('Success deletion')).catch(err => alert(err));
+        });
+    }
+
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.day !== this.props.day || prevProps.time !== this.props.time || prevProps.flag !== this.props.flag
-            || prevProps.trainingSchedule !== this.props.trainingSchedule || prevProps.coachID !== this.props.coachID || prevProps.userID !== this.props.userID) {
-            // this.setState({addRefIDs: this.state.emptyTab});
-            let ret = this.props.trainingSchedule.slice(0);
-            let refID;
-            this.setState({Coach_ID: this.props.coachID, User_ID: this.props.userID});
-            ret.map((item) => {
-                    if (item.Time < 10) {
-                        this.setState({refID: item.Day + ".0" + item.Time});
-                        refID = item.Day + ".0" + item.Time;
-                    } else {
-                        this.setState({refID: item.Day + "." + item.Time});
-                        refID = item.Day + "." + item.Time;
+            || prevProps.trainingSchedule !== this.props.trainingSchedule || prevProps.coachID !== this.props.coachID
+            || prevProps.userID !== this.props.userID || prevProps.trainingScheduleCoach !== this.props.trainingScheduleCoach) {
+
+            console.log("*************************************************************");
+            let refID = '';
+            (async () => {
+                console.log("-----------------------------------------------------");
+                console.log('start clearing');
+                await this.clearArray([], this.props.coachID, this.props.userID);
+                console.log('Cleared');
+                console.log("-----------------------------------------------------");
+
+                const ret = [...this.props.trainingSchedule];
+                // const ret =this.props.trainingSchedule.slice();
+                refID = '';
+                // let tempRefIDs = this.state.refIDs.slice();
+                let tempRefIDs = [...this.state.refIDs];
+                // let tempCoachIDs = this.state.coachIDs.slice();
+                let tempCoachIDs = [...this.state.coachIDs];
+                const items = ret.map((item, key) => {
+                        if (item.Time < 10) {
+                            refID = item.Day + ".0" + item.Time;
+                        } else {
+                            refID = item.Day + "." + item.Time;
+                        }
+                        // Create a new array based on current state:
+                        let coachID = item.Coach_ID;
+                        if (!tempRefIDs.includes(refID)) {
+                            tempRefIDs.push(refID);
+                            tempCoachIDs.push(coachID);
+                        }
                     }
+                );
 
-                    // Create a new array based on current state:
-                    let x = this.state.refIDs;
-                    if (!x.includes(refID)) {
-                        x.push(refID);
-                        // x.push(this.state.addRefIDs);
-                        this.setState({refIDs: x}, () => {
-                            // console.log(" refIDs \n" + x);
-                        });
+                await this.settingRefIDsCoachIDs(tempRefIDs, tempCoachIDs);
+
+                // for coaches enrolled training
+                // let retCoach = this.props.trainingScheduleCoach.slice(0);
+                let retCoach = [...this.props.trainingScheduleCoach];
+                refID = '';
+                // let tempRefIDsCoach = this.state.refIDsCoach;
+                let tempRefIDsCoach = [...this.state.refIDsCoach];
+
+                const itemsCoach = retCoach.map((coach, key) => {
+                        if (coach.Time < 10) {
+                            // this.setState({refID: coach.Day + ".0" + coach.Time});
+                            refID = coach.Day + ".0" + coach.Time;
+                        } else {
+                            // this.setState({refID: coach.Day + "." + coach.Time});
+                            refID = coach.Day + "." + coach.Time;
+                        }
+                        // Create a new array based on current state:
+                        if (!tempRefIDsCoach.includes(refID)) {
+                            tempRefIDsCoach.push(refID);
+                        }
                     }
+                );
 
-                    return item;
+
+                await this.settingRefIDsCoach(tempRefIDsCoach);
+
+
+                if (this.props.time < 10) {
+                    refID = this.props.day + ".0" + this.props.time;
+                } else {
+                    refID = this.props.day + "." + this.props.time;
                 }
-            );
 
-            // let refID;
-            if (this.props.time < 10) {
-                this.setState({refID: this.props.day + ".0" + this.props.time});
-                refID = this.props.day + ".0" + this.props.time;
-            } else {
-                this.setState({refID: this.props.day + "." + this.props.time});
-                refID = this.props.day + "." + this.props.time;
-            }
 
-            this.setState({flag: this.props.flag});
-            console.log(this.props.flag);
+                // let x = this.state.refIDs.slice();
+                let x = [...this.state.refIDs];
+                // let y = this.state.refIDsCoach.slice();
+                let y = [...this.state.refIDsCoach];
+                // let z = this.state.coachIDs.slice();
+                let z = [...this.state.coachIDs];
+                console.log(this.props.trainingScheduleCoach.length + "    " + prevProps.trainingScheduleCoach.length);
 
-            // Create a new array based on current state:
-            let x = this.state.refIDs.slice(0);
-            if (!x.includes(refID) && this.props.flag === true) {
-                x.push(refID);
-                this.setState({refIDs: x});
-                insertPT(this.state).then(() => alert('Success')).catch(err => alert(err));
-
-                // console.log(x);
-            } else {
-                if (x.includes(refID) && this.props.flag === false) {
-                    const newList = this.state.refIDs.slice(0);
-                    newList.splice(this.state.refIDs.indexOf(refID), 1);
-                    this.setState({refIDs: newList}, () => {
-                        console.log(this.state.refIDs)
-                    });
+                if(prevProps.trainingScheduleCoach.length === this.props.trainingScheduleCoach.length && prevProps.coachID !== this.props.coachID){
+                    // console.log("testing  " + this.props.trainingScheduleCoach + "    " + prevProps.trainingScheduleCoach);
+                    return;
                 }
-            }
+                // console.log(this.props.trainingScheduleCoach.length + '   ' + this.state.refIDsCoach.length);
+                if (!x.includes(refID) && !y.includes(refID) && this.props.flag === true && this.props.coachID !== '' && this.props.trainingScheduleCoach.length >= 1 ) {
+                    console.log("inserting stuff bip boop");
+                    console.log("CoachID: " + this.props.coachID);
+                    x.push(refID);
+                    z.push(this.props.coachID);
+                    await this.insertDeleteMethodStates(x, z);
+                } else {
+                    let pos = x.indexOf(refID);
+                    console.log("received coach prop " + this.props.coachID);
+                    console.log("the pos is : " + pos + " coach at this pos is: " + z[pos]);
+                    if (x.includes(refID) && y.includes(refID) && Number(z[pos]) === Number(this.props.coachID) && this.props.flag === false && this.props.coachID !== '') {  //z[pos] === this.props.coachID
+                        console.log("deleting stuff bip boop");
+                        x.splice(pos, 1);
+                        z.splice(pos, 1);
+                        await this.insertDeleteMethodStates(x, z);
+                    }
+                    // }else{
+                    //     if (y.includes(refID) && !x.includes(refID) && this.props.flag === true) {
+                    //         alert("The coach has another scheduled personal training at that time!");
+                    //     } else {
+                    //         if (x.includes(refID) && !y.includes(refID) && this.props.flag === true) {
+                    //             alert("The user has another scheduled personal training at that time!");
+                    //         }
+                    //     }
+                    // }
+                }
+            })();
+
+
 
         }
     }

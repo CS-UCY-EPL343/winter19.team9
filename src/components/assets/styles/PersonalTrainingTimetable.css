@@ -4,7 +4,8 @@
     grid-template-columns: 120px;
     grid-template-rows: 60px;
     width: 95%;
-    height: 400px;
+    /*height: 400px;*/
+    height: fit-content;
     margin: auto;
     background-image: linear-gradient(to right bottom, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E);
     border-radius: 10px;
@@ -22,7 +23,10 @@
 }
 
 .blackBackSelected{
-    background-color: black;
+    background-color: #993333;
+    text-align: center;
+    padding: 5% 0;
+    font-family: "Roboto", sans-serif;
 }
 
 .timetable .weekend {

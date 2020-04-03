@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Carousel}         from 'react-bootstrap';
+import {validURL}         from '../../repository';
 // Images
 
 class ControlledCarousel extends Component {
@@ -30,7 +31,7 @@ class ControlledCarousel extends Component {
                 <Carousel.Item key = { index }>
                   <img
                       className = "d-block img-responsive fit-image"
-                      src = { process.env.PUBLIC_URL + item.src }
+                      src = { validURL(item.src) ? item.src : process.env.PUBLIC_URL + item.src }
                       alt = { item.label }
                   />
                   <Carousel.Caption>
