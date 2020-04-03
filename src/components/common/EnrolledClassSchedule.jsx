@@ -76,6 +76,7 @@ class EnrolledClassSchedule extends Component {
                                             const node = document.getElementById(refID);
                                             node.className = 'blackBackSelected';
                                             node.textContent = item.Name;
+                                            console.log(item.Name);
                                         }
                                     }
                                 );
