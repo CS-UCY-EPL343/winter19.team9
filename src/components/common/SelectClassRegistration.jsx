@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import '../assets/styles/BookDropdown.css'
 // import {getClassDay, getPersonalTraining} from "../../repository";
-// import {getAllCoaches} from "../../repository";
-// import {useEffect} from "react";
+import {getAllCoaches} from "../../repository";
+import {useEffect} from "react";
 
 
 class SelectClassRegistration extends Component {
@@ -25,10 +25,14 @@ class SelectClassRegistration extends Component {
         // console.log(e.target.value);
         this.setState({
             [e.target.name]: e.target.value
+        }, () => {
+            // console.log("this is the CoachID: " + this.state.Coach_ID);
         });
+        // this.setState({Coach_ID: e.target.Coach_ID});
+
     };
 
-    onSubmit = () => {
+    onSubmit = (e) => {
         // console.log(this.state.day);
         this.setState({flag: true},
             () => {
@@ -37,7 +41,7 @@ class SelectClassRegistration extends Component {
             });
     };
 
-    onSubmit2 = () => {
+    onSubmit2 = (e) => {
         // console.log(this.state.day);
         this.setState({flag: false},
             () => {
@@ -91,12 +95,12 @@ class SelectClassRegistration extends Component {
                         <div className="col-md-12 RowBlock">   {/*justify-content-center*/}
                             <label htmlFor="DropClass">Coach:</label>
 
-                            <select className="form-control selectGroupPersonal" name="time" id="TimePers"
+                            <select className="form-control selectGroupPersonal" name="Coach_ID" id="TimePers"
                                     onChange={this.handleChange} required>
                                 <option value="" hidden>Select a Coach</option>
                                 {this.props.coaches.map((res, index) => {
-                                    return <option value={res.CoachName} key={index}>
-                                        {res.CoachName}
+                                    return <option value={res.Coach_ID} key={index}>
+                                        {res.CoachName} {res.Coach_ID}
                                     </option>
                                 })
                                 }

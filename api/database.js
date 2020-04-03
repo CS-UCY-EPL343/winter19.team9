@@ -121,7 +121,6 @@ function base64ToHex(str) {
   return (result);
 }
 
-
 function postUserData(data) {
   return new Promise((resolve, reject) => {
     const x = data.imagePreviewUrl;
@@ -368,17 +367,42 @@ function addClassCodes(DayCode, TimeCode, CLASS_ID) {
 
 //fetching the data for the personal training schedule
 function getPersonalTraining(User_ID) {
-  console.log('Testing 1234: ' + User_ID);
-  return new Promise((resolve, reject) => {
-    const sql = 'SELECT p.Day, p.Time FROM `PERSONAL_TRAINING` p WHERE p.User_ID = ? ';
-    connection.query(sql, [User_ID], function(err, rows) {
-      if (err) {
-        reject(err);
-      }
-      resolve(rows);
+    // console.log("Testing 1234: " + User_ID);
+    return new Promise((resolve, reject) => {
+        const sql = "SELECT p.Day, p.Time, p.Coach_ID FROM `PERSONAL_TRAINING` p WHERE p.User_ID = ? ";
+        connection.query(sql, [User_ID], function (err, rows) {
+            if (err) reject(err);
+            resolve(rows);
+        });
     });
-  });
 
+}
+
+//fetching the data for the coach's training schedule
+function getCoachTraining(Coach_ID) {
+    return new Promise((resolve, reject) => {
+        const sql = "SELECT p.Day, p.Time FROM `PERSONAL_TRAINING` p WHERE p.Coach_ID = ? ";
+        connection.query(sql, [Coach_ID], function (err, rows) {
+            if (err) reject(err);
+            resolve(rows);
+        });
+    });
+
+}
+
+//mine
+function userPic(User_ID) {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT p.image FROM PIC p WHERE p.User_ID = ?';
+        // const sql = 'SELECT * FROM ACCOUNT a, USERS u, PIC p WHERE u.name = ? and u.User_ID = a.User_ID and p.User_ID = u.User_ID';
+        connection.query(sql, [User_ID], function(err, rows) {
+            if (err) {
+                reject(err);
+            }
+            resolve(rows);
+            // console.log(rows);
+        });
+    });
 }
 
 
@@ -396,15 +420,16 @@ function getClassSchedule(User_ID) {
 
 //mine
 function getUserInfo(name) {
-  return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM ACCOUNT a, USERS u, PIC p WHERE u.name = ? and u.User_ID = a.User_ID and p.User_ID = u.User_ID';
-    connection.query(sql, [name], function(err, rows) {
-      if (err) {
-        reject(err);
-      }
-      resolve(rows);
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT * FROM ACCOUNT a, USERS u WHERE u.name = ? and u.User_ID = a.User_ID';
+        // const sql = 'SELECT * FROM ACCOUNT a, USERS u, PIC p WHERE u.name = ? and u.User_ID = a.User_ID and p.User_ID = u.User_ID';
+        connection.query(sql, [name], function(err, rows) {
+            if (err) {
+                reject(err);
+            }
+            resolve(rows);
+        });
     });
-  });
 }
 
 function getMessages(user) {
@@ -485,17 +510,27 @@ function getAllCoaches() {
 }
 
 //insert to PersonalTraining
-function insertPT() {
-  return new Promise((resolve, reject) => {
-    // console.log(Name);
-    const sql = 'INSERT INTO `PERSONAL_TRAINING` (`PT_ID`, `Day`, `Time`, `Coach_ID`, `User_ID`) VALUES (NULL, ?, ?, ?, ?);';
-    connection.query(sql, [], function(err, rows) {
-      if (err) {
-        reject(err);
-      }
-      resolve(rows);
+function insertPT(data) {
+    return new Promise((resolve, reject) => {
+        // console.log((data.day));
+        const sql = "INSERT INTO `PERSONAL_TRAINING` (`PT_ID`, `Day`, `Time`, `Coach_ID`, `User_ID`) VALUES (NULL, ?, ?, ?, ?);";
+        connection.query(sql, [(data.day), (data.time), (data.Coach_ID), (data.User_ID)], function (err, rows) {
+            if (err) reject(err);
+            resolve(rows);
+        });
     });
-  });
+}
+
+//delete from PersonalTraining
+function deletePT(data) {
+    return new Promise((resolve, reject) => {
+        // console.log((data.day));
+        const sql = "DELETE FROM `PERSONAL_TRAINING` WHERE `PERSONAL_TRAINING`.`Day` = ? and `PERSONAL_TRAINING`.`Time` = ? and `PERSONAL_TRAINING`.`Coach_ID` = ? and `PERSONAL_TRAINING`.`User_ID` = ? ";
+        connection.query(sql, [(data.day), (data.time), (data.Coach_ID), (data.User_ID)], function (err, rows) {
+            if (err) reject(err);
+            resolve(rows);
+        });
+    });
 }
 
 // for personal training
@@ -899,6 +934,9 @@ module.exports = {
   getAgeRange,
   getCoachesDayWork,
   getCoachesPersonalWork,
+  deletePT,
+  getCoachTraining,
+  userPic,
   getClassSchedule,
   addClassCodes,
   unenrollUser,

@@ -1,7 +1,7 @@
-import React, {Component}   from 'react';
+import React, {Component}             from 'react';
 import '../assets/styles/classes.css';
-import {AnimatedOnScroll}   from 'react-animated-css-onscroll';
-import {updateClassesVisit} from '../../repository';
+import {AnimatedOnScroll}             from 'react-animated-css-onscroll';
+import {updateClassesVisit, validURL} from '../../repository';
 
 class Classes extends Component {
 
@@ -22,7 +22,9 @@ class Classes extends Component {
                     <div key = { i } className = "col-md-4 col-sm-6">
                       <div className = "single-classes">
                         <div className = "classes-img">
-                          <img src = { process.env.PUBLIC_URL + c.src }
+                          <img src = { validURL(c.src)
+                              ? c.src
+                              : process.env.PUBLIC_URL + c.src }
                                className = "rounded-corners"
                                alt = ""
                           />
@@ -40,8 +42,11 @@ class Classes extends Component {
           <AnimatedOnScroll animationIn = "zoomInUp">
             <div className = 'container'>
               <div className = 'full-width-image'>
-                <img src = { process.env.PUBLIC_URL
-                             + this.props.stylesheetData['Class']['timetable'].src }
+                <img src = { validURL(
+                    this.props.stylesheetData['Class']['timetable'].src)
+                    ? this.props.stylesheetData['Class']['timetable'].src
+                    : process.env.PUBLIC_URL
+                      + this.props.stylesheetData['Class']['timetable'].src }
                      alt = "timetable"
                 />
               </div>
