@@ -25,6 +25,7 @@ export function images(file) {
   });
 
 }
+
 export function userData() {
   return axios.post(`${ BASE_URL }/api/user/data`, {
     'x-access-token': localStorage.getItem('x-access-token'),
@@ -116,10 +117,10 @@ export function getUserID() {
 
 // export function getCoachID(ClassName, ClassDay, ClassTime) {
 //     return axios
-//         .post(`${BASE_URL}/api/BookClass/CoachID`, {'x-access-token': localStorage.getItem('x-access-token'), ClassName: ClassName, ClassDay: ClassDay, ClassTime: ClassTime})
-//         .then(response => response.data)
-//         .catch(err => Promise.reject('Authentication Failed!'))
-// }
+//         .post(`${BASE_URL}/api/BookClass/CoachID`, {'x-access-token':
+// localStorage.getItem('x-access-token'), ClassName: ClassName, ClassDay:
+// ClassDay, ClassTime: ClassTime}) .then(response => response.data) .catch(err
+// => Promise.reject('Authentication Failed!')) }
 
 export function getClassID(ClassName, ClassDay, ClassTime, CoachName) {
   return axios.post(`${ BASE_URL }/api/BookClass/ClassID`, {
@@ -189,17 +190,17 @@ export function allUsersCount() {
 
 export function getUserCount() {
   return axios.get(`${ BASE_URL }/api/user/count`)
-      .then(response => response.data.count[0].count)
+      .then(response => response.data.count[0].count);
 }
 
 export function getEnrollCount() {
   return axios.get(`${ BASE_URL }/api/enroll/count`)
-      .then(response => response.data.count[0].count)
+      .then(response => response.data.count[0].count);
 }
 
 export function getPageVisits() {
   return axios.get(`${ BASE_URL }/api/page/visits/count`)
-      .then(response => response.data.count[0].count)
+      .then(response => response.data.count[0].count);
 }
 
 export function allVisitCount() {
@@ -212,7 +213,7 @@ export function loggedInVisit() {
   return axios.post(`${ BASE_URL }/api/logged/visit/count`,
       {'x-access-token': localStorage.getItem('x-access-token')})
       .then(response => response.data)
-      .catch(() => {})
+      .catch(() => {});
 }
 
 export function updateAboutUsVisit() {
@@ -276,24 +277,24 @@ export function deleteUserData() {
 
 //insert into personal training
 export function insertPT(data) {
-    return axios
-        .post(`${BASE_URL}/api/insert/PersonalTraining`, {
-            'x-access-token': localStorage.getItem('x-access-token'),
-            data: data
-        })
-        .then(response => response.data)
-        .catch(() => Promise.reject('Authentication Failed!'))
+  return axios
+      .post(`${ BASE_URL }/api/insert/PersonalTraining`, {
+        'x-access-token': localStorage.getItem('x-access-token'),
+        data            : data,
+      })
+      .then(response => response.data)
+      .catch(() => Promise.reject('Authentication Failed!'));
 }
 
 //delete from personal training
 export function deletePT(data) {
-    return axios
-        .post(`${BASE_URL}/api/delete/PersonalTraining`, {
-            'x-access-token': localStorage.getItem('x-access-token'),
-            data: data
-        })
-        .then(response => response.data)
-        .catch(() => Promise.reject('Authentication Failed!'))
+  return axios
+      .post(`${ BASE_URL }/api/delete/PersonalTraining`, {
+        'x-access-token': localStorage.getItem('x-access-token'),
+        data            : data,
+      })
+      .then(response => response.data)
+      .catch(() => Promise.reject('Authentication Failed!'));
 }
 
 //for coaches for personal training
@@ -326,27 +327,26 @@ export function getPersonalTraining(User_ID) {
       .catch(() => Promise.reject('Authentication Failed!'));
 }
 
-
 //fetching the data for the personal training schedule
-export function getCoachTraining(Coach_ID){
-    return axios
-        .post(`${BASE_URL}/api/coach/getCoachTraining`, {
-            'x-access-token': localStorage.getItem('x-access-token'),
-            Coach_ID: Coach_ID
-        })
-        .then(response => response.data)
-        .catch(() => Promise.reject('Authentication Failed!'))
+export function getCoachTraining(Coach_ID) {
+  return axios
+      .post(`${ BASE_URL }/api/coach/getCoachTraining`, {
+        'x-access-token': localStorage.getItem('x-access-token'),
+        Coach_ID        : Coach_ID,
+      })
+      .then(response => response.data)
+      .catch(() => Promise.reject('Authentication Failed!'));
 }
 
 //fetch pic
 export function userPic(User_ID) {
-    return axios
-        .post(`${BASE_URL}/api/user/userPic`, {
-            'x-access-token': localStorage.getItem('x-access-token'),
-            User_ID: User_ID
-        })
-        .then(response => response.data)
-        .catch(() => Promise.reject('Authentication Failed!'))
+  return axios
+      .post(`${ BASE_URL }/api/user/userPic`, {
+        'x-access-token': localStorage.getItem('x-access-token'),
+        User_ID         : User_ID,
+      })
+      .then(response => response.data)
+      .catch(() => Promise.reject('Authentication Failed!'));
 }
 
 //mine
@@ -454,30 +454,43 @@ export function getServerConnections() {
 
 export function getGenderChart() {
   return axios.get(`${ BASE_URL }/api/chart/pie/gender`)
-      .then(response => response.data)
+      .then(response => response.data);
 }
 
 export function getClassDaysChart() {
   return axios.get(`${ BASE_URL }/api/chart/pie/enroll`)
-      .then(response => response.data)
+      .then(response => response.data);
 }
 
 export function getPersonalDaysChart() {
   return axios.get(`${ BASE_URL }/api/chart/pie/personal`)
-      .then(response => response.data)
+      .then(response => response.data);
 }
 
 export function getAgeRange() {
   return axios.get(`${ BASE_URL }/api/chart/bar/age`)
-      .then(response => response.data[0][0])
+      .then(response => response.data[0][0]);
 }
 
 export function getCoachesDayWork() {
   return axios.get(`${ BASE_URL }/api/chart/line/coaches/week-work`)
-      .then(response => response.data[0])
+      .then(response => response.data[0]);
 }
 
 export function getCoachesPersonalWork() {
   return axios.get(`${ BASE_URL }/api/chart/line/coaches/personal-work`)
-      .then(response => response.data[0])
+      .then(response => response.data[0]);
+}
+
+export function validURL(str) {
+  const pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+                             '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'
+                             + // domain name
+                             '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4)
+                             // address
+                             '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and
+                             // path
+                             '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+                             '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+  return !!pattern.test(str);
 }
