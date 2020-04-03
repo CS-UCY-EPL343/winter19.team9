@@ -1,0 +1,42 @@
+#privacy-policy h1{
+    text-align: center;
+    font-size: 42px;
+    color: white;
+    padding-top: 70px;
+    padding-bottom: 50px;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /*font-size : 65px;*/
+    /* font-family: Brush Script MT, Brush Script Std, cursive; */
+    font-weight: 600;
+
+}
+#privacy-policy h2{
+    padding-top: 30px;
+    padding-bottom: 5px;
+    color: white;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#privacy-policy li{
+    color: white;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+ #privacy-policy {
+    background-color: #1b1b1b;
+}
+
+#privacy-policy p {
+    align-content: normal;
+    text-align: justify;
+    margin-left: 10%;
+    margin-right: 10%;
+    line-height: 1.75;
+    color: white;
+    margin-block: auto;
+}

@@ -7,7 +7,7 @@ import AnnouncementsPrivate
 import EditAccount from './EditAccount';
 import MessagesModal from './MessagesModal';
 import {
-    getSevenDaysRemaining,
+    // getSevenDaysRemaining,
     getTotalMessages,
     getTotalPrivateAnnouncements,
 } from '../../repository';
@@ -68,13 +68,8 @@ class SettingsProfile extends Component {
                 {TotalMessages: response.TotalMessages});
         });
 
-        getSevenDaysRemaining().then(response => {
-                this.setState(
-                    {open	 : (response.sevenDaysLeft === 1)});
-                console.log(this.state.open);
-        }
 
-        );
+
     }
 
     render() {

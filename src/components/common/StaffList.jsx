@@ -1,5 +1,5 @@
 import React, {Component}      from 'react';
-import {getAdmins, getCoaches} from '../../repository';
+ import {getAdmins, getCoaches} from '../../repository';
 import adminAvatar
                                from '../assets/img/logos/fitnessFactoryLogo.png';
 import ToggleModal             from './ToggleModal';

@@ -311,9 +311,9 @@ app.post('/api/announcements/private/add', middleware, (req, res) => {
   if (req.decoded.level === 'user') {
     return res.status(401).json({message: 'Authentication failed'});
   }
-  db.addPrivateAnnouncement(req.body.title, req.body.message, req.decoded.level,
+  db.addPrivateAnnouncement(req.body.title, req.body.message, req.body.username ,req.decoded.level,
       req.decoded.username).then(response => res.status(200).json({
-    message        : 'Announcement inserted successfully',
+    message: 'Announcement inserted successfully',
     ANNOUNCEMENT_ID: response.id,
   })).catch(() => res.status(404).json('Not Found'));
 });

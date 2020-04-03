@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { CSVLink, CSVDownload } from "react-csv";
 
 import '../assets/styles/EditAccountModal.css'
 import {logOut, userData} from "../../repository";
@@ -17,7 +18,11 @@ class EditAccount extends Component {
             Surname: '',
             password: '',
             confirmPassword: '',
-            image: ''
+            image: '',
+            flag: '1',
+            csvData: [],
+            Bdate: '',
+            Age: '',
         };
     }
 
@@ -28,9 +33,12 @@ class EditAccount extends Component {
             alert("Passwords don't match");
             return 1;
 
-        } else {
+        }
+
+        else {
             return 0;
         }
+
     };
 
     refreshPage() {
@@ -46,37 +54,65 @@ class EditAccount extends Component {
             }).catch(err => alert(err));
         }
     };
+    fillCSV = (name,surname,email,username,password,bdate,age)=> {
+        console.log(name);
+
+        // this.state.csvData =[
+        //     ["firstname", "lastname", "email","username","password"]];
+        return   this.state.csvData =[
+            ["Firstname", "Lastname", "Email","username","password"," Date of Birth","Age"],
+            [name,surname,email,username,password,bdate,age]];
+    }
 
     componentDidMount() {
+        const {name,surname,email,username,password} = '';
         userData()
             .then(response => {
                 console.log(response);
                 this.setState(response);
                 this.setState({confirmPassword: response.password});
+
+
             });
+        //this.fillCSV(name,surname,email,username,password);
 
     }
 
+
     onValueInput = (e) => {
+        if (e.target.value.length === 0) {
+            this.state.flag ='0';
+
+        }else{this.state.flag ='1';}
+
         this.setState({[e.target.name]: e.target.value});
     };
 
+
     Test = () => {
+        //console.log(this.state.Name);
+        if(this.state.flag==='0'){
+            alert("Fill the empty field(s)");return;
+        }
         if (this.handleSubmit() !== 1)
-            postuserData(this.state).then(() => alert('Success')).catch(err => alert(err));
+            postuserData(this.state).then(() => alert('Saved!')).catch(err => alert('Error!'));
 
     };
     onSubmit = (e) => {
+
         e.preventDefault();
+        if (this.state.noValidate === 1) alert("Fill  all the fields Correctly!");
 
         if (!(
-            this.state.Name.match('[a-zA-Z ]+') &&
-            this.state.Email.match('[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$') &&
-            this.state.Surname.match('^ *[a-zA-Z0-9]+.'))) {
+            this.state.Name.match(new RegExp('[a-zA-Z ]+')) &&
+            this.state.Email.match(new RegExp("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$")) &&
+            this.state.Surname.match(new RegExp("^ *[a-zA-Z0-9]+."))) &&  this.state.username.match(new RegExp("^ *[a-zA-Z0-9]+."))) {
+            alert("Fill  all the fields Correctly!");
             return;
         }
         this.Test();
     };
+
 
     _handleImageChange(e) {
         e.preventDefault();
@@ -180,8 +216,11 @@ class EditAccount extends Component {
                                    id="reset"/>
                             <input type="button" className="btn btn-default" defaultValue="Delete Account" id="delete"
                                    onClick={this.deleted}/>
-                        </label>
 
+                        </label>
+                        <label>
+                            <CSVLink data={this.fillCSV(this.state.Name,this.state.Surname,this.state.Email,this.state.username,this.state.password,this.state.Bdate,this.state.Age)}>Download my Data</CSVLink>
+                        </label>
                     </div>
                 </form>
             </div>
