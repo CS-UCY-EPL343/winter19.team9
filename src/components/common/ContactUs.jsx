@@ -31,6 +31,7 @@ class ContactUs extends Component {
         this.state.email.match('[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$') &&
         this.state.phone.match('^ *[0-9]+.*') &&
         this.state.message.match('^ *[a-zA-Z0-9]+.'))) {
+      alert('F');
       return;
     }
 
@@ -66,7 +67,7 @@ class ContactUs extends Component {
                     className = " needs-validation"
                     id = "contactForm"
                     name = "sentMessage"
-                    noValidate = "novalidate"
+                    // noValidate = "novalidate"
                     onSubmit = { this.onSubmit }
                 >
                   <div className = "row">
@@ -94,7 +95,7 @@ class ContactUs extends Component {
                             className = "form-control"
                             id = "email"
                             name = "email"
-                            type = "text"
+                            type = "email"
                             placeholder = "Email"
                             required = "required"
                             pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"

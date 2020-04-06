@@ -24,8 +24,8 @@
 }
 
 #about .page-section {
-  padding: 100px 0;
-  height: 2010px;
+  padding: 100px 0 0 0;
+  /*height: 2010px;*/
 }
 
 #about .page-section h2.section-heading {
@@ -52,7 +52,7 @@
 @media (max-width: 500px) {
   #about #test {
     font-size: 50px;
-    margin-bottom: 30px;
+    /*margin-bottom: 30px;*/
   }
 }
 
@@ -63,8 +63,8 @@
 @media (min-width: 768px) {
   #about {
     background-color: #1b1b1b;
-    padding: 150px 0;
-    height: 2010px;
+    /*padding: 150px 0;*/
+    /*height: 2010px;*/
   }
 }
 

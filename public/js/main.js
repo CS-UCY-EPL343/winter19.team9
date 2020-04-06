@@ -18,6 +18,7 @@ function scrollFunction() {
       document.getElementById('mainNav').style.backgroundColor = 'transparent';
     }
   } else {
+    document.getElementById('to-top').style.display = 'none';
     document.getElementById('mainNav').style.backgroundColor = 'transparent';
   }
 }
