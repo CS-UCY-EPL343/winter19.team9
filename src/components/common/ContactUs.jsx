@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import '../assets/styles/About.css';
 import {sendEmail}        from '../../repository';
-
+import Spinner            from '../Spinner';
+import ButtonLoader       from './ButtonLoader';
 
 class ContactUs extends Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class ContactUs extends Component {
       email  : '',
       phone  : '',
       message: '',
+      loading: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -30,18 +32,19 @@ class ContactUs extends Component {
         this.state.name.match('[a-zA-Z ]+') &&
         this.state.email.match('[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$') &&
         this.state.phone.match('^ *[0-9]+.*') &&
-        this.state.message.match('^ *[a-zA-Z0-9]+.'))) {
-      alert('F');
+        this.state.message.match('^ *[a-zA-Z0-9]+.*'))) {
       return;
     }
 
-    sendEmail(this.state).then((response) => {
-      if (response.status === 'success') {
-        alert('Message Sent.');
-        window.location.reload();
-      } else if (response.status === 'fail') {
-        alert('Message failed to send.');
-      }
+    this.setState({loading: true}, () => {
+      sendEmail(this.state).then((response) => {
+        if (response.status === 'success') {
+          alert('Message Sent.');
+          window.location.reload();
+        } else if (response.status === 'fail') {
+          alert('Message failed to send.');
+        }
+      }).then(() => this.setState({loading: false}));
     });
   };
 
@@ -70,7 +73,7 @@ class ContactUs extends Component {
                     // noValidate = "novalidate"
                     onSubmit = { this.onSubmit }
                 >
-                  <div className = "row">
+                  <div className = "row mb-4">
                     <div className = "col-md-6">
                       <div className = "form-group">
                         <input
@@ -145,13 +148,11 @@ class ContactUs extends Component {
                     <div className = "clearfix" />
                     <div className = "col-lg-3 ">
                       <div id = "success" />
-                      <button
-                          id = "sendMessageButton"
-                          className = "btn btn-primary btn-xl text-uppercase"
-                          type = "submit"
-                      >
-                        Submit Message
-                      </button>
+                      <ButtonLoader loading = { this.state.loading }
+                                    text = { 'Submit Message' }
+                                    loadingText = { 'Sending Message...' }
+                                    type = { 'submit' }
+                      />
                     </div>
                   </div>
                 </form>
@@ -162,19 +163,19 @@ class ContactUs extends Component {
                 <h2>Contact Information</h2>
                 <p>
                   { ' ' }
-                  Address: {this.props.contact.address}
+                  Address: { this.props.contact.address }
                   <br />
-                  Phone: {this.props.contact.phone}
+                  Phone: { this.props.contact.phone }
                   <br />
-                  Email: {this.props.contact.email}
-                  <br/>
+                  Email: { this.props.contact.email }
+                  <br />
                 </p>
-                <br/>
+                <br />
                 <p>
-                  <a href = {this.props.contact.facebook}>
+                  <a href = { this.props.contact.facebook }>
                     <i className = "fa fa-facebook" />
                   </a>
-                  <a href = {this.props.contact.instagram}>
+                  <a href = { this.props.contact.instagram }>
                     <i className = "fa fa-instagram" />
                   </a>
                 </p>

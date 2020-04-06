@@ -1,0 +1,26 @@
+.loading-button {
+    background-color : #D90429;
+    border           : none;
+    color            : white;
+    text-align       : center;
+    text-decoration  : none;
+    display          : inline-block;
+    margin           : 4px 2px;
+    cursor           : pointer;
+    font-size        : 18px;
+    padding          : 20px 40px;
+    font-family      : 'Montserrat', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-weight      : 700;
+    text-transform   : uppercase !important;
+    line-height      : 1.5;
+    border-radius    : .25rem;
+    white-space      : nowrap;
+}
+
+.loading-button:disabled {
+    opacity : 0.5;
+}
+
+.fa-spinner {
+    margin-right: 5px;
+}
