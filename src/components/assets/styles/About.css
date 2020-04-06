@@ -12,6 +12,7 @@
     line-height: 1.75;
     color: white;
     font-size: 18px;
+    margin-bottom: 0;
 }
 
 #contact h2 {
@@ -117,9 +118,9 @@ section#contact .form-control:focus {
     margin: auto;
     /*margin-top: 20px;*/
     position: relative;
-    text-align: right;
-    /*height: 400px;*/
-    /*width: 550px;*/
+    text-align: center;
+    height: 500px;
+    width: 100%;
 }
 
 #contact .gmap_canvas {
@@ -127,8 +128,17 @@ section#contact .form-control:focus {
     /*margin-top: 20px;*/
     overflow: hidden;
     background: none !important;
-    /*height: 400px;*/
-    /*width: 550px;*/
+    height: 100%;
+    width: 100%;
+}
+
+#contact .gmap_canvas iframe {
+    margin: auto;
+    /*margin-top: 20px;*/
+    overflow: hidden;
+    background: none !important;
+    height: 100%;
+    width: 100%;
 }
 
 #contact .mapouter a {
@@ -136,4 +146,25 @@ section#contact .form-control:focus {
     position: relative;
     bottom: 30px;
     display: none;
+}
+
+@media only screen and (max-width: 771px) {
+    #contact {
+        padding: 50px 0;
+    }
+    
+    #contact .mapouter {
+        padding: 15px 10px;
+        margin: auto;
+        /*margin-top: 20px;*/
+        position: relative;
+        text-align: center;
+        width: 100%;
+        /*width: 550px;*/
+    }
+    
+    #contact .gmap_canvas {
+        width: 100%;
+    }
+    
 }

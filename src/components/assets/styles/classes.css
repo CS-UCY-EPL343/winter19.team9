@@ -140,3 +140,9 @@
 #classes .full-width-image img{
 	width: 100%;
 }
+
+@media (max-width: 350px) {
+	#classes .page-title h1 {
+		font-size: 40px;
+	}
+}

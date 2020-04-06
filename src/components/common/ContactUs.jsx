@@ -168,6 +168,7 @@ class ContactUs extends Component {
                   Email: {this.props.contact.email}
                   <br/>
                 </p>
+                <br/>
                 <p>
                   <a href = {this.props.contact.facebook}>
                     <i className = "fa fa-facebook" />

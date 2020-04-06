@@ -59,7 +59,7 @@ class ProfileUser extends Component {
             <div id='profile' className="main-container container-fluid">
                 { (this.props.userLevel === 'user') ? '' : <Redirect to = "/" /> }
 
-                <div className="container-fluid">
+                <div className="container-fluid mb-4">
                     <div className="row ">
                         <SettingsProfile userLevel={this.props.userLevel} />
                         <ProfileInfo/>

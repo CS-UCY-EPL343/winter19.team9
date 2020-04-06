@@ -18,6 +18,7 @@
     "chart.js": "^2.9.3",
     "convert-hex": "^0.1.0",
     "history": "^4.10.1",
+    "jquery": "^3.4.1",
     "leaflet": "^1.5.1",
     "node": "^13.10.1",
     "react": "^16.11.0",

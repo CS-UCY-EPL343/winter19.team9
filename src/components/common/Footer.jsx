@@ -17,12 +17,15 @@ class Footer extends Component {
               >
                 <h2>Get Social</h2>
                 <p>{ this.props.stylesheetData['social']['text'] }</p>
-                <a href = { this.props.stylesheetData['social']['facebook'] }>
-                  <i className = "fa fa-facebook footer-icon" />
-                </a>
-                <a href = { this.props.stylesheetData['social']['instagram'] }>
-                  <i className = "fa fa-instagram footer-icon" />
-                </a>
+                <br/>
+                <p>
+                  <a href = { this.props.stylesheetData['social']['facebook'] }>
+                    <i className = "fa fa-facebook footer-icon" />
+                  </a>
+                  <a href = { this.props.stylesheetData['social']['instagram'] }>
+                    <i className = "fa fa-instagram footer-icon footer-icon-centered" />
+                  </a>
+                </p>
               </div>
               <div id = "about-footer"
                    className = "col-lg-3 col-md-12 col-sm-12"
@@ -32,6 +35,7 @@ class Footer extends Component {
                   <i className = "fa fa-map-marker footer-icon" /> Address:
                   <span className = "about-footer-text"> { this.props.stylesheetData['about-us']['address'] }</span>
                 </p>
+                <br/>
                 <p>
                   <i className = "fa fa-envelope footer-icon" /> Questions?
                   <span className = "about-footer-text"> { this.props.stylesheetData['about-us']['email'] }</span>
