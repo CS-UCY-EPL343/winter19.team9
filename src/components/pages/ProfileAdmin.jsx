@@ -9,40 +9,43 @@ import {
   addPrivateAnnouncement,
   loggedInVisit,
   updateProfileVisit,
-  getPersonalTraining,
-  getAllCoaches,
+  // getPersonalTraining,
+  // getAllCoaches, removeAnnouncement,
 }                                from '../../repository';
 import AnnouncementModal         from '../common/AnnouncementModal';
 import {Button}                  from 'reactstrap';
 import Box                       from '../common/SelectClassRegistration';
 import Timetable                 from '../common/PersonalTrainingCreate';
 import AnnouncementsPrivateModal from '../common/AnnouncementsPrivateModal';
+import Swal                      from 'sweetalert2';
+import ButtonLoader              from '../common/ButtonLoader';
 
 class ProfileAdmin extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      nameStart       : '',
-      Name            : '',
-      Surname         : '',
-      Email           : '',
-      username        : '',
-      searchResults   : [],
-      announcements   : [],
-      modal           : false,
-      modal2          : false,
-      modalTitle      : '',
-      modalMessage    : '',
-      modalAnnId      : '',
-      day             : '',
-      time            : '',
-      flag            : false,
-      image           : '',
-      User_ID         : '',
-      personalTraining: [],
-      selectedCoaches : [],
-      Coach_ID        : '',
+      nameStart        : '',
+      Name             : '',
+      Surname          : '',
+      Email            : '',
+      username         : '',
+      searchResults    : [],
+      announcements    : [],
+      modal            : false,
+      modal2           : false,
+      modalTitle       : '',
+      modalMessage     : '',
+      modalAnnId       : '',
+      day              : '',
+      time             : '',
+      flag             : false,
+      image            : '',
+      User_ID          : '',
+      personalTraining : [],
+      selectedCoaches  : [],
+      Coach_ID         : '',
+      loadingSearchUser: false,
     };
     this.toggleAnnouncementsData = this.toggleAnnouncementsData.bind(this);
     this.onAnnouncementSubmit = this.onAnnouncementSubmit.bind(this);
@@ -67,13 +70,13 @@ class ProfileAdmin extends Component {
   }
 
   onSubmit = (e) => {
-    console.log(this.state.nameStart);
     e.preventDefault();
-    userDetails(this.state.nameStart)
-        .then(response => {
-          console.log(response);
-          this.setState({searchResults: response});
-        });
+    this.setState({loadingSearchUser: true}, () => {
+      userDetails(this.state.nameStart)
+          .then(response => {
+            this.setState({searchResults: response, loadingSearchUser: false});
+          });
+    });
   };
 
   toggle = () => {
@@ -91,26 +94,43 @@ class ProfileAdmin extends Component {
 
     this.setState({modal2: !this.state.modal2});
   };
-  onAnnouncementSubmit = (Title, Message, Ann_ID) => {
-    console.log(Title + ' ' + Message);
-    console.log(this.state.announcements[this.state.modalAnnId].Title + ' '
-                + this.state.announcements[this.state.modalAnnId].Message);
+  onAnnouncementSubmit = async(Title, Message, Ann_ID) => {
+    if (this.state.level <= 1) {
+      Swal.fire(
+          'You are not authorized to do this!',
+          'Please log in and try again...',
+          'error',
+      ).then();
+      return false;
+    }
+
+    // console.log(Title + ' ' + Message);
+    // console.log(this.state.announcements[this.state.modalAnnId].Title + ' '
+    //             + this.state.announcements[this.state.modalAnnId].Message);
     if (Title === this.state.announcements[this.state.modalAnnId].Title
         && Message
         === this.state.announcements[this.state.modalAnnId].Message) {
-      alert('Please give new data.');
-      return;
+      Swal.fire(
+          'Please give new data to update',
+          '',
+          'error',
+      ).then();
+      return false;
     }
 
     if (Title === '' || Message === '') {
-      alert('Please give correct data.');
-      return;
+      Swal.fire(
+          'Please fill in all boxes',
+          '',
+          'error',
+      ).then();
+      return false;
     }
 
-    console.log('Success');
-
-    updateAnnouncement(Ann_ID, Title, Message).then(response => {
-      console.log(response);
+    // console.log('Success');
+    let flag = false;
+    await updateAnnouncement(Ann_ID, Title, Message).then(response => {
+      // console.log(response);
       this.setState({
         announcements: this.state.announcements.map(ann => {
           let x = ann;
@@ -126,36 +146,83 @@ class ProfileAdmin extends Component {
         }),
       });
       this.toggle();
-      alert('Announcement is updated!');
-    }).catch(err => alert(err));
-  };
-  onAnnouncementSubmit2 = (Title, Message) => {
+    }).then(() => {
+      flag = true;
+      Swal.fire(
+          'Private Announcement was updated successfully',
+          '',
+          'success',
+      );
+      this.toggle();
+    }).catch(() => Swal.fire(
+        'Something went wrong',
+        'Please try again...',
+        'error',
+    ));
 
-    if (Title === '' || Message === '') {
-      alert('Please give correct data.');
-      return;
+    return flag;
+  };
+
+  onAnnouncementSubmit2 = async(Title, Message) => {
+    if (this.state.level <= 1) {
+      Swal.fire(
+          'You are not authorized to do this!',
+          'Please log in and try again...',
+          'error',
+      ).then();
+      return false;
     }
 
-    this.toggle2();
+    if (!this.state.username || this.state.username === '') {
+      Swal.fire(
+          'Please select a user first',
+          '',
+          'error',
+      ).then();
+      return false;
+    }
 
-    addPrivateAnnouncement(Title, Message, this.state.username)
+    if (Title === '' || Message === '') {
+      Swal.fire(
+          'Please fill in all boxes',
+          '',
+          'error',
+      ).then();
+      return false;
+    }
+
+    let flag = false;
+    await addPrivateAnnouncement(Title, Message, this.state.username)
         .then(response => {
           let prevAnn = this.state.announcements.slice(0);
-          console.log(response);
+          // console.log(response);
           //console.log(response.TIMESTAMP);
           prevAnn.push(
               {
                 ANNOUNCEMENT_ID: response.data.ANNOUNCEMENT_ID,
                 Title          : Title,
                 Message        : Message,
-                TIMESTAMP      : response.data.TIMESTAMP,
+                TIMESTAMP      : new Date().toISOString(),
               });
           // console.log(announcements);
-          //this.setState({announcements: prevAnn});
+          this.setState({announcements: prevAnn});
           //console.log(prevAnn);
-          alert('Announcement is added!');
-        })
-        .catch(err => alert(err));
+          // alert('Announcement is added!');
+        }).then(() => {
+          flag = true;
+          Swal.fire(
+              'Private Announcement added successfully',
+              '',
+              'success',
+          );
+          this.toggle2();
+        }).catch(() => Swal.fire(
+            'Something went wrong',
+            'Please try again...',
+            'error',
+        ));
+
+    return flag;
   };
 
   handleChange = (e) => {
@@ -206,25 +273,60 @@ class ProfileAdmin extends Component {
     this.toggleAnnouncements();
   };
 
-  toggleAnnouncementsData2 = (e) => {
-
+  toggleAnnouncementsData2 = () => {
     this.toggleAnnouncements2();
   };
 
-  onAnnouncementDelete = (ANNOUNCEMENT_ID) => {
+  onAnnouncementDelete = async(ANNOUNCEMENT_ID) => {
     if (this.state.level <= 1) {
-      return;
+      Swal.fire(
+          'You are not authorized to do this!',
+          'Please log in and try again...',
+          'error',
+      ).then();
+      return false;
     }
 
-    deleteAnnouncement(
-        this.state.announcements[ANNOUNCEMENT_ID].ANNOUNCEMENT_ID).then(() => {
-      this.setState({
-        announcements: this.state.announcements.filter(
-            ann => ann.ANNOUNCEMENT_ID
-                   !== this.state.announcements[ANNOUNCEMENT_ID].ANNOUNCEMENT_ID),
-      });
-    }).catch(err => alert(err));
+    let flag = false;
+    await Swal.fire({
+      title             : 'Are you sure?',
+      text              : 'You won\'t be able to revert this!',
+      icon              : 'warning',
+      showCancelButton  : true,
+      confirmButtonColor: '#3085D6',
+      cancelButtonColor : '#DD3333',
+      confirmButtonText : 'Yes, delete it!',
+    }).then(async(result) => {
+      if (result.value) {
+        await deleteAnnouncement(
+            this.state.announcements[ANNOUNCEMENT_ID].ANNOUNCEMENT_ID)
+            .then(() => {
+              this.setState({
+                announcements: this.state.announcements.filter(
+                    ann => ann.ANNOUNCEMENT_ID
+                           !== this.state.announcements[ANNOUNCEMENT_ID].ANNOUNCEMENT_ID),
+              }, () => Swal.fire(
+                  'Private Announcement deleted successfully',
+                  '',
+                  'success',
+              ));
+              flag = true;
+            })
+            .catch(() => Swal.fire(
+                'Something went wrong',
+                'Please try again...',
+                'error',
+            ));
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+            'Cancelled',
+            'Your Private Announcement is safe :)',
+            'error',
+        ).then();
+      }
+    });
 
+    return flag;
   };
 
   render() {
@@ -259,11 +361,19 @@ class ProfileAdmin extends Component {
                       />
                     </div>
                     <div className = "p-sm-1 flex-fill bd-highlight ">
-                      <button className = "btn btn-outline-secondary h-100 w-100"
-                              type = "submit"
-                              onClick = { this.onSubmit }
-                      ><i className = "fa fa-search" />
-                      </button>
+                      <ButtonLoader text = { '' }
+                                    textIcon = { true }
+                                    loadingText = { '' }
+                                    size = { 'lg' }
+                                    type = { 'submit' }
+                                    onClick = { this.onSubmit }
+                                    loading = { this.state.loadingSearchUser }
+                      />
+                      {/*<button className = "btn btn-outline-secondary h-100 w-100"*/ }
+                      {/*        type = "submit"*/ }
+                      {/*        onClick = { this.onSubmit }*/ }
+                      {/*><i className = "fa fa-search" />*/ }
+                      {/*</button>*/ }
                     </div>
 
                   </div>
@@ -376,6 +486,7 @@ class ProfileAdmin extends Component {
                     onSubmit = { this.onAnnouncementSubmit2 }
                     toggle = { this.toggleAnnouncements2 }
                     modal = { this.state.modalAnnouncements2 }
+                    resetOnSubmit = { true }
                 />
 
                 <AnnouncementModal onSubmit = { this.onAnnouncementSubmit }

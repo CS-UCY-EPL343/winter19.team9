@@ -4,6 +4,7 @@ import {
     getCoaches,
     // makeMessagesRead
 }                                                           from '../../repository';
+import Swal                                                 from "sweetalert2";
 
 class MessageNewModal extends Component {
     constructor(props) {
@@ -34,10 +35,14 @@ class MessageNewModal extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         if (!this.state.title || !this.state.message || !this.state.contact) {
-            alert('Please enter data on fields.');
+            Swal.fire(
+                'Please fill in all boxes',
+                '',
+                'error',
+            ).then();
             return;
         }
-        this.props.onSubmit(this.state.title, this.state.message,
+        this.props.onSubmit(e, this.state.title, this.state.message,
             this.state.contact);
         this.setState({title: '', message: '', contact: ''});
     };

@@ -1,5 +1,5 @@
 .loading-button {
-    background-color : #D90429;
+    background-color : #EF233C;
     border           : none;
     color            : white;
     text-align       : center;
@@ -17,10 +17,14 @@
     white-space      : nowrap;
 }
 
+.loading-button:hover {
+    background-color : #D90429;
+}
+
 .loading-button:disabled {
     opacity : 0.5;
 }
 
 .fa-spinner {
-    margin-right: 5px;
+    margin-right : 5px;
 }

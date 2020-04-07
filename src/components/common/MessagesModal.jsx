@@ -7,6 +7,7 @@ import {
     makeMessagesRead,
 }                         from '../../repository';
 import MessageNewModal    from './MessageNewModal';
+import Swal               from "sweetalert2";
 
 class MessagesModal extends Component {
     constructor(props) {
@@ -24,6 +25,7 @@ class MessagesModal extends Component {
             this.setState({
                 messages: response.messages[0].sort(
                     function(a, b) {
+                        // noinspection JSUnresolvedVariable
                         return b.Message_ID
                             - a.Message_ID;
                     }),
@@ -33,6 +35,7 @@ class MessagesModal extends Component {
 
     componentWillUnmount() {
         if (this.props.TotalMessages > 0) {
+            // noinspection JSUnresolvedVariable
             const newMessages = this.state.messages.slice(0,
                 this.props.TotalMessages).map(msg => msg.Message_ID);
             makeMessagesRead(newMessages).then(() => {
@@ -45,13 +48,32 @@ class MessagesModal extends Component {
         this.setState({newModal: !this.state.newModal});
     };
 
-    onMessageSubmit = (title, message, contact) => {
+    onMessageSubmit = (e, title, message, contact) => {
+        e.preventDefault();
         createNewMessage({title, message, contact}).then(response => {
             this.toggle();
             let newArr = this.state.messages.slice(0);
             newArr.unshift(response[0]);
             this.setState({messages: newArr});
-        }).catch(err => alert(err));
+            console.log(response);
+            if (response[0]) {
+                Swal.fire(
+                    'Message sent successfully',
+                    '',
+                    'success',
+                ).then();
+            } else {
+                Swal.fire(
+                    'Something went wrong',
+                    'Please try again...',
+                    'error',
+                ).then();
+            }
+        }).catch(() => Swal.fire(
+            'Something went wrong',
+            'Please try again...',
+            'error',
+        ).then());
     };
 
     render() {
@@ -67,10 +89,13 @@ class MessagesModal extends Component {
                 >
                     { this.state.messages.map(
                         (msg, index) => {
+                            // noinspection JSUnresolvedVariable
                             const outgoing = this.props.userLevel === msg.From_level;
+                            // noinspection JSUnresolvedVariable
                             const contact = `${ msg.From_Name } ${ msg.From_Surname } - ${ msg.From_level.toUpperCase() }`;
                             const timestamp = msg.Timestamp.split(/[T.]+/)[0] + ' '
                                 + msg.Timestamp.split(/[T.]+/)[1];
+                            // noinspection JSUnresolvedVariable
                             return (
                                 <div key = { index }>
                                     { this.props.TotalMessages > 0 &&

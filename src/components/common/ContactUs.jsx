@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import '../assets/styles/About.css';
 import {sendEmail}        from '../../repository';
-import Spinner            from '../Spinner';
 import ButtonLoader       from './ButtonLoader';
+import Swal               from 'sweetalert2';
+import '@sweetalert2/theme-dark/dark.css';
 
 class ContactUs extends Component {
   constructor(props) {
@@ -37,14 +38,30 @@ class ContactUs extends Component {
     }
 
     this.setState({loading: true}, () => {
-      sendEmail(this.state).then((response) => {
-        if (response.status === 'success') {
-          alert('Message Sent.');
-          window.location.reload();
-        } else if (response.status === 'fail') {
-          alert('Message failed to send.');
-        }
-      }).then(() => this.setState({loading: false}));
+      sendEmail(this.state)
+          .then((response) => {
+            // console.log(response);
+            if (response.status === 'success') {
+              Swal.fire(
+                  'Message sent successfully',
+                  'Check your email inbox for a confirmation.',
+                  'success',
+              ).then(() => window.location.reload());
+            } else {
+              Swal.fire(
+                  'Something went wrong',
+                  'Please try again...',
+                  'error',
+              ).then();
+            }
+          })
+          .then(() => this.setState({loading: false}))
+          .catch(() => Swal.fire(
+              'Something went wrong',
+              'Please try again...',
+              'error',
+              ).then(),
+          );
     });
   };
 

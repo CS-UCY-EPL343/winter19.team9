@@ -1,10 +1,11 @@
-import React, {Component} from 'react';
-import { CSVLink, CSVDownload } from "react-csv";
+import React, {Component}       from 'react';
+import { CSVLink } from "react-csv";
 
 import '../assets/styles/EditAccountModal.css'
-import {logOut, userData} from "../../repository";
-import {postuserData} from "../../repository";
-import {deleteUserData} from "../../repository";
+import {logOut, userData} from '../../repository';
+import {postuserData}                         from "../../repository";
+import {deleteUserData}         from "../../repository";
+import Swal                     from "sweetalert2";
 
 class EditAccount extends Component {
     constructor(props) {
@@ -30,12 +31,13 @@ class EditAccount extends Component {
         const {password, confirmPassword} = this.state;
         // perform all neccassary validations
         if (password !== confirmPassword) {
-            alert("Passwords don't match");
+            Swal.fire(
+                'Passwords don\'t match',
+                '',
+                'error',
+            ).then();
             return 1;
-
-        }
-
-        else {
+        } else {
             return 0;
         }
 
@@ -46,33 +48,56 @@ class EditAccount extends Component {
     }
 
     deleted = () => {
-        if (window.confirm('Delete the item?')) {
-            deleteUserData().then(() => {
-                alert('Success');
-                logOut();
-                window.location.replace('/');
-            }).catch(err => alert(err));
-        }
+        Swal.fire({
+            title             : 'Are you sure?',
+            text              : 'You won\'t be able to revert this!',
+            icon              : 'warning',
+            showCancelButton  : true,
+            confirmButtonColor: '#3085D6',
+            cancelButtonColor : '#DD3333',
+            confirmButtonText : 'Yes, delete it!',
+        }).then((result) => {
+            if (result.value) {
+                deleteUserData().then(() => {
+                    Swal.fire(
+                        'Public Announcement deleted successfully',
+                        '',
+                        'success',
+                    ).then(() => {
+                        logOut();
+                        window.location.replace('/');
+                    });
+                }).catch(() => Swal.fire(
+                    'Something went wrong',
+                    'Please try again...',
+                    'error',
+                ));
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                Swal.fire(
+                    'Cancelled',
+                    'Your Account is safe :)',
+                    'error',
+                ).then();
+            }
+        });
     };
     fillCSV = (name,surname,email,username,password,bdate,age)=> {
-        console.log(name);
-
+        // console.log(name);
+        //
         // this.state.csvData =[
         //     ["firstname", "lastname", "email","username","password"]];
         return   this.state.csvData =[
             ["Firstname", "Lastname", "Email","username","password"," Date of Birth","Age"],
             [name,surname,email,username,password,bdate,age]];
-    }
+    };
 
     componentDidMount() {
-        const {name,surname,email,username,password} = '';
+        // const {name,surname,email,username,password} = '';
         userData()
             .then(response => {
                 console.log(response);
                 this.setState(response);
                 this.setState({confirmPassword: response.password});
-
-
             });
         //this.fillCSV(name,surname,email,username,password);
 
@@ -92,22 +117,39 @@ class EditAccount extends Component {
     Test = () => {
         //console.log(this.state.Name);
         if(this.state.flag==='0'){
-            alert("Fill the empty field(s)");return;
+            Swal.fire(
+                'Please fill in all boxes',
+                '',
+                'error',
+            ).then();
         }
         if (this.handleSubmit() !== 1)
-            postuserData(this.state).then(() => alert('Saved!')).catch(err => alert('Error!'));
+            postuserData(this.state)
+                .then(() => {
+                    Swal.fire(
+                        'Saved Changes',
+                        '',
+                        'success',
+                    ).then();
+                }).catch(() => Swal.fire(
+                'Something went wrong',
+                'Please try again...',
+                'error',
+            ));
 
     };
     onSubmit = (e) => {
-
         e.preventDefault();
-        if (this.state.noValidate === 1) alert("Fill  all the fields Correctly!");
 
-        if (!(
+        if (this.state.noValidate === 1 || !(
             this.state.Name.match(new RegExp('[a-zA-Z ]+')) &&
             this.state.Email.match(new RegExp("[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$")) &&
             this.state.Surname.match(new RegExp("^ *[a-zA-Z0-9]+."))) &&  this.state.username.match(new RegExp("^ *[a-zA-Z0-9]+."))) {
-            alert("Fill  all the fields Correctly!");
+            Swal.fire(
+                'Please fill all the fields Correctly',
+                '',
+                'error',
+            ).then();
             return;
         }
         this.Test();

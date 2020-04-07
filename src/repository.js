@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const BASE_URL = 'http://localhost:5000';
+
 // const BASE_URL = 'http://10.16.22.15:5000';  // For Android use your IPv4
 
 export function logIn(data) {
@@ -180,11 +181,12 @@ export function addAnnouncement(title, message) {
       .catch(() => Promise.reject('Authentication Failed!'));
 }
 
-export function addPrivateAnnouncement(title, message) {
+export function addPrivateAnnouncement(title, message, username) {
   return axios.post(`${ BASE_URL }/api/announcements/private/add`, {
     'x-access-token': localStorage.getItem('x-access-token'),
     title           : title,
     message         : message,
+    username        : username,
   })
       .then(response => response)
       .catch(() => Promise.reject('Authentication Failed!'));
@@ -358,14 +360,14 @@ export function getPersonalTraining(User_ID) {
 }
 
 //Gets the class schedule of the user with the given User_ID
-export function getClassSchedule(User_ID){
-    return axios
-        .post(`${BASE_URL}/api/user/getClassSchedule`, {
-            'x-access-token': localStorage.getItem('x-access-token'),
-            User_ID: User_ID
-        })
-        .then(response => response.data)
-        .catch(() => Promise.reject('Authentication Failed!'))
+export function getClassSchedule(User_ID) {
+  return axios
+      .post(`${ BASE_URL }/api/user/getClassSchedule`, {
+        'x-access-token': localStorage.getItem('x-access-token'),
+        User_ID         : User_ID,
+      })
+      .then(response => response.data)
+      .catch(() => Promise.reject('Authentication Failed!'));
 }
 
 //fetching the data for the personal training schedule
@@ -445,7 +447,8 @@ export function getUserLevel() {
 
 export function sendEmail(data) {
   return axios.post(`${ BASE_URL }/api/email`, data)
-      .then(response => response.data);
+      .then(response => response.data)
+      .catch(error => error);
 }
 
 export function getMessages() {

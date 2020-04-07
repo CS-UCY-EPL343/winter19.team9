@@ -135,7 +135,7 @@ function postUserData(data) {
 
 
             const sql = "UPDATE USERS, ACCOUNT, PIC SET  Name = ? , Surname = ? , Email = ? , password = ?, image = X? WHERE ACCOUNT.username = ? AND ACCOUNT.User_ID = USERS.User_ID AND PIC.User_ID = USERS.User_ID";
-            const as = connection.query(sql, [data.Name, data.Surname, data.Email, data.password, base64ToHex(byteString), data.username], function (err) {
+            connection.query(sql, [data.Name, data.Surname, data.Email, data.password, base64ToHex(byteString), data.username], function (err) {
                // console.log(as);
                 if (err) {
                     console.log(err);
@@ -149,7 +149,7 @@ function postUserData(data) {
     else{
         return new Promise((resolve, reject) => {
             const sql = "UPDATE USERS, ACCOUNT SET  Name = ? , Surname = ? , Email = ? , password = ? WHERE ACCOUNT.username = ? AND ACCOUNT.User_ID = USERS.User_ID ";
-            const as = connection.query(sql, [data.Name, data.Surname, data.Email, data.password, data.username], function (err) {
+            connection.query(sql, [data.Name, data.Surname, data.Email, data.password, data.username], function (err) {
                // console.log(as);
                 if (err) {
                     console.log(err);
@@ -267,53 +267,52 @@ function addAnnouncement(title, message, level, username) {
 }
 
 function addPrivateAnnouncement(title, message, uname,level, username) {
-    return new Promise((resolve, reject) => {
-        let x;
-        const userid = 'SELECT * FROM `ACCOUNT` WHERE `username`= ?';
-        connection.query(userid, [uname],function (err, rows) {
+  return new Promise((resolve, reject) => {
+    let x;
+    const userid = 'SELECT * FROM ACCOUNT WHERE `username`= ?';
+    connection.query(userid, [uname],function (err, rows) {
+      if (err) {
+        console.log(err);
+        return reject(err);
+      }
+      resolve({id: rows.insertId});
+      x = rows[0].User_ID;
+      //console.log(x);
+    });
+
+
+
+    const sql = 'SELECT * FROM ACCOUNT WHERE `username`= ?';
+    connection.query(sql, [username],
+        function (err, rows) {
+          if (err) {
+            return reject(err);
+          }
+
+          let id, sql;
+
+          if (level === 'coach') {
+            id = rows[0].Coach_ID;
+
+            sql = "INSERT INTO ANNOUNCEMENT (Title, Message, isPrivate, isActive,User_ID, Coach_ID ) VALUES ( ? , ? , 1, 1, ? ,? )";
+          } else if (level === 'admin') {
+            id = rows[0].Owner_ID;
+            sql = "INSERT INTO ANNOUNCEMENT (Title, Message, isPrivate, isActive,User_ID,Admin_ID ) VALUES ( ? , ? , 1, 1, ? ,? )";
+          } else {
+            return reject('Authentication failed');
+          }
+
+          connection.query(sql, [title, message,x, id], function (err, rows) {
             if (err) {
-                console.log(err);
-                return reject(err);
+              console.log(err);
+              return reject(err);
             }
             resolve({id: rows.insertId});
-            x = rows[0].User_ID;
-            //console.log(x);
+            //resolve({ANNOUNCEMENT_ID: ann_id});
+          });
         });
-
-
-
-        const sql = 'SELECT * FROM `ACCOUNT` WHERE `username`= ?';
-        connection.query(sql, [username],
-            function (err, rows) {
-                if (err) {
-                    return reject(err);
-                }
-
-                let id, sql;
-
-                if (level === 'coach') {
-                    id = rows[0].Coach_ID;
-
-                    sql = "INSERT INTO ANNOUNCEMENT (Title, Message, isPrivate, isActive,User_ID, Coach_ID ) VALUES ( ? , ? , 1, 1, ? ,? )";
-                } else if (level === 'admin') {
-                    id = rows[0].Owner_ID;
-                    sql = "INSERT INTO ANNOUNCEMENT (Title, Message, isPrivate, isActive,User_ID,Admin_ID ) VALUES ( ? , ? , 1, 1, ? ,? )";
-                } else {
-                    return reject('Authentication failed');
-                }
-
-                connection.query(sql, [title, message,x, id], function (err, rows) {
-                    if (err) {
-                        console.log(err);
-                        return reject(err);
-                    }
-                    resolve({id: rows.insertId});
-                    //resolve({ANNOUNCEMENT_ID: ann_id});
-                });
-            });
-    });
+  });
 }
-
 
 function updateAnnouncement(announcement_id, title, message, level, username) {
     return new Promise((resolve, reject) => {
@@ -327,7 +326,7 @@ function updateAnnouncement(announcement_id, title, message, level, username) {
 
                 let id, sql, ann_id = announcement_id;
 
-                let timestamp ='2020-02-18 18:40:38';
+                // let timestamp ='2020-02-18 18:40:38';
 
                 if (level === 'coach') {
                     id = rows[0].Coach_ID;
@@ -895,27 +894,20 @@ function getClassSchedule(User_ID) {
 
 // noinspection JSUnusedGlobalSymbols
 module.exports = {
-    dbConnect,
-    dbDisconnect,
-    dbSignUp,
-    dbLogIn,
-    getUserData,
-    postUserData,
-    deleteUserData,
-    getPublicAnnouncements,
-    getPrivateAnnouncements,
-    removeAnnouncement,
-    addAnnouncement,
-    getTotalAnnouncements,
-    getUserInfo,
-    getMessages,
-    getMessagesCount,
-    makeMessagesRead,
-    getCoaches,
-    createNewMessage,
-    updateAnnouncement,
-    addPrivateAnnouncement,
-
+  dbConnect,
+  dbDisconnect,
+  dbSignUp,
+  dbLogIn,
+  getUserData,
+  postUserData,
+  deleteUserData,
+  getPublicAnnouncements,
+  getPrivateAnnouncements,
+  removeAnnouncement,
+  addAnnouncement,
+  getTotalAnnouncements,
+  getUserInfo,
+  addPrivateAnnouncement,
   getClassDay,
   getClasses,
   getClassTime,
@@ -936,7 +928,6 @@ module.exports = {
   updateClassesVisit,
   updateAboutUsVisit,
   updateDashboardVisit,
-
   getAllVisitCount,
   getAllUserTypeCount,
   getAdmins,
