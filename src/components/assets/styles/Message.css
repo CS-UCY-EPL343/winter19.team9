@@ -6,6 +6,12 @@
     cursor        : pointer;
     padding-top   : 0;
     margin-bottom : 0;
+    padding-left: 75px;
+}
+
+.msg-card .card-title.right {
+    padding-left: 0;
+    padding-right: 75px;
 }
 
 .msg-card .msg-data {
@@ -19,6 +25,12 @@
 }
 
 .msg-card .msg-content.left {
+    /*float: right;*/
+    text-align : right;
+    /*padding-left : 75px;*/
+}
+
+.msg-card .msg-header.left {
     /*float: right;*/
     text-align : right;
     /*padding-left : 75px;*/
@@ -103,4 +115,9 @@
 .msg-card:hover::before, .msg-card:hover::after,
 .msg-card:focus::before, .msg-card:focus::after {
     transform : scale3d(1, 1, 1);
+}
+
+.msg-header {
+    /*display: flex;*/
+    min-height: 50px;
 }

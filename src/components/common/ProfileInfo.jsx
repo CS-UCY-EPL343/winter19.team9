@@ -14,7 +14,6 @@ class ProfileInfo extends Component {
     componentDidMount() {
         userData()
             .then(response => {
-                console.log(response);
                 this.setState(response);
             });
 

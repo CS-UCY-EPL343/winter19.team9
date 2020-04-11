@@ -4,6 +4,7 @@
 
 #EditModal{
     color: whitesmoke;
+    overflow: hidden;
 }
 
 .avatar-upload {

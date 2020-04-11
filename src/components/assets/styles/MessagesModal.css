@@ -76,3 +76,7 @@
 #MessagesModal .new-msg-line::after {
     margin-left: .25em;
 }
+
+#MessagesModal #message-container {
+    overflow: hidden;
+}
