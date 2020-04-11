@@ -385,6 +385,36 @@ app.post('/api/user/insert', (req, res) => {
       .catch(err => res.status(409).json(err));
 });
 
+/*******************************Insert new Coach/Admin****************************/
+app.post('/api/coach/insert', (req, res) => {
+  db.insertNewCoach(req.body)
+      .then(response => res.status(200).json({message: response}))
+      .catch(err => res.status(409).json(err));
+});
+
+
+app.post('/api/admin/insert', (req,res) => {
+  db.insertNewAdmin(req.body)
+      .then(response => res.status(200).json({message: response}))
+      .catch(err => res.status(409).json(err));
+});
+
+/**************************************************************************/
+
+/*******************************Delete staff member***********************/
+app.post('/api/admin/delete', (req,res) => {
+  db.deleteAdminMember(req.body.AdminId)
+      .then(response => res.status(200).json({message: response}))
+      .catch(err => res.status(409).json(err));
+});
+
+app.post(
+    '/api/coach/delete', (req,res) => {
+      db.deleteCoachMember(req.body.CoachID)
+          .then(response => res.status(200).json({message: response}))
+          .catch(err => res.status(409).json(err));
+    });
+/************************************************************************/
 //fetching the data for the personal training schedule
 // noinspection JSUnresolvedFunction
 app.post('/api/user/getPersonalTraining', middleware, (req, res) => {

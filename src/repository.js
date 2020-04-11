@@ -269,6 +269,30 @@ export function updateHomePageVisit() {
       .catch(() => Promise.reject('HomePage Count Failed!!!'));
 }
 
+export function insertCoach(data) {
+  return axios.post(`${ BASE_URL }/api/coach/insert`, data)
+      .then(response => response.data)
+      .catch(() => Promise.reject('insert coach failed.'));
+}
+
+export function insertAdmin(data) {
+  return axios.post(`${ BASE_URL }/api/admin/insert`, data)
+      .then(response => response.data)
+      .catch(() => Promise.reject('Insert Admin failed.'));
+}
+
+export function deleteAdmin(AdminId){
+  return axios.post(`${ BASE_URL }/api/admin/delete`,{ AdminId : AdminId})
+      .then(response => response.data)
+      .catch(() => Promise.reject('Delete Admin Failed.'));
+}
+
+export function deleteCoach(CoachID){
+  return axios.post(`${ BASE_URL }/api/coach/delete`,{ CoachID : CoachID})
+      .then(response => response.data)
+      .catch(() => Promise.reject('Delete Coach Failed.'));
+}
+
 export function postuserData(data) {
   return axios.post(`${ BASE_URL }/api/user/post/data`,
       {'x-access-token': localStorage.getItem('x-access-token'), data: data})

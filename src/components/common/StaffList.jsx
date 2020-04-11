@@ -1,5 +1,5 @@
 import React, {Component}      from 'react';
- import {getAdmins, getCoaches} from '../../repository';
+ import {deleteAdmin, getAdmins, getCoaches, deleteCoach} from '../../repository';
 import adminAvatar
                                from '../assets/img/logos/fitnessFactoryLogo.png';
 import ToggleModal             from './ToggleModal';
@@ -14,7 +14,8 @@ class StaffList extends Component {
       staffType: '',
       modal    : false,
     };
-    this.handleDelete = this.handleDelete.bind(this);
+    this.DeleteCoach = this.DeleteCoach.bind(this);
+    this.DeleteAdmin = this.DeleteAdmin.bind(this)
     this.createAdmin = this.createAdmin.bind(this);
     this.createCoach = this.createCoach.bind(this);
   }
@@ -38,14 +39,27 @@ class StaffList extends Component {
     this.setState({modal: !this.state.modal});
   };
 
-  handleDelete(e) {
+  DeleteAdmin(e) {
     // noinspection JSUnresolvedVariable
-    const selectedStaffId = e.target.className.split(' ')[3] === 'admin'
+    const AdminId = e.target.className.split(' ')[3] === 'admin'
         ? this.state.admins[e.target.className.split(' ')[2]].AccountID
         : this.state.coaches[e.target.className.split(' ')[2]].AccountID;
-    console.log(selectedStaffId);
+    deleteAdmin(AdminId).then(() => {
+      alert('Deleted Success!!');
+    }).catch(err => alert(err));
   }
 
+  DeleteCoach(e) {
+
+    // noinspection JSUnresolvedVariable
+    const CoachID = e.target.className.split(' ')[3] === 'admin'
+        ? this.state.admins[e.target.className.split(' ')[2]].AccountID
+        : this.state.coaches[e.target.className.split(' ')[2]].AccountID;
+    console.log(CoachID);
+    deleteCoach(CoachID).then(() => {
+      alert('Deleted Success!!');
+    }).catch(err => alert(err));
+  }
   createAdmin() {this.setState({staffType: 'admin'}); this.toggleModal();}
 
   createCoach() {this.setState({staffType: 'coach'}); this.toggleModal();}
@@ -82,12 +96,13 @@ class StaffList extends Component {
                           Gender: { gender }
                         </p>
                       </div>
+                      {admin.username!=='its.giff' &&
                       <button className = "delete-admin">
                         <i className = { 'fa fa-trash ' + index
                                          + ' admin' }
-                           onClick = { this.handleDelete }
+                           onClick = { this.DeleteAdmin }
                         />
-                      </button>
+                      </button>}
                     </div>
                 );
               }) }
@@ -121,12 +136,14 @@ class StaffList extends Component {
                           Gender: { gender }
                         </p>
                       </div>
-                      <button className = "delete-admin">
-                        <i className = { 'fa fa-trash ' + index
-                                         + ' coach' }
-                           onClick = { this.handleDelete }
-                        />
-                      </button>
+                      {(coach.username !== 'headcoach01') &&
+                        <button className = "delete-admin">
+
+                          <i className = { 'fa fa-trash ' + index
+                                           + ' coach' }
+                            onClick = { this.DeleteCoach }
+                          />
+                      </button>}
                     </div>
                 );
               }) }

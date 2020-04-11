@@ -1,13 +1,15 @@
 import React, {Component} from 'react';
 import '../assets/styles/loginStyle.css';
+import {insertAdmin, insertCoach, signUp} from "../../repository";
+import history from "../../history";
 
 class CreateStaffMember extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      fname           : '',
-      lname           : '',
+      firstName           : '',
+      lastName           : '',
       username        : '',
       password        : '',
       repeatedPassword: '',
@@ -49,13 +51,51 @@ class CreateStaffMember extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     // const confirm_password = document.getElementById('signUpPasswordRepeat');
-    if (this.state.password !== this.state.repeatedPassword) {
+    if(this.state.firstName === ""){
+      alert("First name couldn't be empty");
+    }else if(this.state.lastName === ""){
+      alert("Last name couldn't be empty");
+    }else if(this.state.username === ""){
+      alert("Username couldn't be empty");
+    }else if(this.state.email === ""){
+      alert("Email couldn't be empty");
+    }else if(this.state.password === ""){
+      alert("Password couldn't be empty");
+    }else if(this.state.repeatedPassword === ""){
+      alert("Repeat Password couldn't be empty");
+    }else if(this.state.bDate === ""){
+      alert("Birth Date couldn't be empty");
+    }else if(this.state.gender === ""){
+      alert("Gender couldn't be empty");
+    } else if (this.state.password !== this.state.repeatedPassword) {
       alert('Passwords Don\'t Match');
+    }else {
+      const data = {
+        username: this.state.username,
+        password: this.state.password,
+        firstName: this.state.firstName,
+        LastName: this.state.lastName,
+        email: this.state.email,
+        age: this.state.age,
+        gender: this.state.gender,
+        level: this.state.level,
+        bDate: this.state.bDate,
+      };
+      if (this.props.staffType === 'coach') {
+        insertCoach(data).then(() => {
+          alert('Success!!!');
+          history.push('/')
+        })
+            .catch(err => alert(err));
+      }else if(this.props.staffType === 'admin'){
+        insertAdmin(data).then(() => {
+          alert('Success!!!');
+          history.push('/')
+        })
+            .catch(err => alert(err));
+      }
+      alert('Creating ' + this.props.staffType);
     }
-    if (this.state.gender === '') {
-      alert('Pick a gender');
-    }
-    alert('Creating ' + this.props.staffType);
   };
 
   render() {
@@ -86,7 +126,7 @@ class CreateStaffMember extends Component {
                                         <span className = { 'label__icon fa fa-user coloring' }>
                                         </span>
                   </label>
-                  <input name = { 'fname' }
+                  <input name = { 'firstName' }
                          className = { 'form_element signUpName' }
                          type = { 'text' }
                          onChange = { this.handleChange }
@@ -95,7 +135,7 @@ class CreateStaffMember extends Component {
                   />
                   <span>
                                            </span>
-                  <input name = { 'lname' }
+                  <input name = { 'lastName' }
                          className = { 'form_element signUpName' }
                          type = { 'text' }
                          onChange = { this.handleChange }
@@ -130,6 +170,7 @@ class CreateStaffMember extends Component {
                          type = { 'email' }
                          onChange = { this.handleChange }
                          placeholder = { 'Email' }
+                         pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                          required
                   />
                 </fieldset>
@@ -199,6 +240,7 @@ class CreateStaffMember extends Component {
                 </fieldset>
                 <fieldset className = { 'form__group' }>
                   <input className = { 'form__button' }
+                         class={'form-control'}
                          type = { 'submit' }
                          value = { 'Sign up' }
                          onClick = { this.onSubmit }
