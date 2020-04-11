@@ -17,6 +17,7 @@ form.adminViewClient input[type=text] {
     padding-left: 10px !important;
 }
 
+/*change*/
 form.adminViewClient button {
     height: 100%;
     width: 100%;
