@@ -357,6 +357,7 @@ app.post('/api/BookClass/Enroll', middleware, (req, res) => {
       .catch(err => res.status(409).json(err));
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/BookClass/Unenroll', middleware, (req, res) => {
     db.unenrollUser(req.body.CLASS_ID, req.body.User_ID)
         .then(response => res.status(200).json({message: response}))
@@ -385,14 +386,16 @@ app.post('/api/user/insert', (req, res) => {
       .catch(err => res.status(409).json(err));
 });
 
+// noinspection JSUnresolvedFunction
 /*******************************Insert new Coach/Admin****************************/
+// noinspection JSUnresolvedFunction
 app.post('/api/coach/insert', (req, res) => {
   db.insertNewCoach(req.body)
       .then(response => res.status(200).json({message: response}))
       .catch(err => res.status(409).json(err));
 });
 
-
+// noinspection JSUnresolvedFunction
 app.post('/api/admin/insert', (req,res) => {
   db.insertNewAdmin(req.body)
       .then(response => res.status(200).json({message: response}))
@@ -401,13 +404,16 @@ app.post('/api/admin/insert', (req,res) => {
 
 /**************************************************************************/
 
+// noinspection JSUnresolvedFunction
 /*******************************Delete staff member***********************/
+// noinspection JSUnresolvedFunction
 app.post('/api/admin/delete', (req,res) => {
   db.deleteAdminMember(req.body.AdminId)
       .then(response => res.status(200).json({message: response}))
       .catch(err => res.status(409).json(err));
 });
 
+// noinspection JSUnresolvedFunction
 app.post(
     '/api/coach/delete', (req,res) => {
       db.deleteCoachMember(req.body.CoachID)
@@ -430,6 +436,7 @@ app.post('/api/user/getPersonalTraining', middleware, (req, res) => {
   }).catch(err => res.status(409).json(err));
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/user/getPersonalSchedule', middleware, (req, res) => {
   db.getPersonalSchedule(req.body.User_ID).then(data => {
     if (data) {
@@ -440,6 +447,7 @@ app.post('/api/user/getPersonalSchedule', middleware, (req, res) => {
   }).catch(err => res.status(409).json(err));
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/user/getClassSchedule', middleware, (req, res) => {
     console.log("It's a me!");
     console.log(req.body.User_ID);
@@ -455,6 +463,7 @@ app.post('/api/user/getClassSchedule', middleware, (req, res) => {
 });
 
 //fetching the data for the coach's training schedule
+// noinspection JSUnresolvedFunction
 app.post('/api/coach/getCoachTraining', middleware, (req, res) => {
     if (req.decoded.level === 'user') {
         return res.status(409).json('Authentication failed.');
@@ -471,6 +480,7 @@ app.post('/api/coach/getCoachTraining', middleware, (req, res) => {
 });
 
 //fetch pic
+// noinspection JSUnresolvedFunction
 app.post('/api/user/userPic', middleware, (req, res) => {
     if (req.decoded.level === 'user') {
         return res.status(409).json('Authentication failed.');
@@ -512,6 +522,7 @@ app.post('/api/BookClass/ClassName', middleware, (req, res) => {
   }).catch(err => res.status(409).json(err));
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/BookClass/ClassNames', middleware, (req, res) => {
     db.getClassName(req.body.ClassID)
         .then(data => {
@@ -559,6 +570,7 @@ app.post('/api/insert/PersonalTraining', middleware, (req, res) => {
 });
 
 //delete Personal Training
+// noinspection JSUnresolvedFunction
 app.post('/api/delete/PersonalTraining', middleware, (req, res) => {
   db.deletePT(req.body.data)
       .then(data => {
@@ -777,7 +789,9 @@ const server = app.listen(PORT, () => {
   startDatabaseConnection(0).then();
 });
 
+// noinspection JSStringConcatenationToES6Template
 process.on('SIGTERM', shutDown);
+// noinspection JSStringConcatenationToES6Template
 process.on('SIGINT', shutDown);
 
 let connections = [];

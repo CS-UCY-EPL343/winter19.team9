@@ -18,20 +18,6 @@ class AnnouncementsPrivateModal extends Component {
 
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // if (!this.props.announcements || !this.props.announcement_id) return;
-    // if (prevProps.announcement_id === this.props.announcement_id ||
-    // this.props.announcement_id === undefined) return; if (prevProps.title
-    // !== this.props.title || prevProps.message !== this.props.message ||
-    // prevProps.this.props.announcements[this.props.announcement_id].ANNOUNCEMENT_ID
-    // !==
-    // this.props.announcements[this.props.announcement_id].ANNOUNCEMENT_ID)
-    // this.setState({ title: this.props.title || '', message:
-    // this.props.message || '', announcement_id:
-    // this.props.announcements[this.props.announcement_id].ANNOUNCEMENT_ID ||
-    // '' });
-  }
-
   handleChange = (e) => {
     this.setState({[e.target.name]: e.target.value});
   };
@@ -52,6 +38,7 @@ class AnnouncementsPrivateModal extends Component {
   };
 
   render() {
+    // noinspection JSUnresolvedVariable
     return (
         <Modal isOpen = { this.props.modal } toggle = { this.toggle }
                size = { 'md' }

@@ -27,6 +27,7 @@ class AnnouncementModal extends Component {
     });
   }
 
+  // noinspection JSUnusedLocalSymbols
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (!this.props.announcements || !this.props.announcement_id) {
       return;
@@ -105,6 +106,7 @@ class AnnouncementModal extends Component {
   };
 
   render() {
+    // noinspection JSUnresolvedVariable
     return (
         <Modal isOpen = { this.props.modal } toggle = { this.toggle }
                size = { 'md' }
@@ -147,7 +149,8 @@ class AnnouncementModal extends Component {
             </form>
           </ModalBody>
           <ModalFooter>
-            <Button onClick = { this.toggle }>{ this.props.btnCancel
+            <Button onClick = { this.toggle }>{ this.props.
+                                                    btnCancel
                                                 || 'Cancel' }</Button>
             <Button onClick = { this.onSubmit }>{ 'Submit' }</Button>
             { this.props.isPrivate &&

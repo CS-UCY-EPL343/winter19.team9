@@ -223,6 +223,7 @@ class EnrolledClassSchedule extends Component {
     });
   }
 
+  // noinspection JSUnusedLocalSymbols
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (
         prevProps.DayCode !== this.props.DayCode

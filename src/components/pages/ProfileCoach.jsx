@@ -1,4 +1,5 @@
 import React, { Component }                from 'react';
+// noinspection ES6CheckImport
 import { Redirect }                        from 'react-router-dom';
 import {loggedInVisit, updateProfileVisit} from '../../repository';
 

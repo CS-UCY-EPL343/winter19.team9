@@ -10,4 +10,5 @@ class NotFound extends Component {
     }
 }
 
+// noinspection JSUnusedGlobalSymbols
 export default NotFound;

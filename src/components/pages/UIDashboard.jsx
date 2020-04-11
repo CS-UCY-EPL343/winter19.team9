@@ -4,6 +4,7 @@ import PieChart           from '../common/PieChart';
 import StaffList          from '../common/StaffList';
 import LeaderBoard        from '../common/LeaderBoard';
 import Graphs             from '../common/Graphs';
+// noinspection ES6CheckImport
 import {Redirect}         from 'react-router-dom';
 import '../assets/styles/UIDashboard.css';
 import Spinner            from '../Spinner';

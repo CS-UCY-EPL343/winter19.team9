@@ -16,6 +16,7 @@ class Navigation extends Component {
         this.toggle = this.toggle.bind(this);
     };
 
+    // noinspection JSUnusedLocalSymbols
     componentDidUpdate(prevProps, prevState, snapshot) {
         localStorage.setItem('path', history.location.pathname);
     }

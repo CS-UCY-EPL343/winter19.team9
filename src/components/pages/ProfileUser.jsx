@@ -6,6 +6,7 @@ import ProfileInfo                         from '../common/ProfileInfo';
 import BookClass                           from '../common/BookClass';
 import Timetable
                                            from '../common/EnrolledClassSchedule';
+// noinspection ES6CheckImport
 import {Redirect}                          from 'react-router-dom';
 import {loggedInVisit, updateProfileVisit} from '../../repository';
 

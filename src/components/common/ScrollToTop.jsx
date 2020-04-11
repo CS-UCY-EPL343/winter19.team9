@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+// noinspection ES6CheckImport
 import { useLocation } from "react-router-dom";
 
 const ScrollToTop = () => {

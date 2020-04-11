@@ -4,7 +4,8 @@ import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 export default class ToggleModal extends React.Component {
     render() {
         let Comp = this.props.modalBody;
-        return (
+        // noinspection JSUnresolvedVariable
+      return (
             <div>
                 <Modal isOpen = { this.props.modal } toggle = { this.props.toggle }
                        size = { this.props.modalSize || 'lg' }

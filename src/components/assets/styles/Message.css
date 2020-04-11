@@ -79,18 +79,18 @@
     box-shadow : 10px 10px 15px rgba(0, 0, 0, 0.3);
 }
 
-.msg-card::before, .msg-card::after {
-    position       : absolute;
-    top            : 0;
-    right          : 0;
-    bottom         : 0;
-    left           : 0;
-    transform      : scale3d(0, 0, 1);
-    transition     : transform .3s ease-out 0s;
-    background     : rgba(255, 255, 255, 0.1);
-    content        : '';
-    pointer-events : none;
-}
+/*.msg-card::before, .msg-card::after {*/
+/*    position       : absolute;*/
+/*    top            : 0;*/
+/*    right          : 0;*/
+/*    bottom         : 0;*/
+/*    left           : 0;*/
+/*    transform      : scale3d(0, 0, 1);*/
+/*    transition     : transform .3s ease-out 0s;*/
+/*    background     : rgba(255, 255, 255, 0.1);*/
+/*    content        : '';*/
+/*    pointer-events : none;*/
+/*}*/
 
 .msg-card::before {
     transform-origin : left top;

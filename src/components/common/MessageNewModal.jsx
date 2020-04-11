@@ -48,6 +48,7 @@ class MessageNewModal extends Component {
     };
 
     render() {
+        // noinspection JSUnresolvedVariable
         return (
             <Modal isOpen = { this.props.modal } toggle = { this.props.toggle }
                    size = { 'md' }
@@ -73,6 +74,7 @@ class MessageNewModal extends Component {
                                     Select recipient...
                                 </option>
                                 { this.state.recipients.map((rec, index) => {
+                                    // noinspection JSUnresolvedVariable
                                     return <option key = { index }
                                                    value = { rec.AccountID }
                                     >

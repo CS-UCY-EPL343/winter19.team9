@@ -90,4 +90,5 @@ class Timetable extends Component {
     }
 }
 
+// noinspection JSUnusedGlobalSymbols
 export default Timetable;

@@ -49,18 +49,18 @@
     height : auto;
 }
 
-.ann-card::before, .ann-card::after {
-    position       : absolute;
-    top            : 0;
-    right          : 0;
-    bottom         : 0;
-    left           : 0;
-    transform      : scale3d(0, 0, 1);
-    transition     : transform .3s ease-out 0s;
-    background     : rgba(255, 255, 255, 0.1);
-    content        : '';
-    pointer-events : none;
-}
+/*.ann-card::before, .ann-card::after {*/
+/*    position       : absolute;*/
+/*    top            : 0;*/
+/*    right          : 0;*/
+/*    bottom         : 0;*/
+/*    left           : 0;*/
+/*    transform      : scale3d(0, 0, 1);*/
+/*    transition     : transform .3s ease-out 0s;*/
+/*    background     : rgba(255, 255, 255, 0.1);*/
+/*    content        : '';*/
+/*    pointer-events : none;*/
+/*}*/
 
 .ann-card::before {
     transform-origin : left top;

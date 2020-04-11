@@ -52,4 +52,5 @@ class BmiCalc extends Component {
     }
 }
 
+// noinspection JSUnusedGlobalSymbols
 export default BmiCalc;

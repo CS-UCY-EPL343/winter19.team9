@@ -1,4 +1,5 @@
 import React               from 'react';
+// noinspection ES6CheckImport
 import { Route, Redirect } from 'react-router-dom';
 import { isAuthenticated } from '../repository';
 

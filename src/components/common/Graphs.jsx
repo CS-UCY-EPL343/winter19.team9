@@ -12,6 +12,7 @@ class Graphs extends Component {
     this.createGraph();
   }
 
+  // noinspection JSUnusedLocalSymbols
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.graphData !== this.props.graphData) {
       this.state.myChart.destroy();

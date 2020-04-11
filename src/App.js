@@ -1,4 +1,5 @@
 import React, {Component}              from 'react';
+// noinspection ES6CheckImport
 import {Route, Router, Switch}         from 'react-router-dom';
 import PageWrapper                     from './components/PageWrapper';
 import Home                            from './components/pages/Home';
@@ -33,6 +34,7 @@ class App extends Component {
       getUserLevel().then(level => this.setUserLevel(level));
     }
 
+    // noinspection JSUnusedGlobalSymbols
     Tabletop.init({
       key        : process.env.REACT_APP_TABLETOP_API_KEY,
       callback   : googleData => {

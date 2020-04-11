@@ -283,7 +283,8 @@ function addPrivateAnnouncement(title, message, uname,level, username) {
 
                     sql = "INSERT INTO ANNOUNCEMENT (Title, Message, isPrivate, isActive,User_ID, Coach_ID ) VALUES ( ? , ? , 1, 1, ? ,? )";
                 } else if (level === 'admin') {
-                    id = rows[0].Owner_ID;
+                    // noinspection JSUnresolvedVariable
+                  id = rows[0].Owner_ID;
                     sql = "INSERT INTO ANNOUNCEMENT (Title, Message, isPrivate, isActive,User_ID,Admin_ID ) VALUES ( ? , ? , 1, 1, ? ,? )";
                 } else {
                     return reject('Authentication failed');

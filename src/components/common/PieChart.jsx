@@ -15,6 +15,7 @@ class PieChart extends Component {
     this.createChart();
   }
 
+  // noinspection JSUnusedLocalSymbols
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.data !== this.props.data) {
       this.state.myChart.destroy();

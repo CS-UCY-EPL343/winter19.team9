@@ -29,7 +29,8 @@ class SelectClassRegistration extends Component {
 
     };
 
-    onSubmit = (e) => {
+
+    onSubmit = () => {
         // console.log(this.state.day);
         this.setState({flag: true},
             () => {
@@ -38,7 +39,7 @@ class SelectClassRegistration extends Component {
             });
     };
 
-    onSubmit2 = (e) => {
+    onSubmit2 = () => {
         // console.log(this.state.day);
         this.setState({flag: false},
             () => {
@@ -56,6 +57,7 @@ class SelectClassRegistration extends Component {
         coachNode.value = 0;
     }
 
+    // noinspection JSUnusedLocalSymbols
     componentDidUpdate(prevProps, prevState, snapshot) {
         (async () => {
             if (prevProps.userID !== this.props.userID) {

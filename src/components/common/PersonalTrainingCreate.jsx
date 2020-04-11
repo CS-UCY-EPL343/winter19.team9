@@ -115,6 +115,7 @@ class PersonalTrainingCreate extends Component {
     });
   }
 
+  // noinspection JSUnusedLocalSymbols
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.day !== this.props.day || prevProps.time !== this.props.time
         || prevProps.flag !== this.props.flag

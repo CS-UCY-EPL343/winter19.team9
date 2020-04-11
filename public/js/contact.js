@@ -23,6 +23,7 @@
 
     })();
 
+// noinspection JSUnusedGlobalSymbols
 function sendMail() {
     let link;
     link = 'mailto: louis.4949@hotmail.com'

@@ -1,6 +1,6 @@
 # Fitness Factory Nicosia WebApp
 
-This web application is a prototype version of an on going website development for the 
+This web application is a prototype version of an ongoing website development for the 
 company Fitness Factory Nicosia. At the current state, the web application just serves as 
 an indication of the interface of the website in development, however most of the functionality is lacking.
 As stated this is an indication of the final product's interface, hence changes might apply during the 
@@ -32,7 +32,7 @@ navigation bar or by clicking the logo of the company in any page <br/><br/>
 This page is responsible for visualizing information about the coaches and the owners of the company.
 Moreover, the page hosts the contact us section of the web application, where the clients can communicate with 
 the gym staff by completing a simple form and leaving a message. Furthermore, in this page a user can find out 
-all the contact information of the company and also a map, which shows the location of the gym is provided.
+all the contact information of the company and a map, which shows the location of the gym is provided.
 The user is able to visit this page by clicking to the about label of the navigation bar. <br/><br/>
 **Classes** <br/>
 This page is responsible for visualizing the classes provided by the gym. The user can read a brief description
@@ -63,7 +63,7 @@ after redirection from the webapp to paypal's or jcc's web page.
 ## Testing Phase
 
 Basic static tests were implemented by our development team in order to ensure the uninterrupted and correct 
-web application's operation. These consists of several checks on the interface of the web application as well 
+web application's operation. This consists of several checks on the interface of the web application as well 
 as javascript checks after the user input on our forms.
 
 ### Future Intentions
@@ -139,11 +139,11 @@ application's interface.
 * [SQL Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15) -
  Used to build and access our database for back-end operations of our web application.
 
-#####Note: Currently there is an sql file in our repository which will be used for building the web application's database.
+#####Note: Currently there is a sql file in our repository which will be used for building the web application's database.
 ## Contributing
 
-This web application is being developed within the constraints of a university course subject. Hence the development 
-team is fixed and the web application development is strictly private.
+This web application is being developed within the constraints of a university course subject. Hence, the development 
+team is fixed, and the web application development is strictly private.
 
 ## Versioning
 

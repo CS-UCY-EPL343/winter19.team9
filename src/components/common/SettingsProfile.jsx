@@ -59,6 +59,7 @@ class SettingsProfile extends Component {
   componentDidMount() {
     getTotalPrivateAnnouncements().then(response => {
       console.log(response);
+      // noinspection JSUnresolvedVariable
       this.setState(
           {TotalAnnouncement: response.TotalAnnouncement.Count});
     });
