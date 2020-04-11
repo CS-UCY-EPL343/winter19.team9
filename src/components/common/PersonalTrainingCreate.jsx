@@ -1,96 +1,172 @@
 import React, {Component} from 'react';
 import "../assets/styles/PersonalTrainingTimetable.css"
 import {
-    insertPT, deletePT, getCoachTraining
+    insertPT, deletePT, getCoachTraining, getClassSchedule, getPersonalSchedule
 } from "../../repository";
+import ToggleModal from "./ToggleModal";
+
 
 class PersonalTrainingCreate extends Component {
+
     constructor(props) {
+
         super(props);
         this.state = {
-            // refID: '',
-            refIDs: [],
-            coachIDs: [],
-            flag: false,
+            personalTraining: [],
+            classSchedule: [],
+            trainingScheduleCoach: [],
             Coach_ID: '',
             User_ID: '',
-            day: '',
-            time: '',
-            refIDsCoach: []
-            // addRefIDs: [],
-            // emptyTab: []
-            // exists: false
+            coachBooked: false,
+            userBooked: false,
+            incorrectCoach: false,
+            classConflict: false,
+            coachName: ''
         };
-        this.clearArray = this.clearArray.bind(this);
-        this.settingRefIDsCoachIDs = this.settingRefIDsCoachIDs.bind(this);
-        this.settingRefIDsCoach = this.settingRefIDsCoach.bind(this);
+
         this.insertDeleteMethodStates = this.insertDeleteMethodStates.bind(this);
+        this.fillTable = this.fillTable.bind(this);
+        this.toggleModalCoachBooked = this.toggleModalCoachBooked.bind(this);
+        this.toggleModalUserBooked = this.toggleModalUserBooked.bind(this);
+        this.toggleModalIncorrectCoach = this.toggleModalIncorrectCoach.bind(this);
+        this.toggleModalClassConflict = this.toggleModalClassConflict.bind(this);
     }
 
-    clearArray(newArr, coachID, userID) {
+    // Modals for error messages in case of wrong input.
+    toggleModalCoachBooked = () => {
+        this.setState({coachBooked: !this.state.coachBooked});
+    };
+
+    toggleModalClassConflict = () => {
+        this.setState({classConflict: !this.state.classConflict});
+    };
+
+    toggleModalUserBooked = () => {
+        this.setState({userBooked: !this.state.userBooked});
+    };
+
+    toggleModalIncorrectCoach = () => {
+        this.setState({incorrectCoach: !this.state.incorrectCoach});
+    };
+
+    //method responsible for displaying the enrolled classes and personal training according to the user data from
+    // the database
+    fillTable(refIDs, classesRefIDs, cNames, coaches) {
+        let node;
+        for (let i = 1; i <= 6; i++) {
+            for (let x = 1; x <= 12; x++) {
+                let refID = '';
+                if (x < 10) {
+                    refID = i + ".0" + x;
+                } else {
+                    refID = i + "." + x;
+                }
+                if (refIDs.includes(refID)) {
+                    node = document.getElementById(refID);
+                    node.className = 'blackBackSelected';
+                } else {
+                    if (classesRefIDs.includes(refID)) {
+                        node = document.getElementById(refID);
+                        node.className = 'classesBackground';
+                    } else {
+                        if(coaches.includes(refID)){
+                            node = document.getElementById(refID);
+                            console.log(refID);
+                            node.className = 'coachBooked';
+                        }else {
+                            node = document.getElementById(refID);
+                            node.className = '';
+                            node.textContent = '';
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
+    insertDeleteMethodStates() {
         this.setState({
-            refIDsCoach: newArr,
-            refIDs: newArr,
-            coachIDs: newArr,
-            Coach_ID: coachID,
-            User_ID: userID
-        });
-    }
-
-
-    settingRefIDsCoachIDs(x, y) {
-        this.setState({
-            refIDs: x,
-            coachIDs: y
-        }, () => {  //
-            console.log(" refIDs \n" + x);
-            console.log(" coachIDs \n" + y);
-        });
-    }
-
-    settingRefIDsCoach(x) {
-        this.setState({refIDsCoach: x}, () => {
-            console.log(" coachRefIDs \n" + this.state.refIDsCoach);
-        });
-    }
-
-    insertDeleteMethodStates(x, z) {
-        this.setState({
-            refIDs: x,
-            coachIDs: z,
+            // refIDs: x,
+            User_ID: this.props.userID,
+            Coach_ID: this.props.coachID,
             time: this.props.time,
             day: this.props.day
         }, () => {
-            // console.log("CoachID, UserID, Day, time " + this.state.Coach_ID + " " + this.state.User_ID + "  " + this.state.day + " " + this.state.time);
-            if (this.props.flag === true)
+            if (this.props.flag === true) {
                 insertPT(this.state).then(); //() => alert('Successful insertion')).catch(err => alert(err));
-            else
+                console.log("REFIDS AFTER INSERTION: \n" + this.state.refIDs);
+            } else {
                 deletePT(this.state).then(); //() => alert('Success deletion')).catch(err => alert(err));
+            }
         });
     }
 
-
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.day !== this.props.day || prevProps.time !== this.props.time || prevProps.flag !== this.props.flag
-            || prevProps.trainingSchedule !== this.props.trainingSchedule || prevProps.coachID !== this.props.coachID
-            || prevProps.userID !== this.props.userID || prevProps.trainingScheduleCoach !== this.props.trainingScheduleCoach) {
+            || prevProps.coachID !== this.props.coachID || prevProps.userID !== this.props.userID) {
+            console.clear();
+            console.log("An update is being performed!");
 
-            console.log("*************************************************************");
-            let refID = '';
+
             (async () => {
-                console.log("-----------------------------------------------------");
-                console.log('start clearing');
-                await this.clearArray([], this.props.coachID, this.props.userID);
-                console.log('Cleared');
-                console.log("-----------------------------------------------------");
+                let refID = '';
 
-                const ret = [...this.props.trainingSchedule];
-                // const ret =this.props.trainingSchedule.slice();
+                // ************************* Clearing the arrays ***************************
+                // console.log("-----------------------------------------------------");
+                // console.log('start clearing');
+                // console.log('Cleared');
+                // console.log("-----------------------------------------------------");
+                let personalTraining = [];
+                let classSchedule = [];
+
+                if (this.props.userID !== '') {
+                    // console.log(" I AM HERE!!!!")
+                    await getPersonalSchedule(this.props.userID).then(response => {
+                        personalTraining = response;
+                        // console.log("this the user's returned schedule: \n");
+                        // console.log(personalTraining);
+                    });
+                    await getClassSchedule(this.props.userID).then(response => {
+                        classSchedule = response;
+                        // console.log("this the classes returned schedule: ");
+                        // console.log(classSchedule);
+
+                    })
+                }
+
+                // ************************* Filling the arrays ***************************
+                // ------------------------- Class Schedule -------------------------------
+                let ret = [...classSchedule];
+                // console.log("ret is here: \n");
+                // console.log(ret);
+
+                let classRefIDs = [];
+                let cNames = [];
+                // for loop for traversing fetched data for ClassSchedule and filling tables accordingly
+                const items1 = ret.map((item, key) => {
+                        if (item.TimeCode < 10) {
+                            refID = item.DayCode + ".0" + item.TimeCode;
+                        } else {
+                            refID = item.DayCode + "." + item.TimeCode;
+                        }
+                        if (!classRefIDs.includes(refID)) {
+                            classRefIDs.push(refID);
+                            cNames.push(item.Name);
+                            // console.log("HERE: " + item.Name);
+                        }
+
+                    }
+                );
+
+                // ------------------------ Personal Training --------------------------
+                ret = [...personalTraining];
                 refID = '';
-                // let tempRefIDs = this.state.refIDs.slice();
-                let tempRefIDs = [...this.state.refIDs];
-                // let tempCoachIDs = this.state.coachIDs.slice();
-                let tempCoachIDs = [...this.state.coachIDs];
+                // console.log("pts is here: \n");
+                // console.log(ret);
+                let coachID = '';
+                let refIDs = [];
+                let coachName = '';
                 const items = ret.map((item, key) => {
                         if (item.Time < 10) {
                             refID = item.Day + ".0" + item.Time;
@@ -98,94 +174,122 @@ class PersonalTrainingCreate extends Component {
                             refID = item.Day + "." + item.Time;
                         }
                         // Create a new array based on current state:
-                        let coachID = item.Coach_ID;
-                        if (!tempRefIDs.includes(refID)) {
-                            tempRefIDs.push(refID);
-                            tempCoachIDs.push(coachID);
+                        coachID = item.Coach_ID;
+                        console.log(" this is the coachID: " + coachID);
+                        coachName = item.CoachName + " " + item.Surname;
+                        if (!refIDs.includes(refID)) {
+                            refIDs.push(refID);
                         }
                     }
                 );
 
-                await this.settingRefIDsCoachIDs(tempRefIDs, tempCoachIDs);
+                this.setState({coachName: coachName});
 
-                // for coaches enrolled training
-                // let retCoach = this.props.trainingScheduleCoach.slice(0);
-                let retCoach = [...this.props.trainingScheduleCoach];
+
+
+
+
+                // -------------- Filling the CoachRefIDs ----------------------------
+                // This will be used to prevent coach from having two personal training sessions at the same time
+                let trainingScheduleCoach = [];
+                // trainingScheduleCoach =  await this.fetchingCoachSchedule(coachID);
+
+                await getCoachTraining(coachID).then(response => {
+                    trainingScheduleCoach = response;
+                    // console.log("this the coach's returned schedule: \n");
+                    // console.log(trainingScheduleCoach);
+
+                });
+
+                let retCoach = [...trainingScheduleCoach];
+
+
+                // console.log(retCoach);
                 refID = '';
-                // let tempRefIDsCoach = this.state.refIDsCoach;
-                let tempRefIDsCoach = [...this.state.refIDsCoach];
+                let refIDsCoach = [];
 
                 const itemsCoach = retCoach.map((coach, key) => {
                         if (coach.Time < 10) {
-                            // this.setState({refID: coach.Day + ".0" + coach.Time});
                             refID = coach.Day + ".0" + coach.Time;
                         } else {
-                            // this.setState({refID: coach.Day + "." + coach.Time});
                             refID = coach.Day + "." + coach.Time;
                         }
                         // Create a new array based on current state:
-                        if (!tempRefIDsCoach.includes(refID)) {
-                            tempRefIDsCoach.push(refID);
+                        if (!refIDsCoach.includes(refID)) {
+                            refIDsCoach.push(refID);
                         }
                     }
                 );
 
+                // ************ Printing the filled tables on the site **************
+                // console.log(refIDsCoach);
+                // await this.fillTable(refIDs, classRefIDs, cNames, refIDsCoach);
 
-                await this.settingRefIDsCoach(tempRefIDsCoach);
+
+                let time = this.props.time;
+                let day = this.props.day;
 
 
+                // ********************** Getting day and time from box selection *********************
                 if (this.props.time < 10) {
-                    refID = this.props.day + ".0" + this.props.time;
+                    refID = day + ".0" + time;
                 } else {
-                    refID = this.props.day + "." + this.props.time;
+                    refID = day + "." + time;
+                }
+                if (prevProps.userID !== this.props.userID || (prevProps.day === this.props.day && prevProps.time === this.props.time
+                    && prevProps.coachID === this.props.coachID && prevProps.flag === this.props.flag)) {
+                    // console.log("YOU SHALL NOT PASS!!!")
+                    refID = '';
                 }
 
-
-                // let x = this.state.refIDs.slice();
-                let x = [...this.state.refIDs];
-                // let y = this.state.refIDsCoach.slice();
-                let y = [...this.state.refIDsCoach];
-                // let z = this.state.coachIDs.slice();
-                let z = [...this.state.coachIDs];
-                console.log(this.props.trainingScheduleCoach.length + "    " + prevProps.trainingScheduleCoach.length);
-
-                if(prevProps.trainingScheduleCoach.length === this.props.trainingScheduleCoach.length && prevProps.coachID !== this.props.coachID){
-                    // console.log("testing  " + this.props.trainingScheduleCoach + "    " + prevProps.trainingScheduleCoach);
-                    return;
-                }
-                // console.log(this.props.trainingScheduleCoach.length + '   ' + this.state.refIDsCoach.length);
-                if (!x.includes(refID) && !y.includes(refID) && this.props.flag === true && this.props.coachID !== '' && this.props.trainingScheduleCoach.length >= 1 ) {
+                if (!refIDs.includes(refID) && !refIDsCoach.includes(refID) && this.props.flag === true && String(this.props.coachID) !== ''
+                    && (String(coachID) === String(this.props.coachID) || String(coachID) === '') && refID !== '' && !classRefIDs.includes(refID)) {
+                    console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                     console.log("inserting stuff bip boop");
-                    console.log("CoachID: " + this.props.coachID);
-                    x.push(refID);
-                    z.push(this.props.coachID);
-                    await this.insertDeleteMethodStates(x, z);
+                    console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                    refIDs.push(refID);
+                    refIDsCoach.push(coachID);
+                    await this.insertDeleteMethodStates(String(coachID), String(this.props.coachID));
                 } else {
-                    let pos = x.indexOf(refID);
-                    console.log("received coach prop " + this.props.coachID);
-                    console.log("the pos is : " + pos + " coach at this pos is: " + z[pos]);
-                    if (x.includes(refID) && y.includes(refID) && Number(z[pos]) === Number(this.props.coachID) && this.props.flag === false && this.props.coachID !== '') {  //z[pos] === this.props.coachID
+                    let pos = refIDs.indexOf(refID);
+                    let posCoach = refIDsCoach.indexOf(refID);
+                    if (refIDs.includes(refID) && this.props.flag === false && String(this.props.coachID) !== ''
+                        && (String(coachID) === String(this.props.coachID) || String(coachID) === '') && refID !== '') {
+                        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
                         console.log("deleting stuff bip boop");
-                        x.splice(pos, 1);
-                        z.splice(pos, 1);
-                        await this.insertDeleteMethodStates(x, z);
+                        console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                        refIDs.splice(pos, 1);
+                        refIDsCoach.splice(posCoach, 1);
+                        await this.insertDeleteMethodStates(String(coachID), String(this.props.coachID));
+                    } else {
+
+                        if ((refIDs.includes(refID) || classRefIDs.includes(refID)) && this.props.flag === true) {
+                            this.toggleModalUserBooked();
+                            coachID = '';
+                        }
+
+                        if (classRefIDs.includes(refID) && this.props.flag === false) {
+                            this.toggleModalClassConflict();
+                            coachID = '';
+                        }
+                        if (refIDsCoach.includes(refID) && !refIDs.includes(refID) && this.props.flag === true && String(coachID) === this.props.coachID) {
+                            this.toggleModalCoachBooked();
+                        }
+
+                        // console.log("coachID : " + (coachID) + " prop coachID: " + this.props.coachID);
+                        if (String(coachID) !== String(this.props.coachID) && String(coachID) !== '' && prevProps.userID === this.props.userID) { //
+                            this.toggleModalIncorrectCoach();
+                        }
                     }
-                    // }else{
-                    //     if (y.includes(refID) && !x.includes(refID) && this.props.flag === true) {
-                    //         alert("The coach has another scheduled personal training at that time!");
-                    //     } else {
-                    //         if (x.includes(refID) && !y.includes(refID) && this.props.flag === true) {
-                    //             alert("The user has another scheduled personal training at that time!");
-                    //         }
-                    //     }
-                    // }
+
                 }
+                console.log(refIDsCoach);
+                await this.fillTable(refIDs, classRefIDs, cNames, refIDsCoach);
+
             })();
-
-
-
         }
     }
+
 
     render() {
         return (
@@ -219,7 +323,6 @@ class PersonalTrainingCreate extends Component {
                             {[...Array(6).keys()].map(x => (x + 1.01).toFixed(2))
                                 .map((x, index) =>
                                     <div
-                                        className={this.state.refIDs.includes(x) ? 'blackBackSelected' : ''}
                                         key={index} id={x}/>
                                 )}
                             <div className="weekend"/>
@@ -227,7 +330,6 @@ class PersonalTrainingCreate extends Component {
                                 .map((x, index) =>
                                     // <div className={classes.join(' ')} key={index} id={x}/>
                                     <div
-                                        className={this.state.refIDs.includes(x) ? 'blackBackSelected' : ''}
                                         key={index} id={x}/>
                                 )}
 
@@ -235,77 +337,119 @@ class PersonalTrainingCreate extends Component {
                             {[...Array(6).keys()].map(x => (x + 1.03).toFixed(2))
                                 .map((x, index) =>
                                     <div
-                                        className={this.state.refIDs.includes(x) ? 'blackBackSelected' : ''}
                                         key={index} id={x}/>
                                 )}
                             <div className="weekend"/>
                             {[...Array(6).keys()].map(x => (x + 1.04).toFixed(2))
                                 .map((x, index) =>
                                     <div
-                                        className={this.state.refIDs.includes(x) ? 'blackBackSelected' : ''}
                                         key={index} id={x}/>
                                 )}
                             <div className="weekend"/>
                             {[...Array(6).keys()].map(x => (x + 1.05).toFixed(2))
                                 .map((x, index) =>
                                     <div
-                                        className={this.state.refIDs.includes(x) ? 'blackBackSelected' : ''}
                                         key={index} id={x}/>
                                 )}
                             <div className="weekend"/>
                             {[...Array(6).keys()].map(x => (x + 1.06).toFixed(2))
                                 .map((x, index) =>
                                     <div
-                                        className={this.state.refIDs.includes(x) ? 'blackBackSelected' : ''}
                                         key={index} id={x}/>
                                 )}
                             <div className="weekend"/>
                             {[...Array(6).keys()].map(x => (x + 1.07).toFixed(2))
                                 .map((x, index) =>
                                     <div
-                                        className={this.state.refIDs.includes(x) ? 'blackBackSelected' : ''}
                                         key={index} id={x}/>
                                 )}
                             <div className="weekend"/>
                             {[...Array(6).keys()].map(x => (x + 1.08).toFixed(2))
                                 .map((x, index) =>
                                     <div
-                                        className={this.state.refIDs.includes(x) ? 'blackBackSelected' : ''}
                                         key={index} id={x}/>
                                 )}
                             <div className="weekend"/>
                             {[...Array(6).keys()].map(x => (x + 1.09).toFixed(2))
                                 .map((x, index) =>
                                     <div
-                                        className={this.state.refIDs.includes(x) ? 'blackBackSelected' : ''}
                                         key={index} id={x}/>
                                 )}
                             <div className="weekend"/>
                             {[...Array(6).keys()].map(x => (x + 1.10).toFixed(2))
                                 .map((x, index) =>
                                     <div
-                                        className={this.state.refIDs.includes(x) ? 'blackBackSelected' : ''}
                                         key={index} id={x}/>
                                 )}
                             <div className="weekend"/>
                             {[...Array(6).keys()].map(x => (x + 1.11).toFixed(2))
                                 .map((x, index) =>
                                     <div
-                                        className={this.state.refIDs.includes(x) ? 'blackBackSelected' : ''}
                                         key={index} id={x}/>
                                 )}
                             <div className="weekend"/>
                             {[...Array(6).keys()].map(x => (x + 1.12).toFixed(2))
                                 .map((x, index) =>
                                     <div
-                                        className={this.state.refIDs.includes(x) ? 'blackBackSelected' : ''}
                                         key={index} id={x}/>
                                 )}
                             <div className="weekend"/>
                         </div>
                     </div>
                 </div>
+                {/*<div> <span><small>&emsp;*The personal training sessions registered are represented by: </small></span><p className='smallCellBox'></p></div>*/}
                 <br/>
+                <div className='legendsBoxPT'>
+                    <div className="sameRow">
+                        <div className='smallCellBox'/>
+                        {/*<div className='smallCellBox'></div>*/}
+                        <small>&emsp;User Booked</small>
+                        <div className='coachBookedSmall'/>
+                        <small>&emsp;Coach Booked</small>
+                        <div className='classBookedSmall'/>
+                        <small>&emsp;Class Enrolled</small>
+                    </div>
+                    {/*<div className="sameRow">*/}
+                    {/*    /!*<div className='coachBookedSmall'></div>*!/*/}
+                    {/*    /!*<small>&emsp;Coach Booked</small>*!/*/}
+                    {/*</div>*/}
+                    {/*<div className="sameRow">*/}
+                    {/*    /!*<div className='classBookedSmall'></div>*!/*/}
+                    {/*    /!*<small>&emsp;Class Enrolled</small>*!/*/}
+                    {/*</div>*/}
+                </div>
+
+                <br/>
+                <ToggleModal
+                    modal={this.state.coachBooked}
+                    toggle={this.toggleModalCoachBooked}
+                    modalSize={'md'}
+                    modalHeader={"Conflict"}
+                    modalBody={<div style={{color: 'white'}}>The coach has another scheduled client at this time.</div>}
+                />
+                <ToggleModal
+                    modal={this.state.userBooked}
+                    toggle={this.toggleModalUserBooked}
+                    modalSize={'md'}
+                    modalHeader={"Conflict"}
+                    modalBody={<div style={{color: 'white'}}>The user has another class or personal training at this
+                        time.</div>}
+                />
+                <ToggleModal
+                    modal={this.state.incorrectCoach}
+                    toggle={this.toggleModalIncorrectCoach}
+                    modalSize={'md'}
+                    modalHeader={"Conflict"}
+                    modalBody={<div style={{color: 'white'}}>The coach registered for personal training to this user
+                        is {this.state.coachName}.</div>}
+                />
+                <ToggleModal
+                    modal={this.state.classConflict}
+                    toggle={this.toggleModalClassConflict}
+                    modalSize={'md'}
+                    modalHeader={"Conflict"}
+                    modalBody={<div style={{color: 'white'}}>The user has a registered class at that time.</div>}
+                />
             </div>
         )
     }

@@ -430,6 +430,16 @@ app.post('/api/user/getPersonalTraining', middleware, (req, res) => {
   }).catch(err => res.status(409).json(err));
 });
 
+app.post('/api/user/getPersonalSchedule', middleware, (req, res) => {
+  db.getPersonalSchedule(req.body.User_ID).then(data => {
+    if (data) {
+      return res.status(200).json(data);
+    } else {
+      return res.status(409).json('Authentication failed. User not found.');
+    }
+  }).catch(err => res.status(409).json(err));
+});
+
 app.post('/api/user/getClassSchedule', middleware, (req, res) => {
     console.log("It's a me!");
     console.log(req.body.User_ID);
@@ -546,6 +556,19 @@ app.post('/api/insert/PersonalTraining', middleware, (req, res) => {
       return res.status(409).json('Authentication failed. User not found.');
     }
   }).catch(err => res.status(409).json(err));
+});
+
+//delete Personal Training
+app.post('/api/delete/PersonalTraining', middleware, (req, res) => {
+  db.deletePT(req.body.data)
+      .then(data => {
+        if (data) {
+          return res.status(200).json(data)
+        } else {
+          return res.status(409).json('Authentication failed. User not found.');
+        }
+      })
+      .catch(err => res.status(409).json(err));
 });
 
 // fetcing coaches for personal training

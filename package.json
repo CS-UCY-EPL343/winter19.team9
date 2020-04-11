@@ -23,6 +23,8 @@
     "leaflet": "^1.5.1",
     "node": "^13.10.1",
     "react": "^16.11.0",
+    "react-alert": "^7.0.0",
+    "react-alert-template-basic": "^1.0.0",
     "react-animate-on-scroll": "^2.1.5",
     "react-animated-css-onscroll": "^1.2.1",
     "react-animation": "^1.2.2",

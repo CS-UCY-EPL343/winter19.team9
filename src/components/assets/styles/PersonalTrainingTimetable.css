@@ -4,12 +4,23 @@
     grid-template-columns: 120px;
     grid-template-rows: 60px;
     width: 95%;
-    /*height: 400px;*/
     height: fit-content;
     margin: auto;
     background-image: linear-gradient(to right bottom, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E);
     border-radius: 10px;
     overflow: auto;
+    /*display: grid;*/
+    /*grid-template-areas: ". week" "time content";*/
+    /*grid-template-columns: 120px;*/
+    /*grid-template-rows: 60px;*/
+    /*width: 95%;*/
+    /*!*height: 400px;*!*/
+    /*height: fit-content;*/
+    /*background-size: contain;*/
+    /*margin: auto;*/
+    /*background-image: linear-gradient(to right bottom, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E);*/
+    /*border-radius: 10px;*/
+    /*overflow: auto;*/
 }
 
 #timeTableHeading {
@@ -22,8 +33,84 @@
     color: white;
 }
 
-.blackBackSelected{
-    background-color: #993333;
+.blackBackSelected {
+    background-color: #aa4a51;/*#3486eb; */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    /*text-align: center;*/
+    padding: 5% 0;
+    font-family: "Roboto", sans-serif;
+}
+
+.coachBooked{
+    background-color: #111c29;/*#3486eb; */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 5% 0;
+    font-family: "Roboto", sans-serif;
+}
+.coachBookedSmall{
+    background-color: #111c29;/*#3486eb; */
+    margin-left: 20px;
+    height: 20px;
+    width: 20px;
+    border: 1px solid black;
+    margin-right : 5px;
+}
+.classBookedSmall{
+    background-color: #624ccf;
+    margin-left: 20px;
+    height: 20px;
+    width: 20px;
+    border: 1px solid black;
+    margin-right : 5px;
+}
+
+.legendsBoxPT{
+    display: inline-block;
+    background-color: #2b2b2b;
+    border-radius: 10px;
+    border: 2px solid #3b3b3b;
+}
+
+.sameRow small {
+    margin-right: 15px;
+}
+
+
+.sameRow {
+    display : flex;
+    align-items : center;
+    margin: 15px;
+
+}
+
+.smallCellBox {
+    margin-left: 20px;
+    height: 20px;
+    width: 20px;
+    border: 1px solid black;
+    margin-right : 5px;
+    background-color:#b54a51  ;
+}
+
+.classesBackground {
+    /*background-color: #993333;*/
+    background-color: #624ccf;
+    text-align: center;
+    padding: 5% 0;
+    font-family: "Roboto", sans-serif;
+}
+
+.PTSlot{
+    text-align: center;
+    padding: 5% 0;
+    font-family: "Roboto", sans-serif;
+}
+
+.BusySlot{
     text-align: center;
     padding: 5% 0;
     font-family: "Roboto", sans-serif;

@@ -2,40 +2,124 @@ import React, {Component} from 'react';
 import  {useState} from 'react';
 
 import "../assets/styles/PersonalTrainingTimetable.css"
-// import "../assets/styles/Timetable.css"
+import { useAlert } from "react-alert";
 import {
-    getClasses, getPersonalTraining,
+    getClasses,
+    getPersonalTraining,
     getUserID,
-    insertPT, postuserData,
+    insertPT,
+    postuserData,
     getClassSchedule,
-    getClassName
+    getClassName,
+    getPersonalSchedule,
+    enrollUser,
+    unenrollUser
 } from "../../repository";
+import ToggleModal from "./ToggleModal";
+// import {indexOf} from "leaflet/src/core/Util";
+import Weights from "../assets/img/pt.jpg";
+
 class EnrolledClassSchedule extends Component {
+
     constructor(props) {
+
         super(props);
         this.myRef = React.createRef();
         this.state = {
             refID: '',
             refIDs: [],
+            ptIDs : [],
             trainingScheduleRet: [],
             flag: false,
             Coach_ID: '',
             User_ID: '',
             classSchedule: [],
+            personalSchedule : [],
             cIDs: [],
+            pIDs: [],
             cNames: [],
+            pNames: [],
             ClassID : '',
             Name: '',
-            ClassColors : ["#ff6666","#00cc99","#ffcc66","#9966ff","#66ccff","#ccff99","#ff9900"]
+            ClassColors : [
+                "#812029",
+                "#1a63d9",
+                "#cf1b1b",
+                "#ffad1f",
+                "#704585",
+                "#53878c",
+                "#c97200",
+                "#489655",
+                "#158ca3",
+                "#9e134b"
+            ],
+            modalUnenroll : false,
+            modalEnroll : false,
+            modalPT : false,
+            WrongClass  : false
+
         };
         this.StateSetter = this.StateSetter.bind(this);
+        this.StateSetterPT = this.StateSetterPT.bind(this);
+        this.toggleModalUnenroll = this.toggleModalUnenroll.bind(this);
+        this.toggleModalEnroll = this.toggleModalEnroll.bind(this);
+        this.toggleModalPT = this.toggleModalPT.bind(this);
+        this.toggleModalWrong = this.toggleModalWrong.bind(this);
+        this.ColorLuminance = this.ColorLuminance.bind(this);
     }
 
+    ColorLuminance = (hex, lum) => {
+
+        // validate hex string
+        hex = String(hex).replace(/[^0-9a-f]/gi, '');
+        if (hex.length < 6) {
+            hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+        }
+        lum = lum || 0;
+
+        // convert to decimal and change luminosity
+        let rgb = "#", c, i;
+        for (i = 0; i < 3; i++) {
+            c = parseInt(hex.substr(i*2,2), 16);
+            c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
+            rgb += ("00"+c).substr(c.length);
+        }
+        return rgb;
+    };
+
+    toggleModalWrong = () => {
+        this.setState({WrongClass: !this.state.WrongClass});
+    };
+
+    toggleModalUnenroll = () => {
+        this.setState({modalUnenroll: !this.state.modalUnenroll});
+    };
+
+    toggleModalEnroll = () => {
+        this.setState({modalEnroll: !this.state.modalEnroll});
+    };
+
+    toggleModalPT = () => {
+        this.setState({modalPT: !this.state.modalPT});
+    };
+
     StateSetter(x, y, z) {
-        this.setState({refIDs: x});
-        this.setState({cIDs: y});
-        this.setState({Names: z}, () => {
-            console.log(this.state.Names);
+        this.setState({refIDs: x}, () => {
+            this.setState({cIDs: y}, () => {
+                this.setState({cNames: z}, () => {
+                    console.log(this.state.cNames);
+                });
+            });
+        });
+    }
+
+    StateSetterPT(x, y, z) {
+        this.setState({ptIDs: x}, () => {
+            this.setState({pIDs: y}, () => {
+                this.setState({pNames: z}, () => {
+                    console.log(this.state.pNames);
+                });
+            });
         });
     }
 
@@ -47,6 +131,7 @@ class EnrolledClassSchedule extends Component {
 
                     // Gets the Class Name, ID, TimeCode and DayCode Based on the user's ID
                     //
+                    console.clear();
                     getClassSchedule(this.state.User_ID).then(response => {
                         this.setState({classSchedule: response}, () => {
                             console.log("Class Schedule obtained! Here it comes!");
@@ -74,8 +159,23 @@ class EnrolledClassSchedule extends Component {
                                             y.push(item.ClassID);
                                             z.push(item.Name);
                                             const node = document.getElementById(refID);
-                                            node.className = 'blackBackSelected';
+                                            node.className = 'BusySlot';
                                             node.textContent = item.Name;
+                                            console.log("refID: "+refID + " | class-ID: "+ item.ClassID+" | Name: "+item.Name);
+                                            if (z.includes(item.Name)){
+                                                console.log("color: "+this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(item.Name)]]);
+                                                // node.style.backgroundColor = this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(item.Name)]];
+                                                node.style.backgroundImage = "linear-gradient(to bottom right,"
+                                                    +this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(item.Name)]%9]+","
+                                                    +this.ColorLuminance(this.state.ClassColors[(this.state.cIDs[this.state.cNames.indexOf(item.Name)])%9],-0.5)+")";
+                                            }else {
+                                                console.log("color: "+this.state.ClassColors[item.ClassID]);
+                                                // node.style.backgroundColor = this.state.ClassColors[item.ClassID];
+                                                node.style.backgroundImage = "linear-gradient(to bottom right,"
+                                                    +this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(item.Name)]%9]+","
+                                                    +this.ColorLuminance(this.state.ClassColors[(this.state.cIDs[this.state.cNames.indexOf(item.Name)])%9],-0.5)+")";
+                                            }
+
                                             console.log(item.Name);
                                         }
                                     }
@@ -84,6 +184,55 @@ class EnrolledClassSchedule extends Component {
                             })();
                         });
                     });
+
+                    getPersonalSchedule(this.state.User_ID).then(response => {
+                        this.setState({personalSchedule: response}, () => {
+                            console.log("Personal Training obtained! Here it comes!");
+                            console.log(this.state.personalSchedule);
+                            let retPer = this.state.personalSchedule.slice(0);
+                            let refID;
+                            //console.log("Let's go to the mall");
+                            //this.setState({Coach_ID: this.props.coachID, User_ID: this.props.userID});
+
+                            (async ()=>{
+                                console.log('foo');
+                                let x = this.state.ptIDs;
+                                let y = this.state.pIDs;
+                                let z = this.state.pNames;
+                                const items = retPer.map((item, key) => {
+                                        if (item.Time < 10) {
+                                            this.setState({refID: item.Day + ".0" + item.Time});
+                                            refID = item.Day + ".0" + item.Time;
+                                        } else {
+                                            this.setState({refID: item.Day + "." + item.Time});
+                                            refID = item.Day + "." + item.Time;
+                                        }
+                                        if (!x.includes(refID)) {
+                                            x.push(refID);
+                                            y.push(item.Coach_ID);
+                                            z.push(item.CoachName);
+                                            const node = document.getElementById(refID);
+                                            node.className = 'PTSlot';
+                                            node.textContent = item.CoachName;
+                                            node.style.backgroundImage = "radial-gradient( #4c4c4c,"
+                                                +this.ColorLuminance("#4c4c4c",-0.7)+")";
+
+                                            //********************************************************
+
+                                            // node.style.backgroundImage = "url("+Weights+")";
+                                            // node.style.backgroundSize = "100%";
+                                            // node.style.backgroundPosition = "center";
+                                            // node.style.backgroundRepeat = "repeat";
+                                            console.log(item.CoachName);
+                                        }
+                                    }
+                                );
+                                await this.StateSetterPT(x, y, z);
+                            })();
+                        });
+                    });
+
+
                 });
         });
 
@@ -114,54 +263,105 @@ class EnrolledClassSchedule extends Component {
             // Create a new array based on current state:
             let x = this.state.refIDs.slice(0);
             let y = this.state.cIDs.slice(0);
-            let z = this.state.Names.slice(0);
+            let z = this.state.cNames.slice(0);
+            let p = this.state.ptIDs.slice(0);
 
-            if (!x.includes(refID) && this.props.flag === true) {
-                // (async ()=>{
-                    x.push(refID);
-                    y.push(this.props.ClassID);
-                    // getClassName(this.props.ClassID).then(response => {
-                    //     console.log("Here comes the class name");
-                    //     console.log(response);
-                    //     z.push(response);
-                    // });
-                    z.push(this.props.Name);
-                //     await
-                    this.StateSetter(x, y, z);
-                    // const node = this.myRef.current;
-                    const node = document.getElementById(refID);
-                    node.className = 'blackBackSelected';
-                    node.textContent = this.props.Name;
+            //Checks if the user wants to enroll or unenroll. Flag is true for enroll and false otherwise.
+            if (this.props.flag === true) {
+
+                //Checks if there is not any personal training or class scehduled for the user at that specific time
+                if (!p.includes(refID) && !x.includes(refID)){
+                    (async () => {
+
+                        //Copies the tables for the Class timetable entries, Class ID's and Class names into temporary
+                        //ones.
+                        x.push(refID);
+                        y.push(this.props.ClassID);
+                        z.push(this.props.Name);
+
+                        //waiting to copy all the tables before proceeding
+                        await this.StateSetter(x, y, z);
+
+                        //node is the div element containing the specified Class enrollment
+                        const node = document.getElementById(refID);
+
+                        //Sets that timetable entry as "enrolled"
+                        node.className = 'BusySlot';
+                        node.textContent = this.props.Name;
+                        console.log("refID: "+refID + " | class-ID: "+ this.props.ClassID+" | Name: "+this.props.Name);
+                        if (z.includes(this.props.Name)){
+                            console.log("color: "+this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(this.props.Name)]]);
+                            // node.style.backgroundColor = this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(item.Name)]];
+                            node.style.backgroundImage = "linear-gradient(to bottom right,"
+                                +this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(this.props.Name)]%9]+","
+                                +this.ColorLuminance(this.state.ClassColors[(this.state.cIDs[this.state.cNames.indexOf(this.props.Name)])%9],-0.5)+")";
+                        }else {
+                            console.log("color: "+this.state.ClassColors[this.props.ClassID]);
+                            // node.style.backgroundColor = this.state.ClassColors[item.ClassID];
+                            node.style.backgroundImage = "linear-gradient(to bottom right,"
+                                +this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(this.props.Name)]%9]+","
+                                +this.ColorLuminance(this.state.ClassColors[(this.state.cIDs[this.state.cNames.indexOf(this.props.Name)])%9],-0.5)+")";
+                        }                        console.clear();
+                        console.log("CLASSSSSS IDDDDDD");
+                        console.log(this.state.cIDs[this.state.refIDs.indexOf(refID)]);
+                        console.log("USEEEERR IDDDDDD");
+                        console.log(this.state.User_ID);
+                        enrollUser(this.state.cIDs[this.state.refIDs.indexOf(refID)], this.state.User_ID).then();
+                        console.log("Successfully enrolled");
+                    })();
+
                 // })();
-
+                } else {
+                    this.toggleModalEnroll();
+                    console.log("YOU TRIED SOMETHING BAD!");
+                }
             } else {
-                if (x.includes(refID) && this.props.flag === false) {
-                    // (async ()=>{
-                        // let x = this.state.refIDs.slice(0);
-                        // let y = this.state.cIDs.slice(0);
-                        // let z = this.state.Names.slice(0);
-                        const newList = this.state.refIDs.slice(0);
-                        newList.splice(this.state.refIDs.indexOf(refID), 1);
-                        const newList2 = this.state.cIDs.slice(0);
-                        newList2.splice(this.state.refIDs.indexOf(refID), 1);
-                        const newList3 = this.state.cNames.slice(0);
-                        // getClassName(this.props.ClassID).then(response => {
-                        //     this.setState({cName:response});
-                        // });
+                if (this.props.flag === false) {
+                    if (!p.includes(refID)){
+                        if (x.includes(refID)){
+                            if (this.props.ClassID === this.state.cIDs[this.state.refIDs.indexOf(refID)]){
+                                console.clear();
+                                console.log("Correct");
+                                (async () => {
 
-                        newList3.splice(this.state.refIDs.indexOf(refID), 1);
-                        // this.setState({refIDs: newList});
-                        // this.setState({cIDs: newList2});
-                        // this.setState({cNames : newList3});
-                    //     await
-                        this.StateSetter(newList, newList2, newList3);
-                    const node = document.getElementById(refID);
-                    node.className = '';
-                    node.textContent = '';
-                    // })();
+                                    //wait to unenroll first and then remove the entries from the arrays
+                                    await unenrollUser(
+                                        this.state.cIDs[this.state.refIDs.indexOf(refID)],
+                                        this.state.User_ID
+                                    ).then();
+
+                                    //Copy of timetable Class entry array
+                                    const newList = this.state.refIDs.slice(0);
+                                    newList.splice(this.state.refIDs.indexOf(refID), 1);
+
+                                    //Copy of Class ID's array
+                                    const newList2 = this.state.cIDs.slice(0);
+                                    newList2.splice(this.state.refIDs.indexOf(refID), 1);
+
+                                    //Copy of Class's Names array
+                                    const newList3 = this.state.cNames.slice(0);
+                                    newList3.splice(this.state.refIDs.indexOf(refID), 1);
+
+                                    this.StateSetter(newList, newList2, newList3);
+                                    const node = document.getElementById(refID);
+                                    node.className = '';
+                                    node.textContent = '';
+                                    node.style.backgroundImage = "";
+
+                                })();
+                            } else {
+                                this.toggleModalWrong();
+                            }
+                        } else {
+                            this.toggleModalUnenroll();
+                            console.log("THERE IS NOTHING TO DELETE THERE MITE!!!");
+                        }
+                    } else {
+                        this.toggleModalPT();
+                        console.log("YOU ARE NOT PERMITTED TO DELETE THAT MATE!!! SPEAK W/ YOUR COACH FIRST");
+                    }
                 }
             }
-            
         }
     }
 
@@ -368,9 +568,38 @@ class EnrolledClassSchedule extends Component {
                             <div className="weekend"/>
                         </div>
                     </div>
+                    <ToggleModal
+                        modal={this.state.modalUnenroll}
+                        toggle={this.toggleModalUnenroll}
+                        modalSize={'md'}
+                        modalHeader={"Can't Unenroll"}
+                        modalBody={<div style={{ color : 'white'}}>There is no class to unenroll from</div>}
+                    />
+                    <ToggleModal
+                        modal={this.state.modalPT}
+                        toggle={this.toggleModalPT}
+                        modalSize={'md'}
+                        modalHeader={"Can't cancel Personal Training session"}
+                        modalBody={<div style={{ color : 'white'}}>You should speak with your coach in order to cancel a Personal Training session</div>}
+                    />
+                    <ToggleModal
+                        modal={this.state.modalEnroll}
+                        toggle={this.toggleModalEnroll}
+                        modalSize={'md'}
+                        modalHeader={"Conflict"}
+                        modalBody={<div style={{ color : 'white'}}>You have something else scheduled for that time</div>}
+                    />
+                    <ToggleModal
+                        modal={this.state.WrongClass}
+                        toggle={this.toggleModalWrong}
+                        modalSize={'md'}
+                        modalHeader={"Conflict"}
+                        modalBody={<div style={{ color : 'white'}}>You are enrolled to another class at that time</div>}
+                    />
                 </div>
                 <br/>
             </div>
+
         )
     }
 }

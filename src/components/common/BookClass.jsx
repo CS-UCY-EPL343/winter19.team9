@@ -16,6 +16,19 @@ import {getUserID} from "../../repository";
 // import {getTimeCode} from "../../repository";
 // import {getClassSchedule} from "../../repository";
 import {preventDefault} from "leaflet/src/dom/DomEvent";
+import ToggleModal from "./ToggleModal";
+import General from "../assets/img/generalSchedule.png";
+
+// const ModalStyle = {
+//     backgroundImage : "url("+ General +")",
+//     backgroundSize : "100%",
+//     backgroundPosition : "center",
+//     backgroundRepeat : "repeat",
+// };
+//
+// const ModalStyle = {
+//
+// }
 
 class BookClass extends Component {
 
@@ -35,16 +48,22 @@ class BookClass extends Component {
             DayCode         : '',
             TimeCode        : '',
             flag            : false,
-            classSchedule: []
+            classSchedule   : [],
+            modalGeneral    : false
             // CoachID         : ''
         };
         this.handleClass = this.handleClass.bind(this);
         this.handleDay = this.handleDay.bind(this);
         this.handleTime = this.handleTime.bind(this);
         this.handleCoach = this.handleCoach.bind(this);
+        this.toggleModalGeneral = this.toggleModalGeneral.bind(this);
+
     }
 
-
+    toggleModalGeneral = (e) => {
+        preventDefault(e);
+        this.setState({modalGeneral: !this.state.modalGeneral});
+    };
 
     handleClass = (e) => {
         this.setState({[e.target.name]: e.target.value === 'Select...' ? '' : e.target.value}, () => {
@@ -145,12 +164,17 @@ class BookClass extends Component {
 
     onSubmit = (e) => {
         preventDefault(e);
-        enrollUser(this.state.ClassID, this.state.User_ID).then();
+        // enrollUser(this.state.ClassID, this.state.User_ID).then();
         // () => alert('Success')).catch(err => alert(err));
-        this.setState({flag: true},
-            () => {
-                this.props.getSelections(this.state.DayCode, this.state.TimeCode, true, this.state.ClassID, this.state.SelectedClass);
-            });
+        this.setState({flag: true},() => {
+            this.props.getSelections(
+                this.state.DayCode,
+                this.state.TimeCode,
+                true,
+                this.state.ClassID,
+                this.state.SelectedClass
+            );
+        });
 
         this.setState({Name: []}, () => {
             this.setState({Day: []}, () => {
@@ -167,7 +191,7 @@ class BookClass extends Component {
 
     onDelete = (e) => {
         preventDefault(e);
-        unenrollUser(this.state.ClassID, this.state.User_ID).then();
+        // unenrollUser(this.state.ClassID, this.state.User_ID).then();
         //() => alert('Success')).catch(err => alert(err));
         this.setState({flag: false},
             () => {
@@ -275,6 +299,21 @@ class BookClass extends Component {
                             <button type = "button-important" className="RowButton" onClick={this.onDelete}>Unenroll</button>
                         </div>
                     </div>
+                    <div className = "row">
+                        <div className= "col-md-12 RowBlock" style = {{'padding-bottom': '0px'}}>
+                            <button type = "button-important" className="RowButton" onClick={this.toggleModalGeneral}>View General Schedule</button>
+                        </div>
+
+                    </div>
+                    <ToggleModal
+                        modal={this.state.modalGeneral}
+                        toggle={this.toggleModalGeneral}
+                        modalSize={'lg'}
+                        modalHeader={"General Gym Schedule"}
+                        modalBody={<img src={General} alt = "timetable" width="100%"/>}
+                        // modalBody={<div style ={ModalStyle}/>}
+
+                    />
                 </form>
             </div>
         );

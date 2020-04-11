@@ -383,6 +383,15 @@ export function getPersonalTraining(User_ID) {
       .catch(() => Promise.reject('Authentication Failed!'));
 }
 
+export function getPersonalSchedule(User_ID) {
+  return axios.post(`${ BASE_URL }/api/user/getPersonalSchedule`, {
+    'x-access-token': localStorage.getItem('x-access-token'),
+    User_ID         : User_ID,
+  })
+      .then(response => response.data)
+      .catch(() => Promise.reject('Authentication Failed!'));
+}
+
 //Gets the class schedule of the user with the given User_ID
 export function getClassSchedule(User_ID) {
   return axios

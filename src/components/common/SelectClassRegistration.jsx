@@ -1,9 +1,5 @@
 import React, {Component} from 'react';
 import '../assets/styles/BookDropdown.css'
-// import {getClassDay, getPersonalTraining} from "../../repository";
-import {getAllCoaches} from "../../repository";
-import {useEffect} from "react";
-
 
 class SelectClassRegistration extends Component {
 
@@ -13,12 +9,13 @@ class SelectClassRegistration extends Component {
             day: '',
             time: '',
             flag: false,
-            Coach_ID:''
+            Coach_ID: ''
         };
 
         this.onSubmit = this.onSubmit.bind(this);
         this.onSubmit2 = this.onSubmit2.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.clearOptions = this.clearOptions.bind(this);
     }
 
     handleChange = (e) => {
@@ -50,7 +47,22 @@ class SelectClassRegistration extends Component {
             });
     };
 
+    clearOptions() {
+        const timeNode = document.getElementById('TimePers');
+        timeNode.value = 0;
+        const dayNode = document.getElementById('DayPers');
+        dayNode.value = 0;
+        const coachNode = document.getElementById('CoachPers');
+        coachNode.value = 0;
+    }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        (async () => {
+            if (prevProps.userID !== this.props.userID) {
+                await this.clearOptions();
+            }
+        })();
+    }
 
     render() {
         return (
@@ -62,7 +74,7 @@ class SelectClassRegistration extends Component {
                             <label htmlFor="DropDays">Day:</label>
                             <select className="form-control selectGroupPersonal" name="day" id="DayPers"
                                     onChange={this.handleChange} required>
-                                <option value=" " hidden>Day Option</option>
+                                <option value="0" hidden>Day Option</option>
                                 <option value="1">Monday</option>
                                 <option value="2">Tuesday</option>
                                 <option value="3">Wednesday</option>
@@ -75,7 +87,7 @@ class SelectClassRegistration extends Component {
                             <label htmlFor="DropClass">Class:</label>
                             <select className="form-control selectGroupPersonal" name="time" id="TimePers"
                                     onChange={this.handleChange} required>
-                                <option value="" hidden>Time Option</option>
+                                <option value="0" hidden>Time Option</option>
                                 <option value="1">08:00-09:00</option>
                                 <option value="2">09:00-10:00</option>
                                 <option value="3">10:00-11:00</option>
@@ -95,12 +107,12 @@ class SelectClassRegistration extends Component {
                         <div className="col-md-12 RowBlock">   {/*justify-content-center*/}
                             <label htmlFor="DropClass">Coach:</label>
 
-                            <select className="form-control selectGroupPersonal" name="Coach_ID" id="TimePers"
+                            <select className="form-control selectGroupPersonal" name="Coach_ID" id="CoachPers"
                                     onChange={this.handleChange} required>
-                                <option value="" hidden>Select a Coach</option>
+                                <option value="0" hidden>Select a Coach</option>
                                 {this.props.coaches.map((res, index) => {
                                     return <option value={res.Coach_ID} key={index}>
-                                        {res.CoachName} {res.Coach_ID}
+                                        {res.CoachName} {res.Surname}
                                     </option>
                                 })
                                 }
