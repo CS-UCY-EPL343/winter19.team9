@@ -976,22 +976,49 @@ function insertNewAdmin(data){
 function deleteAdminMember(AdminId){
 
     return new Promise((resolve, reject) => {
-
+        updateAdminAnnouncement(AdminId);
+        updateAdminMessage(AdminId);
         const sql = 'DELETE A,O FROM OWNER O JOIN ACCOUNT A ON A.Owner_ID = O.Owner_ID WHERE A.AccountID=? ';
         connection.query(sql, [AdminId], function(err) {
             if (err) {
                 return reject(err);
             }
-            console.log('1 record deleted');
             return resolve('Success');
         });
+    });
+}
+
+function updateAdminMessage(AccountID){
+    const sqlFromMessage='UPDATE Messages M JOIN ACCOUNT AC ON AC.AccountID=M.From_ID SET M.From_ID=97  WHERE AC.AccountID=?';
+    connection.query(sqlFromMessage, [AccountID], function(err) {
+        if (err) {
+            return reject(err);
+        }
+    });
+    const sqlToMessage='UPDATE Messages M JOIN ACCOUNT AC ON AC.AccountID=M.To_ID SET M.To_ID=97  WHERE AC.AccountID=?';
+    connection.query(sqlToMessage, [AccountID], function(err) {
+        if (err) {
+            return reject(err);
+        }
+    });
+}
+
+function updateAdminAnnouncement(AccountID){
+    const sql='UPDATE ANNOUNCEMENT A JOIN ACCOUNT AC ON AC.Owner_ID=A.Admin_ID SET A.Admin_ID=10  WHERE AC.AccountID=?';
+    connection.query(sql, [AccountID], function(err) {
+        if (err) {
+            return reject(err);
+        }
     });
 }
 
 function deleteCoachMember(CoachId){
 
     return new Promise((resolve, reject) => {
-
+        updateCoachMessage(CoachId);
+        updateCoachAnnouncement(CoachId);
+        updateCoachClass(CoachId);
+        updateCoachPersonalTraining(CoachId);
         const sql = 'DELETE A,C FROM COACH C JOIN ACCOUNT A ON A.Coach_ID = C.Coach_ID WHERE A.AccountID=? ';
         connection.query(sql, [CoachId], function(err) {
             if (err) {
@@ -1004,6 +1031,47 @@ function deleteCoachMember(CoachId){
 
 }
 
+function updateCoachMessage(AccountID){
+    const sqlFromMessage='UPDATE Messages M JOIN ACCOUNT AC ON AC.AccountID=M.From_ID SET M.From_ID=73  WHERE AC.AccountID=?';
+    connection.query(sqlFromMessage, [AccountID], function(err) {
+        if (err) {
+            return reject(err);
+        }
+    });
+    const sqlToMessage='UPDATE Messages M JOIN ACCOUNT AC ON AC.AccountID=M.To_ID SET M.To_ID=73  WHERE AC.AccountID=?';
+    connection.query(sqlToMessage, [AccountID], function(err) {
+        if (err) {
+            return reject(err);
+        }
+    });
+}
+
+function updateCoachAnnouncement(AccountID){
+    const sql='UPDATE ANNOUNCEMENT A JOIN ACCOUNT AC ON AC.Coach_ID=A.Coach_ID SET A.Coach_ID=3  WHERE AC.AccountID=?';
+    connection.query(sql, [AccountID], function(err) {
+        if (err) {
+            return reject(err);
+        }
+    });
+}
+
+function updateCoachClass(AccountID){
+    const sql='UPDATE Class C JOIN ACCOUNT AC ON AC.Coach_ID=C.Coach_ID SET C.Coach_ID=3  WHERE AC.AccountID=?';
+    connection.query(sql, [AccountID], function(err) {
+        if (err) {
+            return reject(err);
+        }
+    });
+}
+
+function updateCoachPersonalTraining(AccountID){
+    const sql='UPDATE PERSONAL_TRAINING P JOIN ACCOUNT AC ON AC.Coach_ID=P.Coach_ID SET P.Coach_ID=3  WHERE AC.AccountID=?';
+    connection.query(sql, [AccountID], function(err) {
+        if (err) {
+            return reject(err);
+        }
+    });
+}
 // noinspection JSUnusedGlobalSymbols
 module.exports = {
   dbConnect,
