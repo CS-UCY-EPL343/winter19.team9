@@ -20,7 +20,7 @@ form.adminViewClient input[type=text] {
 form.adminViewClient button {
     height: 100%;
     width: 100%;
-    /*padding: 10px;*/
+    padding: 10px;
     background: #f30638;
     color: white;
     font-size: 17px;
