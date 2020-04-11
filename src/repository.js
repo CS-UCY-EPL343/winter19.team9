@@ -281,19 +281,20 @@ export function insertAdmin(data) {
       .catch(() => Promise.reject('Insert Admin failed.'));
 }
 
-export function deleteAdmin(AdminId){
-  return axios.post(`${ BASE_URL }/api/admin/delete`,{ AdminId : AdminId})
+export function deleteAdmin(AdminId) {
+  return axios.post(`${ BASE_URL }/api/admin/delete`, {AdminId: AdminId})
       .then(response => response.data)
       .catch(() => Promise.reject('Delete Admin Failed.'));
 }
 
-export function deleteCoach(CoachID){
-  return axios.post(`${ BASE_URL }/api/coach/delete`,{ CoachID : CoachID})
+export function deleteCoach(CoachID) {
+  return axios.post(`${ BASE_URL }/api/coach/delete`, {CoachID: CoachID})
       .then(response => response.data)
       .catch(() => Promise.reject('Delete Coach Failed.'));
 }
 
 export function postuserData(data) {
+  // noinspection JSUnresolvedVariable
   return axios.post(`${ BASE_URL }/api/user/post/data`,
       {'x-access-token': localStorage.getItem('x-access-token'), data: data})
       .then(response => response.message)
@@ -301,6 +302,7 @@ export function postuserData(data) {
 }
 
 export function enrollUser(CLASS_ID, User_ID) {
+  // noinspection JSUnresolvedVariable
   return axios.post(`${ BASE_URL }/api/BookClass/Enroll`, {
     'x-access-token': localStorage.getItem('x-access-token'),
     CLASS_ID        : CLASS_ID,
@@ -311,6 +313,7 @@ export function enrollUser(CLASS_ID, User_ID) {
 }
 
 export function unenrollUser(CLASS_ID, User_ID) {
+  // noinspection JSUnresolvedVariable
   return axios
       .post(`${ BASE_URL }/api/BookClass/Unenroll`, {
         'x-access-token': localStorage.getItem('x-access-token'),

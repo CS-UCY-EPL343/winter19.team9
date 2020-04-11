@@ -22,10 +22,10 @@ class ProfileInfo extends Component {
     render() {
         let {image} =  this.state;
         let imageURL = "https://www.w3schools.com/howto/img_avatar.png";
-        let $imagePreview = <img src={imageURL} alt={"Picture"}/>;
+        let $imagePreview = <img src={imageURL} alt={"Profile Avatar"}/>;
         if(image !== '') {
             imageURL =  'data:image/png;base64,' +  new Buffer.from(image, 'binary').toString('base64');
-            $imagePreview = (<img src={imageURL} alt={"Picture"}/>);
+            $imagePreview = (<img src={imageURL} alt={"Profile Avatar"}/>);
             // console.log(image)
         }
 
@@ -39,7 +39,7 @@ class ProfileInfo extends Component {
                         {/*     src = { image }*/}
                         {/*/>*/}
                         <div className="avatar-preview d-flex justify-content-center">
-                            <div id="imagePreview" width = "150px">{$imagePreview}</div>
+                            <div id="imagePreview">{$imagePreview}</div>
                         </div>
                         <div className = "middleEdit" id = "Edit-Add">
                             <div className = "mytext">Add/Edit<br />

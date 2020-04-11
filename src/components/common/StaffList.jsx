@@ -1,9 +1,17 @@
-import React, {Component}      from 'react';
- import {deleteAdmin, getAdmins, getCoaches, deleteCoach} from '../../repository';
+import React, {Component} from 'react';
+import Swal               from 'sweetalert2';
+import '@sweetalert2/theme-dark/dark.css';
+import {
+  deleteAdmin,
+  getAdmins,
+  getCoaches,
+  deleteCoach,
+  logOut,
+}                         from '../../repository';
 import adminAvatar
-                               from '../assets/img/logos/fitnessFactoryLogo.png';
-import ToggleModal             from './ToggleModal';
-import CreateStaffMember       from './CreateStaffMember';
+                          from '../assets/img/logos/fitnessFactoryLogo.png';
+import ToggleModal        from './ToggleModal';
+import CreateStaffMember  from './CreateStaffMember';
 
 class StaffList extends Component {
   constructor(props) {
@@ -15,7 +23,7 @@ class StaffList extends Component {
       modal    : false,
     };
     this.DeleteCoach = this.DeleteCoach.bind(this);
-    this.DeleteAdmin = this.DeleteAdmin.bind(this)
+    this.DeleteAdmin = this.DeleteAdmin.bind(this);
     this.createAdmin = this.createAdmin.bind(this);
     this.createCoach = this.createCoach.bind(this);
   }
@@ -44,9 +52,39 @@ class StaffList extends Component {
     const AdminId = e.target.className.split(' ')[3] === 'admin'
         ? this.state.admins[e.target.className.split(' ')[2]].AccountID
         : this.state.coaches[e.target.className.split(' ')[2]].AccountID;
-    deleteAdmin(AdminId).then(() => {
-      alert('Deleted Success!!');
-    }).catch(err => alert(err));
+
+    Swal.fire({
+      title             : 'Are you sure?',
+      text              : 'You won\'t be able to revert this!',
+      icon              : 'warning',
+      showCancelButton  : true,
+      confirmButtonColor: '#3085D6',
+      cancelButtonColor : '#DD3333',
+      confirmButtonText : 'Yes, delete it!',
+    }).then((result) => {
+      if (result.value) {
+        deleteAdmin(AdminId).then(() => {
+          Swal.fire(
+              'Account deleted successfully',
+              '',
+              'success',
+          ).then(() => {
+            logOut();
+            window.location.replace('/');
+          });
+        }).catch(() => Swal.fire(
+            'Something went wrong',
+            'Please try again...',
+            'error',
+        ));
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+            'Cancelled',
+            'Your Account is safe :)',
+            'error',
+        ).then();
+      }
+    });
   }
 
   DeleteCoach(e) {
@@ -60,9 +98,16 @@ class StaffList extends Component {
       alert('Deleted Success!!');
     }).catch(err => alert(err));
   }
-  createAdmin() {this.setState({staffType: 'admin'}); this.toggleModal();}
 
-  createCoach() {this.setState({staffType: 'coach'}); this.toggleModal();}
+  createAdmin() {
+    this.setState({staffType: 'admin'});
+    this.toggleModal();
+  }
+
+  createCoach() {
+    this.setState({staffType: 'coach'});
+    this.toggleModal();
+  }
 
   render() {
     // noinspection DuplicatedCode
@@ -78,6 +123,7 @@ class StaffList extends Component {
               </button>
               { this.state.admins.map((admin, index) => {
                 const timestamp = admin.Bdate.split(/[T.]+/)[0];
+                // noinspection JSUnresolvedVariable
                 const gender = admin.Gender === 1 ? 'Male' : 'Female';
                 return (
                     <div className = "admin" key = { index }>
@@ -96,13 +142,24 @@ class StaffList extends Component {
                           Gender: { gender }
                         </p>
                       </div>
-                      {admin.username!=='its.giff' &&
-                      <button className = "delete-admin">
-                        <i className = { 'fa fa-trash ' + index
-                                         + ' admin' }
-                           onClick = { this.DeleteAdmin }
-                        />
-                      </button>}
+                      { admin.username !== 'its.giff' ?
+                          <button className = "delete-admin"
+                          >
+                            <i className = { 'fa fa-trash ' + index
+                                             + ' admin' }
+                               onClick = { this.DeleteAdmin }
+                            />
+                          </button>
+                          :
+                          <button className = "delete-admin"
+                                  style = { {'pointerEvents': 'none'} }
+                                  disabled = { true }
+                          >
+                            <i className = { 'fa fa-trash slash' + index
+                                             + ' admin' }
+                            />
+                          </button>
+                      }
                     </div>
                 );
               }) }
@@ -118,6 +175,7 @@ class StaffList extends Component {
               </button>
               { this.state.coaches.map((coach, index) => {
                 const timestamp = coach.Bdate.split(/[T.]+/)[0];
+                // noinspection JSUnresolvedVariable
                 const gender = coach.Gender === 1 ? 'Male' : 'Female';
                 return (
                     <div className = "admin" key = { index }>
@@ -136,14 +194,24 @@ class StaffList extends Component {
                           Gender: { gender }
                         </p>
                       </div>
-                      {(coach.username !== 'headcoach01') &&
-                        <button className = "delete-admin">
-
-                          <i className = { 'fa fa-trash ' + index
-                                           + ' coach' }
-                            onClick = { this.DeleteCoach }
-                          />
-                      </button>}
+                      { (coach.username !== 'headcoach01') ?
+                          <button className = "delete-admin"
+                          >
+                            <i className = { 'fa fa-trash ' + index
+                                             + ' coach' }
+                               onClick = { this.DeleteCoach }
+                            />
+                          </button>
+                          :
+                          <button className = "delete-admin"
+                                  style = { {'pointerEvents': 'none'} }
+                                  disabled = { true }
+                          >
+                            <i className = { 'fa fa-trash slash' + index
+                                             + ' coach' }
+                            />
+                          </button>
+                      }
                     </div>
                 );
               }) }
@@ -156,7 +224,7 @@ class StaffList extends Component {
               modalSize = { 'md' }
               modalHeader = { 'Create New Staff' }
               modalBody = {
-                <CreateStaffMember staffType={this.state.staffType} /> }
+                <CreateStaffMember staffType = { this.state.staffType } /> }
           />
         </div>
     );

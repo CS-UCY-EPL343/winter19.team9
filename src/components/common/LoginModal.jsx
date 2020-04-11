@@ -26,7 +26,7 @@ class LoginModal extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.onRadioChange = this.onRadioChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        this.recaptchaLoaded = this.recaptchaLoaded.bind(this);
+        // this.recaptchaLoaded = this.recaptchaLoaded.bind(this);
         this.verifyCallback = this.verifyCallback.bind(this);
     }
 
@@ -64,7 +64,7 @@ class LoginModal extends Component {
             })
             .catch(err => alert(err));
     };
-   onSignUp= (e) =>{
+    onSignUp= (e) =>{
         e.preventDefault();
         if(this.state.password !== this.state.repeatedPassword){
             alert("Password dont match");
@@ -94,9 +94,9 @@ class LoginModal extends Component {
         }
     };
 
-   recaptchaLoaded() {
-       console.log('captcha has successfully loaded');
-   }
+   // recaptchaLoaded() {
+   //     console.log('captcha has successfully loaded');
+   // }
     calcDate=(dDate)=>{
         let thenD = dDate.target.value;
         let str = thenD.split("-");
@@ -257,9 +257,11 @@ class LoginModal extends Component {
                                     <input className={"form__button"} type={"submit"} value={"Sign up"} onClick={this.onSignUp}/>
                                 </fieldset>
                                 <Recaptcha
+                                    elementID={"g-recaptcha"}
                                     sitekey="6Lf0od8UAAAAAFoog9iFIpVd8rcPxBwHpUKpnCua"
                                     render="explicit"
-                                    onloadCallback={this.recaptchaLoaded}
+                                    theme="dark"
+                                    // onloadCallback={() => console.log('loaded')}
                                     verifyCallback={this.verifyCallback}
                                 />
                                 <small>

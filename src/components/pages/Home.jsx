@@ -7,7 +7,6 @@ import logo_img
 import AnnouncementsPublic
                                             from '../common/AnnouncementsPublic';
 import {loggedInVisit, updateHomePageVisit} from '../../repository';
-import PrivacyPolicy from "./PrivacyPolicy";
 
 class Home extends Component {
   componentDidMount() {

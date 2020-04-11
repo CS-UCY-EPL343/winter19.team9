@@ -37,6 +37,10 @@ h6 {
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+button:disabled {
+    opacity : 0.5;
+}
+
 .fa {
     display : inline;
 }

@@ -477,6 +477,10 @@
     /*cursor: pointer;*/
 }
 
+#LoginModal #g-recaptcha div {
+    width: 100% !important;
+}
+
 /*!*!* Add Zoom Animation *!*/
 
 

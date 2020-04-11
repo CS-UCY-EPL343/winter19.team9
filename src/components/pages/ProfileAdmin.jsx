@@ -1,21 +1,17 @@
 import React, {Component}        from 'react';
+// noinspection ES6CheckImport
 import {Redirect}                from 'react-router-dom';
 import '../assets/styles/adminProfile.css';
 import {
     getPrivateAnnouncementsAdmin,
     userDetails,
     updateAnnouncement,
-    // removeAnnouncement,
     deleteAnnouncement,
     addPrivateAnnouncement,
-    getPersonalTraining,
     getAllCoaches,
-    getCoachTraining,
     loggedInVisit,
     updateProfileVisit,
     userPic,
-    getClassSchedule,
-    getPersonalSchedule
 } from "../../repository";
 import AnnouncementModal from "../common/AnnouncementModal";
 import {Button} from "reactstrap";
@@ -524,24 +520,20 @@ class ProfileAdmin extends Component {
 
 
                         </div>
-                        <div>
-                            <div className="container">
-                                <div className="row">
-                                    <div id="timeTableHeading">Create Personal Training Schedule</div>
-                                    <div className="col-md-8">
-                                        <Timetable day={this.state.day}
-                                                   time={this.state.time}
-                                                   flag={this.state.flag}
-                                                   coachID={this.state.Coach_ID}
-                                                   userID={this.state.User_ID}
-                                        />
-                                    </div>
-                                    <div className="col-md-4">
-                                        <Box toogle={this.handleDayTimeChange} coaches={this.state.selectedCoaches}
-                                             userID = {this.state.User_ID}/>
-                                    </div>
-                                </div>
-                            </div>
+                    </div>
+                    <div className="row">
+                        <div id="timeTableHeading">Create Personal Training Schedule</div>
+                        <div className="col-md-8">
+                            <Timetable day={this.state.day}
+                                       time={this.state.time}
+                                       flag={this.state.flag}
+                                       coachID={this.state.Coach_ID}
+                                       userID={this.state.User_ID}
+                            />
+                        </div>
+                        <div className="col-md-4">
+                            <Box toogle={this.handleDayTimeChange} coaches={this.state.selectedCoaches}
+                                 userID = {this.state.User_ID}/>
                         </div>
                     </div>
                 </div>

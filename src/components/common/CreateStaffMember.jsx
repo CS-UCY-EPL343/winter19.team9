@@ -1,15 +1,15 @@
-import React, {Component} from 'react';
+import React, {Component}         from 'react';
 import '../assets/styles/loginStyle.css';
-import {insertAdmin, insertCoach, signUp} from "../../repository";
-import history from "../../history";
+import {insertAdmin, insertCoach} from '../../repository';
+import history                    from '../../history';
 
 class CreateStaffMember extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      firstName           : '',
-      lastName           : '',
+      firstName       : '',
+      lastName        : '',
       username        : '',
       password        : '',
       repeatedPassword: '',
@@ -51,46 +51,46 @@ class CreateStaffMember extends Component {
   onSubmit = (e) => {
     e.preventDefault();
     // const confirm_password = document.getElementById('signUpPasswordRepeat');
-    if(this.state.firstName === ""){
-      alert("First name couldn't be empty");
-    }else if(this.state.lastName === ""){
-      alert("Last name couldn't be empty");
-    }else if(this.state.username === ""){
-      alert("Username couldn't be empty");
-    }else if(this.state.email === ""){
-      alert("Email couldn't be empty");
-    }else if(this.state.password === ""){
-      alert("Password couldn't be empty");
-    }else if(this.state.repeatedPassword === ""){
-      alert("Repeat Password couldn't be empty");
-    }else if(this.state.bDate === ""){
-      alert("Birth Date couldn't be empty");
-    }else if(this.state.gender === ""){
-      alert("Gender couldn't be empty");
+    if (this.state.firstName === '') {
+      alert('First name couldn\'t be empty');
+    } else if (this.state.lastName === '') {
+      alert('Last name couldn\'t be empty');
+    } else if (this.state.username === '') {
+      alert('Username couldn\'t be empty');
+    } else if (this.state.email === '') {
+      alert('Email couldn\'t be empty');
+    } else if (this.state.password === '') {
+      alert('Password couldn\'t be empty');
+    } else if (this.state.repeatedPassword === '') {
+      alert('Repeat Password couldn\'t be empty');
+    } else if (this.state.bDate === '') {
+      alert('Birth Date couldn\'t be empty');
+    } else if (this.state.gender === '') {
+      alert('Gender couldn\'t be empty');
     } else if (this.state.password !== this.state.repeatedPassword) {
       alert('Passwords Don\'t Match');
-    }else {
+    } else {
       const data = {
-        username: this.state.username,
-        password: this.state.password,
+        username : this.state.username,
+        password : this.state.password,
         firstName: this.state.firstName,
-        LastName: this.state.lastName,
-        email: this.state.email,
-        age: this.state.age,
-        gender: this.state.gender,
-        level: this.state.level,
-        bDate: this.state.bDate,
+        LastName : this.state.lastName,
+        email    : this.state.email,
+        age      : this.state.age,
+        gender   : this.state.gender,
+        level    : this.state.level,
+        bDate    : this.state.bDate,
       };
       if (this.props.staffType === 'coach') {
         insertCoach(data).then(() => {
           alert('Success!!!');
-          history.push('/')
+          history.push('/');
         })
             .catch(err => alert(err));
-      }else if(this.props.staffType === 'admin'){
+      } else if (this.props.staffType === 'admin') {
         insertAdmin(data).then(() => {
           alert('Success!!!');
-          history.push('/')
+          history.push('/');
         })
             .catch(err => alert(err));
       }
@@ -204,7 +204,9 @@ class CreateStaffMember extends Component {
                 </fieldset>
                 <fieldset className = { 'form__group' }>
                   <label htmlFor = { 'age' } id = { 'birthday' }>
-                    <span className = { 'fa fa-birthday-cake' } style={{color: 'white'}}/>
+                    <span className = { 'fa fa-birthday-cake' }
+                          style = { {color: 'white'} }
+                    />
                     <span className = { 'subtitle' }> Birth Date: </span>
                   </label>
                   <input id = { 'signUpAge' }
@@ -239,8 +241,7 @@ class CreateStaffMember extends Component {
                   </div>
                 </fieldset>
                 <fieldset className = { 'form__group' }>
-                  <input className = { 'form__button' }
-                         class={'form-control'}
+                  <input className = { 'form__button form-control' }
                          type = { 'submit' }
                          value = { 'Sign up' }
                          onClick = { this.onSubmit }
