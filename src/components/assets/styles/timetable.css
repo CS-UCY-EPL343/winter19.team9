@@ -8,7 +8,7 @@
     margin                : auto;
     background-image      : linear-gradient(to right bottom, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E, #5E5E5E);
     border-radius         : 10px;
-    overflow              : auto;
+    overflow              : hidden;
 }
 
 #timeTableHeading {
@@ -168,7 +168,7 @@
     font-size             : 12px;
 }
 
-@media (min-width: 500px) and (max-width : 735px) {
+@media (min-width : 500px) and (max-width : 735px) {
     .timetable {
         font-size : 12px;
     }
@@ -205,8 +205,8 @@
     }
     
     .timetable {
-        grid-template-columns: 100px !important;
-        grid-template-rows: 40px !important;
+        grid-template-columns : 100px !important;
+        grid-template-rows    : 40px !important;
     }
 }
 
@@ -247,14 +247,19 @@
 
 .timetable .content > div {
     box-shadow : inset 1px 0 0 #ECEFF1, inset 0 1px 0 0 #ECEFF1;
+    height     : 70px;
+}
+
+.timetable .content .PTSlot, .timetable .content .BusySlot {
+    padding: 0 !important;
 }
 
 .timetable .content > div p {
-    margin: 1rem 0;
+    margin : 1.2rem 0;
 }
 
 @media (max-width : 1315px) {
     .timetable .content > div p {
-        margin: 1rem 0;
+        margin : 1rem 0;
     }
 }

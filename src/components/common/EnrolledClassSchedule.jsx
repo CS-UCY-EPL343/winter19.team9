@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import '../assets/styles/PersonalTrainingTimetable.css';
 import {
-  getClasses,
-  getPersonalTraining,
+  // getClasses,
+  // getPersonalTraining,
   getUserID,
-  insertPT,
-  postuserData,
+  // insertPT,
+  // postuserData,
   getClassSchedule,
-  getClassName,
+  // getClassName,
   getPersonalSchedule,
   enrollUser,
   unenrollUser

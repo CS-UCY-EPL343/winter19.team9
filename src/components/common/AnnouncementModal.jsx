@@ -6,9 +6,9 @@ class AnnouncementModal extends Component {
     super(props);
 
     this.state = {
-      title  : this.props.title || '',
-      message: this.props.message || '',
-      // announcement_id :
+      title          : '',
+      message        : '',
+      announcement_id: '',
       // this.props.announcements[this.props.announcement_id].ANNOUNCEMENT_ID
       // || '',
     };
@@ -32,14 +32,15 @@ class AnnouncementModal extends Component {
     if (!this.props.announcements || !this.props.announcement_id) {
       return;
     }
-    if (prevProps.announcement_id === this.props.announcement_id
+    if (this.props.announcement_id === prevProps.announcement_id
         || this.props.announcement_id === undefined) {
       return;
     }
-    if (prevProps.title !== this.props.title || prevProps.message
-        !== this.props.message
-        || prevProps.this.props.announcements[this.props.announcement_id].ANNOUNCEMENT_ID
-        !== this.props.announcements[this.props.announcement_id].ANNOUNCEMENT_ID) {
+
+    if (this.props.title !== prevProps.title ||
+        this.props.message !== prevProps.message
+        || this.props.announcements[this.props.announcement_id].ANNOUNCEMENT_ID
+        !== prevProps.announcements[this.props.announcement_id].ANNOUNCEMENT_ID) {
       this.setState({
         title          : this.props.title || '',
         message        : this.props.message || '',
@@ -114,7 +115,7 @@ class AnnouncementModal extends Component {
                centered
         >
           <ModalHeader toggle = { this.toggle }>Add
-                                                      Announcement</ModalHeader>
+                                                Announcement</ModalHeader>
           <ModalBody>
             <form>
               <div className = "form-group">
@@ -149,8 +150,7 @@ class AnnouncementModal extends Component {
             </form>
           </ModalBody>
           <ModalFooter>
-            <Button onClick = { this.toggle }>{ this.props.
-                                                    btnCancel
+            <Button onClick = { this.toggle }>{ this.props.btnCancel
                                                 || 'Cancel' }</Button>
             <Button onClick = { this.onSubmit }>{ 'Submit' }</Button>
             { this.props.isPrivate &&

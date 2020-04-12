@@ -239,6 +239,7 @@ class ProfileAdmin extends Component {
                 let prevAnn = this.state.announcements.slice(0);
                 // console.log(response);
                 //console.log(response.TIMESTAMP);
+                console.log(response);
                 prevAnn.push(
                     {
                         ANNOUNCEMENT_ID: response.data.ANNOUNCEMENT_ID,
@@ -358,13 +359,16 @@ class ProfileAdmin extends Component {
     };
 
     toggleAnnouncementsData = (e) => {
-        const x = this.state.announcements[e.target.id];
+        const x = this.state.announcements[e.target.id - 100];
+        if(x === undefined) return;
+
         this.setState({
             modalTitle  : x.Title,
             modalMessage: x.Message,
-            modalAnnId  : e.target.id,
+            modalAnnId  : e.target.id - 100,
+        }, () => {
+            this.toggleAnnouncements();
         });
-        this.toggleAnnouncements();
     };
 
     toggleAnnouncementsData2 = () => {
@@ -501,7 +505,7 @@ class ProfileAdmin extends Component {
                                             - a.ANNOUNCEMENT_ID;
                                     }).map((ann, index) => {
                                     return <Button className="nav-link menu-box-tab menu-text"
-                                                   onClick={this.toggleAnnouncementsData} id={index}
+                                                   onClick={this.toggleAnnouncementsData.bind(this)} id={index + 100}
                                                    key={index}><i style= {{marginRight: 10+'px'}} className="scnd-font-color fa fa-tasks"/>
                                         {ann.Title}{<p> (</p>}{ann.TIMESTAMP[0]}
                                         {ann.TIMESTAMP[1]}{ann.TIMESTAMP[2]}{ann.TIMESTAMP[3]}{ann.TIMESTAMP[4]}{ann.TIMESTAMP[5]}

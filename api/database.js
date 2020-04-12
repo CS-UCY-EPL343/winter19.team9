@@ -130,7 +130,7 @@ function postUserData(data) {
 
 
             const sql = "UPDATE USERS, ACCOUNT, PIC SET  Name = ? , Surname = ? , Email = ? , password = ?, image = X? WHERE ACCOUNT.username = ? AND ACCOUNT.User_ID = USERS.User_ID AND PIC.User_ID = USERS.User_ID";
-            const as = connection.query(sql, [data.Name, data.Surname, data.Email, data.password, base64ToHex(byteString), data.username], function (err) {
+            connection.query(sql, [data.Name, data.Surname, data.Email, data.password, base64ToHex(byteString), data.username], function (err) {
                 // console.log(as);
                 if (err) {
                     console.log(err);
@@ -144,7 +144,7 @@ function postUserData(data) {
     else{
         return new Promise((resolve, reject) => {
             const sql = "UPDATE USERS, ACCOUNT SET  Name = ? , Surname = ? , Email = ? , password = ? WHERE ACCOUNT.username = ? AND ACCOUNT.User_ID = USERS.User_ID ";
-            const as = connection.query(sql, [data.Name, data.Surname, data.Email, data.password, data.username], function (err) {
+            connection.query(sql, [data.Name, data.Surname, data.Email, data.password, data.username], function (err) {
                 // console.log(as);
                 if (err) {
                     console.log(err);
@@ -275,7 +275,7 @@ function addPrivateAnnouncement(title, message, uname,level, username) {
                 console.log(err);
                 return reject(err);
             }
-            resolve({id: rows.insertId});
+            // resolve({id: rows.insertId});
             x = rows[0].User_ID;
             //console.log(x);
         });
@@ -304,7 +304,6 @@ function addPrivateAnnouncement(title, message, uname,level, username) {
 
                 connection.query(sql, [title, message,x, id], function (err, rows) {
                     if (err) {
-                        console.log(err);
                         return reject(err);
                     }
                     resolve({id: rows.insertId});
