@@ -161,7 +161,7 @@ app.get('/api/visit/count', (req, res) => {
 // noinspection JSUnresolvedFunction
 app.get('/api/enroll/count', (req, res) => {
   db.getEnrollCount().then(response => {
-    res.status(200).json({count: response,});
+    res.status(200).json({count: response});
   }).catch(() => res.status(404).json('Not Found'));
 });
 
@@ -311,11 +311,15 @@ app.post('/api/announcements/private/add', middleware, (req, res) => {
   if (req.decoded.level === 'user') {
     return res.status(401).json({message: 'Authentication failed'});
   }
-  db.addPrivateAnnouncement(req.body.title, req.body.message, req.body.username ,req.decoded.level,
-      req.decoded.username).then(response => res.status(200).json({
-    message: 'Announcement inserted successfully',
-    ANNOUNCEMENT_ID: response.id,
-  })).catch(() => res.status(404).json('Not Found'));
+  db.addPrivateAnnouncement(req.body.title, req.body.message, req.body.username,
+      req.decoded.level,
+      req.decoded.username).then(response => {
+    console.log(response);
+    res.status(200).json({
+      message        : 'Announcement inserted successfully',
+      ANNOUNCEMENT_ID: response.id,
+    });
+  }).catch(() => res.status(404).json('Not Found'));
 });
 
 // noinspection JSUnresolvedFunction
@@ -359,9 +363,9 @@ app.post('/api/BookClass/Enroll', middleware, (req, res) => {
 
 // noinspection JSUnresolvedFunction
 app.post('/api/BookClass/Unenroll', middleware, (req, res) => {
-    db.unenrollUser(req.body.CLASS_ID, req.body.User_ID)
-        .then(response => res.status(200).json({message: response}))
-        .catch(err => res.status(409).json(err));
+  db.unenrollUser(req.body.CLASS_ID, req.body.User_ID)
+      .then(response => res.status(200).json({message: response}))
+      .catch(err => res.status(409).json(err));
 });
 /*************************************************************************/
 /*************************************************************************/
@@ -396,7 +400,7 @@ app.post('/api/coach/insert', (req, res) => {
 });
 
 // noinspection JSUnresolvedFunction
-app.post('/api/admin/insert', (req,res) => {
+app.post('/api/admin/insert', (req, res) => {
   db.insertNewAdmin(req.body)
       .then(response => res.status(200).json({message: response}))
       .catch(err => res.status(409).json(err));
@@ -407,7 +411,7 @@ app.post('/api/admin/insert', (req,res) => {
 // noinspection JSUnresolvedFunction
 /*******************************Delete staff member***********************/
 // noinspection JSUnresolvedFunction
-app.post('/api/admin/delete', (req,res) => {
+app.post('/api/admin/delete', (req, res) => {
   db.deleteAdminMember(req.body.AdminId)
       .then(response => res.status(200).json({message: response}))
       .catch(err => res.status(409).json(err));
@@ -415,7 +419,7 @@ app.post('/api/admin/delete', (req,res) => {
 
 // noinspection JSUnresolvedFunction
 app.post(
-    '/api/coach/delete', (req,res) => {
+    '/api/coach/delete', (req, res) => {
       db.deleteCoachMember(req.body.CoachID)
           .then(response => res.status(200).json({message: response}))
           .catch(err => res.status(409).json(err));
@@ -449,51 +453,51 @@ app.post('/api/user/getPersonalSchedule', middleware, (req, res) => {
 
 // noinspection JSUnresolvedFunction
 app.post('/api/user/getClassSchedule', middleware, (req, res) => {
-    console.log("It's a me!");
-    console.log(req.body.User_ID);
-    db.getClassSchedule(req.body.User_ID)
-        .then(data => {
-            if (data) {
-                return res.status(200).json(data)
-            } else {
-                return res.status(409).json('Authentication failed. User not found.');
-            }
-        })
-        .catch(err => res.status(409).json(err));
+  console.log('It\'s a me!');
+  console.log(req.body.User_ID);
+  db.getClassSchedule(req.body.User_ID)
+      .then(data => {
+        if (data) {
+          return res.status(200).json(data);
+        } else {
+          return res.status(409).json('Authentication failed. User not found.');
+        }
+      })
+      .catch(err => res.status(409).json(err));
 });
 
 //fetching the data for the coach's training schedule
 // noinspection JSUnresolvedFunction
 app.post('/api/coach/getCoachTraining', middleware, (req, res) => {
-    if (req.decoded.level === 'user') {
-        return res.status(409).json('Authentication failed.');
-    }
-    db.getCoachTraining(req.body.Coach_ID)
-        .then(data => {
-            if (data) {
-                return res.status(200).json(data)
-            } else {
-                return res.status(409).json('Authentication failed. User not found.');
-            }
-        })
-        .catch(err => res.status(409).json(err));
+  if (req.decoded.level === 'user') {
+    return res.status(409).json('Authentication failed.');
+  }
+  db.getCoachTraining(req.body.Coach_ID)
+      .then(data => {
+        if (data) {
+          return res.status(200).json(data);
+        } else {
+          return res.status(409).json('Authentication failed. User not found.');
+        }
+      })
+      .catch(err => res.status(409).json(err));
 });
 
 //fetch pic
 // noinspection JSUnresolvedFunction
 app.post('/api/user/userPic', middleware, (req, res) => {
-    if (req.decoded.level === 'user') {
-        return res.status(409).json('Authentication failed.');
-    }
-    db.userPic(req.body.User_ID)
-        .then(data => {
-            if (data) {
-                return res.status(200).json(data)
-            } else {
-                return res.status(409).json('Authentication failed. User not found.');
-            }
-        })
-        .catch(err => res.status(409).json(err));
+  if (req.decoded.level === 'user') {
+    return res.status(409).json('Authentication failed.');
+  }
+  db.userPic(req.body.User_ID)
+      .then(data => {
+        if (data) {
+          return res.status(200).json(data);
+        } else {
+          return res.status(409).json('Authentication failed. User not found.');
+        }
+      })
+      .catch(err => res.status(409).json(err));
 });
 
 // mine
@@ -524,15 +528,15 @@ app.post('/api/BookClass/ClassName', middleware, (req, res) => {
 
 // noinspection JSUnresolvedFunction
 app.post('/api/BookClass/ClassNames', middleware, (req, res) => {
-    db.getClassName(req.body.ClassID)
-        .then(data => {
-            if (data) {
-                return res.status(200).json(data.Name)
-            } else {
-                return res.status(409).json('Authentication failed. User not found.');
-            }
-        })
-        .catch(err => res.status(409).json(err));
+  db.getClassName(req.body.ClassID)
+      .then(data => {
+        if (data) {
+          return res.status(200).json(data.Name);
+        } else {
+          return res.status(409).json('Authentication failed. User not found.');
+        }
+      })
+      .catch(err => res.status(409).json(err));
 });
 
 // noinspection JSUnresolvedFunction
@@ -575,7 +579,7 @@ app.post('/api/delete/PersonalTraining', middleware, (req, res) => {
   db.deletePT(req.body.data)
       .then(data => {
         if (data) {
-          return res.status(200).json(data)
+          return res.status(200).json(data);
         } else {
           return res.status(409).json('Authentication failed. User not found.');
         }
