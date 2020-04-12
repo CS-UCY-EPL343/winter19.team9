@@ -116,6 +116,13 @@ p{
 #extra{
     margin-left: 0;
 }
-.nav-link{
-    width: fit-content;
+/*.nav-link{*/
+/*    width: fit-content;*/
+/*    overflow: hidden;*/
+/*    width:100%;*/
+/*}*/
+
+#addAnn{
+    margin-left: -15px;
+    position: relative;
 }

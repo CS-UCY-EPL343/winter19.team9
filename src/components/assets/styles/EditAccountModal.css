@@ -19,7 +19,7 @@
     top: 10px;
 }
 .avatar-upload .avatar-edit input {
-   display: none;
+    display: none;
 
 }
 .avatar-upload .avatar-edit input + label {
@@ -118,3 +118,9 @@
 }
 
 /******************************************************/
+#csv{
+    margin-bottom: 0;
+    padding-top: 40px;
+    text-align: right;
+    display: block;
+}

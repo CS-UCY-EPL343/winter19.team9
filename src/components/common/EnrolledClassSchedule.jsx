@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
 import '../assets/styles/PersonalTrainingTimetable.css';
 import {
+  getClasses,
+  getPersonalTraining,
   getUserID,
+  insertPT,
+  postuserData,
   getClassSchedule,
+  getClassName,
   getPersonalSchedule,
   enrollUser,
-  unenrollUser,
+  unenrollUser
 }                         from '../../repository';
 import Swal               from 'sweetalert2';
 import '@sweetalert2/theme-dark/dark.css';
@@ -91,23 +96,25 @@ class EnrolledClassSchedule extends Component {
   }
 
   componentDidMount() {
+    let dataClasses = [];
+    let dataPT = [];
     getUserID().then(response => {
       console.log(response);
       this.setState(
           {User_ID: response.User_ID}, () => {
 
-            // Gets the Class Name, ID, TimeCode and DayCode Based on the
-            // user's ID
+            // Gets the Class Name, ID, TimeCode and DayCode Based on the user's ID
+            //
             console.clear();
             getClassSchedule(this.state.User_ID).then(response => {
               this.setState({classSchedule: response}, () => {
-                console.log('Class Schedule obtained! Here it comes!');
+                console.log("Class Schedule obtained! Here it comes!");
                 console.log(this.state.classSchedule);
+                dataClasses = [...this.state.classSchedule];
                 let ret = this.state.classSchedule.slice(0);
                 let refID;
                 //console.log("Let's go to the mall");
-                //this.setState({Coach_ID: this.props.coachID, User_ID:
-                // this.props.userID});
+                //this.setState({Coach_ID: this.props.coachID, User_ID: this.props.userID});
 
                 (async() => {
                   console.log('foo');
@@ -137,7 +144,7 @@ class EnrolledClassSchedule extends Component {
                               + ' | Name: ' + item.Name);
                           if (z.includes(item.Name)) {
                             console.log('color: '
-                                        + this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(
+                                + this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(
                                     item.Name)]]);
                             // node.style.backgroundColor =
                             // this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(item.Name)]];
@@ -173,13 +180,14 @@ class EnrolledClassSchedule extends Component {
 
             getPersonalSchedule(this.state.User_ID).then(response => {
               this.setState({personalSchedule: response}, () => {
-                console.log('Personal Training obtained! Here it comes!');
+                console.log("Personal Training obtained! Here it comes!");
                 console.log(this.state.personalSchedule);
+                dataPT = [...this.state.personalSchedule];
+                this.props.userSchedule(dataClasses, dataPT);
                 let retPer = this.state.personalSchedule.slice(0);
                 let refID;
                 //console.log("Let's go to the mall");
-                //this.setState({Coach_ID: this.props.coachID, User_ID:
-                // this.props.userID});
+                //this.setState({Coach_ID: this.props.coachID, User_ID: this.props.userID});
 
                 (async() => {
                   console.log('foo');
@@ -202,7 +210,7 @@ class EnrolledClassSchedule extends Component {
                           node.className = 'PTSlot';
                           node.childNodes[0].textContent = item.CoachName;
                           node.style.backgroundImage = 'radial-gradient( #4c4c4c,'
-                                                       + this.ColorLuminance(
+                              + this.ColorLuminance(
                                   '#4C4C4C', -0.7) + ')';
 
                           //********************************************************
@@ -224,7 +232,6 @@ class EnrolledClassSchedule extends Component {
     }).then(() => this.props.toggleLoading());
   }
 
-  // noinspection JSUnusedLocalSymbols
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (
         prevProps.DayCode !== this.props.DayCode
@@ -277,17 +284,17 @@ class EnrolledClassSchedule extends Component {
             node.className = 'BusySlot';
             node.textContent = this.props.Name;
             console.log('refID: ' + refID + ' | class-ID: ' + this.props.ClassID
-                        + ' | Name: ' + this.props.Name);
+                + ' | Name: ' + this.props.Name);
             if (z.includes(this.props.Name)) {
               console.log('color: '
-                          + this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(
+                  + this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(
                       this.props.Name)]]);
               // node.style.backgroundColor =
               // this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(item.Name)]];
               node.style.backgroundImage = 'linear-gradient(to bottom right,'
-                                           + this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(
+                  + this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(
                       this.props.Name)] % 9] + ','
-                                           + this.ColorLuminance(
+                  + this.ColorLuminance(
                       this.state.ClassColors[(this.state.cIDs[this.state.cNames.indexOf(
                           this.props.Name)]) % 9], -0.5) + ')';
             } else {
@@ -296,9 +303,9 @@ class EnrolledClassSchedule extends Component {
               // node.style.backgroundColor =
               // this.state.ClassColors[item.ClassID];
               node.style.backgroundImage = 'linear-gradient(to bottom right,'
-                                           + this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(
+                  + this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(
                       this.props.Name)] % 9] + ','
-                                           + this.ColorLuminance(
+                  + this.ColorLuminance(
                       this.state.ClassColors[(this.state.cIDs[this.state.cNames.indexOf(
                           this.props.Name)]) % 9], -0.5) + ')';
             }
