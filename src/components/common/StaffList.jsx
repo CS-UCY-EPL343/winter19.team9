@@ -194,7 +194,7 @@ class StaffList extends Component {
                           Gender: { gender }
                         </p>
                       </div>
-                      { (coach.username !== 'headcoach01') ?
+                      { (coach.username !== ('headcoach01')) ?
                           <button className = "delete-admin"
                           >
                             <i className = { 'fa fa-trash ' + index
