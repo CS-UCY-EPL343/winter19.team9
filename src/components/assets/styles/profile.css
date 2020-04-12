@@ -24,7 +24,7 @@
     font-variant            : normal;
     text-transform          : none;
     line-height             : 1;
-
+    
     /* Better Font Rendering =========== */
     -webkit-font-smoothing  : antialiased;
     -moz-osx-font-smoothing : grayscale;
@@ -61,14 +61,15 @@
 }
 
 #leftBlock {
-    background-color: #1d1d1d;
-    border-radius: 22px;
-    border: 2px solid #353535;
-    margin: 5% auto;
+    background-color : #1D1D1D;
+    border-radius    : 22px;
+    border           : 2px solid #353535;
+    margin           : 5% auto;
+    width            : 100%;
 }
 
 #profile .scnd-font-color {
-    color: #606060;
+    color : #606060;
 }
 
 #profile .input-container {
@@ -81,10 +82,10 @@
     margin-left   : 20px;
     margin-bottom : 20px;
     padding-left  : 45px;
-    background: #aaa;
-    color: #000;
-    border: solid 1px #353535;
-    border-radius: 5px;
+    background    : #AAAAAA;
+    color         : #000000;
+    border        : solid 1px #353535;
+    border-radius : 5px;
 }
 
 #profile input[type=text]::-webkit-input-placeholder { /* WebKit browsers */
@@ -193,23 +194,24 @@
 
 #profile {
     /*font-family: 'Roboto', serif;*/
-    width       : 100%;
-    padding     : 100px 0;
-    margin      : auto;
-    color       : #FFFFFF;
+    width            : 100%;
+    padding          : 100px 0;
+    margin           : auto;
+    color            : #FFFFFF;
     /*background  : #232526; !* fallback for old browsers *!*/
     /*background  : -webkit-linear-gradient(to right, #414345, #232526); !* Chrome 10-25, Safari 5.1-6 *!*/
     /*background  : linear-gradient(to right, #414345, #232526); !* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
-    background-color: #1d1d1d;
+    background-color : #1D1D1D;
 }
 
 /** CONTAINERS **/
 
 #profileBlock {
-    background: #2b2b2b;
-    border-radius: 20px;
-    border: 2px solid #454545;
+    background    : #2B2B2B;
+    border-radius : 20px;
+    border        : 2px solid #454545;
     margin        : 5% auto;
+    width         : 100%;
 }
 
 /******************************************** LEFT CONTAINER *****************************************/
@@ -221,7 +223,7 @@
 }
 
 .menu-box .titular {
-    background: #353535;
+    background  : #353535;
     font-size   : 24px;
     font-weight : 300;
     text-align  : center;
@@ -289,7 +291,7 @@
 }
 
 .menu-box-menu li:hover {
-    background      : #351e1d;
+    background      : #351E1D;
     /*border-top: 1px solid #1f253d;*/
     /*border-bottom: 1px solid #1f253d;*/
     text-decoration : none;
@@ -331,7 +333,7 @@
     font-size   : 24px;
     font-weight : 300;
     text-align  : center;
-    color       : #fff;
+    color       : #FFFFFF;
 }
 
 .profile-description {
@@ -369,7 +371,7 @@
 
 .menu-text {
     font-family : Quicksand, serif;
-    color       : #fff;
+    color       : #FFFFFF;
 }
 
 
@@ -379,14 +381,14 @@
 /* BMI  */
 #backBox {
     /*   background-color: #edf2f4;  */
-    background-color : #2b2b2b;
+    background-color : #2B2B2B;
     /*width: 350px;*/
-    width            : 80%;
     height           : 390px;
     border-radius    : 20px;
     display          : block;
     border           : solid 2px #454545;
     margin           : 5% auto;
+    width            : 100%;
 }
 
 #backBox:hover {
@@ -433,12 +435,12 @@
 }
 
 .centerGender {
-    margin: auto;
+    margin               : auto;
     padding-inline       : inherit;
     padding-inline-start : inherit;
-    vertical-align: center;
-    font-size: 15px;
-    white-space: nowrap;
+    vertical-align       : center;
+    font-size            : 15px;
+    white-space          : nowrap;
 }
 
 #profile .text {
@@ -496,7 +498,7 @@
     text-align  : center;
     padding     : 15px;
     font-family : Quicksand, serif;
-    color       : #fff;
+    color       : #FFFFFF;
 }
 
 #bmiHeading b {
@@ -530,6 +532,13 @@
 }
 
 #backBox {
-    font-family: 'Quicksand', sans-serif !important;
-    height: auto;
+    font-family : 'Quicksand', sans-serif !important;
+    /*height      : auto;*/
+    height      : 390px;
+}
+
+@media only screen and (max-width : 992px) {
+    #backBox {
+        height : auto;
+    }
 }

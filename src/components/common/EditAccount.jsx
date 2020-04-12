@@ -22,7 +22,7 @@ class EditAccount extends Component {
       password       : '',
       confirmPassword: '',
       image          : '',
-      flag           : '1',
+      // flag           : '1',
       csvData        : [],
       Bdate          : '',
       Age            : '',
@@ -42,9 +42,9 @@ class EditAccount extends Component {
           '',
           'error',
       ).then();
-      return 1;
-    } else {
       return 0;
+    } else {
+      return 1;
     }
 
   };
@@ -124,25 +124,25 @@ class EditAccount extends Component {
   }
 
   onValueInput = (e) => {
-    if (e.target.value.length === 0) {
-      this.setState({flag: '0'});
-    } else {
-      this.setState({flag: '0'});
-    }
+    // if (e.target.value.length === 0) {
+    //   this.setState({flag: '0'});
+    // } else {
+    //   this.setState({flag: '1'});
+    // }
 
     this.setState({[e.target.name]: e.target.value});
   };
 
   Test = () => {
     //console.log(this.state.Name);
-    if (this.state.flag === '0') {
-      Swal.fire(
-          'Please fill in all boxes',
-          '',
-          'error',
-      ).then();
-    }
-    if (this.handleSubmit() !== 1) {
+    // if (this.state.flag === '0') {
+    //   Swal.fire(
+    //       'Please fill in all boxes',
+    //       '',
+    //       'error',
+    //   ).then();
+    // }
+    if (this.handleSubmit()) {
       postuserData(this.state)
           .then(() => {
             Swal.fire(
@@ -155,6 +155,12 @@ class EditAccount extends Component {
           'Please try again...',
           'error',
       ));
+    } else {
+      Swal.fire(
+          'Passwords do not match',
+          'Please try again...',
+          'error',
+      ).then();
     }
 
   };

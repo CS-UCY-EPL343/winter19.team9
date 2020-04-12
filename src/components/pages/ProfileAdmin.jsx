@@ -372,7 +372,7 @@ class ProfileAdmin extends Component {
   };
 
   render() {
-    let image = this.state.image;
+    let {image} = this.state;
     let imageURL = 'https://www.w3schools.com/howto/img_avatar.png';
     let $imagePreview = <img src = { imageURL } alt = { 'Profile' } />;
     if (image !== '') {
@@ -440,11 +440,11 @@ class ProfileAdmin extends Component {
                 <div className = "avatar-preview d-flex justify-content-center">
                   <div id = "imagePreview">
                     { this.state.loadingInfo ?
-                        <Spinner style = { {
-                          'height'         : 'auto',
-                          'backgroundColor': 'transparent',
-                        } }
-                                 secondaryStyle = { true }
+                        <Spinner secondaryStyle = { true }
+                                 style = { {
+                                   'height'         : 'auto',
+                                   'backgroundColor': 'transparent',
+                                 } }
                         />
                         :
                         $imagePreview

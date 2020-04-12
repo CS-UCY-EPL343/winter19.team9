@@ -130,7 +130,8 @@ class EnrolledClassSchedule extends Component {
                           z.push(item.Name);
                           const node = document.getElementById(refID);
                           node.className = 'BusySlot';
-                          node.textContent = item.Name;
+                          // node.textContent = item.Name;
+                          node.childNodes[0].textContent = item.Name;
                           console.log(
                               'refID: ' + refID + ' | class-ID: ' + item.ClassID
                               + ' | Name: ' + item.Name);
@@ -199,7 +200,7 @@ class EnrolledClassSchedule extends Component {
                           z.push(item.CoachName);
                           const node = document.getElementById(refID);
                           node.className = 'PTSlot';
-                          node.textContent = item.CoachName;
+                          node.childNodes[0].textContent = item.CoachName;
                           node.style.backgroundImage = 'radial-gradient( #4c4c4c,'
                                                        + this.ColorLuminance(
                                   '#4C4C4C', -0.7) + ')';
@@ -220,7 +221,7 @@ class EnrolledClassSchedule extends Component {
             });
 
           });
-    });
+    }).then(() => this.props.toggleLoading());
   }
 
   // noinspection JSUnusedLocalSymbols
@@ -425,6 +426,7 @@ class EnrolledClassSchedule extends Component {
                             key = { index }
                             id = { x }
                         >
+                          <p />
                           {/*{this.state.refIDs.includes(x) ? this.state.cNames[this.state.refIDs.indexOf(x)] : ""}*/ }
                         </div>,
                     ) }
@@ -443,6 +445,7 @@ class EnrolledClassSchedule extends Component {
                             key = { index }
                             id = { x }
                         >
+                          <p />
                           {/*{this.state.refIDs.includes(x) ? this.state.cNames[this.state.refIDs.indexOf(x)] : ""}*/ }
                         </div>,
                     ) }
@@ -461,6 +464,7 @@ class EnrolledClassSchedule extends Component {
                             key = { index }
                             id = { x }
                         >
+                          <p />
                           {/*{console.log(this.state.cIDs[this.state.refIDs.indexOf(x)])}*/ }
                           {/*{this.state.refIDs.includes(x) ? this.state.cNames[this.state.refIDs.indexOf(x)] : ""}*/ }
                         </div>,
@@ -480,6 +484,7 @@ class EnrolledClassSchedule extends Component {
                             key = { index }
                             id = { x }
                         >
+                          <p />
                           {/*{this.state.refIDs.includes(x) ? this.state.cNames[this.state.refIDs.indexOf(x)] : ""}*/ }
                         </div>,
                     ) }
@@ -499,6 +504,7 @@ class EnrolledClassSchedule extends Component {
                             key = { index }
                             id = { x }
                         >
+                          <p />
                           {/*{this.state.refIDs.includes(x) ? this.state.cNames[this.state.refIDs.indexOf(x)] : ""}*/ }
                         </div>,
                     ) }
@@ -517,6 +523,7 @@ class EnrolledClassSchedule extends Component {
                             key = { index }
                             id = { x }
                         >
+                          <p />
                           {/*{this.state.refIDs.includes(x) ? this.state.cNames[this.state.refIDs.indexOf(x)] : ""}*/ }
                         </div>,
                     ) }
@@ -535,6 +542,7 @@ class EnrolledClassSchedule extends Component {
                             key = { index }
                             id = { x }
                         >
+                          <p />
                           {/*{this.state.refIDs.includes(x) ? this.state.cNames[this.state.refIDs.indexOf(x)] : ""}*/ }
                         </div>,
                     ) }
@@ -553,6 +561,7 @@ class EnrolledClassSchedule extends Component {
                             key = { index }
                             id = { x }
                         >
+                          <p />
                           {/*{this.state.refIDs.includes(x) ? this.state.cNames[this.state.refIDs.indexOf(x)] : ""}*/ }
                         </div>,
                     ) }
@@ -571,6 +580,7 @@ class EnrolledClassSchedule extends Component {
                             key = { index }
                             id = { x }
                         >
+                          <p />
                           {/*{this.state.refIDs.includes(x) ? this.state.cNames[this.state.refIDs.indexOf(x)] : ""}*/ }
                         </div>,
                     ) }
@@ -589,6 +599,7 @@ class EnrolledClassSchedule extends Component {
                             key = { index }
                             id = { x }
                         >
+                          <p />
                           {/*{this.state.refIDs.includes(x) ? this.state.cNames[this.state.refIDs.indexOf(x)] : ""}*/ }
                         </div>,
                     ) }
@@ -607,6 +618,7 @@ class EnrolledClassSchedule extends Component {
                             key = { index }
                             id = { x }
                         >
+                          <p />
                           {/*{this.state.refIDs.includes(x) ? this.state.cNames[this.state.refIDs.indexOf(x)] : ""}*/ }
                         </div>,
                     ) }
@@ -625,6 +637,7 @@ class EnrolledClassSchedule extends Component {
                             key = { index }
                             id = { x }
                         >
+                          <p />
                           {/*{this.state.refIDs.includes(x) ? this.state.cNames[this.state.refIDs.indexOf(x)] : ""}*/ }
                         </div>,
                     ) }

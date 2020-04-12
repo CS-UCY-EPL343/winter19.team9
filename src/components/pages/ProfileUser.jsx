@@ -28,20 +28,11 @@ class ProfileUser extends Component {
       flag         : '',
       classSchedule: [],
       Name         : '',
-      loadingInfo  : false,
+      loadingInfo  : 2,
     };
     this.handleSelections = this.handleSelections.bind(this);
-    // this.handleAllSelections = this.handleAllSelections.bind(this);
+    this.toggleLoading = this.toggleLoading.bind(this);
   }
-
-  // handleAllSelections = (User_ID) => {
-  //     this.setState({
-  //         User_ID,
-  //     }, () => {
-  //         console.log("handleAllSelections - done");
-  //         // console.log(this.state.classSchedule);
-  //     });
-  // };
 
   handleSelections = (DayCode, TimeCode, flag, ClassID, Name) => {
     this.setState({
@@ -57,6 +48,10 @@ class ProfileUser extends Component {
 
   };
 
+  toggleLoading = () => {
+    this.setState({loadingInfo: this.state.loadingInfo - 1});
+  };
+
   render() {
     return (
         <div id = 'profile' className = "main-container container-fluid">
@@ -66,7 +61,9 @@ class ProfileUser extends Component {
           <div className = "container-fluid mb-4">
             <div className = "row ">
               <SettingsProfile userLevel = { this.props.userLevel } />
-              <ProfileInfo />
+              <ProfileInfo loadingInfo = { this.state.loadingInfo }
+                           toggleLoading = { this.toggleLoading }
+              />
               <BookClass getSelections = { this.handleSelections } />
             </div>
           </div>
@@ -75,6 +72,7 @@ class ProfileUser extends Component {
                      flag = { this.state.flag }
                      ClassID = { this.state.ClassID }
                      Name = { this.state.Name }
+                     toggleLoading = { this.toggleLoading }
               // User_ID = {this.state.User_ID}
               // classSchedule = {this.state.classSchedule}
           />
