@@ -10,7 +10,10 @@ class Spinner extends Component {
                'backgroundColor': '#252830',
              } }
         >
-          <div className = "profile-main-loader">
+          <div className = { !this.props.secondaryStyle
+              ? 'profile-main-loader'
+              : 'profile-secondary-loader' }
+          >
             <div className = "loader">
               <svg className = "circular-loader"
                    viewBox = "25 25 50 50"

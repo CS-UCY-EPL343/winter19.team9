@@ -58,11 +58,16 @@ form.adminViewClient::after {
 }
 
 #EditAnns{
-    padding-left: 30px;
-    padding-right: 20px;
+    /*padding-left: 30px;*/
+    /*padding-right: 20px;*/
     background-color: #1b1b1b;
     border-radius: 10%;
+    overflow: hidden;
+    width: 100%;
+}
 
+#EditAnns button {
+    width: 100%;
 }
 
 .editAnn{
@@ -70,9 +75,9 @@ form.adminViewClient::after {
 }
 
 .edit{
-    padding-left: 0;
     padding-right: 50px;
     text-align: center;
+    width: 100%;
 }
 
 .first-name-field:invalid + .message::after {

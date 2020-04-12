@@ -15,6 +15,7 @@ import {getUserLevel, isAuthenticated} from './repository';
 import UIDashboard                     from './components/pages/UIDashboard';
 import Tabletop                        from 'tabletop';
 import Spinner                         from './components/Spinner';
+import NotFound                        from './components/common/NotFound';
 
 class App extends Component {
 
@@ -148,59 +149,51 @@ class App extends Component {
                 <Spinner />
                 :
                 <Router history = { history }>
-                  <div>
+                  <PageWrapper userLevel = { this.state.userLevel }
+                               setUserLevel = { this.setUserLevel }
+                               stylesheetData = { this.state.stylesheetData }
+                  >
                     <ScrollToTop />
                     <Switch>
-                      <PageWrapper userLevel = { this.state.userLevel }
-                                   setUserLevel = { this.setUserLevel }
-                                   stylesheetData = { this.state.stylesheetData }
-                      >
-                        <Route exact
-                               path = "/"
-                               component = { (props) => <Home { ...props }
-                                                              userLevel = { this.state.userLevel }
-                                                              stylesheetData = { this.state.stylesheetData }
-                               /> }
-                        />
-                        <Route exact
-                               path = "/about"
-                               component = { (props) => <AboutUs { ...props }
-                                                                 userLevel = { this.state.userLevel }
-                                                                 stylesheetData = { this.state.stylesheetData }
-                               /> }
-                        />
-                        <Route exact
-                               path = "/classes"
-                               component = { (props) => <Classes { ...props }
-                                                                 userLevel = { this.state.userLevel }
-                                                                 stylesheetData = { this.state.stylesheetData }
-                               /> }
-                        />
+                      <Route exact
+                             path = "/"
+                             component = { (props) => <Home { ...props }
+                                                            userLevel = { this.state.userLevel }
+                                                            stylesheetData = { this.state.stylesheetData }
+                             /> }
+                      />
+                      <Route path = "/about"
+                             component = { (props) => <AboutUs { ...props }
+                                                               userLevel = { this.state.userLevel }
+                                                               stylesheetData = { this.state.stylesheetData }
+                             /> }
+                      />
+                      <Route path = "/classes"
+                             component = { (props) => <Classes { ...props }
+                                                               userLevel = { this.state.userLevel }
+                                                               stylesheetData = { this.state.stylesheetData }
+                             /> }
+                      />
 
-                        <PrivateRoute exact
-                                      path = "/user/profile"
-                                      component = { ProfileUser }
-                                      userLevel = { this.state.userLevel }
-                        />
-                        <PrivateRoute exact
-                                      path = "/coach/profile"
-                                      component = { ProfileCoach }
-                                      userLevel = { this.state.userLevel }
-                        />
-                        <PrivateRoute exact
-                                      path = "/admin/profile"
-                                      component = { ProfileAdmin }
-                                      userLevel = { this.state.userLevel }
-                        />
-                        <PrivateRoute exact
-                                      path = "/admin/dashboard"
-                                      component = { UIDashboard }
-                                      userLevel = { this.state.userLevel }
-                        />
-                        {/*<Route path = "*" component = { NotFound } />*/ }
-                      </PageWrapper>
+                      <PrivateRoute path = "/user/profile"
+                                    component = { ProfileUser }
+                                    userLevel = { this.state.userLevel }
+                      />
+                      <PrivateRoute path = "/coach/profile"
+                                    component = { ProfileCoach }
+                                    userLevel = { this.state.userLevel }
+                      />
+                      <PrivateRoute path = "/admin/profile"
+                                    component = { ProfileAdmin }
+                                    userLevel = { this.state.userLevel }
+                      />
+                      <PrivateRoute path = "/admin/dashboard"
+                                    component = { UIDashboard }
+                                    userLevel = { this.state.userLevel }
+                      />
+                      <Route component = { NotFound } />
                     </Switch>
-                  </div>
+                  </PageWrapper>
                 </Router>
           }
         </>

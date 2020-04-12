@@ -28,6 +28,7 @@ class ProfileUser extends Component {
       flag         : '',
       classSchedule: [],
       Name         : '',
+      loadingInfo  : false,
     };
     this.handleSelections = this.handleSelections.bind(this);
     // this.handleAllSelections = this.handleAllSelections.bind(this);

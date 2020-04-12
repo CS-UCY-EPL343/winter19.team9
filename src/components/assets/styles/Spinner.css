@@ -1,7 +1,7 @@
 #wrapper {
-    position : relative;
-    /*height   : 100vh;*/
-    /*background-color: #252830;*/
+    position         : relative;
+    height           : 100vh;
+    background-color : #252830;
 }
 
 .profile-main-loader {
@@ -14,14 +14,14 @@
     z-index     : 9000 !important;
 }
 
-.profile-main-loader .loader {
+.profile-main-loader .loader, .profile-secondary-loader .loader {
     position : relative;
     margin   : 0 auto;
     width    : 200px;
     height   : 200px;
 }
 
-.profile-main-loader .loader:before {
+.profile-main-loader .loader:before, .profile-secondary-loader .loader:before {
     content     : '';
     display     : block;
     padding-top : 100%;
