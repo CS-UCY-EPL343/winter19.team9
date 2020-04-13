@@ -48,7 +48,9 @@ form.adminViewClient::after {
     margin-left: auto;
     margin-right: auto;
 }
-
+#special_msg{
+    width:300%;
+}
 #profile input[type="text"]{
     background: mintcream;
 }

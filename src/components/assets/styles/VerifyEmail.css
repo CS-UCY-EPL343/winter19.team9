@@ -1,0 +1,28 @@
+#VerifyEmail{
+    padding: 100px 0 50px 0;
+    text-align:center;
+    height: 100%;
+    justify-items: center;
+    background-color: #1b1b1b;
+}
+#VerifyEmail h1,p{
+    color: #e1e1e1;
+}
+
+#VerifyEmail input{
+    display: block;
+    width: 25%;
+    margin: 0 auto 0 auto;
+}
+#VerifyEmail input[type=submit]{
+    background-color: #ef233c;
+    color: #e1e1e1;
+    border: 2px solid #ef233c;
+    margin-top: 10px;
+}
+#VerifyEmail .emailText{
+    border: 1px solid #999999;
+}
+#VerifyEmail input[type=submit]:hover{
+    background-color: rgba(239,3,40,0.9);
+}

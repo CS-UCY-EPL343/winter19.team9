@@ -10,9 +10,16 @@ import ProfileAdmin                    from './components/pages/ProfileAdmin';
 import Classes                         from './components/pages/Classes';
 import ScrollToTop                     from './components/common/ScrollToTop';
 import PrivateRoute                    from './components/PrivateRoute';
+import forgotPassword                  from "./components/pages/forgotPassword";
+import VerifyEmail                     from "./components/pages/VerifyEmail";
+import ResetPassword                   from "./components/pages/ResetPassword";
+//import {ResetPassword} from "./components/pages/ResetPassword";
+// import NotFound                            from
+// './components/common/NotFound';
 import history                         from './history';
 import {getUserLevel, isAuthenticated} from './repository';
 import UIDashboard                     from './components/pages/UIDashboard';
+import LoginModal from "./components/common/LoginModal";
 import Tabletop                        from 'tabletop';
 import Spinner                         from './components/Spinner';
 import NotFound                        from './components/common/NotFound';
@@ -174,6 +181,9 @@ class App extends Component {
                                                                stylesheetData = { this.state.stylesheetData }
                              /> }
                       />
+                        <Route exact path ="/forgotPassword" component={forgotPassword}/>
+                        <Route exact path ="/verifyEmail/:id" component={VerifyEmail}/>
+                        <Route exact path={"/resetPassword/:id"} component={ResetPassword}/>
 
                       <PrivateRoute path = "/user/profile"
                                     component = { ProfileUser }

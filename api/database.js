@@ -61,7 +61,7 @@ function dbSignUp(data) {
   return new Promise((resolve, reject) => {
     let lvl = 'user';
     const ins = 'INSERT INTO ACCOUNT(username, password, level, User_ID) values(?,?,?,?)';
-    const insert = 'INSERT INTO USERS(Name, Surname, Bdate, Gender, Email, Medical_History, Age, Membership_ID) values(?,?,?,?,?,?,?,?)';
+    const insert = 'INSERT INTO USERS(Name, Surname, Bdate, Gender, Email, Medical_History, Age,Verify,Token, Membership_ID) values(?,?,?,?,?,?,?,?,?,?)';
 
     connection.query(insert, [
       data.fname,
@@ -71,6 +71,8 @@ function dbSignUp(data) {
       data.email,
       data.med,
       data.age,
+      data.verify,
+      data.hash,
       data.med,
     ], function(err, rows) {
       if (err) {
@@ -591,6 +593,83 @@ function getAdmins() {
       resolve(rows);
     });
   });
+}
+
+function getUser_ID(email){
+    return new Promise((resolve,reject)=>{
+        const find=`SELECT USERS.User_ID FROM USERS WHERE USERS.Email=?`;
+        connection.query(find,[email],function(err,rows){
+            if(err){
+                return reject(err);
+            }else {
+                return resolve(rows[0]);
+            }
+        });
+    });
+}
+
+function updateUser(data){
+    return new Promise((resolve,reject)=>{
+        const update ="UPDATE USERS SET Token =? WHERE User_ID = ?";
+        connection.query(update,[data.token,data.id.User_ID],function(err,res){
+            if(err){
+                return reject(err);
+            }
+            console.log(res.affectedRows+" record(s) updated");
+        });
+    });
+}
+function resetPassword(data){
+    return new Promise((resolve,reject)=>{
+        const check ="SELECT User_ID FROM USERS WHERE Token =?";
+        connection.query(check,[data.token],function(err,res){
+            if(err){
+                return reject(err);
+            }
+            const id = res.length;
+            if(id === 0){
+                return reject(err);
+            }else{
+                const user_id = res[0].User_ID;
+                const update = "UPDATE ACCOUNT SET password =? WHERE User_ID = ? AND username=?";
+                connection.query(update,[data.password,user_id,data.username],function(error,rows){
+                    if(error){
+                        return reject(error);
+                    }
+                    if(rows.affectedRows === 0){
+                        return reject("Wrong username");
+                    }
+                });
+            }
+        });
+    });
+}
+function verifyUser(token){
+    return new Promise((resolve,reject)=>{
+        const select = "SELECT User_ID FROM USERS WHERE Token = ?";
+        connection.query(select,[token.secret],function(err,rows){
+            if(err){
+                return reject(err);
+            }
+            //fix this code..... here
+            console.log(token);
+            const user = rows.length;
+
+            if (user === null){
+                return reject(err);
+            }
+            else{
+                const user_id = rows[0].User_ID;
+                const update = "UPDATE USERS SET Verify = 1 WHERE Token = ? AND User_ID = ?";
+                connection.query(update,[token.secret,user_id],function(err){
+                    if(err){
+                        return reject(err);
+                    }
+                });
+            }
+            return resolve(rows);
+        });
+    });
 }
 
 //add method name
@@ -1148,5 +1227,9 @@ module.exports = {
   insertNewCoach,
   deleteCoachMember,
   getClassName,
-  getPersonalSchedule
+  getPersonalSchedule,
+  getUser_ID,
+  verifyUser,
+  updateUser,
+  resetPassword
 };

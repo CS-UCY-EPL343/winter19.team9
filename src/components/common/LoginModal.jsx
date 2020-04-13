@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 // import Flippy, { FrontSide, BackSide } from 'react-flippy';
 import '../assets/styles/loginStyle.css'
-// import {Link} from 'react-router-dom';
+ // import {Link} from 'react-router-dom';
+import 'react-bootstrap/'
 import Recaptcha from 'react-recaptcha';
 
 import {logIn, signUp} from '../../repository';
@@ -20,14 +21,21 @@ class LoginModal extends Component {
             repeatedPassword:'',
             email:'',
             gender:'',
+            med: null,
             age:'',
             bDate:'',
+            toggle: true,
+            value: true,
+            isVerified: false,
+            userVerify: '',
+            token:''
         };
         this.handleChange = this.handleChange.bind(this);
         this.onRadioChange = this.onRadioChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
-        // this.recaptchaLoaded = this.recaptchaLoaded.bind(this);
-        this.verifyCallback = this.verifyCallback.bind(this);
+       // this.recaptchaLoaded = this.recaptchaLoaded.bind(this);
+         this.verifyCallback = this.verifyCallback.bind(this);
+         // this.onPassword = this.onPassword.bind(this);
     }
 
     verifyCallback = (response) => {
@@ -64,12 +72,15 @@ class LoginModal extends Component {
             })
             .catch(err => alert(err));
     };
-    onSignUp= (e) =>{
+   onSignUp= (e) =>{
         e.preventDefault();
+        const ver = 0;
         if(this.state.password !== this.state.repeatedPassword){
             alert("Password dont match");
         }else {
-            if (this.state.isVerified) {
+             if (this.state.isVerified) {
+                 const crypto = require('crypto');
+                 const newToken = crypto.randomBytes(10).toString('hex');
 
                 const dataSign = {
                     username: this.state.username,
@@ -81,19 +92,26 @@ class LoginModal extends Component {
                     gender: this.state.gender,
                     level: this.state.level,
                     bDate: this.state.bDate,
+                    verify: ver,
+                    hash: newToken,
                 };
+                //console.log(dataSign);
                 signUp(dataSign)
                     .then(() => {
-                        alert('Success');
-                        history.push('/')
-                    })
+                            alert("Successful sign up.Please proceed to your email, so you can verify your account.");
+                             this.props.toggle();
+                        },
+                    )
                     .catch(err => alert(err));
             }else{
                 alert("Please proceed with the recaptcha to verify that you are a human!");
             }
         }
     };
-
+    onClose=()=>{
+        this.props.toggle();
+        history.push('/forgotPassword');
+    };
    // recaptchaLoaded() {
    //     console.log('captcha has successfully loaded');
    // }
@@ -120,11 +138,6 @@ class LoginModal extends Component {
                                 <div className={"cursive"}>
 
                                 </div>
-                                {/*<div className={"row"}>*/}
-                                {/*    <div className="col-lg-12 col-md-12 col-sm-12">*/}
-                                {/*        <p className={"subtitle fancy"}><span className={"cursive2"}><i className="fa fa-facebook facebook brands"/>OR<i className="fa fa-twitter twitter brands"/></span></p>*/}
-                                {/*    </div>*/}
-                                {/*</div>*/}
                             </div>
 
                             <form id={"loginForm"} action={"#"} method={"post"} className={"form"}>
@@ -161,12 +174,9 @@ class LoginModal extends Component {
                                     <label htmlFor={"checkbox"}>
                                         <input id={"checkbox"} name={"checkbox"}
                                                className={"checkbox--forget"} type={"checkbox"}/>
-                                        {/*   <span className="icon--checkbox fa fa-check">*/}
-                                        {/*</span>*/}
                                         <span className={"subtitle"}>Remember me</span>
                                     </label>
-                                    <a className={"form__link link--right"} href={'/'}>Forgot your password?</a>
-                                    {/*  href is missing*/}
+                                    <a className={"form__link link--right"} onClick={this.onClose}>Forgot your password?</a>
                                 </fieldset>
                                 <fieldset className={"form__group"}>
                                     <input className={"form__button"} type={"submit"} value={"Login"}
@@ -235,7 +245,7 @@ class LoginModal extends Component {
                                 </fieldset>
                                 <fieldset className={"form__group"}>
                                     <label htmlFor={"age"} id={"birthday"}>
-                                        <span className={"subtitle"}> Birth Date:</span>
+                                        <span className={"subtitle"}> Birth Date: </span>
                                         <span className={"fas fa-birthday-cake"}>
                                         </span>
                                     </label>
@@ -244,14 +254,16 @@ class LoginModal extends Component {
                                            min={"1900-01-01"} max={"2010-01-01"} required/>
                                 </fieldset>
                                 <fieldset className={"form__group"}>
-                                    <label htmlFor={"gender"} id={"gender"}>
-                                        <input type={"radio"} value={"1"} checked={this.state.gender === '1'}
-                                               onChange={this.onRadioChange}/>
-                                        <span className={"subtitle"}> Male          </span>
-                                        <input type={"radio"} value={"2"} checked={this.state.gender ==='2'}
-                                               onChange={this.onRadioChange}/>
-                                        <span className={"subtitle"}> Female</span>
+                                    <div className={"form__radio"}>
+                                    <label className={"label__style"}>Male
+                                        <input type={"radio"} value={"1"} checked={this.state.gender === '1'} onChange={this.onRadioChange}/>
+                                        <span className={"checkmark"}></span>
                                     </label>
+                                    <label className={"label__style"}>Female
+                                        <input type={"radio"} value={"2"} checked={this.state.gender === '2'} onChange={this.onRadioChange}/>
+                                        <span className={"checkmark"}></span>
+                                    </label>
+                                    </div>
                                 </fieldset>
                                 <fieldset className={"form__group"}>
                                     <input className={"form__button"} type={"submit"} value={"Sign up"} onClick={this.onSignUp}/>
@@ -273,7 +285,6 @@ class LoginModal extends Component {
                                     .
                                 </small>
                             </form>
-                            {/*>>>>>>> Stashed changes*/}
                         </div>
                     }
                 </div>

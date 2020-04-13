@@ -481,6 +481,22 @@ export function getUserLevel() {
   }).then(response => response.data.userLevel);
 }
 
+export function lastVerify(data){
+    return axios
+        .post(`${BASE_URL}/verifyEmail/:id`, data)
+        .then(response => response.data)
+        .catch(() => Promise.reject("Verification failed."))
+}
+export function newPassword(data){
+    return axios.post(`${BASE_URL}/reset-password`,data)
+        .then(response => response.data);
+}
+export function resetPass(data){
+    return axios.post(`${BASE_URL}/resetPassword/:id`,data)
+        .then(response => response.data)
+        .catch(() => Promise.reject('Failed to reset Password'))
+}
+
 export function sendEmail(data) {
   return axios.post(`${ BASE_URL }/api/email`, data)
       .then(response => response.data)

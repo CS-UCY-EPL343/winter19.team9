@@ -90,6 +90,82 @@ app.post('/api/email', (req, res) => {
   });
 });
 
+app.post('/reset-password', (req,res) => {
+    const email = req.body.email;
+    if(req.body.email === ''){
+        res.status(400).send('email required');
+    }
+    db.getUser_ID(req.body.email)
+        .then((user)=> {
+            if (user === null) {
+                console.error('email not in database');
+                res.status(400).status('email not in db');
+            } else {
+                const crypto = require('crypto');
+                const token = crypto.randomBytes(10).toString('hex');
+                const data ={
+                    token: token,
+                    id: user,
+                };
+                db.updateUser(data);
+
+                // const content = `Email: ${email}\nThe secret token is: ${token}\n`;
+
+                const mail = {
+                    from: creds.EMAIL,
+                    to: email,
+                    subject: 'Reset your password',
+                    html: `<h1>Forgot your password?</h1>
+              <p>Click on the link below to <a style="display:block; background-color: red; width: 20%; text-align:center;color:white; text-decoration: none;" href='http://localhost:3000/resetPassword/${token}'>reset your password</a></p>`,
+                };
+                transporter.sendMail(mail, (err) => {
+                    if (err) {
+                        res.status(400).json({
+                            status: 'fail',
+                        });
+                    } else {
+                        res.status(200).json({
+                            status: 'success'
+                        });
+                    }
+                });
+            }
+        })
+});
+/******************************/
+/*******Reset Password*********/
+/******************************/
+app.post('/resetPassword/:id',(req,res)=>{
+    if(req.body.token ===''){
+        res.status(400).send('error');
+    }else{
+       db.resetPassword(req.body)
+           .then(()=>{
+           res.send('Success reset.');
+           })
+           .catch(()=>{
+           res.send('Failed to reset.');
+           })
+    }
+});
+/****************************************************/
+/**************** Email verification ****************/
+/****************************************************/
+
+app.post('/verifyEmail/:id',(req,res)=>{
+
+    if( req.body.hash ===''){
+        res.status(400).send('error')
+    }else{
+        db.verifyUser(req.body)
+            .then(()=>{
+                res.send('Success verify.');
+            })
+            .catch(()=>{
+                res.send('Failed to verify.');
+            })
+    }
+});
 // noinspection JSUnresolvedFunction
 app.post('/api/auth', (req, res) => {
   db.dbLogIn(req.body.name, req.body.password).then(user => {
@@ -384,10 +460,36 @@ app.post('/api/user/delete/data', middleware, (req, res) => {
 
 // noinspection JSUnresolvedFunction
 app.post('/api/user/insert', (req, res) => {
-  console.log(req.body);
-  db.dbSignUp(req.body)
-      .then(response => res.status(200).json({message: response}))
-      .catch(err => res.status(409).json(err));
+    const fname = req.body.fname;
+    const lname = req.body.lname;
+    const email = req.body.email;
+    const token = req.body.hash;
+    const content =`Name: ${fname} ${lname}\n Email: ${email}`;
+    console.log(req.body);
+    db.dbSignUp(req.body)
+        // .then(response => res.status(200).json({message: response}))
+        // .catch(err => res.status(409).json(err));
+        .then(()=>{
+            const mail = {
+                from: creds.EMAIL,
+                to: email,
+                subject: 'Fitness Factory- Please Verify Your Account',
+                text: content,
+                html: `
+                       <a style="display:block; background-color: red; width: 20%; text-align:center;color:white; text-decoration: none;" href="http://localhost:3000/verifyEmail/${token}">Verify your Account</a>`,
+            };
+            transporter.sendMail(mail,(err) => {
+                if (err) {
+                    res.status(400).json({
+                        status: 'fail',
+                    });
+                } else {
+                    res.status(200).json({
+                        status: 'success'
+                    });
+                }
+            })
+        })
 });
 
 // noinspection JSUnresolvedFunction
