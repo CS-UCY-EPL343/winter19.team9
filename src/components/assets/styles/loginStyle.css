@@ -117,7 +117,7 @@
 }
 #LoginModal .form__login {
     z-index: 2;
-    padding: 2rem;
+    padding: 2rem 4rem;
 }
 #LoginModal .form__signup {
     /*padding: 2rem;*/
@@ -138,7 +138,7 @@
     padding: 16px 0 5px 0;
 }
 #LoginModal #birthday{
-    margin-bottom: 2rem;
+    /*margin-bottom: 2rem;*/
     font-weight: 400;
     font-size: 1.2rem;
 }
