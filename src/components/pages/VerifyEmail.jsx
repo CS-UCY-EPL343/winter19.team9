@@ -1,9 +1,6 @@
 import React, {Component} from "react";
 import '../assets/styles/VerifyEmail.css';
 import {lastVerify} from "../../repository";
-import Spinner from "react-bootstrap/Spinner";
-
-
 
 class VerifyEmail extends Component{
     constructor(props){

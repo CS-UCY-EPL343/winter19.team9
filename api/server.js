@@ -90,6 +90,7 @@ app.post('/api/email', (req, res) => {
   });
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/reset-password', (req,res) => {
     const email = req.body.email;
     if(req.body.email === ''){
@@ -135,6 +136,7 @@ app.post('/reset-password', (req,res) => {
 /******************************/
 /*******Reset Password*********/
 /******************************/
+// noinspection JSUnresolvedFunction
 app.post('/resetPassword/:id',(req,res)=>{
     if(req.body.token ===''){
         res.status(400).send('error');
@@ -152,6 +154,7 @@ app.post('/resetPassword/:id',(req,res)=>{
 /**************** Email verification ****************/
 /****************************************************/
 
+// noinspection JSUnresolvedFunction
 app.post('/verifyEmail/:id',(req,res)=>{
 
     if( req.body.hash ===''){
