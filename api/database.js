@@ -80,7 +80,7 @@ function dbSignUp(data) {
         return reject(err);
       }
       let id = rows.insertId;
-      console.log('User created');
+      // console.log('User created');
 
       connection.query(ins, [data.username, data.password, lvl, id],
           function(err) {
@@ -88,7 +88,7 @@ function dbSignUp(data) {
               console.log(err);
               return reject(err);
             }
-            console.log('User inserted');
+            // console.log('User inserted');
             return resolve('The user account was inserted successfully');
           });
 

@@ -468,7 +468,7 @@ app.post('/api/user/insert', (req, res) => {
     const email = req.body.email;
     const token = req.body.hash;
     const content =`Name: ${fname} ${lname}\n Email: ${email}`;
-    console.log(req.body);
+    // console.log(req.body);
     db.dbSignUp(req.body)
         // .then(response => res.status(200).json({message: response}))
         // .catch(err => res.status(409).json(err));
