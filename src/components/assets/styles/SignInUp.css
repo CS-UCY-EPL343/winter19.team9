@@ -1,0 +1,499 @@
+#signup, #login {
+    margin : 0 auto !important;
+    /*width: 10% !important;*/
+}
+
+#signup h1, #login h1 {
+    box-sizing    : border-box;
+    width         : 100%;
+    background    : #EF233C;
+    padding       : 20px;
+    color         : white;
+    box-shadow    : 0 5px 5px 0 rgba(0, 0, 0, 0.05);
+    border-radius : 3px 3px 0 0;
+    position      : relative;
+    top           : 20px;
+}
+
+form#signup, form#login {
+    font-family   : "roboto", sans-serif;
+    width         : 460px;
+    margin        : 100px auto;
+    box-shadow    : 2px 2px 5px 1px rgba(0, 0, 0, 0.2);
+    padding       : 0;
+    border-radius : 3px;
+    color         : white;
+    background    : #2D2D2D;
+    text-align    : center;
+}
+
+#signup > input::-webkit-input-placeholder,
+#signup > textarea::-webkit-input-placeholder,
+#login > input::-webkit-input-placeholder,
+#login > textarea::-webkit-input-placeholder {
+    font       : inherit;
+    transition : transform 0.3s ease-in-out, font-size 0.3s ease-in-out,
+    visibility 0.3s ease-in-out;
+}
+
+#signup > input,
+#signup > textarea,
+#login > input,
+#login > textarea {
+    font                : inherit;
+    font-size           : 0.8em;
+    margin              : 28px 25px 10px;
+    width               : 400px;
+    display             : block;
+    border              : none;
+    padding             : 15px 0 10px;
+    border-bottom       : solid 1px #EF233C;
+    background          : linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0) 96%,
+            #EF233C 4%
+    );
+    background-position : -400px 0;
+    background-size     : 400px 100%;
+    background-repeat   : no-repeat;
+    transition          : background 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+    resize              : none;
+    overflow            : hidden;
+    color               : white !important;
+    background-color    : transparent !important;
+}
+
+#signup > input:focus::-webkit-input-placeholder,
+#signup > textarea:focus::-webkit-input-placeholder,
+#login > input:focus::-webkit-input-placeholder,
+#login > textarea:focus::-webkit-input-placeholder {
+    color : #EF233C;
+}
+
+#signup > input:focus,
+#signup > textarea:focus,
+#signup > input:valid,
+#signup > textarea:valid,
+#login > input:focus,
+#login > textarea:focus,
+#login > input:valid,
+#login > textarea:valid {
+    box-shadow          : none;
+    outline             : none;
+    background-position : 0 0;
+}
+
+#signup > input:focus::-webkit-input-placeholder,
+#signup > textarea:focus::-webkit-input-placeholder,
+#signup > input:valid::-webkit-input-placeholder,
+#signup > textarea:valid::-webkit-input-placeholder,
+#login > input:focus::-webkit-input-placeholder,
+#login > textarea:focus::-webkit-input-placeholder,
+#login > input:valid::-webkit-input-placeholder,
+#login > textarea:valid::-webkit-input-placeholder {
+    font-size  : 0.8em;
+    transform  : translateY(-20px);
+    visibility : visible !important;
+    opacity    : 1;
+}
+
+#signup > input,
+#login > input {
+    background : linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0) 96%,
+            #EF233C 4%
+    ) no-repeat -400px 0;
+    transition : border-bottom 0.3s ease, background 0.3s ease;
+}
+
+#signup > input[type="email"] ~ span.validation-text,
+#login > input[type="email"] ~ span.validation-text {
+    position    : absolute;
+    visibility  : hidden;
+    font-family : "roboto", sans-serif;
+    font-size   : 0.6em;
+    width       : 400px;
+    margin-left : 25px;
+    margin-top  : -5px;
+    color       : white;
+    transition  : color 0.3s ease-in-out;
+}
+
+#signup > input[type="email"]:not([value=""])::-webkit-input-placeholder,
+#login > input[type="email"]:not([value=""])::-webkit-input-placeholder {
+    font-size  : 0.8em;
+    transform  : translateY(-20px);
+    visibility : visible !important;
+    opacity    : 1;
+}
+
+#signup > input[type="email"]:not([value=""]):focus::-webkit-input-placeholder,
+#login > input[type="email"]:not([value=""]):focus::-webkit-input-placeholder {
+    color : #EF233C;
+}
+
+#signup > input[type="email"]:not([value=""]):focus:not(:valid)::-webkit-input-placeholder,
+#login > input[type="email"]:not([value=""]):focus:not(:valid)::-webkit-input-placeholder {
+    color : #E91E63;
+}
+
+#signup > input[type="email"]:focus,
+#login > input[type="email"]:focus {
+    background-position : 0 0;
+}
+
+#signup > input[type="email"]:focus:not(:valid):not([value=""]),
+#login > input[type="email"]:focus:not(:valid):not([value=""]) {
+    border-bottom : solid 1px #E91E63;
+    background    : linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0) 96%,
+            #E91E63 4%
+    );
+}
+
+#signup > input[type="email"]:not(:focus):not(:valid):not([value=""]),
+#login > input[type="email"]:not(:focus):not(:valid):not([value=""]) {
+    border-bottom : solid 1px #E91E63;
+    background    : linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0) 96%,
+            #E91E63 4%
+    ) 0 0;
+}
+
+#signup > input[type="email"]:not(:focus):not(:valid):not([value=""])::-webkit-input-placeholder,
+#login > input[type="email"]:not(:focus):not(:valid):not([value=""])::-webkit-input-placeholder {
+    color : #E91E63;
+}
+
+#signup > input[type="email"]:not(:focus):not(:valid):not([value=""]) ~ span.validation-text,
+#login > input[type="email"]:not(:focus):not(:valid):not([value=""]) ~ span.validation-text {
+    visibility : visible;
+    color      : #E91E63;
+}
+
+#signup > .flex,
+#login > .flex {
+    display     : flex;
+    align-items : stretch;
+}
+
+#signup > .flex textarea,
+#login > .flex textarea {
+    line-height : 120%;
+}
+
+#signup > button, #login > button {
+    font-family   : "roboto", sans-serif;
+    transition    : transform 0.2s cubic-bezier(0.64, 0.09, 0.08, 1),
+    box-shadow 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
+    border        : none;
+    background    : #EF233C;
+    cursor        : pointer;
+    border-radius : 3px;
+    padding       : 6px;
+    width         : 80%;
+    color         : white;
+    margin        : 30px 0 0 25px;
+    box-shadow    : 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+    transform     : translateX(-15px);
+}
+
+#signup > button:hover, #login > button:hover {
+    /* transform: translateY(-2px); */
+    box-shadow : 0 5px 6px 0 rgba(0, 0, 0, 0.2);
+    background : #D90429;
+}
+
+#signup > span.login, #login > span.login {
+    width           : 42px;
+    height          : 47px;
+    border-radius   : 50px;
+    background      : #EF233C;
+    display         : inline-block;
+    margin          : 25px calc(50% - 21px);
+    white-space     : nowrap;
+    padding         : 13px;
+    box-sizing      : border-box;
+    color           : white;
+    transition      : all 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
+    font-family     : Roboto, sans-serif;
+    text-decoration : none;
+    box-shadow      : 0 5px 6px 0 rgba(0, 0, 0, 0.2);
+    overflow        : hidden;
+    /* text-indent: -9999px; */
+}
+
+#signup > span.login i, #login > span.login i {
+    margin-right : 20px;
+    transition   : margin-right 0.2s cubic-bezier(0.64, 0.09, 0.08, 1);
+}
+
+#signup > span.login:hover, #login > span.login:hover {
+    width      : 110px;
+    transform  : translateX(-35px);
+    cursor     : pointer;
+    background : #D90429;
+}
+
+#signup > span.login:hover i, #login > span.login:hover i {
+    margin-right : 10px;
+}
+
+#signup > input[type="date"], #login > input[type="date"] {
+    width : 100% !important;
+    color : white !important;
+}
+
+#signup .gender-radio,
+#login .gender-radio {
+    display         : flex !important;
+    flex-direction  : row !important;
+    justify-content : space-between;
+    width           : 100% !important;
+}
+
+#signup .MuiTextField-root,
+#login .MuiTextField-root {
+    margin    : 28px 25px 10px !important;
+    width     : 400px !important;
+    border    : none !important;
+    padding   : 0 0 10px !important;
+    font      : inherit !important;
+    font-size : 0.8em !important;
+}
+
+#signup .MuiTextField-root input[type="date"],
+#login .MuiTextField-root input[type="date"] {
+    width     : 100% !important;
+    color     : grey !important;
+    font      : inherit;
+    font-size : 0.8em;
+}
+
+#signup .MuiInput-underline:before,
+#login .MuiInput-underline:before {
+    border-bottom : 1px solid #D90429 !important;
+}
+
+#signup .MuiInput-underline:after,
+#login .MuiInput-underline:after {
+    color : white;
+}
+
+#signup .MuiInput-underline:after,
+#login .MuiInput-underline:after {
+    border-bottom : 2px solid #D90429 !important;
+}
+
+#g-recaptcha div {
+    padding    : 3px 0;
+    text-align : center;
+    width      : 100% !important;
+}
+
+#login > .forgot-passsword {
+    margin          : 20px 25px 0 !important;
+    text-decoration : underline;
+    color           : #EF233C;
+    width           : 170px;
+}
+
+#signup > .forgot-passsword:hover,
+#login > .forgot-passsword:hover {
+    cursor : pointer;
+    color  : #D90429;
+}
+
+@media only screen and (max-width : 575px) {
+    form#signup, form#login {
+        width : 550px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 500px !important;
+    }
+    
+    #signup > input,
+    #login > input {
+        background : linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0) 96%,
+                #EF233C 4%
+        ) no-repeat -500px 0;
+        transition : border-bottom 0.3s ease, background 0.3s ease;
+    }
+}
+
+@media only screen and (max-width : 555px) {
+    form#signup, form#login {
+        width : 520px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 480px !important;
+    }
+}
+
+@media only screen and (max-width : 535px) {
+    form#signup, form#login {
+        width : 500px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 460px !important;
+    }
+}
+
+@media only screen and (max-width : 515px) {
+    form#signup, form#login {
+        width : 480px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 440px !important;
+    }
+}
+
+@media only screen and (max-width : 495px) {
+    form#signup, form#login {
+        width : 460px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 420px !important;
+    }
+}
+
+@media only screen and (max-width : 475px) {
+    form#signup, form#login {
+        width : 440px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 400px !important;
+    }
+}
+
+@media only screen and (max-width : 460px) {
+    form#signup, form#login {
+        width : 420px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 380px !important;
+    }
+}
+
+@media only screen and (max-width : 440px) {
+    form#signup, form#login {
+        width : 400px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 360px !important;
+    }
+}
+
+@media only screen and (max-width : 420px) {
+    form#signup, form#login {
+        width : 380px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 340px !important;
+    }
+}
+
+@media only screen and (max-width : 400px) {
+    form#signup, form#login {
+        width : 360px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 320px !important;
+    }
+}
+
+
+@media only screen and (max-width : 380px) {
+    form#signup, form#login {
+        width : 340px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 300px !important;
+    }
+}
+
+@media only screen and (max-width : 360px) {
+    form#signup, form#login {
+        width : 320px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 280px !important;
+    }
+}

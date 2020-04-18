@@ -81,7 +81,6 @@ function dbSignUp(data) {
       }
       let id = rows.insertId;
       // console.log('User created');
-
       connection.query(ins, [data.username, data.password, lvl, id],
           function(err) {
             if (err) {
@@ -652,7 +651,7 @@ function verifyUser(token){
                 return reject(err);
             }
             //fix this code..... here
-            console.log(token);
+
             const user = rows.length;
 
             if (user === null){
