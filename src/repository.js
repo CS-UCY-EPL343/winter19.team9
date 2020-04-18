@@ -293,6 +293,22 @@ export function deleteCoach(CoachID) {
       .catch(() => Promise.reject('Delete Coach Failed.'));
 }
 
+
+export function countPT(AccountID){
+  return axios.post(`${ BASE_URL }/api/coach/countPT`,
+      {AccountID : AccountID})
+      .then(response => response.data.count[0])
+      .catch(() => Promise.reject('Error'));
+
+}
+
+export function countClasses(AccountID){
+  return axios.post(`${ BASE_URL }/api/coach/countClasses`,
+      {AccountID : AccountID})
+      .then(response => response.data.count[0])
+      .catch(() => Promise.reject('Error'));
+}
+
 export function postuserData(data) {
   // noinspection JSUnresolvedVariable
   return axios.post(`${ BASE_URL }/api/user/post/data`,

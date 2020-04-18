@@ -7,7 +7,9 @@ import {
   getCoaches,
   deleteCoach,
   logOut,
-}                         from '../../repository';
+  countPT,
+  countClasses,
+} from '../../repository';
 import adminAvatar
                           from '../assets/img/logos/fitnessFactoryLogo.png';
 import ToggleModal        from './ToggleModal';
@@ -21,6 +23,7 @@ class StaffList extends Component {
       admins   : [],
       staffType: '',
       modal    : false,
+      countTotal  : 0,
     };
     this.DeleteCoach = this.DeleteCoach.bind(this);
     this.DeleteAdmin = this.DeleteAdmin.bind(this);
@@ -93,10 +96,55 @@ class StaffList extends Component {
     const CoachID = e.target.className.split(' ')[3] === 'admin'
         ? this.state.admins[e.target.className.split(' ')[2]].AccountID
         : this.state.coaches[e.target.className.split(' ')[2]].AccountID;
-    console.log(CoachID);
-    deleteCoach(CoachID).then(() => {
-      alert('Deleted Success!!');
-    }).catch(err => alert(err));
+
+    Swal.fire({
+      title             : 'Are you sure?',
+      text              : 'You won\'t be able to revert this!',
+      icon              : 'warning',
+      showCancelButton  : true,
+      confirmButtonColor: '#3085D6',
+      cancelButtonColor : '#DD3333',
+      confirmButtonText : 'Yes, delete it!',
+    }).then((result) => {
+      countPT(CoachID).then(response => {
+        this.setState(
+            {countTotal : response.countTotal});
+      });
+
+      countClasses(CoachID).then(response => {
+        this.setState(
+            {countTotal : this.state.countTotal+response.countTotal});
+      });
+      if (result.value && this.state.countTotal === 0 ) {
+        deleteCoach(CoachID).then(() => {
+          Swal.fire(
+              'Account deleted successfully',
+              '',
+              'success',
+          ).then(() => {
+            logOut();
+            window.location.replace('/');
+          });
+        }).catch(() => Swal.fire(
+            'Something went wrong',
+            'Please try again...',
+            'error',
+        ));
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+            'Cancelled',
+            'Your Account is safe :)',
+            'error',
+        ).then();
+      }else if(this.state.countTotal !== 0){
+        Swal.fire(
+            'Cancelled',
+            'You must go and change the classes and the personal training :)',
+            'error',
+        ).then();
+      }
+    });
+
   }
 
   createAdmin() {

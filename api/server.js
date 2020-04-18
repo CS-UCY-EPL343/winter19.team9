@@ -529,6 +529,31 @@ app.post(
           .then(response => res.status(200).json({message: response}))
           .catch(err => res.status(409).json(err));
     });
+
+
+app.post('/api/coach/countPT', (req, res) => {
+    db.getCountPT(req.body.AccountID).then(data => {
+        if (data) {
+            return res.status(200).json({count: data});
+        } else {
+
+            return res.status(409).json('Authentication failed. User not found.');
+        }
+    }).catch(err => res.status(409).json(err));
+});
+
+app.post('/api/coach/countClasses', (req, res) => {
+    db.getCountClasses(req.body.AccountID).then(data => {
+        if (data) {
+            return res.status(200).json({count: data});
+        } else {
+
+            return res.status(409).json('Authentication failed. User not found.');
+        }
+    }).catch(err => res.status(409).json(err));
+});
+
+
 /************************************************************************/
 //fetching the data for the personal training schedule
 // noinspection JSUnresolvedFunction
