@@ -1,0 +1,120 @@
+#EventsModal .container {
+    margin : 0 auto;
+    width  : 100%;
+    padding: 0;
+}
+
+#EventsModal .dark {
+    margin : 0 auto;
+}
+
+#EventsModal .calendar {
+    width       : 100%;
+    box-shadow  : 0 0 35px -16px rgba(0, 0, 0, 0.75);
+    font-family : 'Roboto', sans-serif;
+    padding     : 20px 30px;
+    color       : #363B41;
+    display     : inline-block;
+}
+
+#EventsModal .calendar_header {
+    border-bottom : 2px solid rgba(0, 0, 0, 0.08);
+}
+
+#EventsModal .header_copy {
+    color     : #A39D9E;
+    font-size : 20px;
+}
+
+#EventsModal .calendar_plan {
+    margin : 20px 0 40px;
+}
+
+#EventsModal .cl_plan {
+    width            : 100%;
+    height           : 140px;
+    background-image : linear-gradient(-222deg, #D90429, #B34F5B);
+    box-shadow       : 0 0 52px -18px rgba(0, 0, 0, 0.75);
+    padding          : 30px;
+    color            : #FFFFFF;
+}
+
+#EventsModal .cl_copy {
+    font-size : 20px;
+    margin    : 20px 0;
+    display   : inline-block;
+}
+
+#EventsModal .cl_add {
+    display          : inline-block;
+    width            : 40px;
+    height           : 40px;
+    border-radius    : 50%;
+    background-color : #FFFFFF;
+    cursor           : pointer;
+    margin           : 0 0 0 65px;
+    color            : #C2C2C2;
+    padding          : 11px 13px;
+}
+
+#EventsModal .calendar_events {
+    color : #A39D9E;
+}
+
+#EventsModal .ce_title {
+    font-size : 14px;
+}
+
+#EventsModal .event_item {
+    margin  : 18px 0;
+    padding : 5px;
+    cursor  : pointer;
+}
+
+#EventsModal .event_item:hover {
+    background-image : linear-gradient(-222deg, #D90429, #B34F5B);
+    box-shadow       : 0 0 52px -18px rgba(0, 0, 0, 0.75);
+}
+
+#EventsModal .event_item:hover .ei_Dot {
+    background-color : #FFFFFF;
+}
+
+#EventsModal .event_item:hover .ei_Copy, .event_item:hover .ei_Title {
+    color : #FFFFFF;
+}
+
+#EventsModal .ei_Dot, .ei_Title {
+    display : inline-block;
+}
+
+.dark .calendar_events .ei_Dot {
+    border-radius    : 50%;
+    width            : 10px;
+    height           : 10px;
+    background-color : #A39D9E;
+    box-shadow       : 0 0 52px -18px rgba(0, 0, 0, 0.75);
+}
+
+#EventsModal .dot_active {
+    background-color : #D90429;
+}
+
+.calendar_events .ei_Title {
+    margin-left : 10px;
+    color       : #363B41;
+}
+
+#EventsModal .ei_Copy {
+    font-size   : 12px;
+    margin-left : 27px;
+}
+
+#EventsModal .dark {
+    background-image : linear-gradient(-222deg, #646464, #454545);
+    color            : #FFFFFF;
+}
+
+#EventsModal .dark .header_title, .dark .ei_Title, .dark .ce_title {
+    color : #FFFFFF;
+}
