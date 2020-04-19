@@ -293,18 +293,17 @@ export function deleteCoach(CoachID) {
       .catch(() => Promise.reject('Delete Coach Failed.'));
 }
 
-
-export function countPT(AccountID){
+export function countPT(AccountID) {
   return axios.post(`${ BASE_URL }/api/coach/countPT`,
-      {AccountID : AccountID})
+      {AccountID: AccountID})
       .then(response => response.data.count[0])
       .catch(() => Promise.reject('Error'));
 
 }
 
-export function countClasses(AccountID){
+export function countClasses(AccountID) {
   return axios.post(`${ BASE_URL }/api/coach/countClasses`,
-      {AccountID : AccountID})
+      {AccountID: AccountID})
       .then(response => response.data.count[0])
       .catch(() => Promise.reject('Error'));
 }
@@ -497,20 +496,22 @@ export function getUserLevel() {
   }).then(response => response.data.userLevel);
 }
 
-export function lastVerify(data){
-    return axios
-        .post(`${BASE_URL}/verifyEmail/:id`, data)
-        .then(response => response.data)
-        .catch(() => Promise.reject("Verification failed."))
+export function lastVerify(data) {
+  return axios
+      .post(`${ BASE_URL }/verifyEmail/:id`, data)
+      .then(response => response.data)
+      .catch(() => Promise.reject('Verification failed.'));
 }
-export function newPassword(data){
-    return axios.post(`${BASE_URL}/reset-password`,data)
-        .then(response => response.data);
+
+export function newPassword(data) {
+  return axios.post(`${ BASE_URL }/reset-password`, data)
+      .then(response => response.data);
 }
-export function resetPass(data){
-    return axios.post(`${BASE_URL}/resetPassword/:id`,data)
-        .then(response => response.data)
-        .catch(() => Promise.reject('Failed to reset Password'))
+
+export function resetPass(data) {
+  return axios.post(`${ BASE_URL }/resetPassword/:id`, data)
+      .then(response => response.data)
+      .catch(() => Promise.reject('Failed to reset Password'));
 }
 
 export function sendEmail(data) {
@@ -605,4 +606,12 @@ export function validURL(str) {
                              '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
                              '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
   return !!pattern.test(str);
+}
+
+export function getEvents() {
+  return axios.post(`${ BASE_URL }/api/events/get`, {
+    'x-access-token': localStorage.getItem('x-access-token'),
+  })
+      .then(response => response.data)
+      .catch(() => Promise.reject('Authentication Failed!'));
 }

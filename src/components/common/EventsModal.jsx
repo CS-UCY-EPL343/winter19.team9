@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
 import '../assets/styles/EventsModal.css';
-// import Event              from './Event';
-// import {
-//   getEvents,
-// }                         from '../../repository';
+import Event              from './Event';
+import {getEvents}        from '../../repository';
 import {AnimatedOnScroll} from 'react-animated-css-onscroll';
 import Spinner            from '../Spinner';
 
@@ -12,24 +10,27 @@ class MessagesModal extends Component {
     super(props);
     this.state = {
       events : [],
-      loading: false, //TODO true
+      date   : '',
+      loading: true,
     };
   }
 
-  // componentDidMount() {
-  //   getEvents().then(response => {
-  //     this.setState({
-  //       events: response.events[0].sort(
-  //           function(a, b) {
-  //             // noinspection JSUnresolvedVariable
-  //             return b.Event_ID
-  //                    - a.Event_ID;
-  //           }),
-  //     });
-  //   }).then(() => {
-  //     this.setState({loading: false});
-  //   }).catch(err => alert(err));
-  // }
+  componentDidMount() {
+    const options = {
+      weekday: 'long',
+      year   : 'numeric',
+      month  : 'long',
+      day    : 'numeric',
+    };
+    const dateTimeFormat = new Intl.DateTimeFormat('en-GB', options);
+    this.setState({date: dateTimeFormat.format(new Date())});
+
+    getEvents().then(response => {
+      this.setState({events: response.events});
+    }).then(() => {
+      this.setState({loading: false});
+    }).catch(err => alert(err));
+  }
 
   render() {
     return (
@@ -51,48 +52,36 @@ class MessagesModal extends Component {
                     <div className = "calendar_plan">
                       <div className = "cl_plan">
                         <div className = "cl_title">Today</div>
-                        <div className = "cl_copy">22nd April 2018</div>
-                        {/*<div class = "cl_add">*/}
-                        {/*  <i class = "fas fa-plus"/>*/}
-                        {/*</div>*/}
+                        <div className = "cl_copy">{ this.state.date }</div>
+                        {/*<div class = "cl_add">*/ }
+                        {/*  <i class = "fas fa-plus"/>*/ }
+                        {/*</div>*/ }
                       </div>
                     </div>
                     <div className = "calendar_events">
                       <p className = "ce_title">Upcoming Events</p>
-                      <div className = "event_item">
-                        <div className = "ei_Dot dot_active" />
-                        <div className = "ei_Title">10:30 am</div>
-                        <div className = "ei_Copy">Monday briefing with the team
-                        </div>
-                      </div>
-                      <div className = "event_item">
-                        <div className = "ei_Dot" />
-                        <div className = "ei_Title">12:00 pm</div>
-                        <div className = "ei_Copy">Lunch for with the besties
-                        </div>
-                      </div>
-                      <div className = "event_item">
-                        <div className = "ei_Dot" />
-                        <div className = "ei_Title">13:00 pm</div>
-                        <div className = "ei_Copy">Meet with the client for
-                                                   final
-                                                   design <br /> @foofinder
-                        </div>
-                      </div>
-                      <div className = "event_item">
-                        <div className = "ei_Dot" />
-                        <div className = "ei_Title">14:30 am</div>
-                        <div className = "ei_Copy">Plan event night to inspire
-                                                   students
-                        </div>
-                      </div>
-                      <div className = "event_item">
-                        <div className = "ei_Dot"/>
-                        <div className = "ei_Title">15:30 am</div>
-                        <div className = "ei_Copy">Add some more events to the
-                                                   calendar
-                        </div>
-                      </div>
+                      { this.state.events.length === 0 ?
+                          <div style = { {'textAlign': 'center'} }>
+                            You have no training planned today.<br />
+                            Take the day off, you deserve it!
+                          </div>
+                          :
+                          this.state.events.map((event, index) => {
+                            const startSplit = event.timeStart.split(':');
+                            const start = parseInt(startSplit[0]) * 60
+                                          + parseInt(startSplit[1]);
+                            const now = new Date().getHours() * 60
+                                        + new Date().getMinutes();
+                            const end = start + 60;
+                            let active = false;
+                            if (start <= now && now <= end) {
+                              active = true;
+                            }
+                            return <Event key = { index } { ...event }
+                                          active = { active }
+                            />;
+                          })
+                      }
                     </div>
                   </div>
                 </div>
