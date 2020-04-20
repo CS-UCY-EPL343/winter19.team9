@@ -81,6 +81,7 @@ function dbSignUp(data) {
       }
       let id = rows.insertId;
       // console.log('User created');
+        //The data.password must be with aes.
       connection.query(ins, [data.username, data.password, lvl, id],
           function(err) {
             if (err) {
@@ -1020,8 +1021,8 @@ function insertNewCoach(data) {
     const insertCoach = 'INSERT INTO COACH(CoachName, Surname, Bdate, Gender, Email) VALUES (?, ?, ?, ?, ?)';
     const insertAccount = 'INSERT INTO ACCOUNT(username , password, level, Coach_ID) VALUES (?, ?, ?, ?)';
     connection.query(insertCoach, [
-      data.firstName,
-      data.LastName,
+      data.fname,
+      data.lname,
       data.bDate,
       data.gender,
       data.email,
@@ -1060,8 +1061,8 @@ function insertNewAdmin(data) {
     const insertAdmin = 'INSERT INTO OWNER(Name, Surname, Bdate, Gender, Email) VALUES (?, ?, ?, ?, ?)';
     const insertAccount = 'INSERT INTO ACCOUNT(username , password, level, Owner_ID) VALUES (?, ?, ?, ?)';
     connection.query(insertAdmin, [
-      data.firstName,
-      data.LastName,
+      data.fname,
+      data.lname,
       data.bDate,
       data.gender,
       data.email,

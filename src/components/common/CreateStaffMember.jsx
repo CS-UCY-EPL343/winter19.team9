@@ -1,256 +1,268 @@
-import React, {Component}         from 'react';
-import '../assets/styles/loginStyle.css';
+import React            from 'react';
+import {ValidatorForm}  from 'react-material-ui-form-validator';
+import TextField        from '@material-ui/core/TextField';
+import Radio            from '@material-ui/core/Radio';
+import RadioGroup       from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl      from '@material-ui/core/FormControl';
+import Recaptcha        from 'react-recaptcha';
+import Swal             from 'sweetalert2';
+import '@sweetalert2/theme-dark/dark.css';
+import '../assets/styles/SignInUp.css';
 import {insertAdmin, insertCoach} from '../../repository';
 import history                    from '../../history';
 
-class CreateStaffMember extends Component {
-  constructor(props) {
-    super(props);
+class CreateStaffMember extends React.Component {
 
-    this.state = {
-      firstName       : '',
-      lastName        : '',
-      username        : '',
-      password        : '',
-      repeatedPassword: '',
-      email           : '',
-      gender          : '',
-      med             : null,
-      age             : '',
-      bDate           : '',
-      toggle          : true,
-      value           : true,
-      isVerified      : false,
-    };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.onRadioChange = this.onRadioChange.bind(this);
-    this.calcDate = this.calcDate.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+ constructor(props) {
+   super(props);
+   this.state = {
+     formData  : {
+       fname           : '',
+       lname           : '',
+       username        : '',
+       email           : '',
+       password        : '',
+       confirm_password: '',
+       bdate           : '',
+       gender          : '',
+       age             : '',
+     },
+     isVerified: false,
+     submitted : false,
+   };
+
+   this.handleChange = this.handleChange.bind(this);
+   this.handleSubmit = this.handleSubmit.bind(this);
+   this.verifyCallback = this.verifyCallback.bind(this);
+   this.calcDate = this.calcDate.bind(this);
+ }
+
+  componentDidMount() {
+    // custom rule will have name 'isPasswordMatch'
+    // noinspection JSUnresolvedFunction
+    ValidatorForm.addValidationRule('isPasswordMatch', value => {
+      const {formData} = this.state;
+      return value === formData.password;
+    });
   }
 
-  handleChange = (e) => {
-    if (e.target.name === 'bDate') {
-      this.setState({[e.target.name]: e.target.value});
-      this.calcDate(e);
-    } else {
-      this.setState({[e.target.name]: e.target.value});
+  handleChange = event => {
+    const {formData} = this.state;
+    formData[event.target.name] = event.target.value;
+    this.setState({formData});
+
+    if (event.target.name === 'bdate') {
+      this.calcDate(event);
     }
 
+    if (
+        event.target.name === 'password' &&
+        !event.target.value.match(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/)
+    ) {
+      event.target.setCustomValidity(
+          'Enter a combination of at least 8 numbers, lower and uppercase letters.',
+      );
+    } else if (
+        event.target.name === 'confirm_password' &&
+        event.target.value !== this.state.formData.password
+    ) {
+      event.target.setCustomValidity('Passwords don\'t match.');
+    } else {
+      event.target.setCustomValidity('');
+    }
   };
-  onRadioChange = (e) => {
-    this.setState({gender: e.target.value});
+
+  verifyCallback = response => {
+    if (response) {
+      this.setState({isVerified: true});
+    }
   };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    if (
+        !this.state.formData.fname ||
+        !this.state.formData.lname ||
+        !this.state.formData.username ||
+        !this.state.formData.bdate ||
+        !this.state.formData.gender ||
+        !this.state.formData.email.match(
+            /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/,
+        ) ||
+        !this.state.formData.password.match(
+            /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
+        ) ||
+        this.state.formData.confirm_password !== this.state.formData.password
+    ) {
+      return;
+    }
+    if (!this.state.isVerified) {
+      Swal.fire(
+          'Please verify that you are not a robot 🤖!!!',
+          '',
+          'error',
+      ).then();
+      return;
+    }
+    // Create output query
+    const data = {
+      username: this.state.formData.username,
+      password: this.state.formData.password,
+      fname   : this.state.formData.fname,
+      lname   : this.state.formData.lname,
+      email   : this.state.formData.email,
+      age     : this.state.formData.age,
+      gender  : this.state.formData.gender === 'male' ? 1 : 2,
+      level   : this.state.formData.level,
+      bDate   : this.state.formData.bdate,
+    };
+    if (this.props.staffType === 'coach') {
+      insertCoach(data).then(() => {
+        Swal.fire(
+            'Coach Created successfully',
+            '',
+            'success',
+        ).then(() => {
+          window.location.replace('/');
+        });
+      }).catch(() => Swal.fire(
+          'Something went wrong',
+          'Please try again...',
+          'error',
+      ));
+    } else if (this.props.staffType === 'admin') {
+      insertAdmin(data).then(() => {
+        Swal.fire(
+            'Admin Created successfully',
+            '',
+            'success',
+        ).then(() => {
+          window.location.replace('/');
+        });
+      }).catch(() => Swal.fire(
+          'Something went wrong',
+          'Please try again...',
+          'error',
+      ));
+    }
+  };
+
   calcDate = (dDate) => {
     let thenD = dDate.target.value;
     let str = thenD.split('-');
     let now = new Date();
     let ageDif = now.getFullYear() - str[0];
-    this.setState({age: ageDif});
-  };
-  onSubmit = (e) => {
-    e.preventDefault();
-    // const confirm_password = document.getElementById('signUpPasswordRepeat');
-    if (this.state.firstName === '') {
-      alert('First name couldn\'t be empty');
-    } else if (this.state.lastName === '') {
-      alert('Last name couldn\'t be empty');
-    } else if (this.state.username === '') {
-      alert('Username couldn\'t be empty');
-    } else if (this.state.email === '') {
-      alert('Email couldn\'t be empty');
-    } else if (this.state.password === '') {
-      alert('Password couldn\'t be empty');
-    } else if (this.state.repeatedPassword === '') {
-      alert('Repeat Password couldn\'t be empty');
-    } else if (this.state.bDate === '') {
-      alert('Birth Date couldn\'t be empty');
-    } else if (this.state.gender === '') {
-      alert('Gender couldn\'t be empty');
-    } else if (this.state.password !== this.state.repeatedPassword) {
-      alert('Passwords Don\'t Match');
-    } else {
-      const data = {
-        username : this.state.username,
-        password : this.state.password,
-        firstName: this.state.firstName,
-        LastName : this.state.lastName,
-        email    : this.state.email,
-        age      : this.state.age,
-        gender   : this.state.gender,
-        level    : this.state.level,
-        bDate    : this.state.bDate,
-      };
-      if (this.props.staffType === 'coach') {
-        insertCoach(data).then(() => {
-          alert('Success!!!');
-          history.push('/');
-        })
-            .catch(err => alert(err));
-      } else if (this.props.staffType === 'admin') {
-        insertAdmin(data).then(() => {
-          alert('Success!!!');
-          history.push('/');
-        })
-            .catch(err => alert(err));
-      }
-      alert('Creating ' + this.props.staffType);
-    }
+
+    const {formData} = this.state;
+    formData.age = ageDif;
+    this.setState({formData});
   };
 
   render() {
+    // noinspection JSUnresolvedVariable
     return (
-        <div className = { 'wrapper' }
-             id = { 'LoginModal' }
-             tabIndex = { '-1' }
-             role = { 'dialog' }
-             aria-labelledby = { 'exampleModalLabel' }
-             aria-hidden = { 'true' }
+        <form id = "signup"
+              onSubmit = { this.handleSubmit }
+              autoComplete = "off"
         >
-          <input type = { 'checkbox' }
-                 name = { 'flipper__checkbox' }
-                 id = { 'flipper__checkbox' }
-                 className = { 'flipper__checkbox' }
-                 hidden
+          <input
+              placeholder = "First Name"
+              name = "fname"
+              type = "text"
+              value = { this.state.formData.fname }
+              required
+              onChange = { this.handleChange }
           />
-
-          <div className = { 'form__container' }>
-            <div className = { 'form__signup' }>
-              <h1 className = { 'form__header' }>Sign Up</h1>
-              <form id = { 'signupForm' }
-                    method = { 'post' }
-                    className = { 'form' }
-              >
-                <fieldset className = { 'form__group' }>
-                  <label htmlFor = { 'signUpName' }>
-                                        <span className = { 'label__icon fa fa-user coloring' }>
-                                        </span>
-                  </label>
-                  <input name = { 'firstName' }
-                         className = { 'form_element signUpName' }
-                         type = { 'text' }
-                         onChange = { this.handleChange }
-                         placeholder = { 'First Name' }
-                         required
-                  />
-                  <span>
-                                           </span>
-                  <input name = { 'lastName' }
-                         className = { 'form_element signUpName' }
-                         type = { 'text' }
-                         onChange = { this.handleChange }
-                         placeholder = { 'Last Name' }
-                         required
-                  />
-
-                </fieldset>
-                <fieldset className = { 'form__group' }>
-                  <label htmlFor = { 'username' }>
-                                        <span className = { 'label__icon fa fa-user coloring' }>
-                                        </span>
-                  </label>
-                  <input id = { 'signUpUsername' }
-                         name = { 'username' }
-                         className = { 'form__element' }
-                         type = { 'text' }
-                         onChange = { this.handleChange }
-                         placeholder = { 'Username' }
-                         required
-                  />
-                </fieldset>
-
-                <fieldset className = { 'form__group' }>
-                  <label htmlFor = { 'signUpMail' }>
-                        <span className = { 'label__icon fa fa-envelope coloring' }>
-                        </span>
-                  </label>
-                  <input id = { 'signUpMail' }
-                         name = { 'email' }
-                         className = { 'form__element' }
-                         type = { 'email' }
-                         onChange = { this.handleChange }
-                         placeholder = { 'Email' }
-                         pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                         required
-                  />
-                </fieldset>
-                <fieldset className = { 'form__group' }>
-                  <label htmlFor = { 'signUpPassword' }>
-                        <span className = { 'label__icon fa fa-lock coloring' }>
-                        </span>
-                  </label>
-                  <input id = { 'signUpPassword' }
-                         name = { 'password' }
-                         className = { 'form__element' }
-                         type = { 'password' }
-                         onChange = { this.handleChange }
-                         placeholder = { 'Password' }
-                         required
-                  />
-                </fieldset>
-                <fieldset className = { 'form__group' }>
-                  <label htmlFor = { 'signUpPasswordRepeat' }>
-                        <span className = { 'label__icon fa fa-lock coloring' }>
-                        </span>
-                  </label>
-                  <input id = "signUpPasswordRepeat"
-                         name = { 'repeatedPassword' }
-                         className = { 'form__element' }
-                         type = { 'password' }
-                         onChange = { this.handleChange }
-                         placeholder = { 'Repeat Password' }
-                         required
-                  />
-                </fieldset>
-                <fieldset className = { 'form__group' }>
-                  <label htmlFor = { 'age' } id = { 'birthday' }>
-                    <span className = { 'fa fa-birthday-cake' }
-                          style = { {color: 'white'} }
-                    />
-                    <span className = { 'subtitle' }> Birth Date: </span>
-                  </label>
-                  <input id = { 'signUpAge' }
-                         name = { 'bDate' }
-                         className = { 'form_element' }
-                         type = { 'date' }
-                         onChange = { this.handleChange }
-                         placeholder = { 'Birth Date' }
-                         min = { '1900-01-01' }
-                         max = { '2010-01-01' }
-                         required
-                  />
-                </fieldset>
-                <fieldset className = { 'form__group' }>
-                  <div className = { 'form__radio' }>
-                    <label className = { 'label__style' }>Male
-                      <input type = { 'radio' }
-                             value = { '1' }
-                             checked = { this.state.gender === '1' }
-                             onChange = { this.onRadioChange }
-                      />
-                      <span className = { 'checkmark' } />
-                    </label>
-                    <label className = { 'label__style' }>Female
-                      <input type = { 'radio' }
-                             value = { '2' }
-                             checked = { this.state.gender === '2' }
-                             onChange = { this.onRadioChange }
-                      />
-                      <span className = { 'checkmark' } />
-                    </label>
-                  </div>
-                </fieldset>
-                <fieldset className = { 'form__group' }>
-                  <input className = { 'form__button form-control' }
-                         type = { 'submit' }
-                         value = { 'Sign up' }
-                         onClick = { this.onSubmit }
-                  />
-                </fieldset>
-              </form>
-            </div>
-          </div>
-        </div>
+          <input
+              placeholder = "Last Name"
+              name = "lname"
+              type = "text"
+              value = { this.state.formData.lname }
+              required
+              onChange = { this.handleChange }
+          />
+          <input
+              placeholder = "Email Address"
+              name = "email"
+              type = "email"
+              value = { this.state.formData.email }
+              onChange = { this.handleChange }
+              pattern = "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+              required
+          />
+          <input
+              placeholder = "Username"
+              name = "username"
+              type = "text"
+              value = { this.state.formData.username }
+              required
+              onChange = { this.handleChange }
+          />
+          <input
+              placeholder = "Password"
+              name = "password"
+              type = "password"
+              value = { this.state.formData.password }
+              required
+              pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+              onChange = { this.handleChange }
+          />
+          <input
+              placeholder = "Confirm Password"
+              name = "confirm_password"
+              type = "password"
+              value = { this.state.formData.confirm_password }
+              required
+              pattern = "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+              onChange = { this.handleChange }
+          />
+          <TextField
+              placeholder = "Birthday"
+              name = "bdate"
+              type = "date"
+              value = { this.state.formData.bday }
+              InputLabelProps = { {
+                shrink: true,
+              } }
+              onChange = { this.handleChange }
+              required
+          />
+          <br />
+          <FormControl component = "fieldset">
+            {/* <FormLabel component="legend">Gender</FormLabel> */ }
+            <RadioGroup
+                aria-label = "gender"
+                name = "gender"
+                value = { this.state.formData.gender }
+                onChange = { this.handleChange }
+                className = { 'gender-radio' }
+            >
+              <FormControlLabel
+                  value = "male"
+                  control = { <Radio required /> }
+                  label = "Male"
+              />
+              <FormControlLabel
+                  value = "female"
+                  control = { <Radio required /> }
+                  label = "Female"
+              />
+            </RadioGroup>
+          </FormControl>
+          <Recaptcha
+              elementID = { 'g-recaptcha' }
+              sitekey = "6Lf0od8UAAAAAFoog9iFIpVd8rcPxBwHpUKpnCua"
+              size = "normal"
+              render = "explicit"
+              theme = "dark"
+              // onloadCallback={() => console.log('loaded')}
+              verifyCallback = { this.verifyCallback }
+          />
+          <button>Sign up</button>
+          <br/>
+        </form>
     );
   }
 }
