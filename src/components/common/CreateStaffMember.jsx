@@ -1,43 +1,41 @@
-import React            from 'react';
-import {ValidatorForm}  from 'react-material-ui-form-validator';
-import TextField        from '@material-ui/core/TextField';
-import Radio            from '@material-ui/core/Radio';
-import RadioGroup       from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl      from '@material-ui/core/FormControl';
-import Recaptcha        from 'react-recaptcha';
-import Swal             from 'sweetalert2';
+import React                      from 'react';
+import {ValidatorForm}            from 'react-material-ui-form-validator';
+import TextField                  from '@material-ui/core/TextField';
+import Radio                      from '@material-ui/core/Radio';
+import RadioGroup                 from '@material-ui/core/RadioGroup';
+import FormControlLabel           from '@material-ui/core/FormControlLabel';
+import FormControl                from '@material-ui/core/FormControl';
+import Recaptcha                  from 'react-recaptcha';
+import Swal                       from 'sweetalert2';
 import '@sweetalert2/theme-dark/dark.css';
 import '../assets/styles/SignInUp.css';
 import {insertAdmin, insertCoach} from '../../repository';
-import history                    from '../../history';
 
 class CreateStaffMember extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      formData  : {
+        fname           : '',
+        lname           : '',
+        username        : '',
+        email           : '',
+        password        : '',
+        confirm_password: '',
+        bdate           : '',
+        gender          : '',
+        age             : '',
+      },
+      isVerified: false,
+      submitted : false,
+    };
 
- constructor(props) {
-   super(props);
-   this.state = {
-     formData  : {
-       fname           : '',
-       lname           : '',
-       username        : '',
-       email           : '',
-       password        : '',
-       confirm_password: '',
-       bdate           : '',
-       gender          : '',
-       age             : '',
-     },
-     isVerified: false,
-     submitted : false,
-   };
-
-   this.handleChange = this.handleChange.bind(this);
-   this.handleSubmit = this.handleSubmit.bind(this);
-   this.verifyCallback = this.verifyCallback.bind(this);
-   this.calcDate = this.calcDate.bind(this);
- }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.verifyCallback = this.verifyCallback.bind(this);
+    this.calcDate = this.calcDate.bind(this);
+  }
 
   componentDidMount() {
     // custom rule will have name 'isPasswordMatch'
@@ -174,6 +172,7 @@ class CreateStaffMember extends React.Component {
               value = { this.state.formData.fname }
               required
               onChange = { this.handleChange }
+              style = { {marginTop: 0} }
           />
           <input
               placeholder = "Last Name"
@@ -260,8 +259,8 @@ class CreateStaffMember extends React.Component {
               // onloadCallback={() => console.log('loaded')}
               verifyCallback = { this.verifyCallback }
           />
-          <button>Sign up</button>
-          <br/>
+          <button style = { {marginBottom: '15px'} }>Sign up</button>
+          <br />
         </form>
     );
   }
