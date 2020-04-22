@@ -35,22 +35,15 @@ class Signup extends React.Component {
             throw Error;
           }
           // Success
-          Swal.fire(
-              'Successful log in',
-              '',
-              'success',
-          ).then(() => {
-            // Reset
-            this.setState({
-              formData: {
-                username: '',
-                password: '',
-              },
-            }, () => {
-              this.props.toggleModal();
-              this.props.setUserLevel(data.level);
-              history.push('/');
-            });
+          this.setState({
+            formData: {
+              username: '',
+              password: '',
+            },
+          }, () => {
+            this.props.toggleModal();
+            this.props.setUserLevel(data.level);
+            history.push('/');
           });
         }).catch(() => Swal.fire(
         'Something went wrong',
