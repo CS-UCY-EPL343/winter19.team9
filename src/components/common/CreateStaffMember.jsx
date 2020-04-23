@@ -104,10 +104,16 @@ class CreateStaffMember extends React.Component {
       ).then();
       return;
     }
+
+    const Crypto = require('cryptr');
+    const cryptr = new Crypto('ffn_private_key_!!!!');
+
+    const encryptedString = cryptr.encrypt(this.state.formData.password);
+
     // Create output query
     const data = {
       username: this.state.formData.username,
-      password: this.state.formData.password,
+      password: encryptedString,
       fname   : this.state.formData.fname,
       lname   : this.state.formData.lname,
       email   : this.state.formData.email,

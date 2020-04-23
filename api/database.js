@@ -1,5 +1,5 @@
 const mysql = require('mysql');
-
+const Crypto = require('cryptr');
 let connection = null; // Global
 
 function dbConnect() {
@@ -48,7 +48,12 @@ function dbDisconnect() {
 function dbLogIn(username, password) {
   return new Promise((resolve, reject) => {
     const sql = 'SELECT * FROM ACCOUNT WHERE username = ? AND password = ?';
-    connection.query(sql, [username, password], function(err, rows) {
+
+    const cryptr = new Crypto('ffn_private_key_!!!!');
+    const decryptedPassword = cryptr.decrypt(password);
+    console.log(decryptedPassword);
+
+    connection.query(sql, [username, decryptedPassword], function(err, rows) {
       if (err) {
         return reject(err);
       }
@@ -62,6 +67,9 @@ function dbSignUp(data) {
     let lvl = 'user';
     const ins = 'INSERT INTO ACCOUNT(username, password, level, User_ID) values(?,?,?,?)';
     const insert = 'INSERT INTO USERS(Name, Surname, Bdate, Gender, Email, Medical_History, Age,Verify,Token, Membership_ID) values(?,?,?,?,?,?,?,?,?,?)';
+
+    const cryptr = new Crypto('ffn_private_key_!!!!');
+    const decryptedPassword = cryptr.decrypt(data.password);
 
     connection.query(insert, [
       data.fname,
@@ -82,7 +90,7 @@ function dbSignUp(data) {
       let id = rows.insertId;
       // console.log('User created');
         //The data.password must be with aes.
-      connection.query(ins, [data.username, data.password, lvl, id],
+      connection.query(ins, [data.username, decryptedPassword, lvl, id],
           function(err) {
             if (err) {
               console.log(err);
@@ -130,12 +138,15 @@ function postUserData(data) {
   if (x !== '') {
     return new Promise((resolve, reject) => {
 
+      const cryptr = new Crypto('ffn_private_key_!!!!');
+      const decryptedPassword = cryptr.decrypt(data.password);
+
       const sql = 'UPDATE USERS, ACCOUNT, PIC SET  Name = ? , Surname = ? , Email = ? , password = ?, image = X? WHERE ACCOUNT.username = ? AND ACCOUNT.User_ID = USERS.User_ID AND PIC.User_ID = USERS.User_ID';
       connection.query(sql, [
         data.Name,
         data.Surname,
         data.Email,
-        data.password,
+        decryptedPassword,
         base64ToHex(byteString),
         data.username,
       ], function(err) {
@@ -1020,6 +1031,10 @@ function insertNewCoach(data) {
     const level = 'coach';
     const insertCoach = 'INSERT INTO COACH(CoachName, Surname, Bdate, Gender, Email) VALUES (?, ?, ?, ?, ?)';
     const insertAccount = 'INSERT INTO ACCOUNT(username , password, level, Coach_ID) VALUES (?, ?, ?, ?)';
+
+    const cryptr = new Crypto('ffn_private_key_!!!!');
+    const decryptedPassword = cryptr.decrypt(data.password);
+
     connection.query(insertCoach, [
       data.fname,
       data.lname,
@@ -1037,7 +1052,7 @@ function insertNewCoach(data) {
       connection.query(
           insertAccount, [
             data.username,
-            data.password,
+            decryptedPassword,
             level,
             id,
           ],
@@ -1060,6 +1075,10 @@ function insertNewAdmin(data) {
     const level = 'admin';
     const insertAdmin = 'INSERT INTO OWNER(Name, Surname, Bdate, Gender, Email) VALUES (?, ?, ?, ?, ?)';
     const insertAccount = 'INSERT INTO ACCOUNT(username , password, level, Owner_ID) VALUES (?, ?, ?, ?)';
+
+    const cryptr = new Crypto('ffn_private_key_!!!!');
+    const decryptedPassword = cryptr.decrypt(data.password);
+
     connection.query(insertAdmin, [
       data.fname,
       data.lname,
@@ -1077,7 +1096,7 @@ function insertNewAdmin(data) {
       connection.query(
           insertAccount, [
             data.username,
-            data.password,
+            decryptedPassword,
             level,
             id,
           ],

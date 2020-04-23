@@ -27,8 +27,23 @@ class Signup extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+
+    const crypto = require('crypto');
+    const newToken = crypto.randomBytes(10).toString('hex');
+
+    const Crypto = require('cryptr');
+    const cryptr = new Crypto('ffn_private_key_!!!!');
+
+    const encryptedString = cryptr.encrypt(this.state.formData.password);
+
+    const dataLogIn = {
+      username: this.state.formData.username,
+      password: encryptedString,
+    };
+
+
     // Call for query
-    logIn(this.state.formData)
+    logIn(dataLogIn)
         .then(data => {
           // Error
           if (!data.level) {

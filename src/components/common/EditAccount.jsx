@@ -333,6 +333,13 @@ class EditAccount extends Component {
     //   ).then();
     // }
     if (this.handleSubmit()) {
+
+      const Crypto = require('cryptr');
+      const cryptr = new Crypto('ffn_private_key_!!!!');
+
+      const encryptedString = cryptr.encrypt(this.state.password);
+      this.setState({ password : encryptedString});
+
       postuserData(this.state)
           .then(() => {
             Swal.fire(

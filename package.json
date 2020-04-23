@@ -72,6 +72,7 @@
   "devDependencies": {
     "@material-ui/core": "^4.9.10",
     "concurrently": "^5.1.0",
+    "cryptr": "^6.0.2",
     "font-awesome": "^4.7.0",
     "gh-pages": "^2.1.1",
     "react-material-ui-form-validator": "^2.0.10",
