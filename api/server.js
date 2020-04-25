@@ -611,6 +611,20 @@ app.post('/api/coach/getCoachTraining', middleware, (req, res) => {
       .catch(err => res.status(409).json(err));
 });
 
+app.post('/api/user/getCoachClasses', middleware, (req, res) => {
+  console.log('It\'s a me!');
+  console.log(req.body.Coach_ID);
+  db.getCoachClass(req.body.Coach_ID)
+      .then(data => {
+        if (data) {
+          return res.status(200).json(data);
+        } else {
+          return res.status(409).json('Authentication failed. User not found.');
+        }
+      })
+      .catch(err => res.status(409).json(err));
+});
+
 //fetch pic
 // noinspection JSUnresolvedFunction
 app.post('/api/user/userPic', middleware, (req, res) => {
@@ -742,6 +756,7 @@ app.post('/api/BookClass/ClassCoach', middleware, (req, res) => {
 
 // noinspection JSUnresolvedFunction
 app.post('/api/BookClass/UserID', middleware, (req, res) => {
+  // console.log("I am HERE!!! " + req.decoded.username);
   db.getUserID(req.decoded.username).then(data => {
     if (data) {
       return res.status(200).json(data);
@@ -750,6 +765,19 @@ app.post('/api/BookClass/UserID', middleware, (req, res) => {
     }
   }).catch(err => res.status(401).json(err));
 });
+
+// noinspection JSUnresolvedFunction
+app.post('/api/CoachSchedule/CoachID', middleware, (req, res) => {
+  console.log("I am HERE!!! " + req.decoded.username);
+  db.getCoachID(req.decoded.username).then(data => {
+    if (data) {
+      return res.status(200).json(data);
+    } else {
+      return res.status(409).json('Authentication failed. User not found.');
+    }
+  }).catch(err => res.status(401).json(err));
+});
+
 
 // app.post('/api/BookClass/CoachID', middleware, (req, res) => {
 //     db.getCoachID(req.body.ClassName, req.body.ClassDay, req.body.ClassTime)
@@ -770,6 +798,40 @@ app.post('/api/BookClass/ClassID', middleware, (req, res) => {
     }
   }).catch(err => res.status(409).json(err));
 });
+
+// coach info
+// noinspection JSUnresolvedFunction
+app.post('/api/coach/getInfo', middleware, (req, res) => {
+  // console.log(req.body.username);
+    db.getCoachInfo(req.body.coachID).then(data => {
+      if (data) {
+        return res.status(200).json({messages: data});
+      } else {
+
+        return res.status(409).json('Authentication failed. User not found.');
+      }
+    }).catch(err => res.status(409).json(err));
+  });
+
+// Melios
+// noinspection JSUnresolvedFunction
+app.post('/api/messages/get2', middleware, (req, res) => {
+  // console.log(req.body.username);
+  if(req.username===''){
+    return res.status(409).json('Authentication failed. User not found.');
+  }else {
+    db.getMessagesMelios(req.body.username).then(data => {
+      if (data) {
+        return res.status(200).json({messages: data});
+      } else {
+
+        return res.status(409).json('Authentication failed. User not found.');
+      }
+    }).catch(err => res.status(409).json(err));
+  }
+});
+
+
 /***********************************************/
 // noinspection JSUnresolvedFunction
 app.post('/api/messages/get', middleware, (req, res) => {

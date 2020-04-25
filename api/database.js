@@ -447,7 +447,8 @@ function getPersonalSchedule(User_ID) {
 //fetching the data for the coach's training schedule
 function getCoachTraining(Coach_ID) {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT p.Day, p.Time FROM `PERSONAL_TRAINING` p WHERE p.Coach_ID = ? ';
+    const sql = 'SELECT p.Day, p.Time, p.User_ID, u.Name, u.Surname FROM `PERSONAL_TRAINING` p, USERS u WHERE ' +
+        'p.Coach_ID = ? AND p.User_ID = u.User_ID';
     connection.query(sql, [Coach_ID], function(err, rows) {
       if (err) {
         reject(err);
@@ -499,6 +500,48 @@ function getUserInfo(name) {
         reject(err);
       }
       resolve(rows);
+    });
+  });
+}
+
+function getCoachClass(Coach_ID) {
+  // console.log("Testing 1234: " + User_ID);
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT c.ClassID, c.DayCode, c.TimeCode, c.Name FROM Class c WHERE c.Coach_ID = ?';
+    connection.query(sql, [Coach_ID], function(err, rows) {
+      if (err) {
+        reject(err);
+      }
+      resolve(rows);
+    });
+  });
+}
+
+
+//coach Info
+function getCoachInfo(coach) {
+  // console.log("I am Here!!!" + typeof user);
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT Coach_ID, CoachName, Surname FROM `COACH` WHERE Coach_ID = ?';
+    connection.query(sql, [coach], function(err, rows) {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(rows);
+    });
+  });
+}
+
+// Melios
+function getMessagesMelios(user) {
+  // console.log("I am Here!!!" + typeof user);
+  return new Promise((resolve, reject) => {
+    const sql = 'call getMessages(?)';
+    connection.query(sql, [user], function(err, rows) {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(rows);
     });
   });
 }
@@ -785,6 +828,18 @@ function getClassCoach(Name, Day, Time) {
 function getUserID(user) {
   return new Promise((resolve, reject) => {
     const sql = 'SELECT u.User_ID FROM ACCOUNT a, USERS u WHERE username = ?  AND a.User_ID = u.User_ID';
+    connection.query(sql, [user], function(err, rows) {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(rows[0]);
+    });
+  });
+}
+
+function getCoachID(user) {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT c.Coach_ID FROM ACCOUNT a, COACH c WHERE username = ?  AND a.Coach_ID = c.Coach_ID';
     connection.query(sql, [user], function(err, rows) {
       if (err) {
         return reject(err);
@@ -1341,4 +1396,9 @@ module.exports = {
   getCountPT,
   getCountClasses,
   getEvents,
+  getMessagesMelios,
+  getCoachInfo,
+  getCoachID,
+  getCoachClass
+
 };

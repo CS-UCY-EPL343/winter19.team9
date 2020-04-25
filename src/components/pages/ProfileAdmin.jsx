@@ -1,7 +1,7 @@
 import React, {Component}        from 'react';
 // noinspection ES6CheckImport
 import {Redirect}                from 'react-router-dom';
-import '../assets/styles/adminProfile.css';
+import '../assets/styles/adminCoachProfile.css';
 import {
   getPrivateAnnouncementsAdmin,
   userDetails,
@@ -11,17 +11,20 @@ import {
   getAllCoaches,
   loggedInVisit,
   updateProfileVisit,
-  userPic,
-}                                from '../../repository';
+  userPic, getTotalPrivateAnnouncements,
+  getCoachInfo,
+  getClassSchedule
+} from '../../repository';
 import AnnouncementModal         from '../common/AnnouncementModal';
 import {Button}                  from 'reactstrap';
-import Box                       from '../common/SelectClassRegistration';
+import Box                       from '../common/SelectionPT';
 import Timetable                 from '../common/PersonalTrainingCreate';
 import AnnouncementsPrivateModal from '../common/AnnouncementsPrivateModal';
 import Swal                      from 'sweetalert2';
 import '@sweetalert2/theme-dark/dark.css';
 import ButtonLoader              from '../common/ButtonLoader';
 import Spinner                   from '../Spinner';
+import ToggleModal from "../common/ToggleModal";
 
 class ProfileAdmin extends Component {
 
@@ -54,6 +57,7 @@ class ProfileAdmin extends Component {
       trainingScheduleCoach: [],
       classSchedule        : [],
       coachIDAssigned      : '',
+      coachIDRet           : '',
     };
 
     this.toggleAnnouncementsData = this.toggleAnnouncementsData.bind(this);
@@ -67,7 +71,6 @@ class ProfileAdmin extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleChange2 = this.handleChange2.bind(this);
     this.onAnnouncementDelete = this.onAnnouncementDelete.bind(this);
-
   }
 
   componentDidMount() {
@@ -316,7 +319,9 @@ class ProfileAdmin extends Component {
         });
         return resolve();
       });
+
     });
+
   };
 
   updateCoaches = async(user, username) => {
@@ -330,8 +335,9 @@ class ProfileAdmin extends Component {
         User_ID: user.User_ID,
       }, () => {
         getAllCoaches().then(response => {
-          this.setState({selectedCoaches: response});
+          this.setState({selectedCoaches: response})
         });
+
       });
       return resolve();
     });
@@ -359,6 +365,31 @@ class ProfileAdmin extends Component {
     });
   };
 
+  retrievedCoach = (coachID) => {
+    console.log("This is the coachID inside this method: " + coachID);
+    if(coachID !== '') {
+      this.setState({coachIDRet: coachID}, () => {
+        getCoachInfo(coachID).then(response => {
+          this.setState({selectedCoaches: response.messages});
+        });
+      });
+    }else{
+      getClassSchedule(this.state.User_ID).then(response => {
+        console.log("This is the response \n");
+        console.log(response);
+        if(response !== []){
+          getAllCoaches().then(response => {
+            this.setState({selectedCoaches: response})
+          });
+        }
+        // console.log("this the classes returned schedule: ");
+        // console.log(classSchedule);
+
+      });
+
+    }
+  };
+
   toggleAnnouncementsData = (e) => {
     const x = this.state.announcements[e.target.id - 100];
     if (x === undefined) {
@@ -378,6 +409,7 @@ class ProfileAdmin extends Component {
     this.toggleAnnouncements2();
   };
 
+
   render() {
     let {image} = this.state;
     let imageURL = 'https://www.w3schools.com/howto/img_avatar.png';
@@ -393,7 +425,7 @@ class ProfileAdmin extends Component {
     return (
         <div id = 'profile' className = "">
           { (this.props.userLevel === 'admin') ? '' : <Redirect to = "/" /> }
-          <div className = "container">
+          <div className = "container-back">
             <div className = "row">
               <div className = "col-md-4">
                 <h4>Search for Client:</h4>
@@ -495,7 +527,6 @@ class ProfileAdmin extends Component {
                            readOnly
                     />
                   </div>
-
                 </form>
               </div>
               <div className = "col-md-4">
@@ -561,6 +592,7 @@ class ProfileAdmin extends Component {
 
               </div>
             </div>
+
             <div className = "row">
               <div id = "timeTableHeading">Create Personal Training Schedule
               </div>
@@ -570,11 +602,13 @@ class ProfileAdmin extends Component {
                            flag = { this.state.flag }
                            coachID = { this.state.Coach_ID }
                            userID = { this.state.User_ID }
+                           coachIDret = {this.retrievedCoach}
                 />
               </div>
               <div className = "col-md-4">
                 <Box toogle = { this.handleDayTimeChange }
                      coaches = { this.state.selectedCoaches }
+                     coachID = {this.state.coachIDRet}
                      userID = { this.state.User_ID }
                 />
               </div>

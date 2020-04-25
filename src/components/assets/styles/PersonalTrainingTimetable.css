@@ -41,15 +41,17 @@
     /*text-align: center;*/
     padding: 5% 0;
     font-family: "Roboto", sans-serif;
+
 }
 
 .coachBooked{
     background-color: #111c29;/*#3486eb; */
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+    /*background-size: contain;*/
+    /*background-repeat: no-repeat;*/
+    /*background-position: center;*/
     padding: 5% 0;
     font-family: "Roboto", sans-serif;
+    text-align: center;
 }
 .coachBookedSmall{
     background-color: #111c29;/*#3486eb; */

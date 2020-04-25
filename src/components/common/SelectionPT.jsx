@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import '../assets/styles/BookDropdown.css'
 
-class SelectClassRegistration extends Component {
+class SelectionPT extends Component {
 
     constructor(props) {
         super(props);
@@ -9,7 +9,8 @@ class SelectClassRegistration extends Component {
             day: '',
             time: '',
             flag: false,
-            Coach_ID: ''
+            Coach_ID: '',
+            coaches: []
         };
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -59,11 +60,15 @@ class SelectClassRegistration extends Component {
 
     // noinspection JSUnusedLocalSymbols
     componentDidUpdate(prevProps, prevState, snapshot) {
-        (async () => {
-            if (prevProps.userID !== this.props.userID) {
-                await this.clearOptions();
-            }
-        })();
+        if (prevProps.coaches !== this.props.coaches || prevProps.coachesRet !== this.props.coachesRet
+            || prevProps.coachID !== this.props.coachID
+           || prevProps.userID !== this.props.userID) {
+            (async () => {
+                if (prevProps.userID !== this.props.userID) {
+                    await this.clearOptions();
+                }
+            })();
+        }
     }
 
     render() {
@@ -86,7 +91,7 @@ class SelectClassRegistration extends Component {
                             </select>
                         </div>
                         <div className="col-md-6 RowBlock">
-                            <label htmlFor="DropClass">Class:</label>
+                            <label htmlFor="DropClass">Time:</label>
                             <select className="form-control selectGroupPersonal" name="time" id="TimePers"
                                     onChange={this.handleChange} required>
                                 <option value="0" hidden>Time Option</option>
@@ -112,6 +117,7 @@ class SelectClassRegistration extends Component {
                             <select className="form-control selectGroupPersonal" name="Coach_ID" id="CoachPers"
                                     onChange={this.handleChange} required>
                                 <option value="0" hidden>Select a Coach</option>
+
                                 {this.props.coaches.map((res, index) => {
                                     return <option value={res.Coach_ID} key={index}>
                                         {res.CoachName} {res.Surname}
@@ -136,4 +142,4 @@ class SelectClassRegistration extends Component {
     }
 }
 
-export default SelectClassRegistration;
+export default SelectionPT;

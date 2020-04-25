@@ -40,6 +40,12 @@ form.adminViewClient::after {
     /*display: table;*/
 }
 
+.container-back{
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 #profPic {
     margin-top: 20px;
     width: 100px;

@@ -9,16 +9,13 @@ class ProfileCoach extends Component {
         loggedInVisit().then();
         updateProfileVisit().then();
     }
-    
+
     render() {
         return (
             <div id='profile' className="main-container container-fluid">
                 { (this.props.userLevel === 'coach') ? '' : <Redirect to = "/" /> }
-
                 Coach
-
             </div>
-
         );
     }
 }

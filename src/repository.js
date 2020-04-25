@@ -135,6 +135,14 @@ export function getUserID() {
       .catch(() => Promise.reject('Authentication Failed user!'));
 }
 
+
+export function getCoachID() {
+  return axios.post(`${ BASE_URL }/api/CoachSchedule/CoachID`, {
+    'x-access-token': localStorage.getItem('x-access-token'),
+  })
+      .then(response => response.data)
+      .catch(() => Promise.reject('Authentication Failed user!'));
+}
 // export function getCoachID(ClassName, ClassDay, ClassTime) {
 //     return axios
 //         .post(`${BASE_URL}/api/BookClass/CoachID`, {'x-access-token':
@@ -432,6 +440,16 @@ export function getCoachTraining(Coach_ID) {
       .catch(() => Promise.reject('Authentication Failed!'));
 }
 
+export function getCoachClasses(Coach_ID) {
+  return axios
+      .post(`${ BASE_URL }/api/user/getCoachClasses`, {
+        'x-access-token': localStorage.getItem('x-access-token'),
+        Coach_ID         : Coach_ID,
+      })
+      .then(response => response.data)
+      .catch(() => Promise.reject('Authentication Failed!'));
+}
+
 //fetch pic
 export function userPic(User_ID) {
   return axios
@@ -518,6 +536,28 @@ export function sendEmail(data) {
   return axios.post(`${ BASE_URL }/api/email`, data)
       .then(response => response.data)
       .catch(error => error);
+}
+
+//retrieve coach info
+export function getCoachInfo(coachID) {
+  return axios.post(`${ BASE_URL }/api/coach/getInfo`, {
+    'x-access-token': localStorage.getItem('x-access-token'),
+    coachID            : coachID,
+
+  })
+      .then(response => response.data)
+      .catch(() => Promise.reject('Authentication Failed!'));
+}
+
+// Melios
+export function getMessagesMelios(username) {
+  return axios.post(`${ BASE_URL }/api/messages/get2`, {
+    'x-access-token': localStorage.getItem('x-access-token'),
+    username            : username,
+
+  })
+      .then(response => response.data)
+      .catch(() => Promise.reject('Authentication Failed!'));
 }
 
 export function getMessages() {

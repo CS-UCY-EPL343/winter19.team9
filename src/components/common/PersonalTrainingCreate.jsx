@@ -201,6 +201,9 @@ class PersonalTrainingCreate extends Component {
         );
 
         this.setState({coachName: coachName});
+        // this.setState({Coach_ID: coachID});
+        this.props.coachIDret(coachID);
+
 
         // -------------- Filling the CoachRefIDs ----------------------------
         // This will be used to prevent coach from having two personal training
@@ -456,14 +459,6 @@ class PersonalTrainingCreate extends Component {
                 <div className = 'classBookedSmall' />
                 <small>&emsp;Class Enrolled</small>
               </div>
-              {/*<div className="sameRow">*/ }
-              {/*    /!*<div className='coachBookedSmall'></div>*!/*/ }
-              {/*    /!*<small>&emsp;Coach Booked</small>*!/*/ }
-              {/*</div>*/ }
-              {/*<div className="sameRow">*/ }
-              {/*    /!*<div className='classBookedSmall'></div>*!/*/ }
-              {/*    /!*<small>&emsp;Class Enrolled</small>*!/*/ }
-              {/*</div>*/ }
             </div>
           </div>
           <br />
