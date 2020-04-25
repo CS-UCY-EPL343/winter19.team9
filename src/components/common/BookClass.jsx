@@ -9,6 +9,7 @@ import {getUserID}              from '../../repository';
 import {preventDefault}         from 'leaflet/src/dom/DomEvent';
 import ToggleModal              from './ToggleModal';
 import GeneralScheduleModalBody from './GeneralScheduleModalBody';
+import Swal                     from "sweetalert2";
 
 class BookClass extends Component {
 
@@ -28,6 +29,7 @@ class BookClass extends Component {
       DayCode      : '',
       TimeCode     : '',
       flag         : false,
+      invalid      : true,
       classSchedule: [],
       modalGeneral : false,
     };
@@ -46,30 +48,30 @@ class BookClass extends Component {
 
   handleClass = (e) => {
     this.setState(
-        {[e.target.name]: e.target.value === 'Select...' ? '' : e.target.value},
-        () => {
-          this.setState({Day: this.state.Day !== null ? [] : this.state.Day},
+      {[e.target.name]: e.target.value === 'Select...' ? '' : e.target.value},
+      () => {
+        this.setState({Day: this.state.Day !== null ? [] : this.state.Day},
+          () => {
+            this.setState(
+              {Time: this.state.Time !== null ? [] : this.state.Time},
               () => {
-                this.setState(
-                    {Time: this.state.Time !== null ? [] : this.state.Time},
-                    () => {
-                      this.setState({
-                        CoachName: this.state.CoachName !== null
-                            ? []
-                            : this.state.CoachName,
-                      }, () => {
-                        getClassDay(this.state.SelectedClass).then(response => {
-                          this.setState({Day: response}, () => {
-                            console.clear();
-                            console.log('Class = ' + this.state.SelectedClass
-                                        + ' & Days dropdown: ');
-                            console.log(this.state.Day);
-                          });
-                        });
-                      });
+                this.setState({
+                  CoachName: this.state.CoachName !== null
+                      ? []
+                      : this.state.CoachName,
+                }, () => {
+                  getClassDay(this.state.SelectedClass).then(response => {
+                    this.setState({Day: response}, () => {
+                      console.clear();
+                      console.log('Class = ' + this.state.SelectedClass
+                                  + ' & Days dropdown: ');
+                      console.log(this.state.Day);
                     });
+                  });
+                });
               });
-        });
+          });
+      });
   };
 
   handleDay = (e) => {
@@ -172,18 +174,27 @@ class BookClass extends Component {
 
   onSubmit = (e) => {
     preventDefault(e);
-    // enrollUser(this.state.ClassID, this.state.User_ID).then();
-    // () => alert('Success')).catch(err => alert(err));
-    this.setState({flag: true}, () => {
-      this.props.getSelections(
-          this.state.DayCode,
-          this.state.TimeCode,
-          true,
-          this.state.ClassID,
-          this.state.SelectedClass,
-      );
-    });
-
+    if (this.state.Day.length === 0 ||
+        this.state.Name.length === 0 ||
+        this.state.Time.length === 0 ||
+        this.state.CoachName.length === 0 ){
+      Swal.fire(
+          'Required selections are empty',
+          'Make sure that you have filled every selection first!',
+          'error',
+      ).then();
+    }else {
+      this.setState({flag: true, invalid : false}, () => {
+        this.props.getSelections(
+            this.state.DayCode,
+            this.state.TimeCode,
+            true,
+            this.state.ClassID,
+            this.state.SelectedClass,
+            false
+        );
+      });
+    }
     this.setState({Name: []}, () => {
       this.setState({Day: []}, () => {
         this.setState({Time: []}, () => {
@@ -199,14 +210,27 @@ class BookClass extends Component {
 
   onDelete = (e) => {
     preventDefault(e);
-    // unenrollUser(this.state.ClassID, this.state.User_ID).then();
-    //() => alert('Success')).catch(err => alert(err));
-    this.setState({flag: false},
-        () => {
-          this.props.getSelections(this.state.DayCode, this.state.TimeCode,
-              false, this.state.ClassID, this.state.SelectedClass);
-        });
-
+    if (this.state.Day.length === 0 ||
+        this.state.Name.length === 0 ||
+        this.state.Time.length === 0 ||
+        this.state.CoachName.length === 0 ){
+      Swal.fire(
+          'Required selections are empty',
+          'Make sure that you have filled every selection first!',
+          'error',
+      ).then();
+    }else {
+      this.setState({flag: false, invalid : false}, () => {
+        this.props.getSelections(
+            this.state.DayCode,
+            this.state.TimeCode,
+            false,
+            this.state.ClassID,
+            this.state.SelectedClass,
+            false
+        );
+      });
+    }
     this.setState({Name: []}, () => {
       this.setState({Day: []}, () => {
         this.setState({Time: []}, () => {

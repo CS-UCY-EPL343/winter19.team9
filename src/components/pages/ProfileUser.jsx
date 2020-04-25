@@ -28,22 +28,24 @@ class ProfileUser extends Component {
             flag         : '',
             classSchedule: [],
             Name         : '',
-            dataPT          : [],
-            dataClasses     : [],
+            dataPT       : [],
+            dataClasses  : [],
             loadingInfo  : 2,
+            invalid      : ''
         };
         this.handleSelections = this.handleSelections.bind(this);
         this.toggleLoading = this.toggleLoading.bind(this);
         this.handlePTClass = this.handlePTClass.bind(this);
     }
 
-    handleSelections = (DayCode, TimeCode, flag, ClassID, Name) => {
+    handleSelections = (DayCode, TimeCode, flag, ClassID, Name, invalid) => {
         this.setState({
             DayCode,
             TimeCode,
             flag,
             ClassID,
             Name,
+            invalid
         }, () => {
             // console.log("General Kenobi");
             // console.log(this.state.classSchedule);
@@ -56,8 +58,8 @@ class ProfileUser extends Component {
     };
     handlePTClass = (dataClasses, dataPT) => {
         this.setState({dataPT, dataClasses}, () => {
-            console.clear();
-            console.log("The tables have been retrieved!")
+            // console.clear();
+            console.log("The tables have been retrieved!");
             console.log(this.state.dataPT);
             console.log(this.state.dataClasses);
         });
@@ -83,6 +85,7 @@ class ProfileUser extends Component {
                            flag     = {this.state.flag}
                            ClassID  = {this.state.ClassID}
                            Name     = {this.state.Name}
+                           invalid  = {this.state.invalid}
                            userSchedule = {this.handlePTClass}
                            toggleLoading = { this.toggleLoading }
                 />

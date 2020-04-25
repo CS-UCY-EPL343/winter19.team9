@@ -87,7 +87,7 @@ class SettingsProfile extends Component {
     if (prevProps.classes !== this.props.classes || prevProps.dataPT
         !== this.props.dataPT) {
       (async() => {
-        console.clear();
+        // console.clear();
         console.log('Setting the states');
         await this.setState(
             {dataPT: this.props.dataPT, classes: this.props.classes});

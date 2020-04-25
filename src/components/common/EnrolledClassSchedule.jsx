@@ -102,7 +102,10 @@ class EnrolledClassSchedule extends Component {
             console.log(response);
             this.setState(
                 {User_ID: response.User_ID}, () => {
-                    console.clear();
+
+                    // Gets the Class Name, ID, TimeCode and DayCode Based on the user's ID
+                    //
+                    // console.clear();
                     getClassSchedule(this.state.User_ID).then(response => {
                         this.setState({classSchedule: response}, () => {
                             console.log("Class Schedule obtained! Here it comes!");
@@ -110,6 +113,9 @@ class EnrolledClassSchedule extends Component {
                             dataClasses = [...this.state.classSchedule];
                             let ret = this.state.classSchedule.slice(0);
                             let refID;
+                            //console.log("Let's go to the mall");
+                            //this.setState({Coach_ID: this.props.coachID, User_ID: this.props.userID});
+
                             (async () => {
                                 console.log('foo');
                                 let x = this.state.refIDs;
@@ -249,78 +255,87 @@ class EnrolledClassSchedule extends Component {
             //Checks if the user wants to enroll or unenroll. Flag is true for enroll
             // and false otherwise.
             if (this.props.flag === true) {
-
-                //Checks if there is not any personal training or class scehduled for
-                // the user at that specific time
-                if (!p.includes(refID) && !x.includes(refID)) {
-                    (async () => {
-
-                        //Copies the tables for the Class timetable entries, Class ID's and
-                        // Class names into temporary ones.
-                        x.push(refID);
-                        y.push(this.props.ClassID);
-                        z.push(this.props.Name);
-
-                        //waiting to copy all the tables before proceeding
-                        await this.StateSetter(x, y, z);
-
-                        //node is the div element containing the specified Class enrollment
-                        const node = document.getElementById(refID);
-
-                        //Sets that timetable entry as "enrolled"
-                        node.className = 'BusySlot';
-                        node.textContent = this.props.Name;
-                        console.log('refID: ' + refID + ' | class-ID: ' + this.props.ClassID
-                            + ' | Name: ' + this.props.Name);
-                        if (z.includes(this.props.Name)) {
-                            console.log('color: '
-                                + this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(
-                                    this.props.Name)]]);
-                            // node.style.backgroundColor =
-                            // this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(item.Name)]];
-                            node.style.backgroundImage = 'linear-gradient(to bottom right,'
-                                + this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(
-                                    this.props.Name)] % 9] + ','
-                                + this.ColorLuminance(
-                                    this.state.ClassColors[(this.state.cIDs[this.state.cNames.indexOf(
-                                        this.props.Name)]) % 9], -0.5) + ')';
-                        } else {
-                            console.log(
-                                'color: ' + this.state.ClassColors[this.props.ClassID]);
-                            // node.style.backgroundColor =
-                            // this.state.ClassColors[item.ClassID];
-                            node.style.backgroundImage = 'linear-gradient(to bottom right,'
-                                + this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(
-                                    this.props.Name)] % 9] + ','
-                                + this.ColorLuminance(
-                                    this.state.ClassColors[(this.state.cIDs[this.state.cNames.indexOf(
-                                        this.props.Name)]) % 9], -0.5) + ')';
-                        }
-                        console.clear();
-                        console.log('CLASSSSSS IDDDDDD');
-                        console.log(this.state.cIDs[this.state.refIDs.indexOf(refID)]);
-                        console.log('USEEEERR IDDDDDD');
-                        console.log(this.state.User_ID);
-                        enrollUser(this.state.cIDs[this.state.refIDs.indexOf(refID)],
-                            this.state.User_ID).then();
-                        console.log('Successfully enrolled');
-                    })();
-
-                    // })();
-                } else {
+                console.log("This is the invalid value:!!!!!!!!!!!!!!!!!!!!!!:::::: "+this.props.invalid);
+                if (this.props.invalid === true){
                     Swal.fire(
-                        'You have something else scheduled for that time',
+                        'Please select a user first!',
                         '',
                         'error',
                     ).then();
+                }else {
+                    //Checks if there is not any personal training or class scehduled for
+                    // the user at that specific time
+                    if (!p.includes(refID) && !x.includes(refID)) {
+                        (async () => {
+
+                            //Copies the tables for the Class timetable entries, Class ID's and
+                            // Class names into temporary ones.
+                            x.push(refID);
+                            y.push(this.props.ClassID);
+                            z.push(this.props.Name);
+
+                            //waiting to copy all the tables before proceeding
+                            await this.StateSetter(x, y, z);
+
+                            //node is the div element containing the specified Class enrollment
+                            const node = document.getElementById(refID);
+
+                            //Sets that timetable entry as "enrolled"
+                            node.className = 'BusySlot';
+                            node.childNodes[0].textContent = this.props.Name;
+                            console.log('refID: ' + refID + ' | class-ID: ' + this.props.ClassID
+                                + ' | Name: ' + this.props.Name);
+                            if (z.includes(this.props.Name)) {
+                                console.log('color: '
+                                    + this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(
+                                        this.props.Name)]]);
+                                // node.style.backgroundColor =
+                                // this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(item.Name)]];
+                                node.style.backgroundImage = 'linear-gradient(to bottom right,'
+                                    + this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(
+                                        this.props.Name)] % 9] + ','
+                                    + this.ColorLuminance(
+                                        this.state.ClassColors[(this.state.cIDs[this.state.cNames.indexOf(
+                                            this.props.Name)]) % 9], -0.5) + ')';
+                            } else {
+                                console.log(
+                                    'color: ' + this.state.ClassColors[this.props.ClassID]);
+                                // node.style.backgroundColor =
+                                // this.state.ClassColors[item.ClassID];
+                                node.style.backgroundImage = 'linear-gradient(to bottom right,'
+                                    + this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(
+                                        this.props.Name)] % 9] + ','
+                                    + this.ColorLuminance(
+                                        this.state.ClassColors[(this.state.cIDs[this.state.cNames.indexOf(
+                                            this.props.Name)]) % 9], -0.5) + ')';
+                            }
+                            // console.clear();
+                            console.log('CLASSSSSS IDDDDDD');
+                            console.log(this.state.cIDs[this.state.refIDs.indexOf(refID)]);
+                            console.log('USEEEERR IDDDDDD');
+                            console.log(this.state.User_ID);
+                            enrollUser(this.state.cIDs[this.state.refIDs.indexOf(refID)],
+                                this.state.User_ID).then();
+                            console.log('Successfully enrolled');
+                        })();
+
+                        // })();
+                    } else {
+                        Swal.fire(
+                            'You have something else scheduled for that time',
+                            '',
+                            'error',
+                        ).then();
+                    }
                 }
+
             } else {
                 if (this.props.flag === false) {
                     if (!p.includes(refID)) {
                         if (x.includes(refID)) {
                             if (this.props.ClassID
                                 === this.state.cIDs[this.state.refIDs.indexOf(refID)]) {
-                                console.clear();
+                                // console.clear();
                                 console.log('Correct');
                                 (async () => {
 
@@ -346,7 +361,7 @@ class EnrolledClassSchedule extends Component {
                                     this.StateSetter(newList, newList2, newList3);
                                     const node = document.getElementById(refID);
                                     node.className = '';
-                                    node.textContent = '';
+                                    node.childNodes[0].textContent = '';
                                     node.style.backgroundImage = '';
 
                                 })();
@@ -405,7 +420,6 @@ class EnrolledClassSchedule extends Component {
                             <div>19:00 - 20:00</div>
                         </div>
                         <div className="content" ref={this.myRef}>
-
                             {[...Array(6).keys()].map(x => (x + 1.01).toFixed(2))
                                 .map((x, index) =>
                                     <div

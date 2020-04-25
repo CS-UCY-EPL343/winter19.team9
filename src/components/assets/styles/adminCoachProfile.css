@@ -42,8 +42,7 @@ form.adminViewClient::after {
 
 .container-back{
     width: 90%;
-    margin-right: auto;
-    margin-left: auto;
+    margin: auto;
 }
 
 #profPic {
