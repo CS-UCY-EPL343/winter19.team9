@@ -6,7 +6,7 @@ an indication of the interface of the website in development, however most of th
 As stated this is an indication of the final product's interface, hence changes might apply during the 
 progression of the development process.
 
-####Deployment link: 
+#### Deployment link: 
 [https://cs-ucy-epl343.github.io/winter19.team9/](https://cs-ucy-epl343.github.io/winter19.team9/)
 ##### The web application is also responsive and operates normally on mobile devices
 
