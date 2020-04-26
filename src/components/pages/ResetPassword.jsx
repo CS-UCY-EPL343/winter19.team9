@@ -50,7 +50,6 @@ class ResetPassword extends Component{
             //         }
             // })
             // .catch((error)=>{
-            //     console.log(error.data)
             // })
     };
     render() {

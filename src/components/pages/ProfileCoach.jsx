@@ -117,10 +117,8 @@ class ProfileCoach extends Component {
             return false;
         }
 
-        // console.log('Success');
         let flag = false;
         await updateAnnouncement(Ann_ID, Title, Message).then(response => {
-            // console.log(response);
             this.setState({
                 announcements: this.state.announcements.map(ann => {
                     let x = ann;
@@ -237,7 +235,6 @@ class ProfileCoach extends Component {
         await addPrivateAnnouncement(Title, Message, this.state.username)
             .then(response => {
                 let prevAnn = this.state.announcements.slice(0);
-                console.log(response);
                 prevAnn.push(
                     {
                         ANNOUNCEMENT_ID: response.data.ANNOUNCEMENT_ID,
@@ -370,7 +367,6 @@ class ProfileCoach extends Component {
                 'data:image/png;base64,' + new Buffer.from(image, 'binary').toString(
                 'base64');
             $imagePreview = (<img src = { imageURL } alt = { 'Profile' } />);
-            // console.log(image)
         }
 
         return (

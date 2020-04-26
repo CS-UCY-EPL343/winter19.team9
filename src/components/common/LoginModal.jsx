@@ -94,7 +94,6 @@ class LoginModal extends Component {
           verify  : ver,
           hash    : newToken,
         };
-        //console.log(dataSign);
         signUp(dataSign)
             .then(() => {
                   alert(
@@ -113,9 +112,6 @@ class LoginModal extends Component {
     this.props.toggle();
     history.push('/forgotPassword');
   };
-  // recaptchaLoaded() {
-  //     console.log('captcha has successfully loaded');
-  // }
   calcDate = (dDate) => {
     let thenD = dDate.target.value;
     let str = thenD.split('-');
@@ -363,7 +359,6 @@ class LoginModal extends Component {
                         sitekey = "6Lf0od8UAAAAAFoog9iFIpVd8rcPxBwHpUKpnCua"
                         render = "explicit"
                         theme = "dark"
-                        // onloadCallback={() => console.log('loaded')}
                         verifyCallback = { this.verifyCallback }
                     />
                     <small>

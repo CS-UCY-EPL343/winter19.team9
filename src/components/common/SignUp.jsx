@@ -284,7 +284,6 @@ class SignUp extends React.Component {
               size = "normal"
               render = "explicit"
               theme = "dark"
-              // onloadCallback={() => console.log('loaded')}
               verifyCallback = { this.verifyCallback }
           />
           <button>Sign up</button>

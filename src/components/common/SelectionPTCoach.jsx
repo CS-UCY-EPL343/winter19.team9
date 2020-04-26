@@ -31,7 +31,6 @@ class SelectionPTCoach extends Component {
     };
 
     handleTime = (e) => {
-        // console.log(e.target.value);
         this.setState({
             [e.target.name]: e.target.value,
             selectionTime : e.target.value,
@@ -42,7 +41,6 @@ class SelectionPTCoach extends Component {
 
     onSubmit = () => {
         if (this.state.selectionTime === '' || this.state.selectionDay === ''){
-            console.log("One or more selections were not properly filled");
             Swal.fire(
                 'Required selections are empty',
                 'Make sure that you have filled every selection first!',
@@ -63,7 +61,6 @@ class SelectionPTCoach extends Component {
 
     onDelete = () => {
         if (this.state.selectionTime === '' || this.state.selectionDay === ''){
-            console.log("One or more selections were not properly filled");
             Swal.fire(
                 'Required selections are empty',
                 'Make sure that you have filled every selection first!',

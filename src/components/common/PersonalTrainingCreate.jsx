@@ -82,7 +82,6 @@ class PersonalTrainingCreate extends Component {
           } else {
             if (coaches.includes(refID)) {
               node = document.getElementById(refID);
-              console.log(refID);
               node.className = 'coachBooked';
             } else {
               node = document.getElementById(refID);
@@ -105,12 +104,9 @@ class PersonalTrainingCreate extends Component {
       day     : this.props.day,
     }, () => {
       if (this.props.flag === true) {
-        insertPT(this.state).then(); //() => alert('Successful
-                                     // insertion')).catch(err => alert(err));
-        console.log('REFIDS AFTER INSERTION: \n' + this.state.refIDs);
+        insertPT(this.state).then();
       } else {
-        deletePT(this.state).then(); //() => alert('Success
-                                     // deletion')).catch(err => alert(err));
+        deletePT(this.state).then();
       }
     });
   }
@@ -122,30 +118,20 @@ class PersonalTrainingCreate extends Component {
         || prevProps.coachID !== this.props.coachID || prevProps.userID
         !== this.props.userID) {
       console.clear();
-      console.log('An update is being performed!');
-
       (async() => {
         let refID = '';
 
         // ************************* Clearing the arrays
         // ***************************
-        // console.log("-----------------------------------------------------");
-        // console.log('start clearing'); console.log('Cleared');
-        // console.log("-----------------------------------------------------");
         let personalTraining = [];
         let classSchedule = [];
 
         if (this.props.userID !== '') {
-          // console.log(" I AM HERE!!!!")
           await getPersonalSchedule(this.props.userID).then(response => {
             personalTraining = response;
-            // console.log("this the user's returned schedule: \n");
-            // console.log(personalTraining);
           });
           await getClassSchedule(this.props.userID).then(response => {
             classSchedule = response;
-            // console.log("this the classes returned schedule: ");
-            // console.log(classSchedule);
 
           });
         }
@@ -154,9 +140,6 @@ class PersonalTrainingCreate extends Component {
         // *************************** ------------------------- Class Schedule
         // -------------------------------
         let ret = [...classSchedule];
-        // console.log("ret is here: \n");
-        // console.log(ret);
-
         let classRefIDs = [];
         let cNames = [];
         // for loop for traversing fetched data for ClassSchedule and filling
@@ -170,7 +153,6 @@ class PersonalTrainingCreate extends Component {
               if (!classRefIDs.includes(refID)) {
                 classRefIDs.push(refID);
                 cNames.push(item.Name);
-                // console.log("HERE: " + item.Name);
               }
 
             },
@@ -179,8 +161,6 @@ class PersonalTrainingCreate extends Component {
         // ------------------------ Personal Training --------------------------
         ret = [...personalTraining];
         refID = '';
-        // console.log("pts is here: \n");
-        // console.log(ret);
         let coachID = '';
         let refIDs = [];
         let coachName = '';
@@ -192,7 +172,6 @@ class PersonalTrainingCreate extends Component {
               }
               // Create a new array based on current state:
               coachID = item.Coach_ID;
-              console.log(' this is the coachID: ' + coachID);
               coachName = item.CoachName + ' ' + item.Surname;
               if (!refIDs.includes(refID)) {
                 refIDs.push(refID);
@@ -213,14 +192,10 @@ class PersonalTrainingCreate extends Component {
 
         await getCoachTraining(coachID).then(response => {
           trainingScheduleCoach = response;
-          // console.log("this the coach's returned schedule: \n");
-          // console.log(trainingScheduleCoach);
-
         });
 
         let retCoach = [...trainingScheduleCoach];
 
-        // console.log(retCoach);
         refID = '';
         let refIDsCoach = [];
 
@@ -238,8 +213,6 @@ class PersonalTrainingCreate extends Component {
         );
 
         // ************ Printing the filled tables on the site **************
-        // console.log(refIDsCoach);
-        // await this.fillTable(refIDs, classRefIDs, cNames, refIDsCoach);
 
         let time = this.props.time;
         let day = this.props.day;
@@ -259,7 +232,6 @@ class PersonalTrainingCreate extends Component {
                                                        === this.props.coachID
                                                        && prevProps.flag
                                                        === this.props.flag)) {
-          // console.log("YOU SHALL NOT PASS!!!")
           refID = '';
         }
 
@@ -268,11 +240,6 @@ class PersonalTrainingCreate extends Component {
             && (String(coachID) === String(this.props.coachID) || String(
                 coachID) === '') && refID !== '' && !classRefIDs.includes(
                 refID)) {
-          console.log(
-              '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-          console.log('inserting stuff bip boop');
-          console.log(
-              '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
           refIDs.push(refID);
           refIDsCoach.push(coachID);
           await this.insertDeleteMethodStates(String(coachID),
@@ -284,11 +251,7 @@ class PersonalTrainingCreate extends Component {
               this.props.coachID) !== ''
               && (String(coachID) === String(this.props.coachID) || String(
                   coachID) === '') && refID !== '') {
-            console.log(
-                '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-            console.log('deleting stuff bip boop');
-            console.log(
-                '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
+
             refIDs.splice(pos, 1);
             refIDsCoach.splice(posCoach, 1);
             await this.insertDeleteMethodStates(String(coachID),
@@ -311,8 +274,6 @@ class PersonalTrainingCreate extends Component {
               this.toggleModalCoachBooked();
             }
 
-            // console.log("coachID : " + (coachID) + " prop coachID: " +
-            // this.props.coachID);
             if (String(coachID) !== String(this.props.coachID) && String(
                 coachID) !== '' && prevProps.userID === this.props.userID) { //
               this.toggleModalIncorrectCoach();
@@ -320,7 +281,6 @@ class PersonalTrainingCreate extends Component {
           }
 
         }
-        console.log(refIDsCoach);
         await this.fillTable(refIDs, classRefIDs, cNames, refIDsCoach);
 
       })();

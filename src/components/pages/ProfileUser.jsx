@@ -47,8 +47,7 @@ class ProfileUser extends Component {
             Name,
             invalid
         }, () => {
-            // console.log("General Kenobi");
-            // console.log(this.state.classSchedule);
+
         });
 
     };

@@ -161,9 +161,7 @@ class CoachSchedule extends Component {
     StateSetter(x, y, z) {
         this.setState({refIDs: x}, () => {
             this.setState({cIDs: y}, () => {
-                this.setState({cNames: z}, () => {
-                    console.log(this.state.cNames);
-                });
+                this.setState({cNames: z});
             });
         });
     }
@@ -173,7 +171,6 @@ class CoachSchedule extends Component {
         let coachID = '';
         let coachName = '';
         getCoachID().then(response => {
-            console.log(response);
             this.setState(
                 {Coach_ID: response.Coach_ID}, () => {
                     coachID = response.Coach_ID;
@@ -200,7 +197,6 @@ class CoachSchedule extends Component {
                                         y.push(item.ClassID);
                                         z.push(item.Name);
                                         let node = document.getElementById(refID);
-                                        // console.log(refID);
                                         node.className = 'BusySlot';
                                         node.childNodes[0].textContent = item.Name;
 
@@ -270,8 +266,6 @@ class CoachSchedule extends Component {
             || prevProps.flag !== this.props.flag || prevProps.userID
             !== this.props.userID || prevProps.userName !== this.props.userName) {
             console.clear();
-            console.log('An update is being performed!');
-
             (async () => {
                 let user = this.props.userID;
                 if (user === '') {
@@ -318,8 +312,6 @@ class CoachSchedule extends Component {
                 );
 
                 // ------------------------ Personal Training --------------------------
-                console.log("THIS IS THE PT");
-                console.log(personalTraining);
                 ret = [...personalTraining];
                 refID = '';
                 let coachID = '';
@@ -334,7 +326,6 @@ class CoachSchedule extends Component {
                             }
                             // Create a new array based on current state:
                             coachID = item.Coach_ID;
-                            console.log(' this is the coachID: ' + coachID);
                             coachName = item.CoachName + ' ' + item.Surname;
                             if (!ClientRefIDs.includes(refID)) {
                                 ClientRefIDs.push(refID);
@@ -355,8 +346,6 @@ class CoachSchedule extends Component {
                     ).then();
                     return;
                 }
-                // console.log("I shouldn't be here");
-
                 // *********** Getting day and time from box select ***************
                 let time = this.props.time;
                 let day = this.props.day;
@@ -369,24 +358,16 @@ class CoachSchedule extends Component {
                     refID = '';
                 }
 
-                console.log(this.props.flag);
                 if ((time === '' || day === '')) {
                     refID = '';
                 }
-
-                console.log("This is the refID: " + refID);
 
                 let refIDsCoach = [...this.state.refIDsCoach];
                 let clientNames = [...this.state.clientNames];
                 if (!this.state.refIDsCoach.includes(refID)
                     && this.props.flag === true && refID !== '' && !classRefIDs.includes(
                         refID) && !this.state.refIDs.includes(refID)) {
-                    console.log(
-                        '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-                    console.log('inserting stuff bip boop');
-                    console.log(
-                        '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-                    // ClientRefIDs.push(refID);
+
                     refIDsCoach.push(refID);
                     clientNames.push(this.props.userName);
                     await this.setState({refIDsCoach: refIDsCoach, clientNames: clientNames})
@@ -395,11 +376,6 @@ class CoachSchedule extends Component {
                     let pos = ClientRefIDs.indexOf(refID);
                     let posCoach = refIDsCoach.indexOf(refID);
                     if (refIDsCoach.includes(refID) && ClientRefIDs.includes(refID) && this.props.flag === false && refID !== '') {
-                        console.log(
-                            '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
-                        console.log('deleting stuff bip boop');
-                        console.log(
-                            '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
                         ClientRefIDs.splice(pos, 1);
                         refIDsCoach.splice(posCoach, 1);
                         clientNames.splice(posCoach, 1);

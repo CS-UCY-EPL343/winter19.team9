@@ -417,7 +417,6 @@ app.post('/api/announcements/private/delete', middleware, (req, res) => {
   if (req.decoded.level === 'user') {
     return res.status(401).json({message: 'Authentication failed'});
   }
-  console.log(req.body.announcement_id);
   db.deleteAnnouncement(req.body.announcement_id)
       .then(
           res.status(204).json({message: 'Announcement deleted successfully'}))
@@ -468,7 +467,6 @@ app.post('/api/user/insert', (req, res) => {
   const email = req.body.email;
   const token = req.body.hash;
   const content = `Name: ${ fname } ${ lname }\n Email: ${ email }`;
-  // console.log(req.body);
   db.dbSignUp(req.body)
       // .then(response => res.status(200).json({message: response}))
       // .catch(err => res.status(409).json(err));
@@ -581,8 +579,7 @@ app.post('/api/user/getPersonalSchedule', middleware, (req, res) => {
 
 // noinspection JSUnresolvedFunction
 app.post('/api/user/getClassSchedule', middleware, (req, res) => {
-  console.log('It\'s a me!');
-  console.log(req.body.User_ID);
+
   db.getClassSchedule(req.body.User_ID)
       .then(data => {
         if (data) {
@@ -612,8 +609,7 @@ app.post('/api/coach/getCoachTraining', middleware, (req, res) => {
 });
 
 app.post('/api/user/getCoachClasses', middleware, (req, res) => {
-  console.log('It\'s a me!');
-  console.log(req.body.Coach_ID);
+
   db.getCoachClass(req.body.Coach_ID)
       .then(data => {
         if (data) {
@@ -756,7 +752,6 @@ app.post('/api/BookClass/ClassCoach', middleware, (req, res) => {
 
 // noinspection JSUnresolvedFunction
 app.post('/api/BookClass/UserID', middleware, (req, res) => {
-  // console.log("I am HERE!!! " + req.decoded.username);
   db.getUserID(req.decoded.username).then(data => {
     if (data) {
       return res.status(200).json(data);
@@ -768,7 +763,6 @@ app.post('/api/BookClass/UserID', middleware, (req, res) => {
 
 // noinspection JSUnresolvedFunction
 app.post('/api/CoachSchedule/CoachID', middleware, (req, res) => {
-  console.log("I am HERE!!! " + req.decoded.username);
   db.getCoachID(req.decoded.username).then(data => {
     if (data) {
       return res.status(200).json(data);
@@ -802,7 +796,6 @@ app.post('/api/BookClass/ClassID', middleware, (req, res) => {
 // coach info
 // noinspection JSUnresolvedFunction
 app.post('/api/coach/getInfo', middleware, (req, res) => {
-  // console.log(req.body.username);
     db.getCoachInfo(req.body.coachID).then(data => {
       if (data) {
         return res.status(200).json({messages: data});
@@ -816,7 +809,7 @@ app.post('/api/coach/getInfo', middleware, (req, res) => {
 // Melios
 // noinspection JSUnresolvedFunction
 app.post('/api/messages/get2', middleware, (req, res) => {
-  // console.log(req.body.username);
+
   if(req.username===''){
     return res.status(409).json('Authentication failed. User not found.');
   }else {

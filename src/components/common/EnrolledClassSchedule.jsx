@@ -79,7 +79,6 @@ class EnrolledClassSchedule extends Component {
         this.setState({refIDs: x}, () => {
             this.setState({cIDs: y}, () => {
                 this.setState({cNames: z}, () => {
-                    console.log(this.state.cNames);
                 });
             });
         });
@@ -89,7 +88,6 @@ class EnrolledClassSchedule extends Component {
         this.setState({ptIDs: x}, () => {
             this.setState({pIDs: y}, () => {
                 this.setState({pNames: z}, () => {
-                    console.log(this.state.pNames);
                 });
             });
         });
@@ -99,7 +97,6 @@ class EnrolledClassSchedule extends Component {
         let dataClasses = [];
         let dataPT = [];
         getUserID().then(response => {
-            console.log(response);
             this.setState(
                 {User_ID: response.User_ID}, () => {
 
@@ -108,16 +105,11 @@ class EnrolledClassSchedule extends Component {
                     // console.clear();
                     getClassSchedule(this.state.User_ID).then(response => {
                         this.setState({classSchedule: response}, () => {
-                            console.log("Class Schedule obtained! Here it comes!");
-                            console.log(this.state.classSchedule);
                             dataClasses = [...this.state.classSchedule];
                             let ret = this.state.classSchedule.slice(0);
                             let refID;
-                            //console.log("Let's go to the mall");
-                            //this.setState({Coach_ID: this.props.coachID, User_ID: this.props.userID});
 
                             (async () => {
-                                console.log('foo');
                                 let x = this.state.refIDs;
                                 let y = this.state.cIDs;
                                 let z = this.state.cNames;
@@ -139,15 +131,7 @@ class EnrolledClassSchedule extends Component {
                                             node.className = 'BusySlot';
                                             // node.textContent = item.Name;
                                             node.childNodes[0].textContent = item.Name;
-                                            console.log(
-                                                'refID: ' + refID + ' | class-ID: ' + item.ClassID
-                                                + ' | Name: ' + item.Name);
                                             if (z.includes(item.Name)) {
-                                                console.log('color: '
-                                                    + this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(
-                                                        item.Name)]]);
-                                                // node.style.backgroundColor =
-                                                // this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(item.Name)]];
                                                 node.style.backgroundImage =
                                                     'linear-gradient(to bottom right,'
                                                     + this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(
@@ -156,10 +140,6 @@ class EnrolledClassSchedule extends Component {
                                                     this.state.ClassColors[(this.state.cIDs[this.state.cNames.indexOf(
                                                         item.Name)]) % 9], -0.5) + ')';
                                             } else {
-                                                console.log(
-                                                    'color: ' + this.state.ClassColors[item.ClassID]);
-                                                // node.style.backgroundColor =
-                                                // this.state.ClassColors[item.ClassID];
                                                 node.style.backgroundImage =
                                                     'linear-gradient(to bottom right,'
                                                     + this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(
@@ -168,8 +148,6 @@ class EnrolledClassSchedule extends Component {
                                                     this.state.ClassColors[(this.state.cIDs[this.state.cNames.indexOf(
                                                         item.Name)]) % 9], -0.5) + ')';
                                             }
-
-                                            console.log(item.Name);
                                         }
                                     },
                                 );
@@ -180,17 +158,12 @@ class EnrolledClassSchedule extends Component {
 
                     getPersonalSchedule(this.state.User_ID).then(response => {
                         this.setState({personalSchedule: response}, () => {
-                            console.log("Personal Training obtained! Here it comes!");
-                            console.log(this.state.personalSchedule);
                             dataPT = [...this.state.personalSchedule];
                             this.props.userSchedule(dataClasses, dataPT);
                             let retPer = this.state.personalSchedule.slice(0);
                             let refID;
-                            //console.log("Let's go to the mall");
-                            //this.setState({Coach_ID: this.props.coachID, User_ID: this.props.userID});
 
                             (async () => {
-                                console.log('foo');
                                 let x = this.state.ptIDs;
                                 let y = this.state.pIDs;
                                 let z = this.state.pNames;
@@ -212,7 +185,6 @@ class EnrolledClassSchedule extends Component {
                                             node.style.backgroundImage = 'radial-gradient( #4c4c4c,'
                                                 + this.ColorLuminance(
                                                     '#4C4C4C', -0.7) + ')';
-                                            console.log(item.CoachName);
                                         }
                                     },
                                 );
@@ -233,8 +205,6 @@ class EnrolledClassSchedule extends Component {
         ) {
 
             let refID;
-            console.log(this.props.DayCode + this.props.TimeCode + this.props.flag);
-
             if (this.props.TimeCode < 10) {
                 this.setState({refID: this.props.DayCode + '.0' + this.props.TimeCode});
                 refID = this.props.DayCode + '.0' + this.props.TimeCode;
@@ -244,8 +214,6 @@ class EnrolledClassSchedule extends Component {
             }
 
             this.setState({flag: this.props.flag});
-            console.log(this.props.flag);
-
             // Create a new array based on current state:
             let x = this.state.refIDs.slice(0);
             let y = this.state.cIDs.slice(0);
@@ -255,7 +223,6 @@ class EnrolledClassSchedule extends Component {
             //Checks if the user wants to enroll or unenroll. Flag is true for enroll
             // and false otherwise.
             if (this.props.flag === true) {
-                console.log("This is the invalid value:!!!!!!!!!!!!!!!!!!!!!!:::::: "+this.props.invalid);
                 if (this.props.invalid === true){
                     Swal.fire(
                         'Please select a user first!',
@@ -283,12 +250,7 @@ class EnrolledClassSchedule extends Component {
                             //Sets that timetable entry as "enrolled"
                             node.className = 'BusySlot';
                             node.childNodes[0].textContent = this.props.Name;
-                            console.log('refID: ' + refID + ' | class-ID: ' + this.props.ClassID
-                                + ' | Name: ' + this.props.Name);
                             if (z.includes(this.props.Name)) {
-                                console.log('color: '
-                                    + this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(
-                                        this.props.Name)]]);
                                 // node.style.backgroundColor =
                                 // this.state.ClassColors[this.state.cIDs[this.state.cNames.indexOf(item.Name)]];
                                 node.style.backgroundImage = 'linear-gradient(to bottom right,'
@@ -298,8 +260,6 @@ class EnrolledClassSchedule extends Component {
                                         this.state.ClassColors[(this.state.cIDs[this.state.cNames.indexOf(
                                             this.props.Name)]) % 9], -0.5) + ')';
                             } else {
-                                console.log(
-                                    'color: ' + this.state.ClassColors[this.props.ClassID]);
                                 // node.style.backgroundColor =
                                 // this.state.ClassColors[item.ClassID];
                                 node.style.backgroundImage = 'linear-gradient(to bottom right,'
@@ -309,14 +269,8 @@ class EnrolledClassSchedule extends Component {
                                         this.state.ClassColors[(this.state.cIDs[this.state.cNames.indexOf(
                                             this.props.Name)]) % 9], -0.5) + ')';
                             }
-                            // console.clear();
-                            console.log('CLASSSSSS IDDDDDD');
-                            console.log(this.state.cIDs[this.state.refIDs.indexOf(refID)]);
-                            console.log('USEEEERR IDDDDDD');
-                            console.log(this.state.User_ID);
                             enrollUser(this.state.cIDs[this.state.refIDs.indexOf(refID)],
                                 this.state.User_ID).then();
-                            console.log('Successfully enrolled');
                         })();
 
                         // })();
@@ -336,7 +290,6 @@ class EnrolledClassSchedule extends Component {
                             if (this.props.ClassID
                                 === this.state.cIDs[this.state.refIDs.indexOf(refID)]) {
                                 // console.clear();
-                                console.log('Correct');
                                 (async () => {
 
                                     //wait to unenroll first and then remove the entries from the

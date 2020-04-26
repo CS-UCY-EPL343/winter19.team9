@@ -63,9 +63,6 @@ class BookClass extends Component {
                   getClassDay(this.state.SelectedClass).then(response => {
                     this.setState({Day: response}, () => {
                       console.clear();
-                      console.log('Class = ' + this.state.SelectedClass
-                                  + ' & Days dropdown: ');
-                      console.log(this.state.Day);
                     });
                   });
                 });
@@ -83,10 +80,6 @@ class BookClass extends Component {
               getClassTime(this.state.SelectedClass, this.state.SelectedDay)
                   .then(response => {
                     this.setState({Time: response}, () => {
-                      console.log(
-                          'Class = ' + this.state.SelectedClass + ', day = '
-                          + this.state.SelectedDay + ' & Times dropdown: ');
-                      console.log(this.state.Time);
                       if (this.state.SelectedDay === 'Monday') {
                         this.setState({DayCode: 1});
                       } else if (this.state.SelectedDay === 'Tuesday') {
@@ -117,11 +110,6 @@ class BookClass extends Component {
             getClassCoach(this.state.SelectedClass, this.state.SelectedDay,
                 this.state.SelectedTime).then(response => {
               this.setState({CoachName: response}, () => {
-                console.log('Class = ' + this.state.SelectedClass + ', day = '
-                            + this.state.SelectedDay + ', time = '
-                            + this.state.SelectedTime
-                            + ' & Coaches dropdown: ');
-                console.log(this.state.CoachName);
                 if (this.state.SelectedTime === '08:00:00') {
                   this.setState({TimeCode: 1});
                 } else if (this.state.SelectedTime === '09:00:00') {
@@ -161,11 +149,6 @@ class BookClass extends Component {
               this.state.SelectedTime, this.state.SelectedCoach)
               .then(response => {
                 this.setState({ClassID: response.data.ClassID.ClassID}, () => {
-                  console.log(
-                      'FINAL SELECTION:\nClass = ' + this.state.SelectedClass
-                      + ', day = ' + this.state.SelectedDay + ', time = '
-                      + this.state.SelectedTime + ' & coach = '
-                      + this.state.SelectedCoach);
                 });
               });
         });
@@ -248,16 +231,11 @@ class BookClass extends Component {
   componentDidMount() {
     getUserID()
         .then(response => {
-          // console.log(response);
           this.setState(
               {User_ID: response.User_ID}, () => {
-                // console.log("Hello There!");
-
               });
           getClasses().then(response => {
-            // console.log(response);
             this.setState({Name: response});
-            // console.log(this.state.Name);
           });
         });
   }

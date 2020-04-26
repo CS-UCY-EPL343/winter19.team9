@@ -20,31 +20,21 @@ class SelectionPT extends Component {
     }
 
     handleChange = (e) => {
-        // console.log(e.target.value);
         this.setState({
-            [e.target.name]: e.target.value
-        }, () => {
-            // console.log("this is the CoachID: " + this.state.Coach_ID);
-        });
-        // this.setState({Coach_ID: e.target.Coach_ID});
-
+            [e.target.name]: e.target.value});
     };
 
 
     onSubmit = () => {
-        // console.log(this.state.day);
         this.setState({flag: true},
             () => {
-                // console.log(this.state.flag);
                 this.props.toogle(this.state.day, this.state.time, this.state.flag, this.state.Coach_ID);
             });
     };
 
     onSubmit2 = () => {
-        // console.log(this.state.day);
         this.setState({flag: false},
             () => {
-                // console.log(this.state.flag);
                 this.props.toogle(this.state.day, this.state.time, this.state.flag, this.state.Coach_ID);
             });
     };

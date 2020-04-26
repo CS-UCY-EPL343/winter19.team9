@@ -89,12 +89,6 @@ class EditAccount extends Component {
   };
   fillCSV = (
       name, surname, email, username, password, bdate, age, PT, classes) => {
-    // console.log(name);
-    //
-    // this.state.csvData =[
-    //     ["firstname", "lastname", "email","username","password"]];
-    // console.log("THIS IS THE COACH: \n");
-    // console.log(PT[0].c);
     let day = '';
     let x = '';
     let time = '';
@@ -120,7 +114,6 @@ class EditAccount extends Component {
     for (let i = 0; i < PT.length; i++) {
       x = PT[i];
       for (let myKey in x) {
-        console.log(x);
         if (myKey === 'Day') {
           // noinspection JSUnfilteredForInLoop
           if (x[myKey] === 1) {
@@ -305,7 +298,6 @@ class EditAccount extends Component {
     // const {name,surname,email,username,password} = '';
     userData()
         .then(response => {
-          console.log(response);
           this.setState(response);
           this.setState({confirmPassword: response.password});
         }).then(() => this.setState({loading: false}));
@@ -324,14 +316,6 @@ class EditAccount extends Component {
   };
 
   Test = () => {
-    //console.log(this.state.Name);
-    // if (this.state.flag === '0') {
-    //   Swal.fire(
-    //       'Please fill in all boxes',
-    //       '',
-    //       'error',
-    //   ).then();
-    // }
     if (this.handleSubmit()) {
 
       const Crypto = require('cryptr');

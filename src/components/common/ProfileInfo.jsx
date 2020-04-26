@@ -30,7 +30,6 @@ class ProfileInfo extends Component {
           'data:image/png;base64,' + new Buffer.from(image, 'binary').toString(
           'base64');
       $imagePreview = (<img src = { imageURL } alt = { 'Profile Avatar' } />);
-      // console.log(image)
     }
 
     const name = this.state.Name + ' ' + this.state.Surname;

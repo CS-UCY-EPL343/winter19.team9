@@ -51,7 +51,6 @@ function dbLogIn(username, password) {
 
     const cryptr = new Crypto('ffn_private_key_!!!!');
     const decryptedPassword = cryptr.decrypt(password);
-    console.log(decryptedPassword);
 
     connection.query(sql, [username, decryptedPassword], function(err, rows) {
       if (err) {
@@ -88,7 +87,6 @@ function dbSignUp(data) {
         return reject(err);
       }
       let id = rows.insertId;
-      // console.log('User created');
         //The data.password must be with aes.
       connection.query(ins, [data.username, decryptedPassword, lvl, id],
           function(err) {
@@ -96,7 +94,6 @@ function dbSignUp(data) {
               console.log(err);
               return reject(err);
             }
-            // console.log('User inserted');
             return resolve('The user account was inserted successfully');
           });
 
@@ -127,13 +124,11 @@ function base64ToHex(str) {
     let hex = raw.charCodeAt(i).toString(16);
     result += (hex.length === 2 ? hex : '0' + hex);
   }
-  //console.log('0x' + result);
   return (result);
 }
 
 function postUserData(data) {
   const x = data.imagePreviewUrl;
-  ///console.log(x);
   let byteString = x.split(',')[1];
   if (x !== '') {
     return new Promise((resolve, reject) => {
@@ -150,12 +145,10 @@ function postUserData(data) {
         base64ToHex(byteString),
         data.username,
       ], function(err) {
-        // console.log(as);
         if (err) {
           console.log(err);
           return reject(err);
         }
-        //console.log("1 record inserted");
         return resolve('The data were saved successfully!');
       });
     });
@@ -165,12 +158,10 @@ function postUserData(data) {
       connection.query(sql,
           [data.Name, data.Surname, data.Email, data.password, data.username],
           function(err) {
-            // console.log(as);
             if (err) {
               console.log(err);
               return reject(err);
             }
-            // console.log("1 record inserted");
             return resolve('The data were saved successfully!');
           });
     });
@@ -185,7 +176,6 @@ function deleteUserData(user) {
       if (err) {
         return reject(err);
       }
-      console.log('1 record deleted');
       return resolve('Success');
     });
   });
@@ -296,7 +286,6 @@ function addPrivateAnnouncement(title, message, uname, level, username) {
       }
       // resolve({id: rows.insertId});
       x = rows[0].User_ID;
-      //console.log(x);
     });
 
     const sql = 'SELECT * FROM `ACCOUNT` WHERE `username`= ?';
@@ -379,7 +368,6 @@ function enrollUser(CLASS_ID, User_ID) {
         console.log(err);
         return reject(err);
       }
-      console.log('1 record inserted');
       return resolve('The data were saved successfully!');
     });
   });
@@ -393,7 +381,6 @@ function unenrollUser(CLASS_ID, User_ID) {
         console.log(err);
         return reject(err);
       }
-      console.log('Unenrolled from class successfully');
       return resolve('The data were saved successfully!');
     });
   });
@@ -409,7 +396,6 @@ function addClassCodes(DayCode, TimeCode, CLASS_ID) {
         console.log(err);
         return reject(err);
       }
-      console.log('1 record inserted');
       return resolve('The data were saved successfully!');
     });
   });
@@ -419,7 +405,6 @@ function addClassCodes(DayCode, TimeCode, CLASS_ID) {
 
 //fetching the data for the personal training schedule
 function getPersonalTraining(User_ID) {
-  // console.log("Testing 1234: " + User_ID);
   return new Promise((resolve, reject) => {
     const sql = 'SELECT p.Day, p.Time, p.Coach_ID FROM `PERSONAL_TRAINING` p WHERE p.User_ID = ? ';
     connection.query(sql, [User_ID], function(err, rows) {
@@ -432,7 +417,6 @@ function getPersonalTraining(User_ID) {
 }
 
 function getPersonalSchedule(User_ID) {
-  // console.log("Testing 1234: " + User_ID);
   return new Promise((resolve, reject) => {
     const sql = 'SELECT p.Day, p.Time, p.Coach_ID, c.CoachName, c.Surname FROM `PERSONAL_TRAINING` p, `COACH` c WHERE p.User_ID = ? AND c.Coach_ID = p.Coach_ID';
     connection.query(sql, [User_ID], function(err, rows) {
@@ -470,13 +454,12 @@ function userPic(User_ID) {
         reject(err);
       }
       resolve(rows);
-      // console.log(rows);
+
     });
   });
 }
 
 function getClassSchedule(User_ID) {
-  // console.log("Testing 1234: " + User_ID);
   return new Promise((resolve, reject) => {
     const sql = 'SELECT c.ClassID, c.DayCode, c.TimeCode, c.Name FROM Class c, ENROL e WHERE e.User_ID = ? AND c.ClassID = e.CLASS_ID';
     connection.query(sql, [User_ID], function(err, rows) {
@@ -505,7 +488,6 @@ function getUserInfo(name) {
 }
 
 function getCoachClass(Coach_ID) {
-  // console.log("Testing 1234: " + User_ID);
   return new Promise((resolve, reject) => {
     const sql = 'SELECT c.ClassID, c.DayCode, c.TimeCode, c.Name FROM Class c WHERE c.Coach_ID = ?';
     connection.query(sql, [Coach_ID], function(err, rows) {
@@ -520,7 +502,6 @@ function getCoachClass(Coach_ID) {
 
 //coach Info
 function getCoachInfo(coach) {
-  // console.log("I am Here!!!" + typeof user);
   return new Promise((resolve, reject) => {
     const sql = 'SELECT Coach_ID, CoachName, Surname FROM `COACH` WHERE Coach_ID = ?';
     connection.query(sql, [coach], function(err, rows) {
@@ -534,7 +515,6 @@ function getCoachInfo(coach) {
 
 // Melios
 function getMessagesMelios(user) {
-  // console.log("I am Here!!!" + typeof user);
   return new Promise((resolve, reject) => {
     const sql = 'call getMessages(?)';
     connection.query(sql, [user], function(err, rows) {
@@ -626,7 +606,6 @@ function getAllCoaches() {
 //insert to PersonalTraining
 function insertPT(data) {
   return new Promise((resolve, reject) => {
-    // console.log((data.day));
     const sql = 'INSERT INTO `PERSONAL_TRAINING` (`PT_ID`, `Day`, `Time`, `Coach_ID`, `User_ID`) VALUES (NULL, ?, ?, ?, ?);';
     connection.query(sql,
         [(data.day), (data.time), (data.Coach_ID), (data.User_ID)],
@@ -642,7 +621,6 @@ function insertPT(data) {
 //delete from PersonalTraining
 function deletePT(data) {
   return new Promise((resolve, reject) => {
-    // console.log((data.day));
     const sql = 'DELETE FROM `PERSONAL_TRAINING` WHERE `PERSONAL_TRAINING`.`Day` = ? and `PERSONAL_TRAINING`.`Time` = ? and `PERSONAL_TRAINING`.`Coach_ID` = ? and `PERSONAL_TRAINING`.`User_ID` = ? ';
     connection.query(sql,
         [(data.day), (data.time), (data.Coach_ID), (data.User_ID)],
@@ -786,7 +764,6 @@ function getClassName(ClassID) {
 
 function getClassDay(Name) {
   return new Promise((resolve, reject) => {
-    // console.log(Name);
     const sql = 'SELECT DISTINCT c.Day FROM Class c WHERE c.Name = ?';
     connection.query(sql, [Name], function(err, rows) {
       if (err) {
@@ -799,7 +776,6 @@ function getClassDay(Name) {
 
 function getClassTime(Name, Day) {
   return new Promise((resolve, reject) => {
-    // console.log();
     const sql = 'SELECT DISTINCT c.Time FROM Class c WHERE c.Name = ? AND c.Day = ?';
     connection.query(sql, [Name, Day], function(err, rows) {
       if (err) {
@@ -812,9 +788,6 @@ function getClassTime(Name, Day) {
 
 function getClassCoach(Name, Day, Time) {
   return new Promise((resolve, reject) => {
-    // console.log();
-    // const sql = "SELECT DISTINCT c.Coach_ID FROM Class c WHERE c.Name = ?
-    // AND c.Day = ? AND c.Time = ?";
     const sql = 'SELECT co.CoachName FROM COACH co, Class ca WHERE ca.Name = ? AND ca.Day = ? AND ca.Time = ? AND co.Coach_ID = ca.Coach_ID';
     connection.query(sql, [Name, Day, Time], function(err, rows) {
       if (err) {
@@ -851,9 +824,6 @@ function getCoachID(user) {
 
 function getClassID(Name, Day, Time, CoachName) {
   return new Promise((resolve, reject) => {
-    // console.log();
-    // const sql = "SELECT DISTINCT c.Coach_ID FROM Class c WHERE c.Name = ?
-    // AND c.Day = ? AND c.Time = ?";
     const sql = 'SELECT ca.ClassID FROM COACH co, Class ca WHERE ca.Name = ? AND ca.Day = ? AND ca.Time = ? AND co.CoachName = ? AND co.Coach_ID = ca.Coach_ID';
     connection.query(sql, [Name, Day, Time, CoachName], function(err, rows) {
       if (err) {
@@ -1000,7 +970,6 @@ function updateHomePageVisit() {
 }
 
 function updateProfileVisit(userType) {
-  console.log(userType);
   return new Promise((resolve, reject) => {
     let sql;
     if (userType === 'user') {
@@ -1102,7 +1071,6 @@ function insertNewCoach(data) {
         return reject(err);
       }
       let id = rows.insertId;
-      console.log('Coach created');
 
       connection.query(
           insertAccount, [
@@ -1116,7 +1084,6 @@ function insertNewCoach(data) {
               console.log(err);
               return reject(err);
             }
-            console.log('Coach inserted');
             return resolve('The coach account was inserted successfully');
           },
       );
@@ -1146,7 +1113,6 @@ function insertNewAdmin(data) {
         return reject(err);
       }
       let id = rows.insertId;
-      console.log('Admin created');
 
       connection.query(
           insertAccount, [
@@ -1160,7 +1126,6 @@ function insertNewAdmin(data) {
               console.log(err);
               return reject(err);
             }
-            console.log('Admin inserted');
             return resolve('The admin account was inserted successfully');
           },
       );
@@ -1207,7 +1172,6 @@ function deleteCoachMember(CoachId) {
       if (err) {
         return reject(err);
       }
-      console.log('1 record Update');
     });
     updateCoachAnnouncement(CoachId);
     updateStaffMessage(CoachId);
@@ -1216,7 +1180,6 @@ function deleteCoachMember(CoachId) {
       if (err) {
         return reject(err);
       }
-      console.log('1 record Deleted');
       return resolve('Success');
     });
   });

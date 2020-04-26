@@ -262,7 +262,7 @@ class CreateStaffMember extends React.Component {
               size = "normal"
               render = "explicit"
               theme = "dark"
-              // onloadCallback={() => console.log('loaded')}
+             
               verifyCallback = { this.verifyCallback }
           />
           <button style = { {marginBottom: '15px'} }>Sign up</button>

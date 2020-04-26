@@ -23,7 +23,7 @@ export function images(file) {
     // noinspection JSUnusedLocalSymbols,JSUnresolvedVariable
     let imageURL = 'data:image/png;base64,' + new Buffer(res.data.profile_pic,
         'binary').toString('base64');
-    console.log(imageURL);
+
   });
 
 }
@@ -351,7 +351,6 @@ export function deleteUserData() {
   return axios.post(`${ BASE_URL }/api/user/delete/data`, {
     'x-access-token': localStorage.getItem('x-access-token'),
   }).then(response => {
-    console.log(response);
     return response.data;
   }).catch(() => Promise.reject('Authentication Failed!'));
 

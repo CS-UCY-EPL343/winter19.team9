@@ -98,9 +98,6 @@ class ProfileAdmin extends Component {
       return false;
     }
 
-    // console.log(Title + ' ' + Message);
-    // console.log(this.state.announcements[this.state.modalAnnId].Title + ' '
-    //             + this.state.announcements[this.state.modalAnnId].Message);
     if (Title === this.state.announcements[this.state.modalAnnId].Title
         && Message
         === this.state.announcements[this.state.modalAnnId].Message) {
@@ -121,10 +118,8 @@ class ProfileAdmin extends Component {
       return false;
     }
 
-    // console.log('Success');
     let flag = false;
     await updateAnnouncement(Ann_ID, Title, Message).then(response => {
-      // console.log(response);
       this.setState({
         announcements: this.state.announcements.map(ann => {
           let x = ann;
@@ -241,9 +236,6 @@ class ProfileAdmin extends Component {
     await addPrivateAnnouncement(Title, Message, this.state.username)
         .then(response => {
           let prevAnn = this.state.announcements.slice(0);
-          // console.log(response);
-          //console.log(response.TIMESTAMP);
-          console.log(response);
           prevAnn.push(
               {
                 ANNOUNCEMENT_ID: response.data.ANNOUNCEMENT_ID,
@@ -251,10 +243,7 @@ class ProfileAdmin extends Component {
                 Message        : Message,
                 TIMESTAMP      : new Date().toISOString(),
               });
-          // console.log(announcements);
           this.setState({announcements: prevAnn});
-          //console.log(prevAnn);
-          // alert('Announcement is added!');
         }).then(() => {
           flag = true;
           Swal.fire(
@@ -312,7 +301,6 @@ class ProfileAdmin extends Component {
     return new Promise((resolve) => {
       userPic(user.User_ID).then(response => {
         this.setState({image: ''}, () => {
-          // console.log(response);
           if (response[0] !== undefined) {
             this.setState({image: response[0].image});
           }
@@ -366,7 +354,6 @@ class ProfileAdmin extends Component {
   };
 
   retrievedCoach = (coachID) => {
-    console.log("This is the coachID inside this method: " + coachID);
     if(coachID !== '') {
       this.setState({coachIDRet: coachID}, () => {
         getCoachInfo(coachID).then(response => {
@@ -375,16 +362,11 @@ class ProfileAdmin extends Component {
       });
     }else{
       getClassSchedule(this.state.User_ID).then(response => {
-        console.log("This is the response \n");
-        console.log(response);
         if(response !== []){
           getAllCoaches().then(response => {
             this.setState({selectedCoaches: response})
           });
         }
-        // console.log("this the classes returned schedule: ");
-        // console.log(classSchedule);
-
       });
 
     }
@@ -419,7 +401,6 @@ class ProfileAdmin extends Component {
           'data:image/png;base64,' + new Buffer.from(image, 'binary').toString(
           'base64');
       $imagePreview = (<img src = { imageURL } alt = { 'Profile' } />);
-      // console.log(image)
     }
 
     return (

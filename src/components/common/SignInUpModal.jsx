@@ -26,15 +26,6 @@ class SignInUpModal extends React.Component {
     } else {
       $('.flipper').css('transform', '');
 
-      // $('html, body').animate(
-      //     {
-      //       scrollTop: $('.flip-container').offset().top,
-      //     },
-      //     2000,
-      //     function() {
-      //       window.location.hash = $('.flip-container');
-      //     },
-      // );
     }
   };
 

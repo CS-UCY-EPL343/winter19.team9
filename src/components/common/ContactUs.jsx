@@ -40,7 +40,6 @@ class ContactUs extends Component {
     this.setState({loading: true}, () => {
       sendEmail(this.state)
           .then((response) => {
-            // console.log(response);
             if (response.status === 'success') {
               Swal.fire(
                   'Message sent successfully',
