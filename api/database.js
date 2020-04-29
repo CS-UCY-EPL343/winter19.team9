@@ -87,7 +87,7 @@ function dbSignUp(data) {
         return reject(err);
       }
       let id = rows.insertId;
-        //The data.password must be with aes.
+      //The data.password must be with aes.
       connection.query(ins, [data.username, decryptedPassword, lvl, id],
           function(err) {
             if (err) {
@@ -431,8 +431,9 @@ function getPersonalSchedule(User_ID) {
 //fetching the data for the coach's training schedule
 function getCoachTraining(Coach_ID) {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT p.Day, p.Time, p.User_ID, u.Name, u.Surname FROM `PERSONAL_TRAINING` p, USERS u WHERE ' +
-        'p.Coach_ID = ? AND p.User_ID = u.User_ID';
+    const sql = 'SELECT p.Day, p.Time, p.User_ID, u.Name, u.Surname FROM `PERSONAL_TRAINING` p, USERS u WHERE '
+                +
+                'p.Coach_ID = ? AND p.User_ID = u.User_ID';
     connection.query(sql, [Coach_ID], function(err, rows) {
       if (err) {
         reject(err);
@@ -498,7 +499,6 @@ function getCoachClass(Coach_ID) {
     });
   });
 }
-
 
 //coach Info
 function getCoachInfo(coach) {
@@ -1248,7 +1248,8 @@ function getEvents(username, dayString, dayNumber) {
         events.push({
           // personal : false,
           timeStart: time[0] + ':' + time[1],
-          event    : 'Class ' + r.Name + ' with Coach ' + r.CoachName + ' ' + r.Surname,
+          event    : 'Class ' + r.Name + ' with Coach ' + r.CoachName + ' '
+                     + r.Surname,
         });
       });
       const sql = 'SELECT PERSONAL_TRAINING.Time, COACH.CoachName, COACH.Surname FROM ACCOUNT INNER JOIN USERS ON ACCOUNT.User_ID=USERS.User_ID INNER JOIN PERSONAL_TRAINING ON USERS.User_ID=PERSONAL_TRAINING.User_ID INNER JOIN COACH ON PERSONAL_TRAINING.Coach_ID=COACH.Coach_ID WHERE PERSONAL_TRAINING.Day=? AND ACCOUNT.username=?';
@@ -1260,7 +1261,8 @@ function getEvents(username, dayString, dayNumber) {
           events.push({
             // personal : true,
             timeStart: r.Time + ':00',
-            event    : 'Personal Training with Coach ' + r.CoachName + ' ' + r.Surname,
+            event    : 'Personal Training with Coach ' + r.CoachName + ' '
+                       + r.Surname,
           });
         });
 
@@ -1282,6 +1284,42 @@ function getEvents(username, dayString, dayNumber) {
           return 0;
         });
         return resolve({events});
+      });
+    });
+  });
+}
+
+function getEventsTotal(username, dayString, dayNumber) {
+  const events = [];
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT Class.Name, Class.Time, COACH.CoachName, COACH.Surname FROM ACCOUNT INNER JOIN USERS ON ACCOUNT.User_ID=USERS.User_ID INNER JOIN ENROL ON USERS.User_ID=ENROL.User_ID INNER JOIN Class ON ENROL.CLASS_ID=Class.ClassID INNER JOIN COACH ON Class.Coach_ID=COACH.Coach_ID WHERE Class.Day=? AND ACCOUNT.username=?';
+    connection.query(sql, [dayString, username], function(err, rows) {
+      if (err) {
+        return reject(err);
+      }
+      rows.forEach(r => {
+        const time = r.Time.split(':');
+        events.push({
+          // personal : false,
+          timeStart: time[0] + ':' + time[1],
+          event    : 'Class ' + r.Name + ' with Coach ' + r.CoachName + ' '
+                     + r.Surname,
+        });
+      });
+      const sql = 'SELECT PERSONAL_TRAINING.Time, COACH.CoachName, COACH.Surname FROM ACCOUNT INNER JOIN USERS ON ACCOUNT.User_ID=USERS.User_ID INNER JOIN PERSONAL_TRAINING ON USERS.User_ID=PERSONAL_TRAINING.User_ID INNER JOIN COACH ON PERSONAL_TRAINING.Coach_ID=COACH.Coach_ID WHERE PERSONAL_TRAINING.Day=? AND ACCOUNT.username=?';
+      connection.query(sql, [dayNumber, username], function(err, rows) {
+        if (err) {
+          return reject(err);
+        }
+        rows.forEach(r => {
+          events.push({
+            // personal : true,
+            timeStart: r.Time + ':00',
+            event    : 'Personal Training with Coach ' + r.CoachName + ' '
+                       + r.Surname,
+          });
+        });
+        return resolve({total: events.length});
       });
     });
   });
@@ -1362,6 +1400,6 @@ module.exports = {
   getMessagesMelios,
   getCoachInfo,
   getCoachID,
-  getCoachClass
-
+  getCoachClass,
+  getEventsTotal,
 };

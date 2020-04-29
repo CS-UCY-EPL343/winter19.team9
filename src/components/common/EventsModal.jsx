@@ -5,7 +5,7 @@ import {getEvents}        from '../../repository';
 import {AnimatedOnScroll} from 'react-animated-css-onscroll';
 import Spinner            from '../Spinner';
 
-class MessagesModal extends Component {
+class EventsModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,7 +29,7 @@ class MessagesModal extends Component {
       this.setState({events: response.events});
     }).then(() => {
       this.setState({loading: false});
-    }).catch(err => alert(err));
+    }).catch();
   }
 
   render() {
@@ -92,4 +92,4 @@ class MessagesModal extends Component {
   }
 }
 
-export default MessagesModal;
+export default EventsModal;

@@ -608,6 +608,7 @@ app.post('/api/coach/getCoachTraining', middleware, (req, res) => {
       .catch(err => res.status(409).json(err));
 });
 
+// noinspection JSUnresolvedFunction
 app.post('/api/user/getCoachClasses', middleware, (req, res) => {
 
   db.getCoachClass(req.body.Coach_ID)
@@ -981,6 +982,19 @@ app.post('/api/events/get', middleware, (req, res) => {
   const day = new Intl.DateTimeFormat('en-GB', {weekday: 'long'}).format(
       new Date());
   db.getEvents(req.decoded.username, day, new Date().getDay()).then(data => {
+    if (data) {
+      return res.status(200).json(data);
+    } else {
+      return res.status(409).json('Authentication failed. User not found.');
+    }
+  }).catch(err => res.status(409).json(err));
+});
+
+// noinspection JSUnresolvedFunction
+app.post('/api/events/total', middleware, (req, res) => {
+  const day = new Intl.DateTimeFormat('en-GB', {weekday: 'long'}).format(
+      new Date());
+  db.getEventsTotal(req.decoded.username, day, new Date().getDay()).then(data => {
     if (data) {
       return res.status(200).json(data);
     } else {

@@ -1,17 +1,18 @@
 import React, {Component} from 'react';
 import ToggleModal        from './ToggleModal';
-import PaymentModal  from './PaymentModal';
-import EventsModal   from './EventsModal';
-import {Button}      from 'reactstrap';
+import PaymentModal       from './PaymentModal';
+import EventsModal        from './EventsModal';
+import {Button}           from 'reactstrap';
 import AnnouncementsPrivate
-                     from './AnnouncementsPrivate';
-import EditAccount   from './EditAccount';
-import MessagesModal from './MessagesModal';
+                          from './AnnouncementsPrivate';
+import EditAccount        from './EditAccount';
+import MessagesModal      from './MessagesModal';
 import {
+  getEventsTotal,
   // getSevenDaysRemaining,
   getTotalMessages,
   getTotalPrivateAnnouncements,
-}                    from '../../repository';
+} from '../../repository';
 
 class SettingsProfile extends Component {
   constructor(props, context) {
@@ -25,7 +26,7 @@ class SettingsProfile extends Component {
       modalEvents        : false,
       TotalMessages      : 0,
       TotalAnnouncement  : 0,
-      TotalEvents      : 0,
+      TotalEvents        : 0,
       sevenDaysLeft      : 0,
       open               : false,
       classes            : [],
@@ -79,6 +80,10 @@ class SettingsProfile extends Component {
       this.setState(
           {TotalMessages: response.TotalMessages});
     });
+
+    getEventsTotal().then(response => {
+      this.setState({TotalEvents: response.total});
+    }).catch();
 
   }
 
@@ -167,8 +172,7 @@ class SettingsProfile extends Component {
                     modalHeader = { 'Events' }
                     modalBody = {
                       <EventsModal userLevel = { this.props.userLevel }
-                                     TotalEvents = { this.state.TotalEvents }
-                                     toggleTotalEvents = { this.toggleTotalEvents }
+                                   TotalEvents = { this.state.TotalEvents }
                       /> }
                 />
               </li>

@@ -29,6 +29,7 @@ class Signup extends React.Component {
     e.preventDefault();
 
     const crypto = require('crypto');
+    // noinspection JSUnusedLocalSymbols
     const newToken = crypto.randomBytes(10).toString('hex');
 
     const Crypto = require('cryptr');

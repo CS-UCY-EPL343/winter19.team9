@@ -23,9 +23,7 @@ export function images(file) {
     // noinspection JSUnusedLocalSymbols,JSUnresolvedVariable
     let imageURL = 'data:image/png;base64,' + new Buffer(res.data.profile_pic,
         'binary').toString('base64');
-
   });
-
 }
 
 export function userData() {
@@ -649,6 +647,14 @@ export function validURL(str) {
 
 export function getEvents() {
   return axios.post(`${ BASE_URL }/api/events/get`, {
+    'x-access-token': localStorage.getItem('x-access-token'),
+  })
+      .then(response => response.data)
+      .catch(() => Promise.reject('Authentication Failed!'));
+}
+
+export function getEventsTotal() {
+  return axios.post(`${ BASE_URL }/api/events/total`, {
     'x-access-token': localStorage.getItem('x-access-token'),
   })
       .then(response => response.data)
