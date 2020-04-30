@@ -133,7 +133,6 @@ export function getUserID() {
       .catch(() => Promise.reject('Authentication Failed user!'));
 }
 
-
 export function getCoachID() {
   return axios.post(`${ BASE_URL }/api/CoachSchedule/CoachID`, {
     'x-access-token': localStorage.getItem('x-access-token'),
@@ -141,6 +140,7 @@ export function getCoachID() {
       .then(response => response.data)
       .catch(() => Promise.reject('Authentication Failed user!'));
 }
+
 // export function getCoachID(ClassName, ClassDay, ClassTime) {
 //     return axios
 //         .post(`${BASE_URL}/api/BookClass/CoachID`, {'x-access-token':
@@ -441,7 +441,7 @@ export function getCoachClasses(Coach_ID) {
   return axios
       .post(`${ BASE_URL }/api/user/getCoachClasses`, {
         'x-access-token': localStorage.getItem('x-access-token'),
-        Coach_ID         : Coach_ID,
+        Coach_ID        : Coach_ID,
       })
       .then(response => response.data)
       .catch(() => Promise.reject('Authentication Failed!'));
@@ -539,7 +539,7 @@ export function sendEmail(data) {
 export function getCoachInfo(coachID) {
   return axios.post(`${ BASE_URL }/api/coach/getInfo`, {
     'x-access-token': localStorage.getItem('x-access-token'),
-    coachID            : coachID,
+    coachID         : coachID,
 
   })
       .then(response => response.data)
@@ -550,7 +550,7 @@ export function getCoachInfo(coachID) {
 export function getMessagesMelios(username) {
   return axios.post(`${ BASE_URL }/api/messages/get2`, {
     'x-access-token': localStorage.getItem('x-access-token'),
-    username            : username,
+    username        : username,
 
   })
       .then(response => response.data)
@@ -560,6 +560,14 @@ export function getMessagesMelios(username) {
 export function getMessages() {
   return axios.post(`${ BASE_URL }/api/messages/get`, {
     'x-access-token': localStorage.getItem('x-access-token'),
+  })
+      .then(response => response.data)
+      .catch(() => Promise.reject('Authentication Failed!'));
+}
+
+export function deleteMessage(id) {
+  return axios.post(`${ BASE_URL }/api/messages/delete`, {
+    'x-access-token': localStorage.getItem('x-access-token'), id,
   })
       .then(response => response.data)
       .catch(() => Promise.reject('Authentication Failed!'));

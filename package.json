@@ -78,6 +78,7 @@
   },
   "devDependencies": {
     "@material-ui/core": "^4.9.10",
+    "chai": "^4.2.0",
     "concurrently": "^5.1.0",
     "cryptr": "^6.0.2",
     "font-awesome": "^4.7.0",

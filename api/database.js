@@ -141,7 +141,7 @@ function postUserData(data) {
         data.Name,
         data.Surname,
         data.Email,
-          data.Medical_History,
+        data.Medical_History,
         decryptedPassword,
         base64ToHex(byteString),
         data.Phone_Number,
@@ -158,7 +158,15 @@ function postUserData(data) {
     return new Promise((resolve, reject) => {
       const sql = 'UPDATE USERS, ACCOUNT SET  Name = ? , Surname = ? , Email = ? , Medical_History = ? , password = ?, Phone_Number = ? WHERE ACCOUNT.username = ? AND ACCOUNT.User_ID = USERS.User_ID ';
       connection.query(sql,
-          [data.Name, data.Surname, data.Email, data.Medical_History,data.password,data.Phone_Number, data.username],
+          [
+            data.Name,
+            data.Surname,
+            data.Email,
+            data.Medical_History,
+            data.password,
+            data.Phone_Number,
+            data.username,
+          ],
           function(err) {
             if (err) {
               console.log(err);
@@ -589,6 +597,32 @@ function createNewMessage(data, username) {
                   return resolve(rows[0]);
                 });
           });
+    });
+  });
+}
+
+function deleteNewMessage(msg_id, username) {
+  return new Promise((resolve, reject) => {
+    const check = 'SELECT AccountID FROM ACCOUNT WHERE username = ?';
+    connection.query(check, [username], function(err, res) {
+      if (err) {
+        return reject(err);
+      }
+      // Change
+      const id = res.length;
+      if (id === 0) {
+        return reject(err);
+      } else {
+        const user_id = res[0].AccountID;
+        const sql = 'DELETE FROM Messages WHERE Message_ID = ? and (From_ID = ? or FromDeletedID = ?)';
+        connection.query(sql, [msg_id, user_id, user_id],
+            function(error, rows) {
+              if (err) {
+                reject(err);
+              }
+              resolve(rows);
+            });
+      }
     });
   });
 }
@@ -1404,4 +1438,5 @@ module.exports = {
   getCoachID,
   getCoachClass,
   getEventsTotal,
+  deleteNewMessage,
 };

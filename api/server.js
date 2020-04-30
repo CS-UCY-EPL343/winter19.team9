@@ -773,7 +773,6 @@ app.post('/api/CoachSchedule/CoachID', middleware, (req, res) => {
   }).catch(err => res.status(401).json(err));
 });
 
-
 // app.post('/api/BookClass/CoachID', middleware, (req, res) => {
 //     db.getCoachID(req.body.ClassName, req.body.ClassDay, req.body.ClassTime)
 //         .then(data => {
@@ -797,23 +796,23 @@ app.post('/api/BookClass/ClassID', middleware, (req, res) => {
 // coach info
 // noinspection JSUnresolvedFunction
 app.post('/api/coach/getInfo', middleware, (req, res) => {
-    db.getCoachInfo(req.body.coachID).then(data => {
-      if (data) {
-        return res.status(200).json({messages: data});
-      } else {
+  db.getCoachInfo(req.body.coachID).then(data => {
+    if (data) {
+      return res.status(200).json({messages: data});
+    } else {
 
-        return res.status(409).json('Authentication failed. User not found.');
-      }
-    }).catch(err => res.status(409).json(err));
-  });
+      return res.status(409).json('Authentication failed. User not found.');
+    }
+  }).catch(err => res.status(409).json(err));
+});
 
 // Melios
 // noinspection JSUnresolvedFunction
 app.post('/api/messages/get2', middleware, (req, res) => {
 
-  if(req.username===''){
+  if (req.username === '') {
     return res.status(409).json('Authentication failed. User not found.');
-  }else {
+  } else {
     db.getMessagesMelios(req.body.username).then(data => {
       if (data) {
         return res.status(200).json({messages: data});
@@ -824,7 +823,6 @@ app.post('/api/messages/get2', middleware, (req, res) => {
     }).catch(err => res.status(409).json(err));
   }
 });
-
 
 /***********************************************/
 // noinspection JSUnresolvedFunction
@@ -870,6 +868,17 @@ app.post('/api/messages/new', middleware, (req, res) => {
       return res.status(200).json(data);
     } else {
 
+      return res.status(409).json('Authentication failed. User not found.');
+    }
+  }).catch(err => res.status(409).json(err));
+});
+
+// noinspection JSUnresolvedFunction
+app.post('/api/messages/delete', middleware, (req, res) => {
+  db.deleteNewMessage(req.body.id, req.decoded.username).then(data => {
+    if (data) {
+      return res.status(200).json(data);
+    } else {
       return res.status(409).json('Authentication failed. User not found.');
     }
   }).catch(err => res.status(409).json(err));
@@ -994,13 +1003,15 @@ app.post('/api/events/get', middleware, (req, res) => {
 app.post('/api/events/total', middleware, (req, res) => {
   const day = new Intl.DateTimeFormat('en-GB', {weekday: 'long'}).format(
       new Date());
-  db.getEventsTotal(req.decoded.username, day, new Date().getDay()).then(data => {
-    if (data) {
-      return res.status(200).json(data);
-    } else {
-      return res.status(409).json('Authentication failed. User not found.');
-    }
-  }).catch(err => res.status(409).json(err));
+  db.getEventsTotal(req.decoded.username, day, new Date().getDay())
+      .then(data => {
+        if (data) {
+          return res.status(200).json(data);
+        } else {
+          return res.status(409).json('Authentication failed. User not found.');
+        }
+      })
+      .catch(err => res.status(409).json(err));
 });
 
 // noinspection JSStringConcatenationToES6Template

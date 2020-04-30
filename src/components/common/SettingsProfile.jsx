@@ -12,7 +12,7 @@ import {
   // getSevenDaysRemaining,
   getTotalMessages,
   getTotalPrivateAnnouncements,
-} from '../../repository';
+}                         from '../../repository';
 
 class SettingsProfile extends Component {
   constructor(props, context) {
@@ -177,22 +177,20 @@ class SettingsProfile extends Component {
                 />
               </li>
               <li>
-                <div className = "menu-box-tab menu-text">
-                  <Button className = { 'nav-link menu-box-tab menu-text ' }
-                          onClick = { this.toggleAnnouncements }
-                          style = { {width: '100%'} }
-                  >
-                    <i className = "scnd-font-color fa fa-tasks" /> Announcements
-                    <div className = "menu-box-number">{ this.state.TotalAnnouncement }</div>
-                  </Button>
-                  <ToggleModal
-                      modal = { this.state.modalAnnouncements }
-                      toggle = { this.toggleAnnouncements }
-                      modalSize = { 'md' }
-                      modalHeader = { 'Announcements' }
-                      modalBody = { <AnnouncementsPrivate /> }
-                  />
-                </div>
+                <Button className = { 'nav-link menu-box-tab menu-text ' }
+                        onClick = { this.toggleAnnouncements }
+                        style = { {width: '100%'} }
+                >
+                  <i className = "scnd-font-color fa fa-tasks" /> Announcements
+                  <div className = "menu-box-number">{ this.state.TotalAnnouncement }</div>
+                </Button>
+                <ToggleModal
+                    modal = { this.state.modalAnnouncements }
+                    toggle = { this.toggleAnnouncements }
+                    modalSize = { 'md' }
+                    modalHeader = { 'Announcements' }
+                    modalBody = { <AnnouncementsPrivate /> }
+                />
               </li>
               <li id = "editAccount">
                 <Button className = { 'nav-link menu-box-tab menu-text ' }
