@@ -99,6 +99,10 @@ form.adminViewClient::after {
     color: red;
     content: "Please enter your username";
 }
+.tel-field:invalid + .message::after {
+    color: red;
+    content: "Please enter your phone number";
+}
 .email-field:invalid + .message::after {
     color: red;
     content: "Invalid email address";

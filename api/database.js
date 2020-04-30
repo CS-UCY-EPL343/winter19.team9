@@ -136,13 +136,15 @@ function postUserData(data) {
       const cryptr = new Crypto('ffn_private_key_!!!!');
       const decryptedPassword = cryptr.decrypt(data.password);
 
-      const sql = 'UPDATE USERS, ACCOUNT, PIC SET  Name = ? , Surname = ? , Email = ? , password = ?, image = X? WHERE ACCOUNT.username = ? AND ACCOUNT.User_ID = USERS.User_ID AND PIC.User_ID = USERS.User_ID';
+      const sql = 'UPDATE USERS, ACCOUNT, PIC SET  Name = ? , Surname = ? , Email = ?, Medical_History = ?, password = ?, image = X?, Phone_Number = ? WHERE ACCOUNT.username = ? AND ACCOUNT.User_ID = USERS.User_ID AND PIC.User_ID = USERS.User_ID';
       connection.query(sql, [
         data.Name,
         data.Surname,
         data.Email,
+          data.Medical_History,
         decryptedPassword,
         base64ToHex(byteString),
+        data.Phone_Number,
         data.username,
       ], function(err) {
         if (err) {
@@ -154,9 +156,9 @@ function postUserData(data) {
     });
   } else {
     return new Promise((resolve, reject) => {
-      const sql = 'UPDATE USERS, ACCOUNT SET  Name = ? , Surname = ? , Email = ? , password = ? WHERE ACCOUNT.username = ? AND ACCOUNT.User_ID = USERS.User_ID ';
+      const sql = 'UPDATE USERS, ACCOUNT SET  Name = ? , Surname = ? , Email = ? , Medical_History = ? , password = ?, Phone_Number = ? WHERE ACCOUNT.username = ? AND ACCOUNT.User_ID = USERS.User_ID ';
       connection.query(sql,
-          [data.Name, data.Surname, data.Email, data.password, data.username],
+          [data.Name, data.Surname, data.Email, data.Medical_History,data.password,data.Phone_Number, data.username],
           function(err) {
             if (err) {
               console.log(err);
