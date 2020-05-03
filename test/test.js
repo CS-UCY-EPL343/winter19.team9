@@ -3,16 +3,16 @@ require('mock-local-storage');
 const {Builder, Key, By, until} = require('selenium-webdriver');
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
-const chaiHttp = require('chai-http');
+// const chaiHttp = require('chai-http');
 const expect = chai.expect;
 // const assert = chai.assert;
 const driver = new Builder().forBrowser('firefox').build();
 
 chai.use(chaiAsPromised);
-chai.use(chaiHttp);
+// chai.use(chaiHttp);
 
-global.window = {};
-window.localStorage = global.localStorage;
+// global.window = {};
+// window.localStorage = global.localStorage;
 
 describe('Navigate to Pages', function() {
   this.timeout(30000);
