@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-// const BASE_URL = 'http://localhost:5000';
+const BASE_URL = 'http://localhost:5000';
 //
-const BASE_URL = 'http://10.16.23.17:5000';  // For Android use your IPv4
+// const BASE_URL = 'http://10.16.23.17:5000';  // For Android use your IPv4
 
 export function logIn(data) {
   // console.log(data);
