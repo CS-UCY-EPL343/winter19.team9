@@ -114,6 +114,18 @@ function getUserData(user) {
   });
 }
 
+function getStaffData(user) {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT COALESCE(Owner_ID, Coach_ID) AS AccountID,username, level FROM ACCOUNT WHERE username = ?';
+        connection.query(sql, [user], function(err, rows) {
+            if (err) {
+                return reject(err);
+            }
+            return resolve(rows[0]);
+        });
+    });
+}
+
 function base64ToHex(str) {
   let atob = require('atob');
   const raw = atob(str);
@@ -671,27 +683,27 @@ function deletePT(data) {
 
 // for personal training
 function getCoaches() {
-  return new Promise((resolve, reject) => {
-    const sql = 'SELECT ACCOUNT.AccountID, ACCOUNT.level, ACCOUNT.username, COACH.* FROM ACCOUNT JOIN COACH ON ACCOUNT.Coach_ID=COACH.Coach_ID';
-    connection.query(sql, [], function(err, rows) {
-      if (err) {
-        return reject(err);
-      }
-      resolve(rows);
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT ACCOUNT.AccountID, ACCOUNT.level, ACCOUNT.username, COACH.* FROM ACCOUNT JOIN COACH ON ACCOUNT.Coach_ID=COACH.Coach_ID';
+        connection.query(sql, [], function(err, rows) {
+            if (err) {
+                return reject(err);
+            }
+            resolve(rows);
+        });
     });
-  });
 }
 
 function getAdmins() {
-  return new Promise((resolve, reject) => {
-    const sql = 'SELECT ACCOUNT.AccountID, ACCOUNT.level, ACCOUNT.username, OWNER.* FROM ACCOUNT JOIN OWNER ON ACCOUNT.Owner_ID=OWNER.Owner_ID';
-    connection.query(sql, [], function(err, rows) {
-      if (err) {
-        return reject(err);
-      }
-      resolve(rows);
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT ACCOUNT.AccountID, ACCOUNT.level, ACCOUNT.username, OWNER.* FROM ACCOUNT JOIN OWNER ON ACCOUNT.Owner_ID=OWNER.Owner_ID';
+        connection.query(sql, [], function(err, rows) {
+            if (err) {
+                return reject(err);
+            }
+            resolve(rows);
+        });
     });
-  });
 }
 
 function getUser_ID(email) {
@@ -785,6 +797,7 @@ function getClasses() {
     });
   });
 }
+
 
 function getClassName(ClassID) {
   return new Promise((resolve, reject) => {
@@ -1200,7 +1213,7 @@ function updateAdminAnnouncement(AccountID) {
   });
 }
 
-function deleteCoachMember(CoachId) {
+function deleteCoachMember(CoachId){
 
   return new Promise((resolve, reject) => {
     const sqlUpdateDeletedID = 'INSERT INTO DELETED_ACCOUNT SELECT A.AccountID,C.CoachName,C.Surname,A.level FROM ACCOUNT A INNER JOIN COACH C ON A.Coach_ID=C.Coach_ID WHERE A.AccountID=?';
@@ -1434,6 +1447,7 @@ module.exports = {
   getCountClasses,
   getEvents,
   getMessagesMelios,
+  getStaffData,
   getCoachInfo,
   getCoachID,
   getCoachClass,

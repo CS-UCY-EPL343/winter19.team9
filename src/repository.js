@@ -33,6 +33,13 @@ export function userData() {
       .then(response => response.data)
       .catch(() => Promise.reject('Authentication Failed!'));
 }
+export function staffData() {
+  return axios.post(`${ BASE_URL }/api/staff/data`, {
+    'x-access-token': localStorage.getItem('x-access-token'),
+  })
+      .then(response => response.data)
+      .catch(() => Promise.reject('Authentication Failed!'));
+}
 
 export function getPrivateAnnouncements() {
   return axios.post(`${ BASE_URL }/api/announcements/private`,
@@ -513,18 +520,18 @@ export function getUserLevel() {
 
 export function lastVerify(data) {
   return axios
-      .post(`${ BASE_URL }/verifyEmail/:id`, data)
+      .post(`${ BASE_URL }/api/verifyEmail/:id`, data)
       .then(response => response.data)
       .catch(() => Promise.reject('Verification failed.'));
 }
 
 export function newPassword(data) {
-  return axios.post(`${ BASE_URL }/reset-password`, data)
+  return axios.post(`${ BASE_URL }/api/reset-password`, data)
       .then(response => response.data);
 }
 
 export function resetPass(data) {
-  return axios.post(`${ BASE_URL }/resetPassword/:id`, data)
+  return axios.post(`${ BASE_URL }/api/resetPassword/:id`, data)
       .then(response => response.data)
       .catch(() => Promise.reject('Failed to reset Password'));
 }

@@ -13,7 +13,8 @@ import {
   updateProfileVisit,
   userPic, getTotalPrivateAnnouncements,
   getCoachInfo,
-  getClassSchedule
+  getClassSchedule,
+  getTotalMessages, userData, staffData
 } from '../../repository';
 import AnnouncementModal         from '../common/AnnouncementModal';
 import {Button}                  from 'reactstrap';
@@ -25,6 +26,7 @@ import '@sweetalert2/theme-dark/dark.css';
 import ButtonLoader              from '../common/ButtonLoader';
 import Spinner                   from '../Spinner';
 import ToggleModal from "../common/ToggleModal";
+import MessagesModalAdminCoach from "../common/MessagesModalAdminCoach.jsx";
 
 class ProfileAdmin extends Component {
 
@@ -58,6 +60,8 @@ class ProfileAdmin extends Component {
       classSchedule        : [],
       coachIDAssigned      : '',
       coachIDRet           : '',
+      TotalMessages        : 0,
+      ownerName            : ''
     };
 
     this.toggleAnnouncementsData = this.toggleAnnouncementsData.bind(this);
@@ -71,11 +75,18 @@ class ProfileAdmin extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleChange2 = this.handleChange2.bind(this);
     this.onAnnouncementDelete = this.onAnnouncementDelete.bind(this);
+    this.toggleMessages = this.toggleMessages.bind(this);
+
   }
 
   componentDidMount() {
     loggedInVisit().then();
     updateProfileVisit().then();
+    staffData().then(response => {
+      // this.setState({image: response.image});
+      this.setState({ownerName: response.username});
+      console.log(response);
+    })
   }
 
   onSubmit = (e) => {
@@ -86,6 +97,10 @@ class ProfileAdmin extends Component {
             this.setState({searchResults: response, loadingSearchUser: false});
           });
     });
+  };
+
+  toggleMessages = () => {
+    this.setState({modalMessages: !this.state.modalMessages});
   };
 
   onAnnouncementSubmit = async(Title, Message, Ann_ID) => {
@@ -307,7 +322,10 @@ class ProfileAdmin extends Component {
         });
         return resolve();
       });
-
+      getTotalMessages().then(response => {
+        this.setState(
+            {TotalMessages: response.TotalMessages});
+      });
     });
 
   };
@@ -323,7 +341,7 @@ class ProfileAdmin extends Component {
         User_ID: user.User_ID,
       }, () => {
         getAllCoaches().then(response => {
-          this.setState({selectedCoaches: response})
+          this.setState({selectedCoaches: response});
         });
 
       });
@@ -401,6 +419,7 @@ class ProfileAdmin extends Component {
           'data:image/png;base64,' + new Buffer.from(image, 'binary').toString(
           'base64');
       $imagePreview = (<img src = { imageURL } alt = { 'Profile' } />);
+      // console.log(image)
     }
 
     return (
@@ -508,6 +527,30 @@ class ProfileAdmin extends Component {
                            readOnly
                     />
                   </div>
+                  <div className="form-group">
+                    <Button className = { 'nav-link menu-box-tab menu-text ' }
+                            onClick = { this.toggleMessages }
+                            style = { {width: '100%'} }
+                    >
+                      <i className = "scnd-font-color fa fa-envelope" /> Exchange Messages with this Client
+                      { this.state.TotalMessages > 0 &&
+                      <div className = "menu-box-number">{ this.state.TotalMessages }</div> }
+                    </Button>
+                    <ToggleModal
+                        modal = { this.state.modalMessages }
+                        toggle = { this.toggleMessages }
+                        modalSize = { 'md' }
+                        modalHeader = { 'Messages' }
+                        modalBody = {
+                          <MessagesModalAdminCoach
+                              userName = {this.state.ownerName}
+                              userLevel = { this.props.userLevel}
+                              TotalMessages = { this.state.TotalMessages }
+                              toggleTotalMessages = { this.toggleTotalMessages }
+                          /> }
+                    />
+                  </div>
+
                 </form>
               </div>
               <div className = "col-md-4">

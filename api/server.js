@@ -91,83 +91,83 @@ app.post('/api/email', (req, res) => {
 });
 
 // noinspection JSUnresolvedFunction
-app.post('/reset-password', (req, res) => {
-  const email = req.body.email;
-  if (req.body.email === '') {
-    res.status(400).send('email required');
-  }
-  db.getUser_ID(req.body.email)
-      .then((user) => {
-        if (user === null) {
-          console.error('email not in database');
-          res.status(400).status('email not in db');
-        } else {
-          const crypto = require('crypto');
-          const token = crypto.randomBytes(10).toString('hex');
-          const data = {
-            token: token,
-            id   : user,
-          };
-          db.updateUser(data);
-
-          // const content = `Email: ${email}\nThe secret token is: ${token}\n`;
-
-          const mail = {
-            from   : creds.EMAIL,
-            to     : email,
-            subject: 'Reset your password',
-            html   : `<h1>Forgot your password?</h1>
-              <p>Click on the link below to <a style="display:block; background-color: red; width: 20%; text-align:center;color:white; text-decoration: none;" href='http://localhost:3000/resetPassword/${ token }'>reset your password</a></p>`,
-          };
-          transporter.sendMail(mail, (err) => {
-            if (err) {
-              res.status(400).json({
-                status: 'fail',
-              });
+app.post('/api/reset-password', (req, res) => {
+    const email = req.body.email;
+    if (req.body.email === '') {
+        res.status(400).send('email required');
+    }
+    db.getUser_ID(req.body.email)
+        .then((user) => {
+            if (user === null) {
+                console.error('email not in database');
+                res.status(400).status('email not in db');
             } else {
-              res.status(200).json({
-                status: 'success',
-              });
+                const crypto = require('crypto');
+                const token = crypto.randomBytes(10).toString('hex');
+                const data = {
+                    token: token,
+                    id   : user,
+                };
+                db.updateUser(data);
+
+                // const content = `Email: ${email}\nThe secret token is: ${token}\n`;
+
+                const mail = {
+                    from   : creds.EMAIL,
+                    to     : email,
+                    subject: 'Reset your password',
+                    html   : `<h1>Forgot your password?</h1>
+              <p>Click on the link below to <a style="display:block; background-color: red; width: 20%; text-align:center;color:white; text-decoration: none;" href='http://localhost:3000/resetPassword/${ token }'>reset your password</a></p>`,
+                };
+                transporter.sendMail(mail, (err) => {
+                    if (err) {
+                        res.status(400).json({
+                            status: 'fail',
+                        });
+                    } else {
+                        res.status(200).json({
+                            status: 'success',
+                        });
+                    }
+                });
             }
-          });
-        }
-      });
+        });
 });
 /******************************/
 /*******Reset Password*********/
 /******************************/
 // noinspection JSUnresolvedFunction
-app.post('/resetPassword/:id', (req, res) => {
-  if (req.body.token === '') {
-    res.status(400).send('error');
-  } else {
-    db.resetPassword(req.body)
-        .then(() => {
-          res.send('Success reset.');
-        })
-        .catch(() => {
-          res.send('Failed to reset.');
-        });
-  }
+app.post('/api/resetPassword/:id', (req, res) => {
+    if (req.body.token === '') {
+        res.status(400).send('error');
+    } else {
+        db.resetPassword(req.body)
+            .then(() => {
+                res.send('Success reset.');
+            })
+            .catch(() => {
+                res.send('Failed to reset.');
+            });
+    }
 });
 /****************************************************/
 /**************** Email verification ****************/
 /****************************************************/
 
 // noinspection JSUnresolvedFunction
-app.post('/verifyEmail/:id', (req, res) => {
+app.post('/api/verifyEmail/:id', (req, res) => {
 
-  if (req.body.hash === '') {
-    res.status(400).send('error');
-  } else {
-    db.verifyUser(req.body)
-        .then(() => {
-          res.send('Success verify.');
-        })
-        .catch(() => {
-          res.send('Failed to verify.');
-        });
-  }
+    if (req.body.hash === '') {
+        res.status(400).send('error');
+    } else {
+        db.verifyUser(req.body)
+            .then(() => {
+                res.send('Success verify.');
+            })
+            .catch(() => {
+                res.send('Failed to verify.');
+            });
+    }
 });
 // noinspection JSUnresolvedFunction
 app.post('/api/auth', (req, res) => {
@@ -203,6 +203,16 @@ app.post('/api/user/data', middleware, (req, res) => {
       return res.status(409).json('Authentication failed. User not found.');
     }
   }).catch(err => res.status(401).json(err));
+});
+// noinspection JSUnresolvedFunction
+app.post('/api/staff/data', middleware, (req, res) => {
+    db.getStaffData(req.decoded.username).then(data => {
+        if (data) {
+            return res.status(200).json(data);
+        } else {
+            return res.status(409).json('Authentication failed. Staff member not found.');
+        }
+    }).catch(err => res.status(401).json(err));
 });
 
 // noinspection JSUnresolvedFunction
