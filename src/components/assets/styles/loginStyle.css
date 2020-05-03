@@ -69,10 +69,12 @@
     margin-right        : auto;
     margin-left         : auto;
     /*width: remy(320px);*/
+    /*background-image: url("https://i.pinimg.com/originals/d1/ef/67/d1ef67d74e17bea9caec03b537f24c05.jpg");*/
     background          : #1B1B1B;
     box-shadow          : 3px 3px 32px rgba(0, 0, 0, 0.25);
     -webkit-perspective : inherit;
     transform           : perspective(1000px);
+    border-radius: 25px;
 }
 
 /*#LoginModal .flipper__checkbox:checked + .form__container {*/
@@ -101,8 +103,11 @@
     width               : 100%;
     /*-webkit-backface-visibility: hidden;*/
     backface-visibility : hidden;
-    background-color    : #1B1B1B;
-    box-shadow          : 3px 3px 32px rgba(0, 0, 0, 0.25);
+    background          : #1B1B1B;
+    /*background-image    : url("https://i.pinimg.com/originals/d1/ef/67/d1ef67d74e17bea9caec03b537f24c05.jpg"); !*#1B1B1B;*!*/
+    /*box-shadow          : 3px 3px 32px rgba(0, 0, 0, 0.25);*/
+    border-radius: 25px;
+
 }
 
 #LoginModal .form__login:after, .form__signup:after {
@@ -119,6 +124,8 @@
     background-size   : 400% 400%;
     -webkit-animation : gradient 2s ease infinite;
     animation         : gradient 2s ease infinite;
+    border-radius: 25px;
+
 }
 
 #LoginModal .form__login {

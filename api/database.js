@@ -46,6 +46,7 @@ function dbDisconnect() {
 }
 
 function dbLogIn(username, password) {
+  // console.log(username + password);
   return new Promise((resolve, reject) => {
     const sql = 'SELECT * FROM ACCOUNT WHERE username = ? AND password = ?';
 
@@ -53,6 +54,7 @@ function dbLogIn(username, password) {
     const decryptedPassword = cryptr.decrypt(password);
 
     connection.query(sql, [username, decryptedPassword], function(err, rows) {
+      console.log(err);
       if (err) {
         return reject(err);
       }
@@ -109,6 +111,7 @@ function getUserData(user) {
       if (err) {
         return reject(err);
       }
+
       return resolve(rows[0]);
     });
   });
