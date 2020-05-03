@@ -58,7 +58,7 @@
     "start": "react-scripts start",
     "dev": "concurrently \"cd api && npm run start\" \"npm run start\"",
     "build": "react-scripts build",
-    "test": "mocha -r mock-local-storage --recursive",
+    "test": "mocha test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -81,7 +81,7 @@
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "chai-http": "^4.3.0",
-    "concurrently": "^5.1.0",
+    "concurrently": "^5.2.0",
     "cryptr": "^6.0.2",
     "font-awesome": "^4.7.0",
     "gh-pages": "^2.1.1",
