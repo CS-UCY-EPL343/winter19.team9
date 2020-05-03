@@ -171,6 +171,7 @@ app.post('/api/verifyEmail/:id', (req, res) => {
 });
 // noinspection JSUnresolvedFunction
 app.post('/api/auth', (req, res) => {
+  // console.log(req.body);
   db.dbLogIn(req.body.name, req.body.password).then(user => {
     if (!user) {
       return res.status('409').json('Authentication failed. User not found.');

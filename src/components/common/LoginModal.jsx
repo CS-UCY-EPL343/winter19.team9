@@ -60,14 +60,28 @@ class LoginModal extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    logIn(this.state)
+
+    const crypto = require('crypto');
+    const newToken = crypto.randomBytes(10).toString('hex');
+
+    const Crypto = require('cryptr');
+    const cryptr = new Crypto('ffn_private_key_!!!!');
+
+    const encryptedString = cryptr.encrypt(this.state.password);
+
+    const dataLogIn = {
+      username: this.state.username,
+      password: encryptedString,
+    };
+    // console.log(this.state.password,  this.state.username);
+    logIn(dataLogIn)
         .then(data => {
           if (!data.level) {
             throw Error;
           }
           this.props.toggle();    // Close Modal
           this.props.setUserLevel(data.level);
-          history.push('/');
+          history.push('/user/profile');
         })
         .catch(err => alert(err));
   };
@@ -80,10 +94,15 @@ class LoginModal extends Component {
       if (this.state.isVerified) {
         const crypto = require('crypto');
         const newToken = crypto.randomBytes(10).toString('hex');
+        // Create output query
+        const Crypto = require('cryptr');
+        const cryptr = new Crypto('ffn_private_key_!!!!');
+
+        const encryptedString = cryptr.encrypt(this.state.password);
 
         const dataSign = {
           username: this.state.username,
-          password: this.state.password,
+          password: encryptedString,
           fname   : this.state.fname,
           lname   : this.state.lname,
           email   : this.state.email,
@@ -162,7 +181,7 @@ class LoginModal extends Component {
                              className = { 'form_element' }
                              type = { 'text' }
                              pattern = "^ *[a-zA-Z0-9]+.*"
-                             placeholder = { 'username' }
+                             placeholder = { 'Username' }
                              required
                              onChange = { this.handleChange }
                       />
@@ -176,7 +195,7 @@ class LoginModal extends Component {
                              className = { 'form_element' }
                              id = { 'pword' }
                              pattern = { '^ *[a-zA-Z]+.*' }
-                             placeholder = { 'Enter password' }
+                             placeholder = { 'Enter Password' }
                              name = { 'password' }
                              required
                              onChange = { this.handleChange }
@@ -212,13 +231,13 @@ class LoginModal extends Component {
                         >Forgot your password?
                         </button>
                         <br />
-                        <span className = { 'subtitle' }> Not a member yet?</span>
-                        <small className = { 'form__link' }
-                               onClick = { this.changeSign }
-                        >
-                          Create your account
-                        </small>
-                        .
+                        {/*<span className = { 'subtitle' }> Not a member yet?</span>*/}
+                        {/*<small className = { 'form__link' }*/}
+                        {/*       onClick = { this.changeSign }*/}
+                        {/*>*/}
+                        {/*  Create your account*/}
+                        {/*</small>*/}
+                        {/*.*/}
                       </small>
                     </fieldset>
                   </form>

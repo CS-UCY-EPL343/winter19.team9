@@ -11,7 +11,7 @@ import {
     getAllCoaches,
     loggedInVisit,
     updateProfileVisit,
-    userPic
+    userPic, staffData
 } from '../../repository';
 
 import AnnouncementModal         from '../common/AnnouncementModal';
@@ -24,6 +24,7 @@ import '@sweetalert2/theme-dark/dark.css';
 import ButtonLoader              from '../common/ButtonLoader';
 import Spinner                   from '../Spinner';
 import ToggleModal from "../common/ToggleModal";
+import MessagesModalAdminCoach from "../common/MessagesModalAdminCoach";
 
 
 class ProfileCoach extends Component {
@@ -54,6 +55,7 @@ class ProfileCoach extends Component {
             loadingInfo          : false,
             trainingScheduleCoach: [],
             cleared              : false,
+            ownerName            :''
         };
 
         this.toggleAnnouncementsData = this.toggleAnnouncementsData.bind(this);
@@ -73,6 +75,11 @@ class ProfileCoach extends Component {
     componentDidMount() {
         loggedInVisit().then();
         updateProfileVisit().then();
+        staffData().then(response => {
+            // this.setState({image: response.image});
+            this.setState({ownerName: response.username});
+            console.log(response);
+        })
     }
 
     onSubmit = (e) => {
@@ -86,6 +93,9 @@ class ProfileCoach extends Component {
         });
     };
 
+    toggleMessages = () => {
+        this.setState({modalMessages: !this.state.modalMessages});
+    };
 
     onAnnouncementSubmit = async(Title, Message, Ann_ID) => {
         if (this.state.level <= 1) {
@@ -427,8 +437,32 @@ class ProfileCoach extends Component {
                             />
                         </div>
                         <div className = "col-md-4">
+                            <label htmlFor = "comment"><h4>Messages:</h4></label>
+                            <div className="form-group">
+                                <Button className = { 'nav-link menu-box-tab menu-text ' }
+                                        onClick = { this.toggleMessages }
+                                        style = { {width: '100%'} }
+                                >
+                                    <i className = "scnd-font-color fa fa-envelope" /> Exchange Messages with this Client
+                                    { this.state.TotalMessages > 0 &&
+                                    <div className = "menu-box-number">{ this.state.TotalMessages }</div> }
+                                </Button>
+                                <ToggleModal
+                                    modal = { this.state.modalMessages }
+                                    toggle = { this.toggleMessages }
+                                    modalSize = { 'md' }
+                                    modalHeader = { 'Messages' }
+                                    modalBody = {
+                                        <MessagesModalAdminCoach
+                                            userName = {this.state.ownerName}
+                                            userLevel = { this.props.userLevel}
+                                            TotalMessages = { this.state.TotalMessages }
+                                            toggleTotalMessages = { this.toggleTotalMessages }
+                                        /> }
+                                />
+                            </div>
+                            <br/>
                             <label htmlFor = "comment"><h4>Announcements:</h4></label>
-
                             <div className = "menu-box-tab menu-text" id = "EditAnns">
                                 { this.state.announcements.sort(
                                     function(a, b) {
