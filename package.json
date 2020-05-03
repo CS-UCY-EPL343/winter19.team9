@@ -58,7 +58,7 @@
     "start": "react-scripts start",
     "dev": "concurrently \"cd api && npm run start\" \"npm run start\"",
     "build": "react-scripts build",
-    "test": "mocha test",
+    "test": "mocha -r mock-local-storage --recursive",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -79,11 +79,14 @@
   "devDependencies": {
     "@material-ui/core": "^4.9.10",
     "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "chai-http": "^4.3.0",
     "concurrently": "^5.1.0",
     "cryptr": "^6.0.2",
     "font-awesome": "^4.7.0",
     "gh-pages": "^2.1.1",
     "mocha": "^7.1.2",
+    "mock-local-storage": "^1.1.12",
     "react-material-ui-form-validator": "^2.0.10",
     "react-router-dom": "^5.1.2",
     "reactjs-popup": "^1.5.0",
