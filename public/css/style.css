@@ -297,6 +297,14 @@ button:disabled {
     color : whitesmoke;
 }
 
+.modal-header button:hover {
+    color : white;
+}
+
+.modal-header button:active {
+    color : #D90429;
+}
+
 .modal-body {
     background-color : #1B1B1B;
 }
