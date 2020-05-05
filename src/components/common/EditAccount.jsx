@@ -303,6 +303,9 @@ class EditAccount extends Component {
   };
 
   componentDidMount() {
+    if (this.props.testLoading) {
+      this.setState({loading: false});
+    }
     // const {name,surname,email,username,password} = '';
     userData()
         .then(response => {
@@ -461,6 +464,7 @@ class EditAccount extends Component {
                                                                 name:</label>
                     <input className = "form-control first-name-field"
                            name = { 'Name' }
+                           placeholder = { 'Enter name' }
                            onChange = { this.onValueInput }
                            type = "text"
                            defaultValue = { this.state.Name }
@@ -473,6 +477,7 @@ class EditAccount extends Component {
                                                                 name:</label>
                     <input className = "form-control last-name-field"
                            name = { 'Surname' }
+                           placeholder = { 'Enter surname' }
                            onChange = { this.onValueInput }
                            type = "text"
                            defaultValue = { this.state.Surname }
@@ -485,6 +490,7 @@ class EditAccount extends Component {
                     <label className = "col-lg-3 control-label">Email:</label>
                     <input className = "form-control email-field"
                            name = { 'Email' }
+                           placeholder = { 'Enter email' }
                            onChange = { this.onValueInput }
                            type = "text"
                            defaultValue = { this.state.Email }
@@ -497,6 +503,7 @@ class EditAccount extends Component {
                                                                 Number:</label>
                     <input className = "form-control tel-field"
                            name = { 'Phone_Number' }
+                           placeholder = { 'Enter phone number' }
                            onChange = { this.onValueInput }
                            type = "text"
                            defaultValue = { this.checkPhoneNo(
@@ -510,6 +517,7 @@ class EditAccount extends Component {
                     <label className = "col-md-3 control-label">Username:</label>
                     <input className = "form-control username-field"
                            name = { 'username' }
+                           placeholder = { 'Enter username' }
                            onChange = { this.onValueInput }
                            type = "text"
                            defaultValue = { this.state.username }
@@ -521,6 +529,7 @@ class EditAccount extends Component {
                     <label className = "col-md-3 control-label">Password:</label>
                     <input className = "form-control"
                            name = { 'password' }
+                           placeholder = { 'Enter password' }
                            onChange = { this.onValueInput }
                            type = "password"
                            defaultValue = { this.state.password }
@@ -532,6 +541,7 @@ class EditAccount extends Component {
                                                                 password:</label>
                     <input className = "form-control"
                            name = { 'confirmPassword' }
+                           placeholder = { 'Confirm password' }
                            onChange = { this.onValueInput }
                            type = "password"
                            defaultValue = { this.state.confirmPassword }
@@ -543,6 +553,7 @@ class EditAccount extends Component {
                                                                 History:</label>
                     <textarea maxLength = "400"
                               className = "form-control last-name-field"
+                              placeholder = { 'Enter medical history' }
                               name = { 'Medical_History' }
                               onChange = { this.onValueInput }
                               defaultValue = { this.state.Medical_History }
@@ -574,15 +585,17 @@ class EditAccount extends Component {
 
                     </label>
 
-                    <label id = "csv">
-                      <CSVLink data = { this.fillCSV(this.state.Name,
-                          this.state.Surname, this.state.Email,
-                          this.state.Medical_History, this.state.Phone_Number,
-                          this.state.username, this.state.password,
-                          this.state.Bdate, this.state.Age, this.props.dataPT,
-                          this.props.classes) }
-                      >Download my Data</CSVLink>
-                    </label>
+                    { !this.props.testLoading &&
+                      <label id = "csv">
+                        <CSVLink data = { this.fillCSV(this.state.Name,
+                            this.state.Surname, this.state.Email,
+                            this.state.Medical_History, this.state.Phone_Number,
+                            this.state.username, this.state.password,
+                            this.state.Bdate, this.state.Age, this.props.dataPT,
+                            this.props.classes) }
+                        >Download my Data</CSVLink>
+                      </label>
+                    }
                   </div>
                 </form>
               </AnimatedOnScroll>

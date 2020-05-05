@@ -40,8 +40,8 @@ describe('<Announcement />', () => {
                                            level = { Announcement.level }
     />);
 
-    expect(queryByTestId('title').textContent).toEqual(Announcement.title);
-    expect(queryByTestId('message').textContent).toEqual(Announcement.message);
+    expect(queryByTestId('title')).toHaveTextContent(Announcement.title);
+    expect(queryByTestId('message')).toHaveTextContent(Announcement.message);
     expect(queryByTestId('minus')).toBeFalsy();
     expect(queryByTestId('plus')).toBeFalsy();
   });
@@ -60,8 +60,8 @@ describe('<Announcement />', () => {
                                            level = { Announcement.level }
     />);
 
-    expect(queryByTestId('title').textContent).toEqual(Announcement.title);
-    expect(queryByTestId('message').textContent).toEqual(Announcement.message);
+    expect(queryByTestId('title')).toHaveTextContent(Announcement.title);
+    expect(queryByTestId('message')).toHaveTextContent(Announcement.message);
     expect(queryByTestId('minus')).toBeFalsy();
     expect(queryByTestId('plus')).toBeFalsy();
   });
@@ -101,9 +101,8 @@ describe('<Announcement />', () => {
                                              level = { Announcement.level }
       />);
 
-      expect(queryByTestId('title').textContent).toEqual(Announcement.title);
-      expect(queryByTestId('message').textContent)
-          .toEqual(Announcement.message);
+      expect(queryByTestId('title')).toHaveTextContent(Announcement.title);
+      expect(queryByTestId('message')).toHaveTextContent(Announcement.message);
       expect(queryByTestId('minus')).toBeTruthy();
       expect(queryByTestId('plus')).toBeFalsy();
     });
@@ -144,9 +143,8 @@ describe('<Announcement />', () => {
                                              level = { Announcement.level }
       />);
 
-      expect(queryByTestId('title').textContent).toEqual(Announcement.title);
-      expect(queryByTestId('message').textContent)
-          .toEqual(Announcement.message);
+      expect(queryByTestId('title')).toHaveTextContent(Announcement.title);
+      expect(queryByTestId('message')).toHaveTextContent(Announcement.message);
       expect(queryByTestId('minus')).toBeTruthy();
       expect(queryByTestId('plus')).toBeFalsy();
     });

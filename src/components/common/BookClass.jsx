@@ -6,10 +6,9 @@ import {getClassTime}           from '../../repository';
 import {getClassCoach}          from '../../repository';
 import {getClassID}             from '../../repository';
 import {getUserID}              from '../../repository';
-import {preventDefault}         from 'leaflet/src/dom/DomEvent';
 import ToggleModal              from './ToggleModal';
 import GeneralScheduleModalBody from './GeneralScheduleModalBody';
-import Swal                     from "sweetalert2";
+import Swal                     from 'sweetalert2';
 
 class BookClass extends Component {
 
@@ -42,33 +41,33 @@ class BookClass extends Component {
   }
 
   toggleModalGeneral = (e) => {
-    preventDefault(e);
+    e.preventDefault();
     this.setState({modalGeneral: !this.state.modalGeneral});
   };
 
   handleClass = (e) => {
     this.setState(
-      {[e.target.name]: e.target.value === 'Select...' ? '' : e.target.value},
-      () => {
-        this.setState({Day: this.state.Day !== null ? [] : this.state.Day},
-          () => {
-            this.setState(
-              {Time: this.state.Time !== null ? [] : this.state.Time},
+        {[e.target.name]: e.target.value === 'Select...' ? '' : e.target.value},
+        () => {
+          this.setState({Day: this.state.Day !== null ? [] : this.state.Day},
               () => {
-                this.setState({
-                  CoachName: this.state.CoachName !== null
-                      ? []
-                      : this.state.CoachName,
-                }, () => {
-                  getClassDay(this.state.SelectedClass).then(response => {
-                    this.setState({Day: response}, () => {
-                      console.clear();
+                this.setState(
+                    {Time: this.state.Time !== null ? [] : this.state.Time},
+                    () => {
+                      this.setState({
+                        CoachName: this.state.CoachName !== null
+                            ? []
+                            : this.state.CoachName,
+                      }, () => {
+                        getClassDay(this.state.SelectedClass).then(response => {
+                          this.setState({Day: response}, () => {
+                            console.clear();
+                          });
+                        });
+                      });
                     });
-                  });
-                });
               });
-          });
-      });
+        });
   };
 
   handleDay = (e) => {
@@ -156,25 +155,25 @@ class BookClass extends Component {
   };
 
   onSubmit = (e) => {
-    preventDefault(e);
+    e.preventDefault();
     if (this.state.Day.length === 0 ||
         this.state.Name.length === 0 ||
         this.state.Time.length === 0 ||
-        this.state.CoachName.length === 0 ){
+        this.state.CoachName.length === 0) {
       Swal.fire(
           'Required selections are empty',
           'Make sure that you have filled every selection first!',
           'error',
       ).then();
-    }else {
-      this.setState({flag: true, invalid : false}, () => {
+    } else {
+      this.setState({flag: true, invalid: false}, () => {
         this.props.getSelections(
             this.state.DayCode,
             this.state.TimeCode,
             true,
             this.state.ClassID,
             this.state.SelectedClass,
-            false
+            false,
         );
       });
     }
@@ -192,25 +191,25 @@ class BookClass extends Component {
   };
 
   onDelete = (e) => {
-    preventDefault(e);
+    e.preventDefault();
     if (this.state.Day.length === 0 ||
         this.state.Name.length === 0 ||
         this.state.Time.length === 0 ||
-        this.state.CoachName.length === 0 ){
+        this.state.CoachName.length === 0) {
       Swal.fire(
           'Required selections are empty',
           'Make sure that you have filled every selection first!',
           'error',
       ).then();
-    }else {
-      this.setState({flag: false, invalid : false}, () => {
+    } else {
+      this.setState({flag: false, invalid: false}, () => {
         this.props.getSelections(
             this.state.DayCode,
             this.state.TimeCode,
             false,
             this.state.ClassID,
             this.state.SelectedClass,
-            false
+            false,
         );
       });
     }
@@ -253,6 +252,7 @@ class BookClass extends Component {
                         id = "DropDays"
                         name = "SelectedClass"
                         onChange = { this.handleClass }
+                        data-testid={'class-select'}
                 >
                   <option>Select...</option>
                   { this.state.Name.map((res, index) => {
@@ -269,6 +269,7 @@ class BookClass extends Component {
                         id = "DropDays"
                         name = "SelectedDay"
                         onChange = { this.handleDay }
+                        data-testid={'day-select'}
                 >
                   <option>Select...</option>
                   { this.state.Day.map((res, index) => {
@@ -289,6 +290,7 @@ class BookClass extends Component {
                         id = "DropDays"
                         name = "SelectedTime"
                         onChange = { this.handleTime }
+                        data-testid={'time-select'}
                 >
                   <option>Select...</option>
                   { this.state.Time.map((res, index) => {
@@ -305,6 +307,7 @@ class BookClass extends Component {
                         id = "DropDays"
                         name = "SelectedCoach"
                         onChange = { this.handleCoach }
+                        data-testid={'coach-select'}
                 >
                   <option>Select...</option>
                   { this.state.CoachName.map((res, index) => {
