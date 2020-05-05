@@ -76,9 +76,7 @@ class ProfileCoach extends Component {
         loggedInVisit().then();
         updateProfileVisit().then();
         staffData().then(response => {
-            // this.setState({image: response.image});
             this.setState({ownerName: response.username});
-            console.log(response);
         })
     }
 

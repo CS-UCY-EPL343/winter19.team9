@@ -9,7 +9,7 @@ import Recaptcha                  from 'react-recaptcha';
 import Swal                       from 'sweetalert2';
 import '@sweetalert2/theme-dark/dark.css';
 import '../assets/styles/SignInUp.css';
-import {insertAdmin, insertCoach} from '../../repository';
+import {insertAdmin, insertCoach, sameUsername} from '../../repository';
 
 class CreateStaffMember extends React.Component {
 
@@ -29,6 +29,7 @@ class CreateStaffMember extends React.Component {
       },
       isVerified: false,
       submitted : false,
+      countTotal     : 0    ,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -122,35 +123,58 @@ class CreateStaffMember extends React.Component {
       level   : this.state.formData.level,
       bDate   : this.state.formData.bdate,
     };
-    if (this.props.staffType === 'coach') {
-      insertCoach(data).then(() => {
-        Swal.fire(
-            'Coach Created successfully',
-            '',
-            'success',
-        ).then(() => {
-          window.location.replace('/');
-        });
-      }).catch(() => Swal.fire(
-          'Something went wrong',
-          'Please try again...',
-          'error',
-      ));
-    } else if (this.props.staffType === 'admin') {
-      insertAdmin(data).then(() => {
-        Swal.fire(
-            'Admin Created successfully',
-            '',
-            'success',
-        ).then(() => {
-          window.location.replace('/');
-        });
-      }).catch(() => Swal.fire(
-          'Something went wrong',
-          'Please try again...',
-          'error',
-      ));
-    }
+
+    sameUsername(this.state.formData.username)
+        .then(response => {
+      this.setState(
+          {countTotal : response.countTotal},
+          () => {
+            if(this.state.countTotal === 1) {
+              Swal.fire(
+                  'Someone else have this username!!!',
+                  '',
+                  'error',
+              ).then(() => {
+                window.location.reload();
+              }).catch(() => Swal.fire(
+                  'Something go wrong!!',
+                  'Please try again...',
+                  'error',
+              ));
+            }else if (this.props.staffType === 'coach') {
+              insertCoach(data).then(() => {
+                Swal.fire(
+                    'Coach Created successfully',
+                    '',
+                    'success',
+                ).then(() => {
+                  window.location.replace('/');
+                });
+              }).catch(() => Swal.fire(
+                  'Something went wrong',
+                  'Please try again...',
+                  'error',
+              ));
+            } else if (this.props.staffType === 'admin') {
+
+              insertAdmin(data).then(() => {
+                Swal.fire(
+                    'Admin Created successfully',
+                    '',
+                    'success',
+                ).then(() => {
+                  window.location.replace('/');
+                });
+              }).catch(() => Swal.fire(
+                  'Something went wrong',
+                  'Please try again...',
+                  'error',
+              ));
+            }
+            }
+      );
+    });
+
   };
 
   calcDate = (dDate) => {

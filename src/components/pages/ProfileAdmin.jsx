@@ -85,7 +85,6 @@ class ProfileAdmin extends Component {
     staffData().then(response => {
       // this.setState({image: response.image});
       this.setState({ownerName: response.username});
-      console.log(response);
     })
   }
 
@@ -419,7 +418,6 @@ class ProfileAdmin extends Component {
           'data:image/png;base64,' + new Buffer.from(image, 'binary').toString(
           'base64');
       $imagePreview = (<img src = { imageURL } alt = { 'Profile' } />);
-      // console.log(image)
     }
 
     return (

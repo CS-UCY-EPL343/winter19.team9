@@ -205,6 +205,18 @@ app.post('/api/user/data', middleware, (req, res) => {
     }
   }).catch(err => res.status(401).json(err));
 });
+
+// noinspection JSUnresolvedFunction
+app.post('/api/user/isVerified', middleware, (req, res) => {
+        db.getVerified(req.decoded.username).then(data => {
+            if (data) {
+                return res.status(200).json(data);
+            } else {
+                return res.status(409).json('Authentication failed. User not found.');
+            }
+        }).catch(err => res.status(401).json(err));
+});
+
 // noinspection JSUnresolvedFunction
 app.post('/api/staff/data', middleware, (req, res) => {
     db.getStaffData(req.decoded.username).then(data => {
@@ -508,7 +520,7 @@ app.post('/api/user/insert', (req, res) => {
 /*******************************Insert new Coach/Admin****************************/
 // noinspection JSUnresolvedFunction
 app.post('/api/coach/insert', (req, res) => {
-  db.insertNewCoach(req.body)
+  db.insertNewCoach(req.decoded.username)
       .then(response => res.status(200).json({message: response}))
       .catch(err => res.status(409).json(err));
 });
@@ -549,6 +561,21 @@ app.post('/api/coach/countPT', (req, res) => {
     }
   }).catch(err => res.status(409).json(err));
 });
+
+// noinspection JSUnresolvedFunction
+app.post('/api/same/username',(req, res) => {
+    db.sameUser(req.body.username)
+        .then(data => {
+            if (data) {
+                return res.status(200).json({count: data});
+            } else {
+
+                return res.status(409).json('Authentication failed. User not found.');
+            }
+        }).catch(err => res.status(409).json(err));
+});
+
+
 // noinspection JSUnresolvedFunction
 app.post('/api/coach/countClasses', (req, res) => {
   db.getCountClasses(req.body.AccountID).then(data => {

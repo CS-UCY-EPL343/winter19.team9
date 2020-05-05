@@ -67,6 +67,10 @@ class LoginModal extends Component {
     const Crypto = require('cryptr');
     const cryptr = new Crypto('ffn_private_key_!!!!');
 
+    const hash = crypto.createHmac('sha256', this.state.password)
+        .update('I love cupcakes')
+        .digest('hex');
+
     const encryptedString = cryptr.encrypt(this.state.password);
 
     const dataLogIn = {

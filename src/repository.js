@@ -34,6 +34,15 @@ export function userData() {
       .then(response => response.data)
       .catch(() => Promise.reject('Authentication Failed!'));
 }
+
+export function isVerified(){
+  return axios.post(`${ BASE_URL }/api/user/isVerified`,
+      {'x-access-token': localStorage.getItem('x-access-token')})
+      .then(response => response.data)
+      .catch(() => Promise.reject(
+          'Error when get is Verified from database!!'));
+}
+
 export function staffData() {
   return axios.post(`${ BASE_URL }/api/staff/data`, {
     'x-access-token': localStorage.getItem('x-access-token'),
@@ -312,7 +321,13 @@ export function countPT(AccountID) {
       {AccountID: AccountID})
       .then(response => response.data.count[0])
       .catch(() => Promise.reject('Error'));
+}
 
+export function sameUsername(username){
+  return axios.post(`${ BASE_URL }/api/same/username`,
+      {username : username})
+      .then(response => response.data.count[0])
+      .catch(() => Promise.reject('Error'));
 }
 
 export function countClasses(AccountID) {

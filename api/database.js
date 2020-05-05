@@ -117,6 +117,20 @@ function getUserData(user) {
   });
 }
 
+function getVerified(username) {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT U.Verify FROM ACCOUNT A INNER JOIN USERS U ON A.User_ID=U.User_ID WHERE A.username=? ';
+    connection.query(sql, [username], function(err, rows) {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(rows[0]);
+    });
+
+  });
+}
+
+
 function getStaffData(user) {
     return new Promise((resolve, reject) => {
         const sql = 'SELECT COALESCE(Owner_ID, Coach_ID) AS AccountID,username, level FROM ACCOUNT WHERE username = ?';
@@ -1287,6 +1301,19 @@ function getCountClasses(AccountID) {
   });
 }
 
+function sameUser(username){
+  return new Promise((resolve, reject) => {
+    const sql='SELECT COUNT(*) AS "countTotal" FROM ACCOUNT A WHERE A.username=?';
+    connection.query(sql, [username], function(err, rows) {
+      if (err) {
+        return reject(err);
+      }
+      resolve(rows);
+    });
+  });
+}
+
+
 function getEvents(username, dayString, dayNumber) {
   const events = [];
   return new Promise((resolve, reject) => {
@@ -1456,4 +1483,6 @@ module.exports = {
   getCoachClass,
   getEventsTotal,
   deleteNewMessage,
+  sameUser,
+  getVerified,
 };

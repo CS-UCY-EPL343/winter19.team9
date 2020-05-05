@@ -56,12 +56,7 @@ class ProfileUser extends Component {
         this.setState({loadingInfo: this.state.loadingInfo - 1});
     };
     handlePTClass = (dataClasses, dataPT) => {
-        this.setState({dataPT, dataClasses}, () => {
-            // console.clear();
-            console.log("The tables have been retrieved!");
-            console.log(this.state.dataPT);
-            console.log(this.state.dataClasses);
-        });
+        this.setState({dataPT, dataClasses});
     };
 
     render() {

@@ -9,7 +9,7 @@ import Recaptcha        from 'react-recaptcha';
 import Swal             from 'sweetalert2';
 import '@sweetalert2/theme-dark/dark.css';
 import '../assets/styles/SignInUp.css';
-import {signUp}         from '../../repository';
+import {insertAdmin, insertCoach, sameUsername, signUp} from '../../repository';
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -28,6 +28,7 @@ class SignUp extends React.Component {
       },
       isVerified: false,
       submitted : false,
+      countTotal: 0,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -144,35 +145,55 @@ class SignUp extends React.Component {
       verify  : 0,
       hash    : newToken,
     };
-    // Call for query
-    signUp(dataSign)
-        .then(() => {
-          Swal.fire(
-              'Successful sign up',
-              'Please proceed to your email, so you can verify your account.',
-              'success',
-          ).then(() => {
-            // Reset
-            this.setState({
-              formData  : {
-                fname           : '',
-                lname           : '',
-                username        : '',
-                email           : '',
-                password        : '',
-                confirm_password: '',
-                bdate           : '',
-                gender          : '',
-              },
-              isVerified: false,
-              submitted : false,
-            }, () => this.props.toggleModal());
-          });
-        }).catch(() => Swal.fire(
-        'Something went wrong',
-        'Please try again...',
-        'error',
-    ));
+    sameUsername(this.state.formData.username)
+        .then(response => {
+          this.setState(
+              {countTotal : response.countTotal},
+              () => {
+                if(this.state.countTotal === 1) {
+                  Swal.fire(
+                      'Someone else have this username!!!',
+                      '',
+                      'error',
+                  ).then(() => {
+                  }).catch(() => Swal.fire(
+                      'Something go wrong!!',
+                      'Please try again...',
+                      'error',
+                  ));
+                }else {
+                  signUp(dataSign)
+                      .then(() => {
+                        Swal.fire(
+                            'Successful sign up',
+                            'Please proceed to your email, so you can verify your account.',
+                            'success',
+                        ).then(() => {
+                          // Reset
+                          this.setState({
+                            formData  : {
+                              fname           : '',
+                              lname           : '',
+                              username        : '',
+                              email           : '',
+                              password        : '',
+                              confirm_password: '',
+                              bdate           : '',
+                              gender          : '',
+                            },
+                            isVerified: false,
+                            submitted : false,
+                          }, () => this.props.toggleModal());
+                        });
+                      }).catch(() => Swal.fire(
+                      'Something went wrong',
+                      'Please try again...',
+                      'error',
+                  ));
+                }
+              }
+          );
+        });
   };
 
   calcDate = (dDate) => {
