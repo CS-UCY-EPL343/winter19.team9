@@ -17,7 +17,7 @@ class ProfileInfo extends Component {
     userData()
         .then(response => {
           this.setState(response);
-        }).then(() => this.props.toggleLoading());
+        }).finally(() => this.props.toggleLoading());
 
   }
 

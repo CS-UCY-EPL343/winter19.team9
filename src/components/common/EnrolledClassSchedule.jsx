@@ -194,7 +194,7 @@ class EnrolledClassSchedule extends Component {
             });
 
           });
-    }).then(() => this.props.toggleLoading());
+    }).finally(() => this.props.toggleLoading());
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
