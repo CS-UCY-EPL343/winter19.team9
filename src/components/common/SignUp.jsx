@@ -1,15 +1,15 @@
-import React            from 'react';
-import {ValidatorForm}  from 'react-material-ui-form-validator';
-import TextField        from '@material-ui/core/TextField';
-import Radio            from '@material-ui/core/Radio';
-import RadioGroup       from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl      from '@material-ui/core/FormControl';
-import Recaptcha        from 'react-recaptcha';
-import Swal             from 'sweetalert2';
+import React                  from 'react';
+import {ValidatorForm}        from 'react-material-ui-form-validator';
+import TextField              from '@material-ui/core/TextField';
+import Radio                  from '@material-ui/core/Radio';
+import RadioGroup             from '@material-ui/core/RadioGroup';
+import FormControlLabel       from '@material-ui/core/FormControlLabel';
+import FormControl            from '@material-ui/core/FormControl';
+import Recaptcha              from 'react-recaptcha';
+import Swal                   from 'sweetalert2';
 import '@sweetalert2/theme-dark/dark.css';
 import '../assets/styles/SignInUp.css';
-import {insertAdmin, insertCoach, sameUsername, signUp} from '../../repository';
+import {sameUsername, signUp} from '../../repository';
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -148,9 +148,9 @@ class SignUp extends React.Component {
     sameUsername(this.state.formData.username)
         .then(response => {
           this.setState(
-              {countTotal : response.countTotal},
+              {countTotal: response.countTotal},
               () => {
-                if(this.state.countTotal === 1) {
+                if (this.state.countTotal === 1) {
                   Swal.fire(
                       'Someone else have this username!!!',
                       '',
@@ -161,7 +161,7 @@ class SignUp extends React.Component {
                       'Please try again...',
                       'error',
                   ));
-                }else {
+                } else {
                   signUp(dataSign)
                       .then(() => {
                         Swal.fire(
@@ -191,7 +191,7 @@ class SignUp extends React.Component {
                       'error',
                   ));
                 }
-              }
+              },
           );
         });
   };

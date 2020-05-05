@@ -29,9 +29,9 @@ class Signup extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const crypto = require('crypto');
+    // const crypto = require('crypto');
     // noinspection JSUnusedLocalSymbols
-    const newToken = crypto.randomBytes(10).toString('hex');
+    // const newToken = crypto.randomBytes(10).toString('hex');
 
     const Crypto = require('cryptr');
     const cryptr = new Crypto('ffn_private_key_!!!!');

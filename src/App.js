@@ -19,7 +19,6 @@ import UIDashboard from './components/pages/UIDashboard';
 import Tabletop from 'tabletop';
 import Spinner from './components/Spinner';
 import NotFound from './components/common/NotFound';
-import SignInUpModal from "./components/common/SignInUpModal";
 import LoginAndroid from "./components/pages/LoginAndroid";
 
 class App extends Component {

@@ -1,11 +1,6 @@
 import React  from 'react';
-import $      from 'jquery';
-import Modal  from 'react-bootstrap/Modal';
-import Signup from '../common/SignUp';
-import LogIn  from '../common/LogIn';
 import '../assets/styles/SignInUpModal.css';
 import ToggleModal from "../common/ToggleModal";
-import MessagesModal from "../common/MessagesModal";
 import LoginModal from "../common/LoginModal";
 
 class LoginAndroid extends React.Component {

@@ -11,11 +11,12 @@ import {
   getAllCoaches,
   loggedInVisit,
   updateProfileVisit,
-  userPic, getTotalPrivateAnnouncements,
+  userPic,
   getCoachInfo,
   getClassSchedule,
-  getTotalMessages, userData, staffData
-} from '../../repository';
+  getTotalMessages,
+  staffData,
+}                                from '../../repository';
 import AnnouncementModal         from '../common/AnnouncementModal';
 import {Button}                  from 'reactstrap';
 import Box                       from '../common/SelectionPT';
@@ -25,8 +26,8 @@ import Swal                      from 'sweetalert2';
 import '@sweetalert2/theme-dark/dark.css';
 import ButtonLoader              from '../common/ButtonLoader';
 import Spinner                   from '../Spinner';
-import ToggleModal from "../common/ToggleModal";
-import MessagesModalAdminCoach from "../common/MessagesModalAdminCoach.jsx";
+import ToggleModal               from '../common/ToggleModal';
+import MessagesModalAdminCoach   from '../common/MessagesModalAdminCoach.jsx';
 
 class ProfileAdmin extends Component {
 
@@ -61,7 +62,7 @@ class ProfileAdmin extends Component {
       coachIDAssigned      : '',
       coachIDRet           : '',
       TotalMessages        : 0,
-      ownerName            : ''
+      ownerName            : '',
     };
 
     this.toggleAnnouncementsData = this.toggleAnnouncementsData.bind(this);
@@ -85,7 +86,7 @@ class ProfileAdmin extends Component {
     staffData().then(response => {
       // this.setState({image: response.image});
       this.setState({ownerName: response.username});
-    })
+    });
   }
 
   onSubmit = (e) => {
@@ -371,17 +372,17 @@ class ProfileAdmin extends Component {
   };
 
   retrievedCoach = (coachID) => {
-    if(coachID !== '') {
+    if (coachID !== '') {
       this.setState({coachIDRet: coachID}, () => {
         getCoachInfo(coachID).then(response => {
           this.setState({selectedCoaches: response.messages});
         });
       });
-    }else{
+    } else {
       getClassSchedule(this.state.User_ID).then(response => {
-        if(response !== []){
+        if (response !== []) {
           getAllCoaches().then(response => {
-            this.setState({selectedCoaches: response})
+            this.setState({selectedCoaches: response});
           });
         }
       });
@@ -407,7 +408,6 @@ class ProfileAdmin extends Component {
   toggleAnnouncementsData2 = () => {
     this.toggleAnnouncements2();
   };
-
 
   render() {
     let {image} = this.state;
@@ -525,14 +525,18 @@ class ProfileAdmin extends Component {
                            readOnly
                     />
                   </div>
-                  <div className="form-group">
+                  <div className = "form-group">
                     <Button className = { 'nav-link menu-box-tab menu-text ' }
                             onClick = { this.toggleMessages }
                             style = { {width: '100%'} }
                     >
-                      <i className = "scnd-font-color fa fa-envelope" /> Exchange Messages with this Client
+                      <i className = "scnd-font-color fa fa-envelope" /> Exchange
+                                                                         Messages
+                                                                         with
+                                                                         this
+                                                                         Client
                       { this.state.TotalMessages > 0 &&
-                      <div className = "menu-box-number">{ this.state.TotalMessages }</div> }
+                        <div className = "menu-box-number">{ this.state.TotalMessages }</div> }
                     </Button>
                     <ToggleModal
                         modal = { this.state.modalMessages }
@@ -541,8 +545,8 @@ class ProfileAdmin extends Component {
                         modalHeader = { 'Messages' }
                         modalBody = {
                           <MessagesModalAdminCoach
-                              userName = {this.state.ownerName}
-                              userLevel = { this.props.userLevel}
+                              userName = { this.state.ownerName }
+                              userLevel = { this.props.userLevel }
                               TotalMessages = { this.state.TotalMessages }
                               toggleTotalMessages = { this.toggleTotalMessages }
                           /> }
@@ -624,13 +628,13 @@ class ProfileAdmin extends Component {
                            flag = { this.state.flag }
                            coachID = { this.state.Coach_ID }
                            userID = { this.state.User_ID }
-                           coachIDret = {this.retrievedCoach}
+                           coachIDret = { this.retrievedCoach }
                 />
               </div>
               <div className = "col-md-4">
                 <Box toogle = { this.handleDayTimeChange }
                      coaches = { this.state.selectedCoaches }
-                     coachID = {this.state.coachIDRet}
+                     coachID = { this.state.coachIDRet }
                      userID = { this.state.User_ID }
                 />
               </div>

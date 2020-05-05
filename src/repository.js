@@ -20,11 +20,7 @@ export function logIn(data) {
 
 // noinspection JSUnusedLocalSymbols,JSUnusedGlobalSymbols
 export function images(file) {
-  return axios.post('/api/getProfilePic', {emp_id: 5}).then(res => {
-    // noinspection JSUnusedLocalSymbols,JSUnresolvedVariable
-    let imageURL = 'data:image/png;base64,' + new Buffer(res.data.profile_pic,
-        'binary').toString('base64');
-  });
+  return axios.post('/api/getProfilePic', {emp_id: 5});
 }
 
 export function userData() {
@@ -35,7 +31,7 @@ export function userData() {
       .catch(() => Promise.reject('Authentication Failed!'));
 }
 
-export function isVerified(){
+export function isVerified() {
   return axios.post(`${ BASE_URL }/api/user/isVerified`,
       {'x-access-token': localStorage.getItem('x-access-token')})
       .then(response => response.data)
@@ -323,9 +319,9 @@ export function countPT(AccountID) {
       .catch(() => Promise.reject('Error'));
 }
 
-export function sameUsername(username){
+export function sameUsername(username) {
   return axios.post(`${ BASE_URL }/api/same/username`,
-      {username : username})
+      {username: username})
       .then(response => response.data.count[0])
       .catch(() => Promise.reject('Error'));
 }

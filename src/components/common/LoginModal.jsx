@@ -62,12 +62,14 @@ class LoginModal extends Component {
     e.preventDefault();
 
     const crypto = require('crypto');
-    const newToken = crypto.randomBytes(10).toString('hex');
+    // noinspection JSUnusedLocalSymbols
+    // const newToken = crypto.randomBytes(10).toString('hex');
 
     const Crypto = require('cryptr');
     const cryptr = new Crypto('ffn_private_key_!!!!');
 
-    const hash = crypto.createHmac('sha256', this.state.password)
+    // noinspection JSUnusedLocalSymbols
+    crypto.createHmac('sha256', this.state.password)
         .update('I love cupcakes')
         .digest('hex');
 
