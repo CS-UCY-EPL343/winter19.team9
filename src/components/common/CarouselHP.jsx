@@ -22,7 +22,7 @@ class ControlledCarousel extends Component {
     return (
         <Carousel activeIndex = { this.state.index }
                   direction = { this.state.direction }
-                  onSelect = { this.handleSelect }
+                  onSelect= { (i,e)=>this.handleSelect(i,e) }
                   pauseOnHover = { true }
                   touch = { true }
         >
