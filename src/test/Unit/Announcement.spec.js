@@ -1,9 +1,8 @@
-import React               from 'react';
-import {render, fireEvent} from '@testing-library/react';
-import Announcement        from '../../components/common/Announcement';
-// import 'react-testing-library/cleanup-after-each'
-
-// import {ToggleModal}        from '../../components/common/ToggleModal';
+import React        from 'react';
+import {render}     from '@testing-library/react';
+import Announcement from '../../components/common/Announcement';
+// import '@testing-library/'
+// import '@react-testing-library/cleanup-after-each'
 
 function ByPass(props) {
   return <Announcement { ...props } />;
@@ -82,8 +81,8 @@ describe('<Announcement />', () => {
                                              level = { Announcement.level }
       />);
 
-      expect(queryByTestId('title').textContent).toBeFalsy();
-      expect(queryByTestId('message').textContent).toBeFalsy();
+      expect(queryByTestId('title')).toBeFalsy();
+      expect(queryByTestId('message')).toBeFalsy();
       expect(queryByTestId('minus')).toBeFalsy();
       expect(queryByTestId('plus')).toBeTruthy();
     });
@@ -125,8 +124,8 @@ describe('<Announcement />', () => {
                                              level = { Announcement.level }
       />);
 
-      expect(queryByTestId('title').textContent).toBeFalsy();
-      expect(queryByTestId('message').textContent).toBeFalsy();
+      expect(queryByTestId('title')).toBeFalsy();
+      expect(queryByTestId('message')).toBeFalsy();
       expect(queryByTestId('minus')).toBeFalsy();
       expect(queryByTestId('plus')).toBeTruthy();
     });
