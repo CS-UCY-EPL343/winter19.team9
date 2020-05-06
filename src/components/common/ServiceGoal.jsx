@@ -1,7 +1,7 @@
-import React, {Component}    from 'react';
+import React, {Component}         from 'react';
 import '../assets/styles/homePage.css';
-import * as Icons            from '@fortawesome/fontawesome-free-solid';
-import {FontAwesomeIcon}     from '@fortawesome/react-fontawesome';
+import * as Icons                 from '@fortawesome/fontawesome-free-solid';
+import {FontAwesomeIcon}          from '@fortawesome/react-fontawesome';
 import {faMedal, faWeightHanging} from '@fortawesome/free-solid-svg-icons';
 
 class ServiceGoal extends Component {
@@ -16,21 +16,32 @@ class ServiceGoal extends Component {
               {/*/>*/ }
               {
                 this.props.icon === 'medal' ?
-                    <FontAwesomeIcon icon = { faMedal } size = "2x" />
+                    <FontAwesomeIcon data-testid = { 'icon' }
+                                     icon = { faMedal }
+                                     size = "2x"
+                    />
                     :
                     this.props.icon === 'weight' ?
-                        <FontAwesomeIcon icon = { faWeightHanging } size = "2x" />
+                        <FontAwesomeIcon data-testid = { 'icon' }
+                                         icon = { faWeightHanging }
+                                         size = "2x"
+                        />
                         :
-                        <FontAwesomeIcon icon = { Icons['fa'
+                        <FontAwesomeIcon data-testid = { 'icon' }
+                                         icon = { Icons['fa'
                                                         + this.props.icon.charAt(
-                            0).toUpperCase() + this.props.icon.slice(1)] }
+                                             0).toUpperCase()
+                                                        + this.props.icon.slice(
+                                             1)] }
                                          size = "2x"
                         />
               }
             </div>
             <div className = { 'service-box-content' }>
-              <h1 className = { 'service-box-title' }>{ this.props.title }</h1>
-              <p>{ this.props.message }</p>
+              <h1 data-testid = { 'title' }
+                  className = { 'service-box-title' }
+              >{ this.props.title }</h1>
+              <p data-testid = { 'message' }>{ this.props.message }</p>
             </div>
           </div>
         </div>

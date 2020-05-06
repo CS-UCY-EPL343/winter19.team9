@@ -98,7 +98,7 @@ class PieChart extends Component {
                     height = "400"
             />
           </div>
-          <div className = "text-center">
+          <div data-testid={'title'} className = "text-center">
             <strong>{ this.props.title }</strong>
           </div>
         </div>

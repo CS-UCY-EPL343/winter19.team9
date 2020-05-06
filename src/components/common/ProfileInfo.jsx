@@ -24,12 +24,12 @@ class ProfileInfo extends Component {
   render() {
     let {image} = this.state;
     let imageURL = 'https://www.w3schools.com/howto/img_avatar.png';
-    let $imagePreview = <img src = { imageURL } alt = { 'Profile Avatar' } />;
+    let $imagePreview = <img data-testid={'image'} src = { imageURL } alt = { 'Profile Avatar' } />;
     if (image !== '') {
       imageURL =
           'data:image/png;base64,' + new Buffer.from(image, 'binary').toString(
           'base64');
-      $imagePreview = (<img src = { imageURL } alt = { 'Profile Avatar' } />);
+      $imagePreview = (<img data-testid={'image'} src = { imageURL } alt = { 'Profile Avatar' } />);
     }
 
     const name = this.state.Name + ' ' + this.state.Surname;

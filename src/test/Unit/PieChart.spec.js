@@ -12,4 +12,12 @@ describe('<PieChart />', () => {
 
     expect(container.firstChild).toBeTruthy();
   });
+
+  it('check inserted data', () => {
+    const {getByTestId} = render(<ByPass testLoading = { true }
+                                         title = { 'Test' }
+    />);
+
+    expect(getByTestId('title')).toHaveTextContent('Test');
+  });
 });
