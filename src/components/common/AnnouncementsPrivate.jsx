@@ -17,13 +17,16 @@ class AnnouncementsPrivate extends Component {
   }
 
   componentDidMount() {
-
     this.setState({level: -1});
 
-    getPrivateAnnouncements().then(response => {
-      this.setState(
-          {announcements: response.data.announcements});
-    }).then(() => this.setState({loading: false}));
+    if (this.props.testLoading) {
+      this.setState({announcements: this.props.announcements, loading: false});
+    } else {
+      getPrivateAnnouncements().then(response => {
+        this.setState(
+            {announcements: response.data.announcements});
+      }).then(() => this.setState({loading: false}));
+    }
   }
 
   render() {

@@ -46,6 +46,9 @@ class BookClass extends Component {
   };
 
   handleClass = (e) => {
+    if (this.props.testLoading) {
+      return;
+    }
     this.setState(
         {[e.target.name]: e.target.value === 'Select...' ? '' : e.target.value},
         () => {
@@ -71,6 +74,9 @@ class BookClass extends Component {
   };
 
   handleDay = (e) => {
+    if (this.props.testLoading) {
+      return;
+    }
     this.setState(
         {[e.target.name]: e.target.value === 'Select...' ? '' : e.target.value},
         () => {
@@ -102,6 +108,9 @@ class BookClass extends Component {
   };
 
   handleTime = (e) => {
+    if (this.props.testLoading) {
+      return;
+    }
     this.setState(
         {[e.target.name]: e.target.value === 'Select...' ? '' : e.target.value},
         () => {
@@ -141,6 +150,9 @@ class BookClass extends Component {
   };
 
   handleCoach = (e) => {
+    if (this.props.testLoading) {
+      return;
+    }
     this.setState(
         {[e.target.name]: e.target.value === 'Select...' ? '' : e.target.value},
         () => {
@@ -228,15 +240,24 @@ class BookClass extends Component {
 
   //
   componentDidMount() {
-    getUserID()
-        .then(response => {
-          this.setState(
-              {User_ID: response.User_ID}, () => {
-              });
-          getClasses().then(response => {
-            this.setState({Name: response});
+    if (this.props.testLoading) {
+      this.setState({
+        Name     : this.props.data.Name,
+        Day      : this.props.data.Day,
+        Time     : this.props.data.Time,
+        CoachName: this.props.data.CoachName,
+      });
+    } else {
+      getUserID()
+          .then(response => {
+            this.setState(
+                {User_ID: response.User_ID}, () => {
+                });
+            getClasses().then(response => {
+              this.setState({Name: response});
+            });
           });
-        });
+    }
   }
 
   render() {
@@ -252,7 +273,7 @@ class BookClass extends Component {
                         id = "DropDays"
                         name = "SelectedClass"
                         onChange = { this.handleClass }
-                        data-testid={'class-select'}
+                        data-testid = { 'class-select' }
                 >
                   <option>Select...</option>
                   { this.state.Name.map((res, index) => {
@@ -269,7 +290,7 @@ class BookClass extends Component {
                         id = "DropDays"
                         name = "SelectedDay"
                         onChange = { this.handleDay }
-                        data-testid={'day-select'}
+                        data-testid = { 'day-select' }
                 >
                   <option>Select...</option>
                   { this.state.Day.map((res, index) => {
@@ -290,7 +311,7 @@ class BookClass extends Component {
                         id = "DropDays"
                         name = "SelectedTime"
                         onChange = { this.handleTime }
-                        data-testid={'time-select'}
+                        data-testid = { 'time-select' }
                 >
                   <option>Select...</option>
                   { this.state.Time.map((res, index) => {
@@ -307,7 +328,7 @@ class BookClass extends Component {
                         id = "DropDays"
                         name = "SelectedCoach"
                         onChange = { this.handleCoach }
-                        data-testid={'coach-select'}
+                        data-testid = { 'coach-select' }
                 >
                   <option>Select...</option>
                   { this.state.CoachName.map((res, index) => {
