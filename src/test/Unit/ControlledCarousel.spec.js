@@ -1,19 +1,16 @@
-import React from 'react';
-import {render} from '@testing-library/react';
-import ControlledCarousel from '../../components/common/ControlledCarousel';
+import React      from 'react';
+import {render}   from '@testing-library/react';
+import CarouselHp from '../../components/common/CarouselHp';
 
 function ByPass(props) {
-    return <ControlledCarousel {...props} />;
+  return <CarouselHp { ...props } />;
 }
 
-describe('<ControlledCarousel />', () => {
-    it('renders correctly', () => {
-        const ControlledCarousel = {};
+describe('<CarouselHp />', () => {
+  it('renders correctly', () => {
+    const {container} = render(
+        <ByPass stylesheetData = { {Home: {carousel: []}} } />);
 
-        const {container} = render(<ByPass
-
-        />);
-
-    });
-
+    expect(container.firstChild).toBeTruthy();
+  });
 });

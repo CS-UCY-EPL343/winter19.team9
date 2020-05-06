@@ -10,18 +10,7 @@ function ByPass(props) {
 
 describe('<Announcement />', () => {
   it('renders correctly', () => {
-    const Announcement = {
-      'title'  : 'Test',
-      'message': 'This is a test.',
-      'isAdder': false,
-      'level'  : 0,
-    };
-
-    const {container} = render(<ByPass isAdder = { Announcement.isAdder }
-                                       title = { Announcement.title }
-                                       message = { Announcement.message }
-                                       level = { Announcement.level }
-    />);
+    const {container} = render(<ByPass />);
 
     expect(container.firstChild).toHaveClass('ann-card');
   });

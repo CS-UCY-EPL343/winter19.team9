@@ -8,12 +8,8 @@ function ByPass(props) {
 
 describe('<AnnouncementsPrivate />', () => {
     it('renders correctly', () => {
-        const AnnouncementsPrivate = {};
+        const {container} = render(<ByPass />);
 
-        const {container} = render(<ByPass
-
-        />);
-
+        expect(container.firstChild).toBeTruthy();
     });
-
 });

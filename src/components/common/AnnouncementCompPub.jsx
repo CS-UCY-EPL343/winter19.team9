@@ -26,16 +26,16 @@ class AnnouncementCompPub extends Component {
                          onMouseOut={this.toggleHover}
                     >
                         <div className="ann-data" style={dataStyle}>
-                            <h5 className="card-title">
+                            <h5 data-testid = { 'title' } className="card-title">
                                 {this.props.title}
                             </h5>
-                            <p className="card-text">
+                            <p data-testid = { 'message' } className="card-text">
                                 {this.props.message}
                             </p>
                         </div>
                         {this.props.level >= 2
                         &&
-                        <i className="fa fa-minus-circle ann-img"
+                        <i data-testid = { 'minus' } className="fa fa-minus-circle ann-img"
                            style={imgStyle}
                         />}
                     </div>

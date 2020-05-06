@@ -1,17 +1,15 @@
 import React                        from 'react';
-import {render, fireEvent, cleanup} from '@testing-library/react';
+import {render, fireEvent} from '@testing-library/react';
 import EditAccount                  from '../../components/common/EditAccount';
 
 function ByPass(props) {
   return <EditAccount { ...props } />;
 }
 
-afterEach(cleanup);
-
 describe('<EditAccount />', () => {
   it('renders correctly', () => {
     const {container} = render(<ByPass testLoading = { true } />);
-    console.log(container.innerHTML);
+
     expect(container.firstChild).toHaveClass('container');
   });
 

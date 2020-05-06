@@ -8,12 +8,8 @@ function ByPass(props) {
 
 describe('<CoachSchedule />', () => {
     it('renders correctly', () => {
-        const CoachSchedule = {};
+        const {container} = render(<ByPass />);
 
-        const {container} = render(<ByPass
-
-        />);
-
+        expect(container.firstChild).toBeTruthy();
     });
-
 });

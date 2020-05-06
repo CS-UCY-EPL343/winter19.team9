@@ -8,12 +8,8 @@ function ByPass(props) {
 
 describe('<ButtonLoader />', () => {
     it('renders correctly', () => {
-        const ButtonLoader = {};
+        const {container} = render(<ByPass />);
 
-        const {container} = render(<ByPass
-
-        />);
-
+        expect(container.firstChild).toBeTruthy();
     });
-
 });

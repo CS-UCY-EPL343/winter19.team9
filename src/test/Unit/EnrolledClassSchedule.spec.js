@@ -8,12 +8,9 @@ function ByPass(props) {
 
 describe('<EnrolledClassSchedule />', () => {
     it('renders correctly', () => {
-        const EnrolledClassSchedule = {};
+        const {container} = render(
+            <ByPass />);
 
-        const {container} = render(<ByPass
-
-        />);
-
+        expect(container.firstChild).toBeTruthy();
     });
-
 });

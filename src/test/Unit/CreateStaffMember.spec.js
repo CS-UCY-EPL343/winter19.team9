@@ -8,12 +8,9 @@ function ByPass(props) {
 
 describe('<CreateStaffMember />', () => {
     it('renders correctly', () => {
-        const CreateStaffMember = {};
+        const {container} = render(
+            <ByPass />);
 
-        const {container} = render(<ByPass
-
-        />);
-
+        expect(container.firstChild).toBeTruthy();
     });
-
 });
