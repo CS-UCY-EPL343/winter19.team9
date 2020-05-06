@@ -29,6 +29,11 @@ class ContactUs extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
+    if(this.props.testSubmit) {
+      this.props.testSubmit('Testing');
+      return;
+    }
+
     if (!(
         this.state.name.match('[a-zA-Z ]+') &&
         this.state.email.match('[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$') &&

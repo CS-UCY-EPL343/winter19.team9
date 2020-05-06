@@ -80,5 +80,36 @@ describe('<EditAccount />', () => {
       expect(confirm_password).toHaveValue(data.confirm_password);
       expect(medical).toHaveValue(data.medical);
     });
+    it('Submit-Button', () => {
+      const testSubmit = jest.fn();
+
+      const {queryByTestId} = render(
+          <ByPass testLoading={true} testSubmit={testSubmit}
+          />);
+      fireEvent.click(queryByTestId('button'));
+      expect(testSubmit).toHaveBeenCalled();
+    });
+    //button-delete
+    it('Delete-Button', () => {
+      const testSubmit = jest.fn();
+
+      const {queryByTestId} = render(
+          <ByPass testLoading={true} testSubmit={testSubmit}
+          />);
+      fireEvent.click(queryByTestId('button-delete'));
+      expect(testSubmit).toHaveBeenCalled();
+    });
+
+    it('Reset-Button', () => {
+      const testSubmit = jest.fn();
+
+      const {queryByTestId} = render(
+          <ByPass testLoading={true} testSubmit={testSubmit}
+          />);
+      fireEvent.click(queryByTestId('button-reset'));
+      expect(testSubmit).toHaveBeenCalled();
+    });
+
+
   });
 });

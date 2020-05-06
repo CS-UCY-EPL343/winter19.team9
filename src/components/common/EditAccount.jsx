@@ -330,6 +330,8 @@ class EditAccount extends Component {
   };
 
   Test = () => {
+
+
     //console.log(this.state.Name);
     // if (this.state.flag === '0') {
     //   Swal.fire(
@@ -362,6 +364,10 @@ class EditAccount extends Component {
   };
   onSubmit = (e) => {
     e.preventDefault();
+    if(this.props.testSubmit) {
+      this.props.testSubmit('Testing');
+      return;
+    }
 
     if ((this.state.noValidate === 1) || !(
         this.state.Name.match(new RegExp('[a-zA-Z ]+')) &&
@@ -565,6 +571,7 @@ class EditAccount extends Component {
                   <div className = "form-group" id = "buttons">
                     <label className = "col-md-12 control-label" id = "savel">
                       <input type = "submit"
+                             data-testid={'button'}
                              className = "btn btn-primary"
                              defaultValue = "Save Changes"
                              id = "save"
@@ -572,12 +579,14 @@ class EditAccount extends Component {
                     </label>
                     <label className = "col-md-12 control-label" id = "resetl">
                       <input onClick = { this.refreshPage }
-                             type = "reset"
+                             data-testid={'button-reset'}
+                             type = "submit"
                              className = "btn btn-default"
                              value = "Reset"
                              id = "reset"
                       />
-                      <input type = "button"
+                      <input type = "submit"
+                             data-testid={'button-delete'}
                              className = "btn btn-default"
                              defaultValue = "Delete Account"
                              id = "delete"

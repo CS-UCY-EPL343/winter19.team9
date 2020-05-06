@@ -99,6 +99,10 @@ class SignUp extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    if(this.props.testSubmit) {
+      this.props.testSubmit('Testing');
+      return;
+    }
     if (
         !this.state.formData.fname ||
         !this.state.formData.lname ||
@@ -307,7 +311,7 @@ class SignUp extends React.Component {
               theme = "dark"
               verifyCallback = { this.verifyCallback }
           />
-          <button>Sign up</button>
+          <button data-testid={'button'}>Sign up</button>
           <br />
           <span className = "login rotateForms" onClick = { this.rotate }>
             <i className = "fa fa-sign-in" />

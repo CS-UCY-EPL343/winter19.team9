@@ -28,6 +28,10 @@ class Signup extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+      if(this.props.testSubmit) {
+          this.props.testSubmit('Testing');
+          return;
+      }
 
     // const crypto = require('crypto');
     // noinspection JSUnusedLocalSymbols
@@ -131,7 +135,7 @@ class Signup extends React.Component {
           <p className = { 'forgot-passsword' }
              onClick = { this.forgotPassword }
           >Forgot your password?</p>
-          <button>Sign in</button>
+          <button data-testid={'button'}>Sign in</button>
           <br />
           <span className = "login rotateForms" onClick = { this.rotate }>
             <i className = "fa fa-user-plus" />
