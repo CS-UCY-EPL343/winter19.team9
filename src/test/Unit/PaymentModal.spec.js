@@ -8,11 +8,13 @@ function ByPass(props) {
 
 describe('<PaymentModal />', () => {
     it('renders correctly', () => {
-        const PaymentModal = {};
+       // const PaymentModal = {};
 
         const {container} = render(<ByPass
 
         />);
+
+        expect(container.firstChild).toBeTruthy();
 
     });
 

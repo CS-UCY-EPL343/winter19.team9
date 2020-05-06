@@ -13,6 +13,7 @@ describe('<PersonalTrainingCreate />', () => {
         const {container} = render(<ByPass
 
         />);
+        expect(container.firstChild).toBeTruthy();
 
     });
 
