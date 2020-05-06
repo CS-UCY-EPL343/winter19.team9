@@ -8,12 +8,8 @@ function ByPass(props) {
 
 describe('<LoginModal />', () => {
     it('renders correctly', () => {
-        const LoginModal = {};
-
-        const {container} = render(<ByPass
-
-        />);
-
+        const {container} = render(<ByPass testLoading={true}/>);
+        expect(container.firstChild).toHaveClass('wrapper');
     });
 
 });

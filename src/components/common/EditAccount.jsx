@@ -52,6 +52,7 @@ class EditAccount extends Component {
   };
 
   refreshPage() {
+    // noinspection JSDeprecatedSymbols
     window.location.reload(false);
   }
 

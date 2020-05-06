@@ -1,18 +1,15 @@
 import React from 'react';
 import {render} from '@testing-library/react';
-import MessageNewModal from '../../components/common/MessageNewModal';
+import MessagesNewModalForm from '../../components/common/MessagesNewModalForm';
 
 function ByPass(props) {
-    return <MessageNewModal {...props} />;
+    return <MessagesNewModalForm {...props} />;
 }
 
-describe('<MessageNewModal />', () => {
+describe('<MessagesNewModalForm />', () => {
     it('renders correctly', () => {
-        const MessageNewModal = {};
-
-        const {container} = render(<ByPass
-
-        />);
+        const {container} = render(<ByPass recipients={[]} toggle={jest.fn()}/>);
+        expect(container.firstChild).toBeTruthy();
 
     });
 

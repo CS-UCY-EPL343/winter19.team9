@@ -8,12 +8,8 @@ function ByPass(props) {
 
 describe('<MessagesModalAdminCoach />', () => {
     it('renders correctly', () => {
-        const MessagesModalAdminCoach = {};
-
-        const {container} = render(<ByPass
-
-        />);
-
+        const {container} = render(<ByPass testLoading={true}/>);
+        expect(container.firstChild).toBeTruthy();
     });
 
 });

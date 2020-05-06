@@ -8,11 +8,8 @@ function ByPass(props) {
 
 describe('<GeneralScheduleModalBody />', () => {
     it('renders correctly', () => {
-        const GeneralScheduleModalBody = {};
-
-        const {container} = render(<ByPass
-
-        />);
+        const {container} = render(<ByPass/>);
+        expect(container.firstChild).toBeTruthy();
 
     });
 

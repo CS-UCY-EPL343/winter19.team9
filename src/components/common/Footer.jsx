@@ -41,29 +41,31 @@ class Footer extends Component {
                   <span className = "about-footer-text"> { this.props.stylesheetData['about-us']['email'] }</span>
                 </p>
               </div>
-              <div id = "help-footer"
-                   className = "col-lg-3 col-md-12 col-sm-12"
+              {!this.props.testLoading &&
+              <div id="help-footer"
+                   className="col-lg-3 col-md-12 col-sm-12"
               >
                 <h2>Get Help</h2>
                 <div>
-                  <p><i className = "fa fa-home footer-icon" /> <NavLink
-                      className = "Nav_link"
-                      to = "/"
+                  <p><i className="fa fa-home footer-icon"/> <NavLink
+                      className="Nav_link"
+                      to="/"
                   >Home Page</NavLink></p>
                 </div>
                 <div>
-                  <p><i className = "fa fa-phone footer-icon" /> <NavLink
-                      className = "Nav_link"
-                      to = "/about"
+                  <p><i className="fa fa-phone footer-icon"/> <NavLink
+                      className="Nav_link"
+                      to="/about"
                   >Contact Us</NavLink></p>
                 </div>
                 <div>
-                  <p><i className = "fa fa-info footer-icon" /> <NavLink
-                      className = "Nav_link"
-                      to = "/classes"
+                  <p><i className="fa fa-info footer-icon"/> <NavLink
+                      className="Nav_link"
+                      to="/classes"
                   >See the classes</NavLink></p>
                 </div>
               </div>
+              }
               <div id = "about-footer"
                    className = "col-lg-3 col-md-12 col-sm-12"
               >

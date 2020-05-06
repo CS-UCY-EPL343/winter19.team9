@@ -8,11 +8,8 @@ function ByPass(props) {
 
 describe('<Leader />', () => {
     it('renders correctly', () => {
-        const Leader = {};
-
-        const {container} = render(<ByPass
-
-        />);
+        const {container} = render(<ByPass testLoading={true}/>);
+        expect(container.firstChild).toHaveClass('leaderboard__result');
 
     });
 

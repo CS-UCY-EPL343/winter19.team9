@@ -8,12 +8,8 @@ function ByPass(props) {
 
 describe('<LeaderBoard />', () => {
     it('renders correctly', () => {
-        const LeaderBoard = {};
-
-        const {container} = render(<ByPass
-
-        />);
-
+        const {container} = render(<ByPass testLoading={true} data={[]}/>);
+        expect(container.firstChild).toHaveClass('col-md-6 panel panel-default');
     });
 
 });

@@ -34,7 +34,7 @@ class EventsModal extends Component {
 
   render() {
     return (
-        <div id = { 'EventsModal' }>
+        <div id = { 'EventsModal' } className={ 'eventClass'}>
           { this.state.loading ?
               <Spinner style = { {
                 'height'         : '250px',

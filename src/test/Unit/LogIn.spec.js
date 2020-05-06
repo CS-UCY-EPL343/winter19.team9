@@ -8,11 +8,8 @@ function ByPass(props) {
 
 describe('<LogIn />', () => {
     it('renders correctly', () => {
-        const LogIn = {};
-
-        const {container} = render(<ByPass
-
-        />);
+        const {container} = render(<ByPass testLoading={true}/>);
+        expect(container.firstChild).toHaveClass('forgot-passsword');
 
     });
 

@@ -5,18 +5,24 @@ class Graphs extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.createGraph = this.createGraph.bind(this);
+    if (!this.props.testLoading) {
+      this.createGraph = this.createGraph.bind(this);
+    }
   }
 
   componentDidMount() {
-    this.createGraph();
+    if (!this.props.testLoading) {
+      this.createGraph();
+    }
   }
 
   // noinspection JSUnusedLocalSymbols
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.graphData !== this.props.graphData) {
       this.state.myChart.destroy();
-      this.createGraph();
+      if (!this.props.testLoading) {
+        this.createGraph();
+      }
     }
   }
 

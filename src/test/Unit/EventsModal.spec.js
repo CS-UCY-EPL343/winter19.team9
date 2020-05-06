@@ -8,12 +8,8 @@ function ByPass(props) {
 
 describe('<EventsModal />', () => {
     it('renders correctly', () => {
-        const EventsModal = {};
-
-        const {container} = render(<ByPass
-
-        />);
-
+        const {container} = render(<ByPass/>);
+        expect(container.firstChild).toBeTruthy();
     });
 
 });

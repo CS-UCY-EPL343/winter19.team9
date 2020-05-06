@@ -8,12 +8,8 @@ function ByPass(props) {
 
 describe('<Navigation />', () => {
     it('renders correctly', () => {
-        const Navigation = {};
-
-        const {container} = render(<ByPass
-
-        />);
-
+        const {container} = render(<ByPass testLoading={true}/>);
+        expect(container.firstChild).toHaveClass('navbar');
     });
 
 });

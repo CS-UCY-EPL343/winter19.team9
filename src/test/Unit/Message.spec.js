@@ -8,11 +8,8 @@ function ByPass(props) {
 
 describe('<Message />', () => {
     it('renders correctly', () => {
-        const Message = {};
-
-        const {container} = render(<ByPass
-
-        />);
+        const {container} = render(<ByPass testLoading={true}/>);
+        expect(container.firstChild).toHaveClass('msg-card');
 
     });
 
