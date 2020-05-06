@@ -16,13 +16,17 @@ class Footer extends Component {
                    className = "col-lg-3 col-md-12 col-sm-12"
               >
                 <h2>Get Social</h2>
-                <p>{ this.props.stylesheetData['social']['text'] }</p>
-                <br/>
+                <p data-testid = { 'text' }>{ this.props.stylesheetData['social']['text'] }</p>
+                <br />
                 <p>
-                  <a href = { this.props.stylesheetData['social']['facebook'] }>
+                  <a data-testid = { 'facebook' }
+                     href = { this.props.stylesheetData['social']['facebook'] }
+                  >
                     <i className = "fa fa-facebook footer-icon" />
                   </a>
-                  <a href = { this.props.stylesheetData['social']['instagram'] }>
+                  <a data-testid = { 'instagram' }
+                     href = { this.props.stylesheetData['social']['instagram'] }
+                  >
                     <i className = "fa fa-instagram footer-icon footer-icon-centered" />
                   </a>
                 </p>
@@ -33,38 +37,42 @@ class Footer extends Component {
                 <h2>About Us</h2>
                 <p>
                   <i className = "fa fa-map-marker footer-icon" /> Address:
-                  <span className = "about-footer-text"> { this.props.stylesheetData['about-us']['address'] }</span>
+                  <span data-testid = { 'address' }
+                        className = "about-footer-text"
+                  > { this.props.stylesheetData['about-us']['address'] }</span>
                 </p>
-                <br/>
+                <br />
                 <p>
                   <i className = "fa fa-envelope footer-icon" /> Questions?
-                  <span className = "about-footer-text"> { this.props.stylesheetData['about-us']['email'] }</span>
+                  <span data-testid = { 'email' }
+                        className = "about-footer-text"
+                  > { this.props.stylesheetData['about-us']['email'] }</span>
                 </p>
               </div>
-              {!this.props.testLoading &&
-              <div id="help-footer"
-                   className="col-lg-3 col-md-12 col-sm-12"
-              >
-                <h2>Get Help</h2>
-                <div>
-                  <p><i className="fa fa-home footer-icon"/> <NavLink
-                      className="Nav_link"
-                      to="/"
-                  >Home Page</NavLink></p>
+              { !this.props.testLoading &&
+                <div id = "help-footer"
+                     className = "col-lg-3 col-md-12 col-sm-12"
+                >
+                  <h2>Get Help</h2>
+                  <div>
+                    <p><i className = "fa fa-home footer-icon" /> <NavLink
+                        className = "Nav_link"
+                        to = "/"
+                    >Home Page</NavLink></p>
+                  </div>
+                  <div>
+                    <p><i className = "fa fa-phone footer-icon" /> <NavLink
+                        className = "Nav_link"
+                        to = "/about"
+                    >Contact Us</NavLink></p>
+                  </div>
+                  <div>
+                    <p><i className = "fa fa-info footer-icon" /> <NavLink
+                        className = "Nav_link"
+                        to = "/classes"
+                    >See the classes</NavLink></p>
+                  </div>
                 </div>
-                <div>
-                  <p><i className="fa fa-phone footer-icon"/> <NavLink
-                      className="Nav_link"
-                      to="/about"
-                  >Contact Us</NavLink></p>
-                </div>
-                <div>
-                  <p><i className="fa fa-info footer-icon"/> <NavLink
-                      className="Nav_link"
-                      to="/classes"
-                  >See the classes</NavLink></p>
-                </div>
-              </div>
               }
               <div id = "about-footer"
                    className = "col-lg-3 col-md-12 col-sm-12"
@@ -72,7 +80,10 @@ class Footer extends Component {
                 <h2>About The Club</h2>
                 { this.props.stylesheetData['about-club'].map((v, i) => {
                   return (
-                      <div key = { i } style = { {padding: 0} }>
+                      <div data-testid = { 'about-club' }
+                           key = { i }
+                           style = { {padding: 0} }
+                      >
                         <p>{ v }</p>
                       </div>
                   );

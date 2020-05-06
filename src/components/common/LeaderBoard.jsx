@@ -44,10 +44,10 @@ class LeaderBoard extends Component {
     return (
         <div className = "col-md-6 panel panel-default">
           <div className = "leaderboard__wrapper">
-            <div className = "leaderboard__title panel-heading">
+            <div data-testid={'title'} className = "leaderboard__title panel-heading">
               <h5>{ this.props.title }</h5>
             </div>
-            <div className = "leaderboard__results">
+            <div data-testid={'leaders'} className = "leaderboard__results">
               { leaders }
             </div>
             {/*
