@@ -24,22 +24,25 @@ class MessagesModalAdminCoach extends Component {
   }
 
   componentDidMount() {
-    // const data = {username: this.props.username};
-    getMessagesMelios(this.props.userName).then(response => {
-      this.setState({
-        messages: response.messages[0].sort(
-            function(a, b) {
-              // noinspection JSUnresolvedVariable
-              return b.Message_ID
-                     - a.Message_ID;
-            }),
-      });
-    }).then(() => {
-      let loading = this.state.loading;
-      loading[0] = false;
-      this.setState({loading});
-    }).catch(err => alert(err));
-
+    if (this.props.testLoading) {
+      this.setState({messages: this.props.messages, loading: [false, false]});
+    } else {
+      // const data = {username: this.props.username};
+      getMessagesMelios(this.props.userName).then(response => {
+        this.setState({
+          messages: response.messages[0].sort(
+              function(a, b) {
+                // noinspection JSUnresolvedVariable
+                return b.Message_ID
+                       - a.Message_ID;
+              }),
+        });
+      }).then(() => {
+        let loading = this.state.loading;
+        loading[0] = false;
+        this.setState({loading});
+      }).catch(err => alert(err));
+    }
   }
 
   componentWillUnmount() {
@@ -119,7 +122,10 @@ class MessagesModalAdminCoach extends Component {
                                             + msg.Timestamp.split(/[T.]+/)[1];
                           // noinspection JSUnresolvedVariable
                           return (
-                              <div className = { 'messageDiv' } key = { index }>
+                              <div data-testid = { 'messageDiv' }
+                                   className = { 'messageDiv' }
+                                   key = { index }
+                              >
                                 { this.props.TotalMessages > 0 &&
                                   this.props.TotalMessages === index &&
                                   < div className = 'new-msg-line'>

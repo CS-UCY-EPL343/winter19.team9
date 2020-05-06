@@ -5,7 +5,8 @@ import adminAvatar        from '../assets/img/logos/fitnessFactoryLogo.png';
 class Message extends Component {
   render() {
     let imageURL = 'https://www.w3schools.com/howto/img_avatar.png';
-    let $imagePreview = <img src = { imageURL }
+    let $imagePreview = <img data-testid = { 'image' }
+                             src = { imageURL }
                              className = { 'img-left' }
                              alt = { 'Profile Avatar' }
     />;
@@ -14,7 +15,8 @@ class Message extends Component {
           'data:image/png;base64,' + new Buffer.from(this.props.image,
           'binary').toString(
           'base64');
-      $imagePreview = (<img src = { imageURL }
+      $imagePreview = (<img data-testid = { 'image' }
+                            src = { imageURL }
                             className = { 'img-left' }
                             alt = { 'Profile Avatar' }
       />);
@@ -29,48 +31,53 @@ class Message extends Component {
           {/*  <i className = "fa fa-plus-circle" /> }*/ }
           { this.props.outgoing ?
               <div className = "msg-data">
-                <div className={'msg-header'}>
+                <div className = { 'msg-header' }>
                   { $imagePreview }
-                  <h2 className = "card-title">
+                  <h2 data-testid = { 'title' } className = "card-title">
                     { this.props.title }
                   </h2>
                 </div>
                 <div className = "msg-content right">
-                  <h5 className = "msg-contact">
+                  <h5 data-testid = { 'fromContact' } className = "msg-contact">
                     From: { this.props.fromContact }
                   </h5>
-                  <h5 className = "msg-contact">
+                  <h5 data-testid = { 'toContact' } className = "msg-contact">
                     To: { this.props.toContact }
                   </h5>
-                  <p className = "card-text">
+                  <p data-testid = { 'message' } className = "card-text">
                     { this.props.message }
                   </p>
                 </div>
-                <p className = "msg-timestamp left">{ this.props.timestamp }</p>
+                <p data-testid = { 'timestamp' }
+                   className = "msg-timestamp left"
+                >{ this.props.timestamp }</p>
               </div>
               :
               <div className = "msg-data">
-                <div className={'msg-header left'}>
-                  < img src = { adminAvatar }
+                <div className = { 'msg-header left' }>
+                  < img data-testid = { 'image' }
+                        src = { adminAvatar }
                         className = { 'img-right' }
                         alt = 'Avatar'
                   />
-                  <h2 className = "card-title right">
+                  <h2 data-testid = { 'title' } className = "card-title right">
                     { this.props.title }
                   </h2>
                 </div>
                 <div className = "msg-content left">
-                  <h5 className = "msg-contact">
+                  <h5 data-testid = { 'fromContact' } className = "msg-contact">
                     From: { this.props.fromContact }
                   </h5>
-                  <h5 className = "msg-contact">
+                  <h5 data-testid = { 'toContact' } className = "msg-contact">
                     To: { this.props.toContact }
                   </h5>
-                  <p className = "card-text">
+                  <p data-testid = { 'message' } className = "card-text">
                     { this.props.message }
                   </p>
                 </div>
-                <p className = "msg-timestamp right">{ this.props.timestamp }</p>
+                <p data-testid = { 'timestamp' }
+                   className = "msg-timestamp right"
+                >{ this.props.timestamp }</p>
               </div>
           }
         </div>

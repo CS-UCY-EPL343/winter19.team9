@@ -69,11 +69,11 @@ class AnnouncementsPublic extends Component {
 
   slickAdd = async(Title, Message) => {
     if (this.state.level <= 1) {
-      Swal.fire(
-          'You are not authorized to do this!',
-          'Please log in and try again...',
-          'error',
-      ).then();
+      // Swal.fire(
+      //     'You are not authorized to do this!',
+      //     'Please log in and try again...',
+      //     'error',
+      // ).then();
       return false;
     }
 
@@ -113,11 +113,11 @@ class AnnouncementsPublic extends Component {
 
   slickRemove = (ANNOUNCEMENT_ID) => {
     if (this.state.level <= 1) {
-      Swal.fire(
-          'You are not authorized to do this!',
-          'Please log in and try again...',
-          'error',
-      ).then();
+      // Swal.fire(
+      //     'You are not authorized to do this!',
+      //     'Please log in and try again...',
+      //     'error',
+      // ).then();
       return;
     }
 
