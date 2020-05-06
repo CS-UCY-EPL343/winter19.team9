@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/winter19.team9/static/css/main.449573f9.chunk.css",
-    "main.js": "/winter19.team9/static/js/main.9b8ea12f.chunk.js",
-    "main.js.map": "/winter19.team9/static/js/main.9b8ea12f.chunk.js.map",
+    "main.js": "/winter19.team9/static/js/main.d8aebc36.chunk.js",
+    "main.js.map": "/winter19.team9/static/js/main.d8aebc36.chunk.js.map",
     "runtime-main.js": "/winter19.team9/static/js/runtime-main.8f9dc62c.js",
     "runtime-main.js.map": "/winter19.team9/static/js/runtime-main.8f9dc62c.js.map",
     "static/css/2.beb670dd.chunk.css": "/winter19.team9/static/css/2.beb670dd.chunk.css",
-    "static/js/2.494dc871.chunk.js": "/winter19.team9/static/js/2.494dc871.chunk.js",
-    "static/js/2.494dc871.chunk.js.map": "/winter19.team9/static/js/2.494dc871.chunk.js.map",
+    "static/js/2.3273217b.chunk.js": "/winter19.team9/static/js/2.3273217b.chunk.js",
+    "static/js/2.3273217b.chunk.js.map": "/winter19.team9/static/js/2.3273217b.chunk.js.map",
     "index.html": "/winter19.team9/index.html",
-    "precache-manifest.0b71f7b770e5c12def7f81275e756d84.js": "/winter19.team9/precache-manifest.0b71f7b770e5c12def7f81275e756d84.js",
+    "precache-manifest.7152ab0c5f4c74d5e019fb751cf217f8.js": "/winter19.team9/precache-manifest.7152ab0c5f4c74d5e019fb751cf217f8.js",
     "service-worker.js": "/winter19.team9/service-worker.js",
     "static/css/2.beb670dd.chunk.css.map": "/winter19.team9/static/css/2.beb670dd.chunk.css.map",
     "static/css/main.449573f9.chunk.css.map": "/winter19.team9/static/css/main.449573f9.chunk.css.map",
-    "static/js/2.494dc871.chunk.js.LICENSE.txt": "/winter19.team9/static/js/2.494dc871.chunk.js.LICENSE.txt",
+    "static/js/2.3273217b.chunk.js.LICENSE.txt": "/winter19.team9/static/js/2.3273217b.chunk.js.LICENSE.txt",
     "static/media/About.css": "/winter19.team9/static/media/aboutusimg.231364a7.jpg",
     "static/media/ffLogoTransparent.png": "/winter19.team9/static/media/ffLogoTransparent.9f75a55d.png",
     "static/media/fitnessFactoryLogo.png": "/winter19.team9/static/media/fitnessFactoryLogo.444228d2.png",
@@ -24,8 +24,8 @@
   "entrypoints": [
     "static/js/runtime-main.8f9dc62c.js",
     "static/css/2.beb670dd.chunk.css",
-    "static/js/2.494dc871.chunk.js",
+    "static/js/2.3273217b.chunk.js",
     "static/css/main.449573f9.chunk.css",
-    "static/js/main.9b8ea12f.chunk.js"
+    "static/js/main.d8aebc36.chunk.js"
   ]
 }
