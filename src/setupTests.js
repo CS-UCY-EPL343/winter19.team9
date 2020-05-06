@@ -6,4 +6,5 @@ const localStorageMock = {
   removeItem: jest.fn(),
   clear     : jest.fn(),
 };
+// noinspection JSUndefinedPropertyAssignment
 global.localStorage = localStorageMock;

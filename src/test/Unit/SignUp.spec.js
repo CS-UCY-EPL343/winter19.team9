@@ -8,8 +8,6 @@ function ByPass(props) {
 
 describe('<SignUp />', () => {
     it('renders correctly', () => {
-        const SignUp = {};
-
         const {container} = render(<ByPass
 
         />);
@@ -48,6 +46,7 @@ describe('<SignUp />', () => {
             expect(birthday).toBeEmpty();
         });
 
+        // noinspection DuplicatedCode
         it('change input data', () => {
             const {queryByPlaceholderText} = render(
                 <ByPass testLoading = { true } />);

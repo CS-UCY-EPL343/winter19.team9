@@ -54,6 +54,7 @@ class MessagesNewModal extends Component {
     };
 
     render() {
+        // noinspection JSUnresolvedVariable
         return (
             <Modal isOpen={this.props.modal} toggle={this.toggle}
                    size={'md'}

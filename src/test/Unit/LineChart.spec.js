@@ -1,7 +1,6 @@
 import React from 'react';
 import {render} from '@testing-library/react';
 import LineChart from '../../components/common/LineChart';
-import {getServerConnections} from "../../repository";
 
 function ByPass(props) {
     return <LineChart {...props} />;

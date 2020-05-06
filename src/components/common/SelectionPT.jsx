@@ -50,6 +50,7 @@ class SelectionPT extends Component {
 
     // noinspection JSUnusedLocalSymbols
     componentDidUpdate(prevProps, prevState, snapshot) {
+        // noinspection JSUnresolvedVariable
         if (prevProps.coaches !== this.props.coaches || prevProps.coachesRet !== this.props.coachesRet
             || prevProps.coachID !== this.props.coachID
            || prevProps.userID !== this.props.userID) {

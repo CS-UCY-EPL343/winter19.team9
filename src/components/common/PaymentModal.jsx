@@ -81,7 +81,7 @@ class PaymentModal extends Component {
                     </div>
                 </div>
                 <button id="CheckoutButton" className="btn btn-primary"
-                        type="submit"><i className="fa fa-lock" disabled={true}/> CHECKOUT
+                        type="submit"><i className="fa fa-lock"/> CHECKOUT
                 </button>
             </div>
 

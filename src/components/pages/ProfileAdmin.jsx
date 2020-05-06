@@ -103,6 +103,7 @@ class ProfileAdmin extends Component {
     this.setState({modalMessages: !this.state.modalMessages});
   };
 
+  // noinspection DuplicatedCode
   onAnnouncementSubmit = async(Title, Message, Ann_ID) => {
     if (this.state.level <= 1) {
       Swal.fire(

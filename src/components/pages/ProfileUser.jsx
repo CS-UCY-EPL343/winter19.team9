@@ -8,8 +8,7 @@ import Timetable
     from '../common/EnrolledClassSchedule';
 // noinspection ES6CheckImport
 import {NavLink, Redirect} from 'react-router-dom';
-import {isAuthenticated, loggedInVisit, updateProfileVisit} from '../../repository';
-import {Modal} from "reactstrap";
+import {loggedInVisit, updateProfileVisit} from '../../repository';
 
 class ProfileUser extends Component {
     componentDidMount() {
