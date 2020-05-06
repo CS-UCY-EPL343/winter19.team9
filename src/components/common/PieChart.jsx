@@ -12,14 +12,18 @@ class PieChart extends Component {
   }
 
   componentDidMount() {
-    this.createChart();
+    if (!this.props.testLoading) {
+      this.createChart();
+    }
   }
 
   // noinspection JSUnusedLocalSymbols
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.data !== this.props.data) {
-      this.state.myChart.destroy();
-      this.createChart();
+      if (!this.props.testLoading) {
+        this.state.myChart.destroy();
+        this.createChart();
+      }
     }
   }
 

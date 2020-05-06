@@ -1,19 +1,15 @@
-import React from 'react';
+import React    from 'react';
 import {render} from '@testing-library/react';
 import PieChart from '../../components/common/PieChart';
 
 function ByPass(props) {
-    return <PieChart {...props} />;
+  return <PieChart { ...props } />;
 }
 
 describe('<PieChart />', () => {
-    it('renders correctly', () => {
-        const PieChart = {};
+  it('renders correctly', () => {
+    const {container} = render(<ByPass testLoading = { true } />);
 
-        const {container} = render(<ByPass
-
-        />);
-
-    });
-
+    expect(container.firstChild).toBeTruthy();
+  });
 });
