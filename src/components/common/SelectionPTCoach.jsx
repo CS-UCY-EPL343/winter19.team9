@@ -101,7 +101,7 @@ class SelectionPTCoach extends Component {
     render() {
         return (
             <div>
-                <form className="form" id="backBox">
+                <form className="form smallerBack" id="backBox" >
                     <h3 id="bmiHeading"><b>C</b>hoose <b>D</b>ay and <b>T</b>ime</h3>
                     <div className="row" id="first-row">
                         <div className="col-md-6 RowBlock">

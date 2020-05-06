@@ -47,6 +47,7 @@ class Signup extends React.Component {
       password: encryptedString,
     };
 
+
     // Call for query
     logIn(dataLogIn)
         .then(data => {

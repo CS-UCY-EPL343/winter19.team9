@@ -22,12 +22,12 @@ class PaymentModal extends Component {
 
                             <label className="option" htmlFor="option-1">
                                 <span className="option__indicator"/>
-                                <span className="option__label">&euro;50<sub>per month</sub></span>
+                                <span className="option__label">&euro;65<sub>per month</sub></span>
                             </label>
 
                             <label className="option" htmlFor="option-2">
                                 <span className="option__indicator"/>
-                                <span className="option__label">&euro;200<sub>/ 3 months</sub></span>
+                                <span className="option__label">&euro;170<sub>/ 3 months</sub></span>
                             </label>
 
                         </div>
@@ -40,12 +40,12 @@ class PaymentModal extends Component {
 
                             <label className="option" htmlFor="option-3">
                                 <span className="option__indicator"/>
-                                <span className="option__label">&euro;500<sub>/ 6 months</sub></span>
+                                <span className="option__label">&euro;300<sub>/ 6 months</sub></span>
                             </label>
 
                             <label className="option" htmlFor="option-4">
                                 <span className="option__indicator"/>
-                                <span className="option__label">&euro;700<sub>per year</sub></span>
+                                <span className="option__label">&euro;565<sub>per year</sub></span>
                             </label>
 
                         </div>
@@ -81,7 +81,7 @@ class PaymentModal extends Component {
                     </div>
                 </div>
                 <button id="CheckoutButton" className="btn btn-primary"
-                        type="submit"><i className="fa fa-lock"/> CHECKOUT
+                        type="submit"><i className="fa fa-lock" disabled={true}/> CHECKOUT
                 </button>
             </div>
 

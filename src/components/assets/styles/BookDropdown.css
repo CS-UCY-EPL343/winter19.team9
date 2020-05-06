@@ -9,7 +9,11 @@
 
 #backBox {
     padding: 1%;
-    height: fit-content;
+    /*height: fit-content;*/
+}
+.smallerBack {
+    padding: 5% !important;
+    height: fit-content !important;
 }
 
 #DropDays{

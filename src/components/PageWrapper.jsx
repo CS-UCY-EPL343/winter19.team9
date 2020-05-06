@@ -29,6 +29,7 @@ class PageWrapper extends Component {
             React.cloneElement(child, {userLevel: this.props.userLevel}),
         );
         return (
+
             <div id="top-of-page">
                 {!(navigator.userAgent.match(/Android/i)) &&
                 <Navigation userLevel={this.props.userLevel}

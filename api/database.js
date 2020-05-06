@@ -9,9 +9,13 @@ function dbConnect() {
       return reject();
     }
     conn = mysql.createConnection({
-      host    : 'dione.in.cs.ucy.ac.cy',
-      user    : 'ffndb',
-      password: '3dwaxQvnSDPpVjJS',
+      // host    : 'dione.in.cs.ucy.ac.cy',
+      // user    : 'ffndb',
+      // password: '3dwaxQvnSDPpVjJS',
+      // database: 'ffndb',
+      host    : 'ffndb.mysql.database.azure.com',
+      user    : 'ffn_root@ffndb',
+      password: 'mavroS1234!',
       database: 'ffndb',
     });
 
@@ -46,7 +50,7 @@ function dbDisconnect() {
 }
 
 function dbLogIn(username, password) {
-  // console.log(username + password);
+  console.log(username + password);
   return new Promise((resolve, reject) => {
     const sql = 'SELECT * FROM ACCOUNT WHERE username = ? AND password = ?';
 

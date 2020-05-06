@@ -12,7 +12,7 @@ export default class ToggleModal extends React.Component {
                        aria-labelledby = "contained-modal-title-vcenter"
                        centered
                 >
-                    {!(navigator.userAgent.match(/Android/i)) &&
+                    {!(navigator.userAgent.match(/Android/i))     &&
                     <ModalHeader toggle={this.props.toggle}>{this.props.modalHeader}</ModalHeader>
                     }
                     <ModalBody>
