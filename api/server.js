@@ -1,3 +1,4 @@
+
 'use strict';
 
 const db = require('./database');
@@ -34,6 +35,10 @@ transporter.verify((error, success) => {
 app.use(bodyParser.json({limit: '10mb', extended: true}));
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
 app.use(cors());
+
+exports.handler = ((req, res) => {
+    res.set({ 'Access-Control-Allow-Origin': '*' }).sendStatus(200)
+})
 
 // noinspection JSUnresolvedFunction
 app.post('/api/email', (req, res) => {
