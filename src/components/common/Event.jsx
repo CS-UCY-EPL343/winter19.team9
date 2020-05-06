@@ -11,7 +11,7 @@ class Event extends Component {
             { this.props.timeStart } { this.props.timeStart.split(':')[0] < 12
               ? 'am' : 'pm' }
           </div>
-          <div className = "ei_Copy">{ this.props.event } </div>
+          <div className = "ei_Copy">{ this.props.event }</div>
         </div>
     );
   }

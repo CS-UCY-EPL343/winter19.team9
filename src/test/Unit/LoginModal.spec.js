@@ -1,9 +1,9 @@
 import React from 'react';
 import {render} from '@testing-library/react';
-import AnnouncementCompPub from '../../components/common/AnnouncementCompPub';
+import LoginModal from '../../components/common/LoginModal';
 
 function ByPass(props) {
-    return <AnnouncementCompPub {...props} />;
+    return <LoginModal {...props} />;
 }
 
 describe('<LoginModal />', () => {
@@ -12,4 +12,11 @@ describe('<LoginModal />', () => {
         expect(container.firstChild).toBeTruthy();
     });
 
+    // it('check input data', () => {
+    //     const {queryByPlaceholderText} = render(<ByPass testLoading={true}/>);
+    //     const username = queryByPlaceholderText('Username');
+    //     const password = queryByPlaceholderText('Enter Password');
+    //     const name     = queryByPlaceholderText('First Name');
+    //     const surname  = queryByPlaceholderText('Last Name');
+    // });
 });
