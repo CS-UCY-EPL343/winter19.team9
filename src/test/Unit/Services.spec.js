@@ -8,12 +8,12 @@ function ByPass(props) {
 
 describe('<Services />', () => {
     it('renders correctly', () => {
-        const Services = {};
+       // const Services = {};
 
-        const {container} = render(<ByPass
+        const {container} = render(<ByPass stylesheetData = {{Home:{services:[]}}}
 
-        />);
-
+                                    />);
+        expect(container.firstChild).toBeTruthy();
     });
 
 });

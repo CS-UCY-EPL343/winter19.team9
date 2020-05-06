@@ -13,6 +13,7 @@ describe('<StaffList />', () => {
         const {container} = render(<ByPass
 
         />);
+        expect(container.firstChild).toBeTruthy();
 
     });
 

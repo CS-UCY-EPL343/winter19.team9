@@ -10,10 +10,8 @@ describe('<Team />', () => {
     it('renders correctly', () => {
         const Team = {};
 
-        const {container} = render(<ByPass
-
-        />);
-
+        const {container} = render(<ByPass coaches = {[]} />);
+        expect(container.firstChild).toHaveClass('page-section');
     });
 
 });

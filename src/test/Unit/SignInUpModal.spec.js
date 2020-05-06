@@ -13,7 +13,7 @@ describe('<SignInUpModal />', () => {
         const {container} = render(<ByPass
 
         />);
-
+        expect(container.firstChild).toBeTruthy();
     });
 
 });

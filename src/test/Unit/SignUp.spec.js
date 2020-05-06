@@ -13,7 +13,7 @@ describe('<SignUp />', () => {
         const {container} = render(<ByPass
 
         />);
-
+        expect(container.firstChild).toBeTruthy();
     });
 
 });

@@ -13,7 +13,7 @@ describe('<SettingsProfile />', () => {
         const {container} = render(<ByPass
 
         />);
-
+        expect(container.firstChild).toHaveClass('col-lg-4 col-md-12 col-sm-12');
     });
 
 });
