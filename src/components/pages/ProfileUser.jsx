@@ -84,6 +84,7 @@ class ProfileUser extends Component {
                                classes = { this.state.dataClasses }
                                userLevel = { this.props.userLevel }
                                changeAvatar = { this.changeAvatar }
+                               setUserLevel = { this.props.setUserLevel }
               />
               <ProfileInfo loadingInfo = { this.state.loadingInfo }
                            toggleLoading = { this.toggleLoading }

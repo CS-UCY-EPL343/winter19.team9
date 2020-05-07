@@ -207,6 +207,7 @@ class SettingsProfile extends Component {
                                                classes = { this.state.classes }
                                                toggle = { this.toggleEditAccount }
                                                changeAvatar = { this.props.changeAvatar }
+                                               setUserLevel = { this.props.setUserLevel }
                     /> }
                 />
               </li>

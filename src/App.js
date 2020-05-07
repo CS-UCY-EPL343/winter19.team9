@@ -207,7 +207,10 @@ class App extends Component {
                       />
 
                       <PrivateRoute path = "/user/profile"
-                                    component = { ProfileUser }
+                                    component = { (props) => <ProfileUser { ...props }
+                                                                           setUserLevel = { this.setUserLevel }
+                                                                           userLevel = { this.state.userLevel }
+                                    /> }
                                     userLevel = { this.state.userLevel }
                       />
                       <PrivateRoute path = "/coach/profile"

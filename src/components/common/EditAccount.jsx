@@ -8,6 +8,7 @@ import Swal                                  from 'sweetalert2';
 import '@sweetalert2/theme-dark/dark.css';
 import Spinner                               from '../Spinner';
 import {AnimatedOnScroll}                    from 'react-animated-css-onscroll';
+import history from '../../history';
 
 class EditAccount extends Component {
   constructor(props) {
@@ -70,8 +71,9 @@ class EditAccount extends Component {
               '',
               'success',
           ).then(() => {
+            this.props.setUserLevel(undefined);
             logOut();
-            window.location.replace('/');
+            history.push('/');
           });
         }).catch(() => Swal.fire(
             'Something went wrong',

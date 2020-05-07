@@ -1,12 +1,10 @@
-import React, {Component} from 'react';
-import {NavLink} from 'react-router-dom';
-// import ToggleModal                 from './ToggleModal';
-// import LoginModal                  from './LoginModal';
-// import { Button }                  from 'reactstrap';
+import React, {Component}        from 'react';
+import {NavLink}                 from 'react-router-dom';
 import {isAuthenticated, logOut} from '../../repository';
-import logo_img from '../assets/img/logos/ffLogoTransparent.png';
-import history from '../../history';
-import SignInUpModal from './SignInUpModal';
+import logo_img
+                                 from '../assets/img/logos/ffLogoTransparent.png';
+import history                   from '../../history';
+import SignInUpModal             from './SignInUpModal';
 
 class Navigation extends Component {
   constructor(props) {
@@ -20,6 +18,9 @@ class Navigation extends Component {
   // noinspection JSUnusedLocalSymbols
   componentDidUpdate(prevProps, prevState, snapshot) {
     localStorage.setItem('path', history.location.pathname);
+    if (this.props.userLevel !== prevProps.userLevel) {
+      this.setState({userLevel: this.props.userLevel});
+    }
   }
 
   toggle = () => {
@@ -73,28 +74,28 @@ class Navigation extends Component {
                 </li>
                 { isAuthenticated() &&
                   <>
-                    { this.props.userLevel === 'user' &&
+                    { this.state.userLevel === 'user' &&
                       <li className = "nav-item">
                         <NavLink className = "nav-link"
                                  to = "/user/profile"
                         >Profile</NavLink>
                       </li> }
 
-                    { this.props.userLevel === 'coach' &&
+                    { this.state.userLevel === 'coach' &&
                       <li className = "nav-item">
                         <NavLink className = "nav-link"
                                  to = "/coach/profile"
                         >Profile</NavLink>
                       </li> }
 
-                    { this.props.userLevel === 'admin' &&
+                    { this.state.userLevel === 'admin' &&
                       <li className = "nav-item">
                         <NavLink className = "nav-link"
                                  to = "/admin/profile"
                         >Profile</NavLink>
                       </li> }
 
-                    { this.props.userLevel === 'admin' &&
+                    { this.state.userLevel === 'admin' &&
                       <li className = "nav-item">
                         <NavLink className = "nav-link"
                                  to = "/admin/dashboard"
@@ -108,7 +109,7 @@ class Navigation extends Component {
                 </li>
                 {
                   (
-                      isAuthenticated()) ?
+                      this.state.userLevel && isAuthenticated()) ?
                       <li className = "nav-item">
                         <NavLink to = "/"
                                  className = { 'nav-link logout btn btn-secondary' }
