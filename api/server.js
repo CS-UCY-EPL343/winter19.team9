@@ -525,7 +525,7 @@ app.post('/api/user/insert', (req, res) => {
 /*******************************Insert new Coach/Admin****************************/
 // noinspection JSUnresolvedFunction
 app.post('/api/coach/insert', (req, res) => {
-  db.insertNewCoach(req.decoded.username)
+  db.insertNewCoach(req.body)
       .then(response => res.status(200).json({message: response}))
       .catch(err => res.status(409).json(err));
 });

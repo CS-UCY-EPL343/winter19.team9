@@ -319,15 +319,6 @@ class EditAccount extends Component {
 
   Test = () => {
 
-
-    //console.log(this.state.Name);
-    // if (this.state.flag === '0') {
-    //   Swal.fire(
-    //       'Please fill in all boxes',
-    //       '',
-    //       'error',
-    //   ).then();
-    // }
     if (this.handleSubmit()) {
         postuserData(this.state)
             .then(() => {
