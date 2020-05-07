@@ -19,6 +19,16 @@ export function logIn(data) {
   }).catch(() => Promise.reject('Authentication Failed!'));
 }
 
+export function isVerify(data){
+  return axios.post(`${ BASE_URL }/api/verify`, {
+    username : data.username,
+    level    : data.level,
+  }).then(response => {
+    localStorage.setItem('x-access-token', response.data.token);
+    // noinspection JSCheckFunctionSignatures
+    // return response.data;
+  }).catch(() => Promise.reject('Authentication Failed!'));
+}
 // noinspection JSUnusedLocalSymbols,JSUnusedGlobalSymbols
 export function images(file) {
   return axios.post('/api/getProfilePic', {emp_id: 5});
@@ -142,6 +152,14 @@ export function getClassCoach(ClassName, ClassDay, ClassTime) {
 export function getUserID() {
   return axios.post(`${ BASE_URL }/api/BookClass/UserID`, {
     'x-access-token': localStorage.getItem('x-access-token'),
+  })
+      .then(response => response.data)
+      .catch(() => Promise.reject('Authentication Failed user!'));
+}
+
+export function getAccountID(data) {
+  return axios.post(`${ BASE_URL }/api/adminCoach/AccountID`, {
+    'x-access-token': localStorage.getItem('x-access-token'), data : data,
   })
       .then(response => response.data)
       .catch(() => Promise.reject('Authentication Failed user!'));
@@ -540,7 +558,14 @@ export function lastVerify(data) {
 
 export function newPassword(data) {
   return axios.post(`${ BASE_URL }/api/reset-password`, data)
-      .then(response => response.data);
+      // .then(response => response.data);
+      .then(response => {
+        localStorage.setItem('x-access-token', response.data.token);
+        // noinspection JSCheckFunctionSignatures
+        localStorage.setItem('x-access-token-expiration',
+            Date.now() + 2 * 60 * 60 * 1000);
+      })
+
 }
 
 export function resetPass(data) {

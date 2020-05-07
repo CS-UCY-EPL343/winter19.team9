@@ -8,9 +8,11 @@ import {
   updateAnnouncement,
   deleteAnnouncement,
   addPrivateAnnouncement,
+  getAllCoaches,
   loggedInVisit,
   updateProfileVisit,
   staffData,
+  getAccountID,
 }                         from '../../repository';
 
 import AnnouncementModal         from '../common/AnnouncementModal';
@@ -26,34 +28,35 @@ import MessagesModalAdminCoach   from '../common/MessagesModalAdminCoach';
 
 class ProfileCoach extends Component {
 
-  // noinspection DuplicatedCode
-  constructor(props) {
-    super(props);
-    this.state = {
-      nameStart            : '',
-      Name                 : '',
-      Surname              : '',
-      Email                : '',
-      username             : '',
-      searchResults        : [],
-      announcements        : [],
-      modal                : false,
-      modal2               : false,
-      modalTitle           : '',
-      modalMessage         : '',
-      modalAnnId           : '',
-      day                  : '',
-      time                 : '',
-      flag                 : false,
-      image                : '',
-      User_ID              : '',
-      Coach_ID             : '',
-      loadingSearchUser    : false,
-      loadingInfo          : false,
-      trainingScheduleCoach: [],
-      cleared              : false,
-      ownerName            : '',
-    };
+    // noinspection DuplicatedCode
+    constructor(props) {
+        super(props);
+        this.state = {
+            userAccountID        :'',
+            nameStart            : '',
+            Name                 : '',
+            Surname              : '',
+            Email                : '',
+            username             : '',
+            searchResults        : [],
+            announcements        : [],
+            modal                : false,
+            modal2               : false,
+            modalTitle           : '',
+            modalMessage         : '',
+            modalAnnId           : '',
+            day                  : '',
+            time                 : '',
+            flag                 : false,
+            image                : '',
+            User_ID              : '',
+            Coach_ID             : '',
+            loadingSearchUser    : false,
+            loadingInfo          : false,
+            trainingScheduleCoach: [],
+            cleared              : false,
+            ownerName            :''
+        };
 
     this.toggleAnnouncementsData = this.toggleAnnouncementsData.bind(this);
     this.onAnnouncementSubmit = this.onAnnouncementSubmit.bind(this);
@@ -301,21 +304,26 @@ class ProfileCoach extends Component {
     });
   };
 
-  updateCoaches = async(user, username) => {
-    return new Promise((resolve) => {
-      this.setState({
-        Name   : user.Name,
-        Surname: user.Surname,
-        Email  : user.Email,
-        username,
-        // image: user.image,
-        User_ID: user.User_ID,
-        cleared: false,
-      }, () => {
-      });
-      return resolve();
-    });
-  };
+    updateCoaches = async(user, username) => {
+        return new Promise((resolve) => {
+            this.setState({
+                Name   : user.Name,
+                Surname: user.Surname,
+                Email  : user.Email,
+                username,
+                // image: user.image,
+                User_ID: user.User_ID,
+                cleared: false,
+            }, () => {
+                getAccountID(this.state.username).then(response => {
+                    this.setState({userAccountID: response.AccountID}, () =>{
+                        console.log(response.AccountID);
+                    })
+                });
+            });
+            return resolve();
+        });
+    };
 
   updatePrivateAnnouncements = async(username) => {
     return new Promise((resolve) => {
@@ -414,65 +422,64 @@ class ProfileCoach extends Component {
                     })
                     }
 
-                  </select>
-                </div>
-              </div>
-              <div className = "col-md-4">
-                <Box toogle = { this.handleDayTimeChange }
-                     userID = { this.state.User_ID }
-                />
-              </div>
-              <div className = "col-md-4">
-                <label htmlFor = "comment"><h4>Messages:</h4></label>
-                <div className = "form-group">
-                  <Button className = { 'nav-link menu-box-tab menu-text ' }
-                          onClick = { this.toggleMessages }
-                          style = { {width: '100%'} }
-                  >
-                    <i className = "scnd-font-color fa fa-envelope" /> Exchange
-                                                                       Messages
-                                                                       with this
-                                                                       Client
-                    { this.state.TotalMessages > 0 &&
-                      <div className = "menu-box-number">{ this.state.TotalMessages }</div> }
-                  </Button>
-                  <ToggleModal
-                      modal = { this.state.modalMessages }
-                      toggle = { this.toggleMessages }
-                      modalSize = { 'md' }
-                      modalHeader = { 'Messages' }
-                      modalBody = {
-                        <MessagesModalAdminCoach
-                            userName = { this.state.ownerName }
-                            userLevel = { this.props.userLevel }
-                            TotalMessages = { this.state.TotalMessages }
-                            toggleTotalMessages = { this.toggleTotalMessages }
-                        /> }
-                  />
-                </div>
-                <br />
-                <label htmlFor = "comment"><h4>Announcements:</h4></label>
-                <div className = "menu-box-tab menu-text" id = "EditAnns">
-                  { this.state.announcements.sort(
-                      function(a, b) {
-                        return b.ANNOUNCEMENT_ID
-                               - a.ANNOUNCEMENT_ID;
-                      }).map((ann, index) => {
-                    return <Button className = "nav-link menu-box-tab menu-text"
-                                   onClick = { this.toggleAnnouncementsData.bind(
-                                       this) } id = { index + 100 }
-                                   key = { index }
-                    ><i style = { {marginRight: 10 + 'px'} }
-                        className = "scnd-font-color fa fa-tasks"
-                    />
-                      { ann.Title }{ <p> (</p> }{ ann.TIMESTAMP[0] }
-                      { ann.TIMESTAMP[1] }{ ann.TIMESTAMP[2] }{ ann.TIMESTAMP[3] }{ ann.TIMESTAMP[4] }{ ann.TIMESTAMP[5] }
-                      { ann.TIMESTAMP[6] }{ ann.TIMESTAMP[7] } { ann.TIMESTAMP[8] }{ ann.TIMESTAMP[9] }{
-                        <p
-                            id = "extra"
-                        >)</p> }
-                    </Button>;
-                  }) }
+                                </select>
+                            </div>
+                        </div>
+                        <div className = "col-md-4">
+                            <Box toogle = { this.handleDayTimeChange }
+                                 userID = { this.state.User_ID }
+                            />
+                        </div>
+                        <div className = "col-md-4">
+                            <label htmlFor = "comment"><h4>Messages:</h4></label>
+                            <div className="form-group">
+                                <Button className = { 'nav-link menu-box-tab menu-text ' }
+                                        onClick = { this.toggleMessages }
+                                        style = { {width: '100%'} }
+                                >
+                                    <i className = "scnd-font-color fa fa-envelope" /> Exchange Messages with this Client
+                                    { this.state.TotalMessages > 0 &&
+                                    <div className = "menu-box-number">{ this.state.TotalMessages }</div> }
+                                </Button>
+                                <ToggleModal
+                                    modal = { this.state.modalMessages }
+                                    toggle = { this.toggleMessages }
+                                    modalSize = { 'md' }
+                                    modalHeader = { 'Messages' }
+                                    modalBody = {
+                                        <MessagesModalAdminCoach
+                                            userName = {this.state.ownerName}
+                                            userLevel = { this.props.userLevel}
+                                            TotalMessages = { this.state.TotalMessages }
+                                            toggleTotalMessages = { this.toggleTotalMessages }
+                                            username = {this.state.username}
+                                            user_ID = {this.state.userAccountID}
+                                        /> }
+                                />
+                            </div>
+                            <br/>
+                            <label htmlFor = "comment"><h4>Announcements:</h4></label>
+                            <div className = "menu-box-tab menu-text" id = "EditAnns">
+                                { this.state.announcements.sort(
+                                    function(a, b) {
+                                        return b.ANNOUNCEMENT_ID
+                                            - a.ANNOUNCEMENT_ID;
+                                    }).map((ann, index) => {
+                                    return <Button className = "nav-link menu-box-tab menu-text"
+                                                   onClick = { this.toggleAnnouncementsData.bind(
+                                                       this) } id = { index + 100 }
+                                                   key = { index }
+                                    ><i style = { {marginRight: 10 + 'px'} }
+                                        className = "scnd-font-color fa fa-tasks"
+                                    />
+                                        { ann.Title }{ <p> (</p> }{ ann.TIMESTAMP[0] }
+                                        { ann.TIMESTAMP[1] }{ ann.TIMESTAMP[2] }{ ann.TIMESTAMP[3] }{ ann.TIMESTAMP[4] }{ ann.TIMESTAMP[5] }
+                                        { ann.TIMESTAMP[6] }{ ann.TIMESTAMP[7] } { ann.TIMESTAMP[8] }{ ann.TIMESTAMP[9] }{
+                                            <p
+                                                id = "extra"
+                                            >)</p> }
+                                    </Button>;
+                                }) }
 
                 </div>
                 <Button id = "addAnn"

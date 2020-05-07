@@ -6,7 +6,7 @@ import {
   getMessagesMelios,
   makeMessagesRead,
 }                         from '../../repository';
-import MessageNewModal    from './MessageNewModal';
+import MessageNewModal    from './MessageNewModalCoach';
 import Swal               from 'sweetalert2';
 import Spinner            from '../Spinner';
 import {AnimatedOnScroll} from 'react-animated-css-onscroll';
@@ -151,13 +151,15 @@ class MessagesModalAdminCoach extends Component {
               </>
           }
 
-          <MessageNewModal onSubmit = { this.onMessageSubmit }
-                           toggle = { this.toggle }
-                           modal = { this.state.newModal }
-          />
-        </div>
-    );
-  }
+                <MessageNewModal onSubmit = { this.onMessageSubmit }
+                                 toggle = { this.toggle }
+                                 modal = { this.state.newModal }
+                                 username = {this.props.username}
+                                 user_ID = {this.props.user_ID}
+                />
+            </div>
+        );
+    }
 }
 
 export default MessagesModalAdminCoach;

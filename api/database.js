@@ -724,6 +724,7 @@ function getUser_ID(email) {
 
 function updateUser(data) {
   return new Promise((resolve, reject) => {
+    //const update = 'UPDATE USERS SET Token =?,activeEpires=? WHERE User_ID = ?';
     const update = 'UPDATE USERS SET Token =? WHERE User_ID = ?';
     connection.query(update, [data.token, data.id.User_ID], function(err) {
       if (err) {
@@ -736,6 +737,7 @@ function updateUser(data) {
 function resetPassword(data) {
   return new Promise((resolve, reject) => {
     const check = 'SELECT User_ID FROM USERS WHERE Token =?';
+    // const check = 'SELECT User_ID,activeExpires FROM USERS WHERE Token =?';
     connection.query(check, [data.token], function(err, res) {
       if (err) {
         return reject(err);
@@ -744,6 +746,9 @@ function resetPassword(data) {
       if (id === 0) {
         return reject(err);
       } else {
+        // let epxire = res[0].activeExpires;
+        // let today = Date.now();
+        // if(expire < today){
         const user_id = res[0].User_ID;
         const update = 'UPDATE ACCOUNT SET password =? WHERE User_ID = ? AND username=?';
         connection.query(update, [data.password, user_id, data.username],
@@ -756,6 +761,7 @@ function resetPassword(data) {
               }
             });
       }
+    //  }else{return reject()}
     });
   });
 }
@@ -852,6 +858,18 @@ function getClassCoach(Name, Day, Time) {
 function getUserID(user) {
   return new Promise((resolve, reject) => {
     const sql = 'SELECT u.User_ID FROM ACCOUNT a, USERS u WHERE username = ?  AND a.User_ID = u.User_ID';
+    connection.query(sql, [user], function(err, rows) {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(rows[0]);
+    });
+  });
+}
+
+function getAccountID(user) {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT a.AccountID FROM ACCOUNT a, USERS u WHERE username = ?  AND a.User_ID = u.User_ID';
     connection.query(sql, [user], function(err, rows) {
       if (err) {
         return reject(err);
@@ -1459,4 +1477,5 @@ module.exports = {
   deleteNewMessage,
   sameUser,
   getVerified,
+  getAccountID
 };
