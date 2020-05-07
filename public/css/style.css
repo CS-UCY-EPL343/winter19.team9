@@ -201,7 +201,7 @@ button:disabled {
 #footer {
     background-color : #353535;
     align-items      : center;
-    padding          : 50px;
+    padding          : 25px 50px 0 50px;
 }
 
 #footer h2 {
@@ -270,7 +270,7 @@ button:disabled {
 
 
 #copyrights {
-    padding          : 15px 0;
+    padding          : 0;
     background-color : #8D99AE;
     vertical-align   : center;
 }

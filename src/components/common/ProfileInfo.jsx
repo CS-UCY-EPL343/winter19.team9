@@ -6,10 +6,11 @@ class ProfileInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      Name    : '',
-      Surname : '',
-      username: '',
-      image   : '',
+      Name        : '',
+      Surname     : '',
+      username    : '',
+      image       : '',
+      imagePreviewURL: '',
     };
   }
 
@@ -20,27 +21,30 @@ class ProfileInfo extends Component {
         })
         .then(
             () => userPicByUsername().then(response => this.setState(response)))
+        .then(() => {
+          let {image} = this.state;
+          let imageURL = 'https://www.w3schools.com/howto/img_avatar.png';
+
+          if (image !== '') {
+            imageURL =
+                'data:image/png;base64,' + new Buffer.from(image, 'binary').toString(
+                'base64');
+          }
+          this.setState({imagePreviewURL: imageURL});
+        })
         .finally(() => this.props.toggleLoading());
   }
 
-  render() {
-    let {image} = this.state;
-    let imageURL = 'https://www.w3schools.com/howto/img_avatar.png';
-    let $imagePreview = <img data-testid = { 'image' }
-                             src = { imageURL }
-                             alt = { 'Profile Avatar' }
-    />;
-    if (image !== '') {
-      imageURL =
-          'data:image/png;base64,' + new Buffer.from(image, 'binary').toString(
-          'base64');
-      $imagePreview = (<img data-testid = { 'image' }
-                            src = { imageURL }
-                            alt = { 'Profile Avatar' }
-      />);
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.props.newAvatar !== prevProps.newAvatar && this.props.newAvatar
+        !== '') {
+      this.setState({imagePreviewURL: this.props.newAvatar});
     }
+  }
 
+  render() {
     const name = this.state.Name + ' ' + this.state.Surname;
+
     return (
         <div className = "col-lg-4 col-md-12 col-sm-12">
           <div className = "profile block" id = "profileBlock">
@@ -59,7 +63,10 @@ class ProfileInfo extends Component {
                   {/*/>*/ }
                   <div className = "avatar-preview d-flex justify-content-center">
                     <div id = "imagePreview">
-                      { $imagePreview }
+                      <img data-testid = { 'image' }
+                           src = { this.state.imagePreviewURL }
+                           alt = { 'Profile Avatar' }
+                      />
                     </div>
                   </div>
                   <div className = "middleEdit" id = "Edit-Add">

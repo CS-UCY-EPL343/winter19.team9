@@ -43,7 +43,7 @@ class Footer extends Component {
                 </p>
                 <br />
                 <p>
-                  <i className = "fa fa-envelope footer-icon" /> Questions?
+                  <i className = "fa fa-envelope footer-icon" />
                   <span data-testid = { 'email' }
                         className = "about-footer-text"
                   > { this.props.stylesheetData['about-us']['email'] }</span>

@@ -347,12 +347,18 @@ class EditAccount extends Component {
                 '',
                 'success',
             ).then();
-          }).catch(() => Swal.fire(
+          })
+          .then(() => {
+            if(this.state.imagePreviewUrl) {
+              this.props.changeAvatar(this.state.imagePreviewUrl)
+            }
+            this.props.toggle();
+          })
+          .catch(() => Swal.fire(
           'Something went wrong',
           'Please try again...',
           'error',
       ));
-
     }
   };
 

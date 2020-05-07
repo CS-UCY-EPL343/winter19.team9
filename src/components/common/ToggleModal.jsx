@@ -18,7 +18,9 @@ export default class ToggleModal extends React.Component {
     let isFirefox = typeof InstallTrigger !== 'undefined';
     // Safari 3.0+ "[object HTMLElementConstructor]"
     // noinspection ES6ModulesDependencies
-    let isSafari = /constructor/i.test(window.HTMLElement) || (function(p) {
+    const {HTMLElement} = window;
+    // noinspection ES6ModulesDependencies
+    let isSafari = /constructor/i.test(HTMLElement) || (function(p) {
       return p.toString() === '[object SafariRemoteNotification]';
     })(!window['safari'] || (typeof safari !== 'undefined'));
     // Internet Explorer 6-11
@@ -32,7 +34,7 @@ export default class ToggleModal extends React.Component {
                                        || !!window.chrome.runtime);
     // Edge (based on chromium) detection
     // noinspection EqualityComparisonWithCoercionJS
-    let isEdgeChromium = isChrome && (navigator.userAgent.indexOf('Edg') != -1);
+    let isEdgeChromium = isChrome && (navigator.userAgent.indexOf('Edg') !== -1);
     // Blink engine detection
     let isBlink = (isChrome || isOpera) && !!window.CSS;
 

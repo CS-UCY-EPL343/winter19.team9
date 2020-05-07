@@ -206,6 +206,7 @@ class SettingsProfile extends Component {
                     modalBody = { <EditAccount dataPT = { this.state.dataPT }
                                                classes = { this.state.classes }
                                                toggle = { this.toggleEditAccount }
+                                               changeAvatar = { this.props.changeAvatar }
                     /> }
                 />
               </li>
