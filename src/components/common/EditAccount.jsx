@@ -590,7 +590,7 @@ class EditAccount extends Component {
                       <input type = "submit"
                              data-testid = { 'button' }
                              className = "btn btn-primary"
-                             defaultValue = "Save Changes"
+                             value = "Save Changes"
                              id = "save"
                       />
                     </label>
@@ -605,7 +605,7 @@ class EditAccount extends Component {
                       <input type = "submit"
                              data-testid = { 'button-delete' }
                              className = "btn btn-default"
-                             defaultValue = "Delete Account"
+                             value = "Delete Account"
                              id = "delete"
                              onClick = { this.deleted }
                       />
