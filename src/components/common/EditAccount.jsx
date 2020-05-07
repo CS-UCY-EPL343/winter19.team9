@@ -9,6 +9,8 @@ import '@sweetalert2/theme-dark/dark.css';
 import Spinner                               from '../Spinner';
 import {AnimatedOnScroll}                    from 'react-animated-css-onscroll';
 
+
+
 class EditAccount extends Component {
   constructor(props) {
     super(props);
@@ -32,14 +34,16 @@ class EditAccount extends Component {
       Medical_History: '',
       Phone_Number   : '',
       newUser        : false,
+      valPassword: '',
+      valConfirmPassword:'',
     };
     this.onValueInput = this.onValueInput.bind(this);
   }
 
   handleSubmit = () => {
-    const {password, confirmPassword} = this.state;
+    const {valPassword, valConfirmPassword} = this.state;
     // perform all neccassary validations
-    if (password !== confirmPassword) {
+    if (valPassword !== valConfirmPassword) {
       Swal.fire(
           'Passwords don\'t match',
           '',
@@ -317,8 +321,25 @@ class EditAccount extends Component {
 
   };
 
+  checkValidationPassword = () =>{
+    if(this.state.valPassword!==''){
+      if(!this.state.valPassword.match(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,)){
+        Swal.fire(
+            'Password must has 8 letters small and cap letters and one number',
+            '',
+            'error',
+        ).then( () => {
+          return 0;
+        });
+        return 0;
+      }
+    }
+    return 1;
+  };
+
   Test = () => {
-    if (this.handleSubmit()) {
+
+    if (this.handleSubmit() &&this.checkValidationPassword()) {
       postuserData(this.state)
           .then(() => {
             Swal.fire(
@@ -331,18 +352,13 @@ class EditAccount extends Component {
           'Please try again...',
           'error',
       ));
-    } else {
-      Swal.fire(
-          'Passwords do not match',
-          'Please try again...',
-          'error',
-      ).then();
+
     }
   };
 
   onSubmit = (e) => {
     e.preventDefault();
-    if (this.props.testSubmit) {
+    if(this.props.testSubmit) {
       this.props.testSubmit('Testing');
       return;
     }
@@ -371,18 +387,20 @@ class EditAccount extends Component {
   };
 
   changePassword = (e) => {
-    if (e.target.value === '' || e.target.value === ' ') {
+    if(e.target.value === '' || e.target.value === ' '){
       Swal.fire(
           'The password cannot be empty or have space',
           '',
           'error',
       ).then();
+    }else {
+      this.setState({valPassword:e.target.value});
+      const crypto = require('crypto');
+      const hashCode = crypto.createHmac('sha256', 'ffn_private_key_!!!!')
+          .update(e.target.value)
+          .digest('hex');
+      this.setState({password: hashCode});
     }
-    const crypto = require('crypto');
-    const hashCode = crypto.createHmac('sha256', 'ffn_private_key_!!!!')
-        .update(e.target.value)
-        .digest('hex');
-    this.setState({password: hashCode});
   };
 
   changeConfirmPassword = (e) => {
@@ -392,13 +410,14 @@ class EditAccount extends Component {
           '',
           'warning',
       ).then();
+    }else {
+      this.setState({valConfirmPassword:e.target.value});
+      const crypto = require('crypto');
+      const hashCode = crypto.createHmac('sha256', 'ffn_private_key_!!!!')
+          .update(e.target.value)
+          .digest('hex');
+      this.setState({confirmPassword: hashCode});
     }
-    const crypto = require('crypto');
-    const hashCode = crypto.createHmac('sha256', 'ffn_private_key_!!!!')
-        .update(e.target.value)
-        .digest('hex');
-    this.setState({confirmPassword: hashCode});
-
   };
 
   _handleImageChange(e) {
@@ -485,7 +504,7 @@ class EditAccount extends Component {
                   <h3>Personal info</h3>
                   <div className = "form-group">
                     <label className = "col-lg-6 control-label">First
-                                                                name:</label>
+                      name:</label>
                     <input className = "form-control first-name-field"
                            name = { 'Name' }
                            placeholder = { 'Enter name' }
@@ -498,7 +517,7 @@ class EditAccount extends Component {
                   </div>
                   <div className = "form-group">
                     <label className = "col-lg-6 control-label">Last
-                                                                name:</label>
+                      name:</label>
                     <input className = "form-control last-name-field"
                            name = { 'Surname' }
                            placeholder = { 'Enter surname' }
@@ -524,7 +543,7 @@ class EditAccount extends Component {
                   </div>
                   <div className = "form-group">
                     <label className = "col-md-6 control-label">Phone
-                                                                Number:</label>
+                      Number:</label>
                     <input className = "form-control tel-field"
                            name = { 'Phone_Number' }
                            placeholder = { 'Enter phone number' }
@@ -562,7 +581,7 @@ class EditAccount extends Component {
                   </div>
                   <div className = "form-group">
                     <label className = "col-md-6 control-label">Confirm
-                                                                password:</label>
+                      password:</label>
                     <input className = "form-control"
                            name = { 'confirmPassword' }
                            placeholder = { 'Confirm password' }
@@ -574,7 +593,7 @@ class EditAccount extends Component {
                   </div>
                   <div className = "form-group">
                     <label className = "col-lg-6 control-label">Add Medical
-                                                                History:</label>
+                      History:</label>
                     <textarea maxLength = "400"
                               className = "form-control last-name-field"
                               placeholder = { 'Enter medical history' }
@@ -590,7 +609,7 @@ class EditAccount extends Component {
                       <input type = "submit"
                              data-testid = { 'button' }
                              className = "btn btn-primary"
-                             value = "Save Changes"
+                             defaultValue = "Save Changes"
                              id = "save"
                       />
                     </label>
@@ -605,7 +624,7 @@ class EditAccount extends Component {
                       <input type = "submit"
                              data-testid = { 'button-delete' }
                              className = "btn btn-default"
-                             value = "Delete Account"
+                             defaultValue = "Delete Account"
                              id = "delete"
                              onClick = { this.deleted }
                       />
@@ -613,15 +632,15 @@ class EditAccount extends Component {
                     </label>
 
                     { !this.props.testLoading &&
-                      <label id = "csv">
-                        <CSVLink data = { this.fillCSV(this.state.Name,
-                            this.state.Surname, this.state.Email,
-                            this.state.Medical_History, this.state.Phone_Number,
-                            this.state.username, this.state.password,
-                            this.state.Bdate, this.state.Age, this.props.dataPT,
-                            this.props.classes) }
-                        >Download my Data</CSVLink>
-                      </label>
+                    <label id = "csv">
+                      <CSVLink data = { this.fillCSV(this.state.Name,
+                          this.state.Surname, this.state.Email,
+                          this.state.Medical_History, this.state.Phone_Number,
+                          this.state.username, this.state.password,
+                          this.state.Bdate, this.state.Age, this.props.dataPT,
+                          this.props.classes) }
+                      >Download my Data</CSVLink>
+                    </label>
                     }
                   </div>
                 </form>
