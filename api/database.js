@@ -739,9 +739,9 @@ function getUser_ID(email) {
 
 function updateUser(data) {
   return new Promise((resolve, reject) => {
-    //const update = 'UPDATE USERS SET Token =?,activeEpires=? WHERE User_ID = ?';
-    const update = 'UPDATE USERS SET Token =? WHERE User_ID = ?';
-    connection.query(update, [data.token, data.id.User_ID], function(err) {
+    const update = 'UPDATE USERS SET Token =?,activeExpires=? WHERE User_ID = ?';
+    // const update = 'UPDATE USERS SET Token =? WHERE User_ID = ?';
+    connection.query(update, [data.token,data.activeExpires ,data.id.User_ID], function(err) {
       if (err) {
         return reject(err);
       }
@@ -751,8 +751,8 @@ function updateUser(data) {
 
 function resetPassword(data) {
   return new Promise((resolve, reject) => {
-    const check = 'SELECT User_ID FROM USERS WHERE Token =?';
-    // const check = 'SELECT User_ID,activeExpires FROM USERS WHERE Token =?';
+    // const check = 'SELECT User_ID FROM USERS WHERE Token =?';
+    const check = 'SELECT User_ID,activeExpires FROM USERS WHERE Token =?';
     connection.query(check, [data.token], function(err, res) {
       if (err) {
         return reject(err);
@@ -761,9 +761,9 @@ function resetPassword(data) {
       if (id === 0) {
         return reject(err);
       } else {
-        // let epxire = res[0].activeExpires;
-        // let today = Date.now();
-        // if(expire < today){
+        const expire = res[0].activeExpires;
+        let today = Date.now();
+        if(expire >= today){
         const user_id = res[0].User_ID;
         const update = 'UPDATE ACCOUNT SET password =? WHERE User_ID = ? AND username=?';
         connection.query(update, [data.password, user_id, data.username],
@@ -775,8 +775,10 @@ function resetPassword(data) {
                 return reject('Wrong username');
               }
             });
-      }
-    //  }else{return reject()}
+      }else{
+          return reject('password expired');
+        }
+     }
     });
   });
 }

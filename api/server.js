@@ -114,11 +114,12 @@ app.post('/api/reset-password', (req, res) => {
             } else {
                 const crypto = require('crypto');
                 const token = crypto.randomBytes(10).toString('hex');
-                //const exp = Date.now() + 24 *3600 *1000;
+                const exp = Date.now() + 24 *3600 *1000;
+               //  const exp = Date.now() + 120;
                 const data = {
                     token: token,
                     id   : user,
-                //    activeExpires:    exp,
+                   activeExpires:    exp,
                 };
                 db.updateUser(data);
 
@@ -157,13 +158,12 @@ app.post('/api/resetPassword/:id', (req, res) => {
     if (req.body.token === '') {
         res.status(400).send('error');
     } else {
-        //db.checkExp(req.body)
         db.resetPassword(req.body)
-            .then(() => {
-                res.send('Success reset.');
+            .then((response) => {
+                return res.status(200).json({message: response.data});
             })
-            .catch(() => {
-                res.send('Failed to reset.');
+            .catch((response) => {
+                return res.status(409).json({message: response.data});
             });
     }
 });
@@ -182,7 +182,7 @@ app.post('/api/verifyEmail/:id', (req, res) => {
                 res.send('Success verify.');
             })
             .catch(() => {
-                res.send('Failed to verify.');
+                return res.status(409).json('Authentication failed. User not found.');
             });
     }
 });
