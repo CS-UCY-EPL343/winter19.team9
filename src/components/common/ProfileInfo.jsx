@@ -69,11 +69,11 @@ class ProfileInfo extends Component {
                       />
                     </div>
                   </div>
-                  <div className = "middleEdit" id = "Edit-Add">
-                    <div className = "mytext">Add/Edit<br />
-                                              Profile Picture
-                    </div>
-                  </div>
+                  {/*<div className = "middleEdit" id = "Edit-Add">*/}
+                  {/*  <div className = "mytext">Add/Edit<br />*/}
+                  {/*                            Profile Picture*/}
+                  {/*  </div>*/}
+                  {/*</div>*/}
                 </div>
             }
             <div className = "user-name">{ name }</div>

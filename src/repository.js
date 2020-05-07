@@ -394,9 +394,7 @@ export function unenrollUser(CLASS_ID, User_ID) {
 export function deleteUserData() {
   return axios.post(`${ BASE_URL }/api/user/delete/data`, {
     'x-access-token': localStorage.getItem('x-access-token'),
-  }).then(response => {
-    return response.data;
-  }).catch(() => Promise.reject('Authentication Failed!'));
+  }).then(response => response).catch(() => Promise.reject('Authentication Failed!'));
 
 }
 

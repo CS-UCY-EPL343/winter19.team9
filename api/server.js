@@ -512,7 +512,6 @@ app.post('/api/user/delete/data', middleware, (req, res) => {
     if (data) {
       return res.status(200).json(data);
     } else {
-
       return res.status(409).json('Authentication failed. User not found.');
     }
   }).catch(err => res.status(409).json(err));

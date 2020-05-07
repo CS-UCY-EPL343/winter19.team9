@@ -170,17 +170,17 @@
     text-align    : center;
 }
 
-.profile-picture:hover {
-    opacity : 50%;
-}
+/*.profile-picture:hover {*/
+/*    opacity : 50%;*/
+/*}*/
 
-.profile-picture:hover .middleEdit {
-    opacity : 1;
-}
+/*.profile-picture:hover .middleEdit {*/
+/*    opacity : 1;*/
+/*}*/
 
-.profile-picture:hover .mytext {
-    color : white;
-}
+/*.profile-picture:hover .mytext {*/
+/*    color : white;*/
+/*}*/
 
 
 .middleEdit .mytext {

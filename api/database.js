@@ -124,17 +124,16 @@ function getVerified(username) {
   });
 }
 
-
 function getStaffData(user) {
-    return new Promise((resolve, reject) => {
-        const sql = 'SELECT COALESCE(Owner_ID, Coach_ID) AS AccountID,username, level FROM ACCOUNT WHERE username = ?';
-        connection.query(sql, [user], function(err, rows) {
-            if (err) {
-                return reject(err);
-            }
-            return resolve(rows[0]);
-        });
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT COALESCE(Owner_ID, Coach_ID) AS AccountID,username, level FROM ACCOUNT WHERE username = ?';
+    connection.query(sql, [user], function(err, rows) {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(rows[0]);
     });
+  });
 }
 
 function base64ToHex(str) {
@@ -153,13 +152,13 @@ function base64ToHex(str) {
 function postUserData(data) {
   const x = data.imagePreviewUrl;
   let byteString = x.split(',')[1];
-  if(data.newUser) {
+  if (data.newUser) {
     const sql = 'INSERT INTO PIC (User_ID, image) VALUES (?, "")';
     connection.query(sql, [data.User_ID], function(err) {
       if (err) {
         return reject(err);
       }
-    })
+    });
   }
   if (x !== '') {
     return new Promise((resolve, reject) => {
@@ -205,13 +204,55 @@ function postUserData(data) {
 
 function deleteUserData(user) {
   return new Promise((resolve, reject) => {
-
-    const sql = 'DELETE a,u FROM USERS u JOIN ACCOUNT a ON a.User_ID = u.User_ID WHERE a.username = ? ';
+    const sql = 'DELETE b FROM ACCOUNT a JOIN PIC b ON a.User_ID = b.User_ID WHERE a.username = ?';
     connection.query(sql, [user], function(err) {
       if (err) {
         return reject(err);
       }
-      return resolve('Success');
+
+      const sql = 'DELETE b FROM ACCOUNT a JOIN ANNOUNCEMENT b ON a.User_ID = b.User_ID WHERE a.username = ?';
+      connection.query(sql, [user], function(err) {
+        if (err) {
+          return reject(err);
+        }
+
+        const sql = 'DELETE b FROM ACCOUNT a JOIN ENROL b  ON a.User_ID = b.User_ID WHERE a.username = ?';
+        connection.query(sql, [user], function(err) {
+          if (err) {
+            return reject(err);
+          }
+
+          const sql = 'DELETE b FROM ACCOUNT a JOIN PERSONAL_TRAINING b ON a.User_ID = b.User_ID WHERE a.username = ?';
+          connection.query(sql, [user], function(err) {
+            if (err) {
+              return reject(err);
+            }
+
+            const sql = 'DELETE b FROM ACCOUNT a JOIN Messages b ON a.AccountID = b.From_ID WHERE a.username = ?';
+            connection.query(sql, [user], function(err) {
+              if (err) {
+                return reject(err);
+              }
+
+              const sql = 'DELETE b FROM ACCOUNT a JOIN Messages b ON a.AccountID = b.To_ID WHERE a.username = ?';
+              connection.query(sql, [user], function(err) {
+                if (err) {
+                  return reject(err);
+                }
+
+                const sql = 'DELETE a,u FROM USERS u JOIN ACCOUNT a ON a.User_ID = u.User_ID WHERE a.username = ?';
+                connection.query(sql, [user], function(err) {
+                  if (err) {
+                    return reject(err);
+                  }
+
+                  return resolve('Success');
+                });
+              });
+            });
+          });
+        });
+      });
     });
   });
 }
@@ -701,27 +742,27 @@ function deletePT(data) {
 
 // for personal training
 function getCoaches() {
-    return new Promise((resolve, reject) => {
-        const sql = 'SELECT ACCOUNT.AccountID, ACCOUNT.level, ACCOUNT.username, COACH.* FROM ACCOUNT JOIN COACH ON ACCOUNT.Coach_ID=COACH.Coach_ID';
-        connection.query(sql, [], function(err, rows) {
-            if (err) {
-                return reject(err);
-            }
-            resolve(rows);
-        });
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT ACCOUNT.AccountID, ACCOUNT.level, ACCOUNT.username, COACH.* FROM ACCOUNT JOIN COACH ON ACCOUNT.Coach_ID=COACH.Coach_ID';
+    connection.query(sql, [], function(err, rows) {
+      if (err) {
+        return reject(err);
+      }
+      resolve(rows);
     });
+  });
 }
 
 function getAdmins() {
-    return new Promise((resolve, reject) => {
-        const sql = 'SELECT ACCOUNT.AccountID, ACCOUNT.level, ACCOUNT.username, OWNER.* FROM ACCOUNT JOIN OWNER ON ACCOUNT.Owner_ID=OWNER.Owner_ID';
-        connection.query(sql, [], function(err, rows) {
-            if (err) {
-                return reject(err);
-            }
-            resolve(rows);
-        });
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT ACCOUNT.AccountID, ACCOUNT.level, ACCOUNT.username, OWNER.* FROM ACCOUNT JOIN OWNER ON ACCOUNT.Owner_ID=OWNER.Owner_ID';
+    connection.query(sql, [], function(err, rows) {
+      if (err) {
+        return reject(err);
+      }
+      resolve(rows);
     });
+  });
 }
 
 function getUser_ID(email) {
@@ -741,11 +782,12 @@ function updateUser(data) {
   return new Promise((resolve, reject) => {
     const update = 'UPDATE USERS SET Token =?,activeExpires=? WHERE User_ID = ?';
     // const update = 'UPDATE USERS SET Token =? WHERE User_ID = ?';
-    connection.query(update, [data.token,data.activeExpires ,data.id.User_ID], function(err) {
-      if (err) {
-        return reject(err);
-      }
-    });
+    connection.query(update, [data.token, data.activeExpires, data.id.User_ID],
+        function(err) {
+          if (err) {
+            return reject(err);
+          }
+        });
   });
 }
 
@@ -763,22 +805,22 @@ function resetPassword(data) {
       } else {
         const expire = res[0].activeExpires;
         let today = Date.now();
-        if(expire >= today){
-        const user_id = res[0].User_ID;
-        const update = 'UPDATE ACCOUNT SET password =? WHERE User_ID = ? AND username=?';
-        connection.query(update, [data.password, user_id, data.username],
-            function(error, rows) {
-              if (error) {
-                return reject(error);
-              }
-              if (rows.affectedRows === 0) {
-                return reject('Wrong username');
-              }
-            });
-      }else{
+        if (expire >= today) {
+          const user_id = res[0].User_ID;
+          const update = 'UPDATE ACCOUNT SET password =? WHERE User_ID = ? AND username=?';
+          connection.query(update, [data.password, user_id, data.username],
+              function(error, rows) {
+                if (error) {
+                  return reject(error);
+                }
+                if (rows.affectedRows === 0) {
+                  return reject('Wrong username');
+                }
+              });
+        } else {
           return reject('password expired');
         }
-     }
+      }
     });
   });
 }
@@ -822,7 +864,6 @@ function getClasses() {
     });
   });
 }
-
 
 function getClassName(ClassID) {
   return new Promise((resolve, reject) => {
@@ -1178,7 +1219,6 @@ function insertNewAdmin(data) {
     const insertAdmin = 'INSERT INTO OWNER(Name, Surname, Bdate, Gender, Email) VALUES (?, ?, ?, ?, ?)';
     const insertAccount = 'INSERT INTO ACCOUNT(username , password, level, Owner_ID) VALUES (?, ?, ?, ?)';
 
-
     connection.query(insertAdmin, [
       data.fname,
       data.lname,
@@ -1239,7 +1279,7 @@ function updateAdminAnnouncement(AccountID) {
   });
 }
 
-function deleteCoachMember(CoachId){
+function deleteCoachMember(CoachId) {
 
   return new Promise((resolve, reject) => {
     const sqlUpdateDeletedID = 'INSERT INTO DELETED_ACCOUNT SELECT A.AccountID,C.CoachName,C.Surname,A.level FROM ACCOUNT A INNER JOIN COACH C ON A.Coach_ID=C.Coach_ID WHERE A.AccountID=?';
@@ -1310,9 +1350,9 @@ function getCountClasses(AccountID) {
   });
 }
 
-function sameUser(username){
+function sameUser(username) {
   return new Promise((resolve, reject) => {
-    const sql='SELECT COUNT(*) AS "countTotal" FROM ACCOUNT A WHERE A.username=?';
+    const sql = 'SELECT COUNT(*) AS "countTotal" FROM ACCOUNT A WHERE A.username=?';
     connection.query(sql, [username], function(err, rows) {
       if (err) {
         return reject(err);
@@ -1321,7 +1361,6 @@ function sameUser(username){
     });
   });
 }
-
 
 function getEvents(username, dayString, dayNumber) {
   const events = [];

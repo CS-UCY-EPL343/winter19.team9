@@ -84,6 +84,7 @@
 	margin-bottom: 40px;
 	background-color: #353535;
 	border-radius: 10px;
+	height: 650px;
 }
 
 #classes .single-classes .classes-img {
@@ -100,6 +101,8 @@
 	text-align: center;
 	padding-left: 15px;
 	padding-right: 15px;
+	height: 375px;
+	overflow: auto;
 }
 
 #classes .single-classes .classes-text h5 {
@@ -116,6 +119,7 @@
 	font-weight: 400;
 	line-height: 30px;
 	padding-bottom: 50px;
+	text-align: justify;
 }
 
 #classes .page-title{
@@ -144,5 +148,17 @@
 @media (max-width: 350px) {
 	#classes .page-title h1 {
 		font-size: 40px;
+	}
+}
+
+@media (max-width: 1200px) {
+	#classes .single-classes .classes-text {
+		height: 400px;
+	}
+}
+
+@media (max-width: 992px) {
+	#classes .single-classes .classes-text {
+		height: 450px;
 	}
 }
