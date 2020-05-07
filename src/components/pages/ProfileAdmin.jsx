@@ -16,6 +16,7 @@ import {
   getClassSchedule,
   getTotalMessages,
   staffData,
+  getAccountID
 }                                from '../../repository';
 import AnnouncementModal         from '../common/AnnouncementModal';
 import {Button}                  from 'reactstrap';
@@ -35,6 +36,7 @@ class ProfileAdmin extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      userAccountID         : '',
       nameStart            : '',
       Name                 : '',
       Surname              : '',
@@ -344,6 +346,11 @@ class ProfileAdmin extends Component {
         getAllCoaches().then(response => {
           this.setState({selectedCoaches: response});
         });
+        getAccountID(this.state.username).then(response => {
+          this.setState({userAccountID: response.AccountID},() => {
+            console.log(response.AccountID);
+          });
+        })
 
       });
       return resolve();
@@ -526,37 +533,39 @@ class ProfileAdmin extends Component {
                            readOnly
                     />
                   </div>
-                  <div className = "form-group">
-                    <Button className = { 'nav-link menu-box-tab menu-text ' }
-                            onClick = { this.toggleMessages }
-                            style = { {width: '100%'} }
-                    >
-                      <i className = "scnd-font-color fa fa-envelope" /> Exchange
-                                                                         Messages
-                                                                         with
-                                                                         this
-                                                                         Client
-                      { this.state.TotalMessages > 0 &&
-                        <div className = "menu-box-number">{ this.state.TotalMessages }</div> }
-                    </Button>
-                    <ToggleModal
-                        modal = { this.state.modalMessages }
-                        toggle = { this.toggleMessages }
-                        modalSize = { 'md' }
-                        modalHeader = { 'Messages' }
-                        modalBody = {
-                          <MessagesModalAdminCoach
-                              userName = { this.state.ownerName }
-                              userLevel = { this.props.userLevel }
-                              TotalMessages = { this.state.TotalMessages }
-                              toggleTotalMessages = { this.toggleTotalMessages }
-                          /> }
-                    />
-                  </div>
+
 
                 </form>
               </div>
               <div className = "col-md-4">
+                <label htmlFor = "comment"><h4>Messages:</h4></label>
+                <div className="form-group">
+                  <Button className = { 'nav-link menu-box-tab menu-text ' }
+                          onClick = { this.toggleMessages }
+                          style = { {width: '100%'} }
+                  >
+                    <i className = "scnd-font-color fa fa-envelope" /> Exchange Messages with this Client
+                    { this.state.TotalMessages > 0 &&
+                    <div className = "menu-box-number">{ this.state.TotalMessages }</div> }
+                  </Button>
+                  <ToggleModal
+                      modal = { this.state.modalMessages }
+                      toggle = { this.toggleMessages }
+                      modalSize = { 'md' }
+                      modalHeader = { 'Messages' }
+                      modalBody = {
+                        <MessagesModalAdminCoach
+                            userName = {this.state.ownerName}
+                            userLevel = { this.props.userLevel}
+                            TotalMessages = { this.state.TotalMessages }
+                            toggleTotalMessages = { this.toggleTotalMessages }
+                            username = {this.state.username}
+                            user_ID = {this.state.userAccountID}
+
+                        /> }
+                  />
+                </div>
+                <br/>
                 <label htmlFor = "comment"><h4>Announcements:</h4></label>
 
                 <div className = "menu-box-tab menu-text" id = "EditAnns">

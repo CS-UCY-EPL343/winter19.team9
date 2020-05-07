@@ -7,6 +7,8 @@ const app = express();
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
+const sendgridTransport = require('nodemailer-sendgrid-transport');
+const sgMail = require('@sendgrid/mail');
 const creds = require('./config');
 const bodyParser = require('body-parser');
 const middleware = require('./middleware');
@@ -14,8 +16,12 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const transport = {
-  host: 'smtp.mailtrap.io',
-  port: 2525,
+    host: "smtp-mail.outlook.com",
+    secureConnection: false,
+  port: 587,
+    tls: {
+        ciphers:'SSLv3'
+    },
   auth: {
     user: creds.USER,
     pass: creds.PASS,
@@ -49,7 +55,7 @@ app.post('/api/email', (req, res) => {
   const content = `Name: ${ name } \nEmail: ${ email } \nPhone: ${ phone } \nMessage: ${ message } `;
 
   const mail = {
-    from   : email,
+    from   : creds.EMAIL,
     to     : creds.EMAIL,
     subject: 'Fitness Factory Nicosia - Contact Request',
     text   : content,
@@ -58,6 +64,7 @@ app.post('/api/email', (req, res) => {
   // Send email from user
   transporter.sendMail(mail, (err) => {
     if (err) {
+        console.log(err);
       res.status(400).json({
         status: 'fail',
       });
@@ -109,23 +116,29 @@ app.post('/api/reset-password', (req, res) => {
             } else {
                 const crypto = require('crypto');
                 const token = crypto.randomBytes(10).toString('hex');
+                //const exp = Date.now() + 24 *3600 *1000;
                 const data = {
                     token: token,
                     id   : user,
+                //    activeExpires:    exp,
                 };
                 db.updateUser(data);
 
                 // const content = `Email: ${email}\nThe secret token is: ${token}\n`;
 
                 const mail = {
-                    from   : creds.EMAIL,
-                    to     : email,
-                    subject: 'Reset your password',
-                    html   : `<h1>Forgot your password?</h1>
-              <p>Click on the link below to <a style="display:block; background-color: red; width: 20%; text-align:center;color:white; text-decoration: none;" href='http://localhost:3000/resetPassword/${ token }'>reset your password</a></p>`,
+                    from    : creds.EMAIL,
+                    to      : email,
+                    subject : 'Reset your password',
+                    html    : `<h1>Forgot your password?</h1>
+                <p>You are receiving this because you (or someone else) have requested the reset of the password for your account.</p>
+                        <p>Please click on the following link to complete the process:</p>
+                       <p>If you did not request this, please ignore this email and your password will remain unchanged.</p>
+               <a style="display:block; background-color: red; width: 20%; text-align:center;color:white; text-decoration: none;" href='http://localhost:3000/resetPassword/${ token }'>reset your password</a>`,
                 };
                 transporter.sendMail(mail, (err) => {
                     if (err) {
+                        console.log(err);
                         res.status(400).json({
                             status: 'fail',
                         });
@@ -134,7 +147,7 @@ app.post('/api/reset-password', (req, res) => {
                             status: 'success',
                         });
                     }
-                });
+                })
             }
         });
 });
@@ -146,6 +159,7 @@ app.post('/api/resetPassword/:id', (req, res) => {
     if (req.body.token === '') {
         res.status(400).send('error');
     } else {
+        //db.checkExp(req.body)
         db.resetPassword(req.body)
             .then(() => {
                 res.send('Success reset.');
@@ -176,7 +190,7 @@ app.post('/api/verifyEmail/:id', (req, res) => {
 });
 // noinspection JSUnresolvedFunction
 app.post('/api/auth', (req, res) => {
-  // console.log(req.body);
+
   db.dbLogIn(req.body.name, req.body.password).then(user => {
     if (!user) {
       return res.status('409').json('Authentication failed. User not found.');
@@ -194,7 +208,16 @@ app.post('/api/auth', (req, res) => {
     return res.status(200).json(response);
   }).catch(err => res.status(409).json(err));
 });
-
+// noinspection JSUnresolvedFunction
+app.post('/api/verify', (req,res) => {
+    db.isVerified(req.body.username)
+        .then(() => {
+            res.send('Already Verified');
+        })
+        .catch(()=>{
+            res.send('Not verified');
+        })
+});
 // noinspection JSUnresolvedFunction
 app.post('/api/userLevel', middleware, (req, res) => {
   res.json({'userLevel': req.decoded.level});
@@ -803,6 +826,18 @@ app.post('/api/BookClass/UserID', middleware, (req, res) => {
       return res.status(409).json('Authentication failed. User not found.');
     }
   }).catch(err => res.status(401).json(err));
+});
+
+// noinspection JSUnresolvedFunction
+app.post('/api/adminCoach/AccountID', middleware, (req, res) => {
+    console.log(req.body.data);
+    db.getAccountID(req.body.data).then(data => {
+        if (data) {
+            return res.status(200).json(data);
+        } else {
+            return res.status(409).json('Authentication failed. User not found.');
+        }
+    }).catch(err => res.status(401).json(err));
 });
 
 // noinspection JSUnresolvedFunction
