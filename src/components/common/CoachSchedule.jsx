@@ -57,6 +57,15 @@ class CoachSchedule extends Component {
     ).then();
   };
 
+    toggleModalCoachHasClass = () =>{
+        Swal.fire(
+            'You have a class scheduled for this time.',
+            // 'The coach has another scheduled client or a class at this time.',
+            '',
+            'error',
+        ).then();
+    }
+
   toggleModalAnotherClient = () => {
     Swal.fire(
         'You cannot delete the Personal Training Session of a different client.',
@@ -105,6 +114,9 @@ class CoachSchedule extends Component {
           node = document.getElementById(refID);
           node.setAttribute('style', 'white-space: pre;');
           node.className = 'coachBooked';
+            node.style.backgroundImage = 'radial-gradient( #4c4c4c,'
+                + this.ColorLuminance(
+                    '#4C4C4C', -0.7) + ')';
           node.textContent = clientNames[coaches.indexOf(refID)];
         } else {
           if (classRefIDs.includes(refID) && !this.state.refIDs.includes(
@@ -198,10 +210,29 @@ class CoachSchedule extends Component {
                       if (!x.includes(refID)) {
                         x.push(refID);
                         y.push(item.ClassID);
+                          if(item.Name === "Functional Hypertrophy") {
+                              item.Name = "Fun. Hypertrophy";
+                          }
                         z.push(item.Name);
                         let node = document.getElementById(refID);
                         node.className = 'BusySlot';
+
                         node.childNodes[0].textContent = item.Name;
+                          if (/\s/.test(item.Name)) {
+                              let string = item.Name;
+                              string = string.split(" ");
+                              const stringArray = [];
+                              for(let i =0; i < string.length; i++){
+                                  stringArray.push(string[i]);
+                                  // if(i !== string.length-1){
+                                  //     stringArray.push("");
+                                  // }
+                              }
+                              for(let i = 0; i < stringArray.length; i++){
+                                  console.log("\n" + stringArray[i]);
+                              }
+                              // node.childNodes[0].setAttribute('style', 'font-size: 70%;');
+                          }
 
                         if (z.includes(item.Name)) {
                           node.style.backgroundImage =
@@ -344,7 +375,7 @@ class CoachSchedule extends Component {
             classRefIDs);
 
         // Checking if the client has the same coach assigned for PT
-        if (coachID !== this.state.Coach_ID) {
+        if (coachID !== this.state.Coach_ID && coachID !== '') {
           Swal.fire(
               'A different coach is registered for personal training for this client',
               'You cannot add a personal schedule session to this client',
@@ -430,7 +461,11 @@ class CoachSchedule extends Component {
               this.toggleModalClientHasClass();
               coachID = '';
             }
-
+            //Coach has a class
+              if (this.state.refIDs.includes(refID) && this.props.flag === false) {
+                  this.toggleModalCoachHasClass();
+                  coachID = '';
+              }
           }
 
         }

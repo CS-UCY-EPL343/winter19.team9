@@ -387,13 +387,16 @@ class ProfileAdmin extends Component {
         });
       });
     } else {
-      getClassSchedule(this.state.User_ID).then(response => {
-        if (response !== []) {
-          getAllCoaches().then(response => {
-            this.setState({selectedCoaches: response});
-          });
-        }
+      this.setState({selectedCoaches: []}, ()=> {
+        getClassSchedule(this.state.User_ID).then(response => {
+          if (response !== []) {
+            getAllCoaches().then(response => {
+              this.setState({selectedCoaches: response});
+            });
+          }
+        });
       });
+
 
     }
   };
@@ -626,26 +629,26 @@ class ProfileAdmin extends Component {
               </div>
             </div>
 
-            <div className = "row">
-              <div id = "timeTableHeading">Create Personal Training Schedule
-              </div>
-              <div className = "col-md-8">
-                <Timetable day = { this.state.day }
-                           time = { this.state.time }
-                           flag = { this.state.flag }
-                           coachID = { this.state.Coach_ID }
-                           userID = { this.state.User_ID }
-                           coachIDret = { this.retrievedCoach }
-                />
-              </div>
-              <div className = "col-md-4">
-                <Box toogle = { this.handleDayTimeChange }
-                     coaches = { this.state.selectedCoaches }
-                     coachID = { this.state.coachIDRet }
-                     userID = { this.state.User_ID }
-                />
-              </div>
-            </div>
+            {/*<div className = "row">*/}
+            {/*  <div id = "timeTableHeading">Create Personal Training Schedule*/}
+            {/*  </div>*/}
+            {/*  <div className = "col-md-8">*/}
+            {/*    <Timetable day = { this.state.day }*/}
+            {/*               time = { this.state.time }*/}
+            {/*               flag = { this.state.flag }*/}
+            {/*               coachID = { this.state.Coach_ID }*/}
+            {/*               userID = { this.state.User_ID }*/}
+            {/*               coachIDret = { this.retrievedCoach }*/}
+            {/*    />*/}
+            {/*  </div>*/}
+            {/*  <div className = "col-md-4">*/}
+            {/*    <Box toogle = { this.handleDayTimeChange }*/}
+            {/*         coaches = { this.state.selectedCoaches }*/}
+            {/*         coachID = { this.state.coachIDRet }*/}
+            {/*         userID = { this.state.User_ID }*/}
+            {/*    />*/}
+            {/*  </div>*/}
+            {/*</div>*/}
           </div>
         </div>
 

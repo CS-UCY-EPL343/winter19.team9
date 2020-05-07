@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import '../assets/styles/BookDropdown.css'
+import Swal from "sweetalert2";
 
 class SelectionPT extends Component {
 
@@ -10,33 +11,70 @@ class SelectionPT extends Component {
             time: '',
             flag: false,
             Coach_ID: '',
-            coaches: []
+            coaches: [],
+            selectionDay: '',
+            selectionTime: '',
         };
 
         this.onSubmit = this.onSubmit.bind(this);
-        this.onSubmit2 = this.onSubmit2.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        this.onDelete = this.onDelete.bind(this);
+        this.handleDay = this.handleDay.bind(this);
+        this.handleTime = this.handleTime.bind(this);
         this.clearOptions = this.clearOptions.bind(this);
     }
 
+    handleDay = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value,
+            selectionDay: e.target.value,
+        }, () => {
+        });
+    };
+
+    handleTime = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value,
+            selectionTime: e.target.value,
+        }, () => {
+        });
+    };
+
     handleChange = (e) => {
         this.setState({
-            [e.target.name]: e.target.value});
+            [e.target.name]: e.target.value
+
+        });
     };
 
 
     onSubmit = () => {
-        this.setState({flag: true},
-            () => {
-                this.props.toogle(this.state.day, this.state.time, this.state.flag, this.state.Coach_ID);
-            });
+        if (this.state.selectionTime === '' || this.state.selectionDay === '') {
+            Swal.fire(
+                'Required selections are empty',
+                'Make sure that you have filled every selection first!',
+                'error',
+            ).then();
+        } else {
+            this.setState({flag: true},
+                () => {
+                    this.props.toogle(this.state.day, this.state.time, this.state.flag, this.state.Coach_ID);
+                });
+        }
     };
 
-    onSubmit2 = () => {
-        this.setState({flag: false},
-            () => {
-                this.props.toogle(this.state.day, this.state.time, this.state.flag, this.state.Coach_ID);
-            });
+    onDelete = () => {
+        if (this.state.selectionTime === '' || this.state.selectionDay === '') {
+            Swal.fire(
+                'Required selections are empty',
+                'Make sure that you have filled every selection first!',
+                'error',
+            ).then();
+        } else {
+            this.setState({flag: false},
+                () => {
+                    this.props.toogle(this.state.day, this.state.time, this.state.flag, this.state.Coach_ID);
+                });
+        }
     };
 
     clearOptions() {
@@ -53,8 +91,9 @@ class SelectionPT extends Component {
         // noinspection JSUnresolvedVariable
         if (prevProps.coaches !== this.props.coaches || prevProps.coachesRet !== this.props.coachesRet
             || prevProps.coachID !== this.props.coachID
-           || prevProps.userID !== this.props.userID) {
+            || prevProps.userID !== this.props.userID) {
             (async () => {
+                // if(this.props.coachIDRet !==)
                 if (prevProps.userID !== this.props.userID) {
                     await this.clearOptions();
                 }
@@ -71,7 +110,7 @@ class SelectionPT extends Component {
                         <div className="col-md-6 RowBlock">
                             <label htmlFor="DropDays">Day:</label>
                             <select className="form-control selectGroupPersonal" name="day" id="DayPers"
-                                    onChange={this.handleChange} required>
+                                    onChange={this.handleDay} required>
                                 <option value="0" hidden>Day Option</option>
                                 <option value="1">Monday</option>
                                 <option value="2">Tuesday</option>
@@ -84,7 +123,7 @@ class SelectionPT extends Component {
                         <div className="col-md-6 RowBlock">
                             <label htmlFor="DropClass">Time:</label>
                             <select className="form-control selectGroupPersonal" name="time" id="TimePers"
-                                    onChange={this.handleChange} required>
+                                    onChange={this.handleTime} required>
                                 <option value="0" hidden>Time Option</option>
                                 <option value="1">08:00-09:00</option>
                                 <option value="2">09:00-10:00</option>
@@ -108,23 +147,25 @@ class SelectionPT extends Component {
                             <select className="form-control selectGroupPersonal" name="Coach_ID" id="CoachPers"
                                     onChange={this.handleChange} required>
                                 <option value="0" hidden>Select a Coach</option>
-
-                                {this.props.coaches.map((res, index) => {
-                                    return <option value={res.Coach_ID} key={index}>
-                                        {res.CoachName} {res.Surname}
-                                    </option>
-                                })
+                                {
+                                    this.props.coaches.map((res, index) => {
+                                        return <option value={res.Coach_ID} key={index}>
+                                            {res.CoachName} {res.Surname}
+                                        </option>
+                                    })
                                 }
+
                             </select>
                         </div>
 
                     </div>
+
                     <div className="row">
                         <div className="col-md-6 RowBlock">
                             <button type="button" className="RowButton" onClick={this.onSubmit}>Submit</button>
                         </div>
                         <div className="col-md-6 RowBlock">
-                            <button type="button" className="RowButton" onClick={this.onSubmit2}>Delete</button>
+                            <button type="button" className="RowButton" onClick={this.onDelete}>Delete</button>
                         </div>
                     </div>
                 </form>

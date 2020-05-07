@@ -82,7 +82,7 @@ class Signup extends React.Component {
             }else{
               this.props.toggleModal();
               this.props.setUserLevel(data.level);
-             history.push('/user/profile');
+             history.push('/' + data.level + '/profile');
             }
           });
         }).catch(() => Swal.fire(

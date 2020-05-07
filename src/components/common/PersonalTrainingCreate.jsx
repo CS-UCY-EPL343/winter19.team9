@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import '../assets/styles/PersonalTrainingTimetable.css';
 import {
-  insertPT, deletePT, getCoachTraining, getClassSchedule, getPersonalSchedule,
-}                         from '../../repository';
+  insertPT, deletePT, getCoachTraining, getClassSchedule, getPersonalSchedule, getCoachClasses,
+} from '../../repository';
 import Swal               from "sweetalert2";
 
 class PersonalTrainingCreate extends Component {
@@ -21,6 +21,23 @@ class PersonalTrainingCreate extends Component {
       incorrectCoach       : false,
       classConflict        : false,
       coachName            : '',
+
+      refIDs     : [],
+      cIDs       : [],
+      cNames     : [],
+      Name       : '',
+      ClassColors: [
+        '#812029',
+        '#1A63D9',
+        '#CF1B1B',
+        '#FFAD1F',
+        '#704585',
+        '#53878C',
+        '#C97200',
+        '#489655',
+        '#158CA3',
+        '#9E134B',
+      ],
     };
 
     this.insertDeleteMethodStates = this.insertDeleteMethodStates.bind(this);
@@ -111,14 +128,43 @@ class PersonalTrainingCreate extends Component {
     });
   }
 
+  // noinspection DuplicatedCode
+  ColorLuminance = (hex, lum) => {
+    // validate hex string
+    hex = String(hex).replace(/[^0-9a-f]/gi, '');
+    if (hex.length < 6) {
+      hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+    }
+    lum = lum || 0;
+    // convert to decimal and change luminosity
+    let rgb = '#', c, i;
+    for (i = 0; i < 3; i++) {
+      c = parseInt(hex.substr(i * 2, 2), 16);
+      c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
+      rgb += ('00' + c).substr(c.length);
+    }
+    return rgb;
+  };
+
+  StateSetter(x, y, z) {
+    this.setState({refIDs: x}, () => {
+      this.setState({cIDs: y}, () => {
+        this.setState({cNames: z});
+      });
+    });
+  }
+
+
+
   // noinspection JSUnusedLocalSymbols
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.day !== this.props.day || prevProps.time !== this.props.time
         || prevProps.flag !== this.props.flag
         || prevProps.coachID !== this.props.coachID || prevProps.userID
         !== this.props.userID) {
-      console.clear();
+      // console.clear();
       (async() => {
+        console.log(this.props.userID)
         let refID = '';
 
         // ************************* Clearing the arrays
@@ -154,9 +200,9 @@ class PersonalTrainingCreate extends Component {
                 classRefIDs.push(refID);
                 cNames.push(item.Name);
               }
-
             },
         );
+
 
         // ------------------------ Personal Training --------------------------
         ret = [...personalTraining];
@@ -182,6 +228,7 @@ class PersonalTrainingCreate extends Component {
         this.setState({coachName: coachName});
         // this.setState({Coach_ID: coachID});
         this.props.coachIDret(coachID);
+
 
 
         // -------------- Filling the CoachRefIDs ----------------------------
@@ -211,6 +258,7 @@ class PersonalTrainingCreate extends Component {
               }
             },
         );
+
 
         // ************ Printing the filled tables on the site **************
 
@@ -318,89 +366,87 @@ class PersonalTrainingCreate extends Component {
               <div className = "content">
                 { [...Array(6).keys()].map(x => (x + 1.01).toFixed(2))
                     .map((x, index) =>
-                        <div
-                            key = { index } id = { x }
-                        />,
+                        <div key = { index } id = { x }>
+                          <p />
+                        </div>,
                     ) }
                 <div className = "weekend" />
                 { [...Array(6).keys()].map(x => (x + 1.02).toFixed(2))
                     .map((x, index) =>
-                        // <div className={classes.join(' ')} key={index}
-                        // id={x}/>
-                        <div
-                            key = { index } id = { x }
-                        />,
+                        <div key = { index } id = { x }>
+                          <p />
+                        </div>,
                     ) }
 
                 <div className = "weekend" />
                 { [...Array(6).keys()].map(x => (x + 1.03).toFixed(2))
                     .map((x, index) =>
-                        <div
-                            key = { index } id = { x }
-                        />,
+                        <div key = { index } id = { x }>
+                          <p />
+                        </div>,
                     ) }
                 <div className = "weekend" />
                 { [...Array(6).keys()].map(x => (x + 1.04).toFixed(2))
                     .map((x, index) =>
-                        <div
-                            key = { index } id = { x }
-                        />,
+                        <div key = { index } id = { x }>
+                          <p />
+                        </div>,
                     ) }
                 <div className = "weekend" />
                 { [...Array(6).keys()].map(x => (x + 1.05).toFixed(2))
                     .map((x, index) =>
-                        <div
-                            key = { index } id = { x }
-                        />,
+                        <div key = { index } id = { x }>
+                          <p />
+                        </div>,
                     ) }
                 <div className = "weekend" />
                 { [...Array(6).keys()].map(x => (x + 1.06).toFixed(2))
                     .map((x, index) =>
-                        <div
-                            key = { index } id = { x }
-                        />,
+                        <div key = { index } id = { x }>
+                          <p />
+                        </div>,
                     ) }
                 <div className = "weekend" />
                 { [...Array(6).keys()].map(x => (x + 1.07).toFixed(2))
                     .map((x, index) =>
-                        <div
-                            key = { index } id = { x }
-                        />,
+                        <div key = { index } id = { x }>
+                          <p />
+                        </div>,
                     ) }
                 <div className = "weekend" />
                 { [...Array(6).keys()].map(x => (x + 1.08).toFixed(2))
                     .map((x, index) =>
-                        <div
-                            key = { index } id = { x }
-                        />,
+                        <div key = { index } id = { x }>
+                          <p />
+                        </div>,
                     ) }
                 <div className = "weekend" />
                 { [...Array(6).keys()].map(x => (x + 1.09).toFixed(2))
                     .map((x, index) =>
-                        <div
-                            key = { index } id = { x }
-                        />,
+                        <div key = { index } id = { x }>
+                          <p />
+                        </div>,
                     ) }
                 <div className = "weekend" />
                 { [...Array(6).keys()].map(x => (x + 1.10).toFixed(2))
                     .map((x, index) =>
-                        <div
-                            key = { index } id = { x }
-                        />,
+                        <div key = { index } id = { x }>
+                          <p />
+                        </div>,
                     ) }
                 <div className = "weekend" />
                 { [...Array(6).keys()].map(x => (x + 1.11).toFixed(2))
                     .map((x, index) =>
-                        <div
-                            key = { index } id = { x }
-                        />,
+                        <div key = { index } id = { x }>
+                          <p />
+                        </div>,
                     ) }
                 <div className = "weekend" />
                 { [...Array(6).keys()].map(x => (x + 1.12).toFixed(2))
                     .map((x, index) =>
-                        <div
-                            key = { index } id = { x }
-                        />,
+                        <div key = { index } id = { x }>
+                          <p />
+                        </div>,
                     ) }
                 <div className = "weekend" />
               </div>
