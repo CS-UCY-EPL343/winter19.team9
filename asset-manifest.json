@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/winter19.team9/static/css/main.15e4ece1.chunk.css",
-    "main.js": "/winter19.team9/static/js/main.cbf4e886.chunk.js",
-    "main.js.map": "/winter19.team9/static/js/main.cbf4e886.chunk.js.map",
+    "main.css": "/winter19.team9/static/css/main.b299d8a3.chunk.css",
+    "main.js": "/winter19.team9/static/js/main.d35172da.chunk.js",
+    "main.js.map": "/winter19.team9/static/js/main.d35172da.chunk.js.map",
     "runtime-main.js": "/winter19.team9/static/js/runtime-main.8f9dc62c.js",
     "runtime-main.js.map": "/winter19.team9/static/js/runtime-main.8f9dc62c.js.map",
     "static/css/2.beb670dd.chunk.css": "/winter19.team9/static/css/2.beb670dd.chunk.css",
-    "static/js/2.e59dab43.chunk.js": "/winter19.team9/static/js/2.e59dab43.chunk.js",
-    "static/js/2.e59dab43.chunk.js.map": "/winter19.team9/static/js/2.e59dab43.chunk.js.map",
+    "static/js/2.d0faa258.chunk.js": "/winter19.team9/static/js/2.d0faa258.chunk.js",
+    "static/js/2.d0faa258.chunk.js.map": "/winter19.team9/static/js/2.d0faa258.chunk.js.map",
     "index.html": "/winter19.team9/index.html",
-    "precache-manifest.5aa4869ece72e57f968d1664f4a97058.js": "/winter19.team9/precache-manifest.5aa4869ece72e57f968d1664f4a97058.js",
+    "precache-manifest.af54597c4148f81c0cc0283566a4eafa.js": "/winter19.team9/precache-manifest.af54597c4148f81c0cc0283566a4eafa.js",
     "service-worker.js": "/winter19.team9/service-worker.js",
     "static/css/2.beb670dd.chunk.css.map": "/winter19.team9/static/css/2.beb670dd.chunk.css.map",
-    "static/css/main.15e4ece1.chunk.css.map": "/winter19.team9/static/css/main.15e4ece1.chunk.css.map",
-    "static/js/2.e59dab43.chunk.js.LICENSE.txt": "/winter19.team9/static/js/2.e59dab43.chunk.js.LICENSE.txt",
-    "static/media/About.css": "/winter19.team9/static/media/aboutusimg.231364a7.jpg",
+    "static/css/main.b299d8a3.chunk.css.map": "/winter19.team9/static/css/main.b299d8a3.chunk.css.map",
+    "static/js/2.d0faa258.chunk.js.LICENSE.txt": "/winter19.team9/static/js/2.d0faa258.chunk.js.LICENSE.txt",
+    "static/media/About.css": "/winter19.team9/static/media/aboutusimg.0f9078a6.jpg",
     "static/media/ffLogoTransparent.png": "/winter19.team9/static/media/ffLogoTransparent.9f75a55d.png",
     "static/media/fitnessFactoryLogo.png": "/winter19.team9/static/media/fitnessFactoryLogo.444228d2.png",
     "static/media/jccLogo.svg": "/winter19.team9/static/media/jccLogo.c31e2ec4.svg",
@@ -24,8 +24,8 @@
   "entrypoints": [
     "static/js/runtime-main.8f9dc62c.js",
     "static/css/2.beb670dd.chunk.css",
-    "static/js/2.e59dab43.chunk.js",
-    "static/css/main.15e4ece1.chunk.css",
-    "static/js/main.cbf4e886.chunk.js"
+    "static/js/2.d0faa258.chunk.js",
+    "static/css/main.b299d8a3.chunk.css",
+    "static/js/main.d35172da.chunk.js"
   ]
 }
