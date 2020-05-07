@@ -1,5 +1,4 @@
 const mysql = require('mysql');
-const Crypto = require('cryptr');
 let connection = null; // Global
 
 function dbConnect() {
@@ -1107,9 +1106,6 @@ function insertNewCoach(data) {
     const level = 'coach';
     const insertCoach = 'INSERT INTO COACH(CoachName, Surname, Bdate, Gender, Email) VALUES (?, ?, ?, ?, ?)';
     const insertAccount = 'INSERT INTO ACCOUNT(username , password, level, Coach_ID) VALUES (?, ?, ?, ?)';
-
-    const cryptr = new Crypto('ffn_private_key_!!!!');
-    const decryptedPassword = cryptr.decrypt(data.password);
 
     connection.query(insertCoach, [
       data.fname,
