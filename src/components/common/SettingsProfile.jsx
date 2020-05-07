@@ -9,7 +9,6 @@ import EditAccount        from './EditAccount';
 import MessagesModal      from './MessagesModal';
 import {
   getEventsTotal,
-  // getSevenDaysRemaining,
   getTotalMessages,
   getTotalPrivateAnnouncements,
 }                         from '../../repository';
@@ -206,6 +205,7 @@ class SettingsProfile extends Component {
                     modalHeader = { 'Edit Account' }
                     modalBody = { <EditAccount dataPT = { this.state.dataPT }
                                                classes = { this.state.classes }
+                                               toggle = { this.toggleEditAccount }
                     /> }
                 />
               </li>

@@ -51,11 +51,6 @@ class EditAccount extends Component {
 
   };
 
-  refreshPage() {
-    // noinspection JSDeprecatedSymbols
-    window.location.reload(false);
-  }
-
   deleted = () => {
     Swal.fire({
       title             : 'Are you sure?',
@@ -318,10 +313,10 @@ class EditAccount extends Component {
   };
 
   Test = () => {
-
     if (this.handleSubmit()) {
         postuserData(this.state)
             .then(() => {
+              console.log('G')
               Swal.fire(
                   'Saved Changes',
                   '',
@@ -445,6 +440,7 @@ changeConfirmPassword = (e) => {
       />);
     }
 
+    // noinspection SpellCheckingInspection
     return (
         <div className = "container" id = "EditModal">
           { this.state.loading ?
@@ -588,9 +584,9 @@ changeConfirmPassword = (e) => {
                       />
                     </label>
                     <label className = "col-md-12 control-label" id = "resetl">
-                      <input onClick = { this.refreshPage }
+                      <input onClick = { this.props.toggle }
                              data-testid={'button-reset'}
-                             type = "submit"
+                             type = "button"
                              className = "btn btn-default"
                              value = "Reset"
                              id = "reset"

@@ -46,10 +46,7 @@ class ProfileUser extends Component {
             ClassID,
             Name,
             invalid
-        }, () => {
-
         });
-
     };
 
     toggleLoading = () => {

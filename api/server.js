@@ -526,14 +526,14 @@ app.post('/api/user/insert', (req, res) => {
 // noinspection JSUnresolvedFunction
 app.post('/api/coach/insert', (req, res) => {
   db.insertNewCoach(req.body)
-      .then(response => res.status(200).json({message: response}))
+      .then(response => res.status(200).json({Account_ID: response}))
       .catch(err => res.status(409).json(err));
 });
 
 // noinspection JSUnresolvedFunction
 app.post('/api/admin/insert', (req, res) => {
   db.insertNewAdmin(req.body)
-      .then(response => res.status(200).json({message: response}))
+      .then(response => res.status(200).json({Account_ID: response}))
       .catch(err => res.status(409).json(err));
 });
 
@@ -561,7 +561,6 @@ app.post('/api/coach/countPT', (req, res) => {
     if (data) {
       return res.status(200).json({count: data});
     } else {
-
       return res.status(409).json('Authentication failed. User not found.');
     }
   }).catch(err => res.status(409).json(err));

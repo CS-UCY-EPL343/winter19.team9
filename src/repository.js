@@ -7,7 +7,6 @@ const BASE_URL = 'http://localhost:5000';
 
 
 export function logIn(data) {
-  // console.log(data);
   return axios.post(`${ BASE_URL }/api/auth`, {
     name    : data.username,
     password: data.password,
@@ -317,7 +316,7 @@ export function deleteCoach(CoachID) {
 export function countPT(AccountID) {
   return axios.post(`${ BASE_URL }/api/coach/countPT`,
       {AccountID: AccountID})
-      .then(response => response.data.count[0])
+      .then(response => response.data.count[0][0])
       .catch(() => Promise.reject('Error'));
 }
 
@@ -331,7 +330,7 @@ export function sameUsername(username) {
 export function countClasses(AccountID) {
   return axios.post(`${ BASE_URL }/api/coach/countClasses`,
       {AccountID: AccountID})
-      .then(response => response.data.count[0])
+      .then(response => response.data.count[0][0])
       .catch(() => Promise.reject('Error'));
 }
 

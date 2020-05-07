@@ -6,10 +6,9 @@ import {
   getAdmins,
   getCoaches,
   deleteCoach,
-  logOut,
   countPT,
   countClasses,
-} from '../../repository';
+}                         from '../../repository';
 import adminAvatar
                           from '../assets/img/logos/fitnessFactoryLogo.png';
 import ToggleModal        from './ToggleModal';
@@ -19,20 +18,20 @@ class StaffList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      coaches  : [],
-      admins   : [],
-      staffType: '',
-      modal    : false,
-      countTotal  : 0,
+      coaches   : [],
+      admins    : [],
+      staffType : '',
+      modal     : false,
+      countTotal: 0,
     };
     this.DeleteCoach = this.DeleteCoach.bind(this);
     this.DeleteAdmin = this.DeleteAdmin.bind(this);
     this.createAdmin = this.createAdmin.bind(this);
     this.createCoach = this.createCoach.bind(this);
+    this.addStaffMember = this.addStaffMember.bind(this);
   }
 
   componentDidMount() {
-    // TODO get image when done
     getCoaches().then(response => {
       this.setState({
         coaches: response.map(c => {
@@ -72,8 +71,10 @@ class StaffList extends Component {
               '',
               'success',
           ).then(() => {
-            logOut();
-            window.location.replace('/');
+            this.setState({
+              admins: this.state.admins.filter(
+                  admin => admin.AccountID !== AdminId),
+            });
           });
         }).catch(() => Swal.fire(
             'Something went wrong',
@@ -90,8 +91,7 @@ class StaffList extends Component {
     });
   }
 
-  DeleteCoach(e) {
-
+  DeleteCoach = (e) => {
     // noinspection JSUnresolvedVariable
     const CoachID = e.target.className.split(' ')[3] === 'admin'
         ? this.state.admins[e.target.className.split(' ')[2]].AccountID
@@ -105,25 +105,28 @@ class StaffList extends Component {
       confirmButtonColor: '#3085D6',
       cancelButtonColor : '#DD3333',
       confirmButtonText : 'Yes, delete it!',
-    }).then((result) => {
-      countPT(CoachID).then(response => {
-        this.setState(
-            {countTotal : response.countTotal});
+    }).then(async (result) => {
+      let countTotal = 0;
+      await countPT(CoachID).then(response => {
+        countTotal += response.countTotal;
+        return countTotal;
+      });
+      await countClasses(CoachID).then(response => {
+        countTotal += response.countTotal;
+        return countTotal;
       });
 
-      countClasses(CoachID).then(response => {
-        this.setState(
-            {countTotal : this.state.countTotal+response.countTotal});
-      });
-      if (result.value && this.state.countTotal === 0 ) {
+      if (result.value && countTotal === 0) {
         deleteCoach(CoachID).then(() => {
           Swal.fire(
               'Account deleted successfully',
               '',
               'success',
           ).then(() => {
-            logOut();
-            window.location.replace('/');
+            this.setState({
+              coaches: this.state.coaches.filter(
+                  coach => coach.AccountID !== CoachID),
+            });
           });
         }).catch(() => Swal.fire(
             'Something went wrong',
@@ -136,7 +139,7 @@ class StaffList extends Component {
             'Your Account is safe :)',
             'error',
         ).then();
-      }else if(this.state.countTotal !== 0){
+      } else if (countTotal !== 0) {
         Swal.fire(
             'Cancelled',
             'You must go and change the classes and the personal training :)',
@@ -144,7 +147,6 @@ class StaffList extends Component {
         ).then();
       }
     });
-
   }
 
   createAdmin() {
@@ -156,6 +158,16 @@ class StaffList extends Component {
     this.setState({staffType: 'coach'});
     this.toggleModal();
   }
+
+  addStaffMember = (staff, staffType, coaches, admins) => {
+    if (staffType === 'admin') {
+      admins.push(staff);
+      this.setState({admins, coaches});
+    } else if (staffType === 'coach') {
+      coaches.push(staff);
+      this.setState({admins, coaches});
+    }
+  };
 
   render() {
     // noinspection DuplicatedCode
@@ -272,7 +284,12 @@ class StaffList extends Component {
               modalSize = { 'md' }
               modalHeader = { 'Create New Staff' }
               modalBody = {
-                <CreateStaffMember staffType = { this.state.staffType } /> }
+                <CreateStaffMember staffType = { this.state.staffType }
+                                   onSuccess = { this.addStaffMember }
+                                   coaches = { this.state.coaches }
+                                   admins = { this.state.admins }
+                                   toggle = { this.toggleModal }
+                /> }
           />
         </div>
     );

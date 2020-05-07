@@ -1,12 +1,16 @@
-import React                      from 'react';
-import {ValidatorForm}            from 'react-material-ui-form-validator';
-import TextField                  from '@material-ui/core/TextField';
-import Radio                      from '@material-ui/core/Radio';
-import RadioGroup                 from '@material-ui/core/RadioGroup';
-import FormControlLabel           from '@material-ui/core/FormControlLabel';
-import FormControl                from '@material-ui/core/FormControl';
-import Recaptcha                  from 'react-recaptcha';
-import Swal                       from 'sweetalert2';
+import React                                    from 'react';
+import {ValidatorForm}                          from 'react-material-ui-form-validator';
+import TextField
+                                                from '@material-ui/core/TextField';
+import Radio                                    from '@material-ui/core/Radio';
+import RadioGroup
+                                                from '@material-ui/core/RadioGroup';
+import FormControlLabel
+                                                from '@material-ui/core/FormControlLabel';
+import FormControl
+                                                from '@material-ui/core/FormControl';
+import Recaptcha                                from 'react-recaptcha';
+import Swal                                     from 'sweetalert2';
 import '@sweetalert2/theme-dark/dark.css';
 import '../assets/styles/SignInUp.css';
 import {insertAdmin, insertCoach, sameUsername} from '../../repository';
@@ -29,7 +33,7 @@ class CreateStaffMember extends React.Component {
       },
       isVerified: false,
       submitted : false,
-      countTotal     : 0    ,
+      countTotal: 0,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -126,54 +130,84 @@ class CreateStaffMember extends React.Component {
 
     sameUsername(this.state.formData.username)
         .then(response => {
-      this.setState(
-          {countTotal : response.countTotal},
-          () => {
-            if(this.state.countTotal === 1) {
-              Swal.fire(
-                  'Someone else have this username!!!',
-                  '',
-                  'error',
-              ).then(() => {
-                window.location.reload();
-              }).catch(() => Swal.fire(
-                  'Something go wrong!!',
-                  'Please try again...',
-                  'error',
-              ));
-            }else if (this.props.staffType === 'coach') {
-              insertCoach(data).then(() => {
-                Swal.fire(
-                    'Coach Created successfully',
-                    '',
-                    'success',
-                ).then(() => {
-                  window.location.replace('/');
-                });
-              }).catch(() => Swal.fire(
-                  'Something went wrong',
-                  'Please try again...',
-                  'error',
-              ));
-            } else if (this.props.staffType === 'admin') {
+          this.setState(
+              {countTotal: response.countTotal},
+              () => {
+                if (this.state.countTotal === 1) {
+                  Swal.fire(
+                      'Someone else has this username!!!',
+                      '',
+                      'error',
+                  ).catch(() => Swal.fire(
+                      'Something go wrong!!',
+                      'Please try again...',
+                      'error',
+                  ));
+                } else if (this.props.staffType === 'coach') {
+                  insertCoach(data).then((response) => {
+                    const Account_ID = response.Account_ID;
+                    Swal.fire(
+                        'Coach Created successfully',
+                        '',
+                        'success',
+                    ).then(() => {
+                      // noinspection JSUnresolvedVariable
+                      let newStaff = {
+                        AccountID: Account_ID,
+                        Bdate    : this.state.formData.bdate,
+                        Email    : this.state.formData.email,
+                        Gender   : this.state.formData.gender === 'male'
+                            ? 1
+                            : 2,
+                        Name     : this.state.formData.fname,
+                        Surname  : this.state.formData.lname,
+                        level    : this.state.formData.level,
+                        username : this.state.formData.username,
+                      };
+                      this.props.onSuccess(newStaff, 'coach',
+                          this.props.coaches, this.props.admins);
+                      this.props.toggle();
+                    });
+                  }).catch(() => Swal.fire(
+                      'Something went wrong',
+                      'Please try again...',
+                      'error',
+                  ));
+                } else if (this.props.staffType === 'admin') {
 
-              insertAdmin(data).then(() => {
-                Swal.fire(
-                    'Admin Created successfully',
-                    '',
-                    'success',
-                ).then(() => {
-                  window.location.replace('/');
-                });
-              }).catch(() => Swal.fire(
-                  'Something went wrong',
-                  'Please try again...',
-                  'error',
-              ));
-            }
-            }
-      );
-    });
+                  insertAdmin(data).then((response) => {
+                    const Account_ID = response.Account_ID;
+                    Swal.fire(
+                        'Admin Created successfully',
+                        '',
+                        'success',
+                    ).then(() => {
+                      // noinspection JSUnresolvedVariable
+                      let newStaff = {
+                        AccountID: Account_ID,
+                        Bdate    : this.state.formData.bdate,
+                        Email    : this.state.formData.email,
+                        Gender   : this.state.formData.gender === 'male'
+                            ? 1
+                            : 2,
+                        Name     : this.state.formData.fname,
+                        Surname  : this.state.formData.lname,
+                        level    : this.state.formData.level,
+                        username : this.state.formData.username,
+                      };
+                      this.props.onSuccess(newStaff, 'admin',
+                          this.props.coaches, this.props.admins);
+                      this.props.toggle();
+                    });
+                  }).catch(() => Swal.fire(
+                      'Something went wrong',
+                      'Please try again...',
+                      'error',
+                  ));
+                }
+              },
+          );
+        });
 
   };
 
@@ -286,7 +320,7 @@ class CreateStaffMember extends React.Component {
               size = "normal"
               render = "explicit"
               theme = "dark"
-             
+
               verifyCallback = { this.verifyCallback }
           />
           <button style = { {marginBottom: '15px'} }>Sign up</button>

@@ -1126,14 +1126,13 @@ function insertNewCoach(data) {
             level,
             id,
           ],
-          function(err) {
+          function(err, rows) {
             if (err) {
               return reject(err);
             }
-            return resolve('The coach account was inserted successfully');
+            return resolve(rows.insertId);
           },
       );
-      return resolve('Coach created successfully!');
     });
   });
 }
@@ -1164,14 +1163,13 @@ function insertNewAdmin(data) {
             level,
             id,
           ],
-          function(err) {
+          function(err, rows) {
             if (err) {
               return reject(err);
             }
-            return resolve('The admin account was inserted successfully');
+            return resolve(rows.insertId);
           },
       );
-      return resolve('Admin created successfully!');
     });
   });
 }
