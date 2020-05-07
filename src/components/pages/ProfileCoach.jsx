@@ -8,7 +8,6 @@ import {
   updateAnnouncement,
   deleteAnnouncement,
   addPrivateAnnouncement,
-  getAllCoaches,
   loggedInVisit,
   updateProfileVisit,
   staffData,

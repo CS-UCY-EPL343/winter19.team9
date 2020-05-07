@@ -1,9 +1,5 @@
 import React, {Component}                                   from 'react';
 import {Button, Modal, ModalBody, ModalFooter, ModalHeader} from 'reactstrap';
-import {
-    getCoaches,
-    // makeMessagesRead
-}                                                           from '../../repository';
 import Swal                                                 from "sweetalert2";
 
 class MessageNewModal extends Component {

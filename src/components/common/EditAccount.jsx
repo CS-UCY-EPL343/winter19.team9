@@ -49,7 +49,6 @@ class EditAccount extends Component {
     } else {
       return 1;
     }
-
   };
 
   deleted = () => {
