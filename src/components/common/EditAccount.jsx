@@ -1,36 +1,37 @@
-import React, {Component} from 'react';
-import {CSVLink}          from 'react-csv';
+import React, {Component}                    from 'react';
+import {CSVLink}                             from 'react-csv';
 import '../assets/styles/EditAccountModal.css';
-import {logOut, userData} from '../../repository';
-import {postuserData}     from '../../repository';
-import {deleteUserData}   from '../../repository';
-import Swal               from 'sweetalert2';
+import {logOut, userData, userPicByUsername} from '../../repository';
+import {postuserData}                        from '../../repository';
+import {deleteUserData}                      from '../../repository';
+import Swal                                  from 'sweetalert2';
 import '@sweetalert2/theme-dark/dark.css';
-import Spinner            from '../Spinner';
-import {AnimatedOnScroll} from 'react-animated-css-onscroll';
+import Spinner                               from '../Spinner';
+import {AnimatedOnScroll}                    from 'react-animated-css-onscroll';
 
 class EditAccount extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      file: '',
+      file           : '',
       imagePreviewUrl: '',
-      username: '',
-      Email: '',
-      Name: '',
-      Surname: '',
-      password: '',
+      username       : '',
+      Email          : '',
+      Name           : '',
+      Surname        : '',
+      password       : '',
       confirmPassword: '',
-      image: '',
-      flag: '1',
-      csvData: [],
-      Bdate: '',
-      Age: '',
-      dataPT: [],
-      classes: [],
-      loading: true,
+      image          : '',
+      flag           : '1',
+      csvData        : [],
+      Bdate          : '',
+      Age            : '',
+      dataPT         : [],
+      classes        : [],
+      loading        : true,
       Medical_History: '',
-      Phone_Number: '',
+      Phone_Number   : '',
+      newUser        : false,
     };
     this.onValueInput = this.onValueInput.bind(this);
   }
@@ -301,10 +302,15 @@ class EditAccount extends Component {
         .then(response => {
           this.setState(response);
           this.setState({confirmPassword: response.password});
-        }).then(() => this.setState({loading: false}));
-    //this.props.showUrl(this.props.location.pathname)
-    //this.fillCSV(name,surname,email,username,password);
-
+        })
+        .then(
+            () => userPicByUsername().then(response => this.setState(response)))
+        .then(() => {
+          if (!this.state.image) {
+            this.setState({newUser: true});
+          }
+        })
+        .finally(() => this.setState({loading: false}));
   }
 
   onValueInput = (e) => {
@@ -314,20 +320,18 @@ class EditAccount extends Component {
 
   Test = () => {
     if (this.handleSubmit()) {
-        postuserData(this.state)
-            .then(() => {
-              console.log('G')
-              Swal.fire(
-                  'Saved Changes',
-                  '',
-                  'success',
-              ).then();
-            }).catch(() => Swal.fire(
-            'Something went wrong',
-            'Please try again...',
-            'error',
-        ));
-
+      postuserData(this.state)
+          .then(() => {
+            Swal.fire(
+                'Saved Changes',
+                '',
+                'success',
+            ).then();
+          }).catch(() => Swal.fire(
+          'Something went wrong',
+          'Please try again...',
+          'error',
+      ));
     } else {
       Swal.fire(
           'Passwords do not match',
@@ -335,11 +339,11 @@ class EditAccount extends Component {
           'error',
       ).then();
     }
-
   };
+
   onSubmit = (e) => {
     e.preventDefault();
-    if(this.props.testSubmit) {
+    if (this.props.testSubmit) {
       this.props.testSubmit('Testing');
       return;
     }
@@ -359,6 +363,7 @@ class EditAccount extends Component {
     }
     this.Test();
   };
+
   checkPhoneNo = (number) => {
     if ((number === '0') || (number === null)) {
       this.setState({Phone_Number: ''});
@@ -367,33 +372,33 @@ class EditAccount extends Component {
   };
 
   changePassword = (e) => {
-    if(e.target.value === '' || e.target.value === ' '){
+    if (e.target.value === '' || e.target.value === ' ') {
       Swal.fire(
           'The password cannot be empty or have space',
           '',
           'error',
       ).then();
     }
-      const crypto = require('crypto');
-      const hashCode = crypto.createHmac('sha256', 'ffn_private_key_!!!!')
-          .update(e.target.value)
-          .digest('hex');
-      this.setState({password : hashCode});
+    const crypto = require('crypto');
+    const hashCode = crypto.createHmac('sha256', 'ffn_private_key_!!!!')
+        .update(e.target.value)
+        .digest('hex');
+    this.setState({password: hashCode});
   };
 
-changeConfirmPassword = (e) => {
-    if(e.target.value === '' || e.target.value === ' '){
+  changeConfirmPassword = (e) => {
+    if (e.target.value === '' || e.target.value === ' ') {
       Swal.fire(
           'The password cannot be empty or have space',
           '',
           'warning',
       ).then();
     }
-      const crypto = require('crypto');
-      const hashCode = crypto.createHmac('sha256', 'ffn_private_key_!!!!')
-          .update(e.target.value)
-          .digest('hex');
-      this.setState({confirmPassword : hashCode});
+    const crypto = require('crypto');
+    const hashCode = crypto.createHmac('sha256', 'ffn_private_key_!!!!')
+        .update(e.target.value)
+        .digest('hex');
+    this.setState({confirmPassword: hashCode});
 
   };
 
@@ -426,13 +431,20 @@ changeConfirmPassword = (e) => {
   }
 
   render() {
-
-    let imageURL = 'data:image/png;base64,' + new Buffer(this.state.image,
-        'binary').toString('base64');
-
-    let $imagePreview = null;
-    if (this.state.image !== '') {
-      $imagePreview = (<img src = { imageURL } alt = { 'Profile Avatar' } />);
+    let {image} = this.state;
+    let imageURL = 'https://www.w3schools.com/howto/img_avatar.png';
+    let $imagePreview = <img data-testid = { 'image' }
+                             src = { imageURL }
+                             alt = { 'Profile Avatar' }
+    />;
+    if (image !== '') {
+      imageURL =
+          'data:image/png;base64,' + new Buffer.from(image, 'binary').toString(
+          'base64');
+      $imagePreview = (<img data-testid = { 'image' }
+                            src = { imageURL }
+                            alt = { 'Profile Avatar' }
+      />);
     }
     if (this.state.imagePreviewUrl) {
       $imagePreview = (<img src = { this.state.imagePreviewUrl }
@@ -577,7 +589,7 @@ changeConfirmPassword = (e) => {
                   <div className = "form-group" id = "buttons">
                     <label className = "col-md-12 control-label" id = "savel">
                       <input type = "submit"
-                             data-testid={'button'}
+                             data-testid = { 'button' }
                              className = "btn btn-primary"
                              defaultValue = "Save Changes"
                              id = "save"
@@ -585,14 +597,14 @@ changeConfirmPassword = (e) => {
                     </label>
                     <label className = "col-md-12 control-label" id = "resetl">
                       <input onClick = { this.props.toggle }
-                             data-testid={'button-reset'}
+                             data-testid = { 'button-reset' }
                              type = "button"
                              className = "btn btn-default"
                              value = "Reset"
                              id = "reset"
                       />
                       <input type = "submit"
-                             data-testid={'button-delete'}
+                             data-testid = { 'button-delete' }
                              className = "btn btn-default"
                              defaultValue = "Delete Account"
                              id = "delete"

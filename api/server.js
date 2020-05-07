@@ -7,8 +7,6 @@ const app = express();
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
-const sendgridTransport = require('nodemailer-sendgrid-transport');
-const sgMail = require('@sendgrid/mail');
 const creds = require('./config');
 const bodyParser = require('body-parser');
 const middleware = require('./middleware');
@@ -226,6 +224,17 @@ app.post('/api/userLevel', middleware, (req, res) => {
 // noinspection JSUnresolvedFunction
 app.post('/api/user/data', middleware, (req, res) => {
   db.getUserData(req.decoded.username).then(data => {
+    if (data) {
+      return res.status(200).json(data);
+    } else {
+      return res.status(409).json('Authentication failed. User not found.');
+    }
+  }).catch(err => res.status(401).json(err));
+});
+
+// noinspection JSUnresolvedFunction
+app.post('/api/user/image', middleware, (req, res) => {
+  db.userPicByUsername(req.decoded.username).then(data => {
     if (data) {
       return res.status(200).json(data);
     } else {
@@ -477,7 +486,6 @@ app.post('/api/announcements/private/delete', middleware, (req, res) => {
 /*************************************************************************/
 // noinspection JSUnresolvedFunction
 app.post('/api/user/post/data', middleware, (req, res) => {
-
   db.postUserData(req.body.data)
       .then(response => res.status(200).json({message: response}))
       .catch(err => res.status(409).json(err));

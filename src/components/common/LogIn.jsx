@@ -72,8 +72,8 @@ class Signup extends React.Component {
                             history.push('/user/profile');
                           }else{
                             Swal.fire(
-                                'This Account is not Verify yet!!',
-                                'Please go to verify!!',
+                                'This Account is not Verified yet!!',
+                                'Please go and verify it!!',
                                 'warning',
                             ).then(() => {logOut();});
                           }

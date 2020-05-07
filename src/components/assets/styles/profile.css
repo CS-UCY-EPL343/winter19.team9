@@ -151,8 +151,8 @@
 .big-profile-picture {
     margin              : 0 auto;
     border              : 5px solid #D90429;
-    width               : 150px;
-    height              : 150px;
+    width               : 180px;
+    height              : 180px;
     transition          : .5s ease;
     backface-visibility : hidden;
     opacity             : 1;

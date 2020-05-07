@@ -100,7 +100,7 @@ function dbSignUp(data) {
 
 function getUserData(user) {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM ACCOUNT,USERS,PIC WHERE username = ?  AND ACCOUNT.User_ID = USERS.User_ID  AND PIC.User_ID = USERS.User_ID';
+    const sql = 'SELECT * FROM ACCOUNT,USERS WHERE username = ? AND ACCOUNT.User_ID = USERS.User_ID';
     connection.query(sql, [user], function(err, rows) {
       if (err) {
         return reject(err);
@@ -153,19 +153,23 @@ function base64ToHex(str) {
 function postUserData(data) {
   const x = data.imagePreviewUrl;
   let byteString = x.split(',')[1];
+  if(data.newUser) {
+    const sql = 'INSERT INTO PIC (User_ID, image) VALUES (?, "")';
+    connection.query(sql, [data.User_ID], function(err) {
+      if (err) {
+        return reject(err);
+      }
+    })
+  }
   if (x !== '') {
     return new Promise((resolve, reject) => {
-
-      const cryptr = new Crypto('ffn_private_key_!!!!');
-      const decryptedPassword = cryptr.decrypt(data.password);
-
       const sql = 'UPDATE USERS, ACCOUNT, PIC SET  Name = ? , Surname = ? , Email = ?, Medical_History = ?, password = ?, image = X?, Phone_Number = ? WHERE ACCOUNT.username = ? AND ACCOUNT.User_ID = USERS.User_ID AND PIC.User_ID = USERS.User_ID';
       connection.query(sql, [
         data.Name,
         data.Surname,
         data.Email,
         data.Medical_History,
-        decryptedPassword,
+        data.password,
         base64ToHex(byteString),
         data.Phone_Number,
         data.username,
@@ -480,7 +484,18 @@ function userPic(User_ID) {
         reject(err);
       }
       resolve(rows);
+    });
+  });
+}
 
+function userPicByUsername(username) {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT PIC.image FROM ACCOUNT,USERS,PIC WHERE username = ? AND ACCOUNT.User_ID = USERS.User_ID  AND PIC.User_ID = USERS.User_ID';
+    connection.query(sql, [username], function(err, rows) {
+      if (err) {
+        reject(err);
+      }
+      resolve(rows);
     });
   });
 }
@@ -1477,5 +1492,6 @@ module.exports = {
   deleteNewMessage,
   sameUser,
   getVerified,
-  getAccountID
+  getAccountID,
+  userPicByUsername,
 };

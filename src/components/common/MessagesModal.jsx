@@ -4,7 +4,7 @@ import Message            from './Message';
 import {
   createNewMessage,
   getMessages,
-  makeMessagesRead, userData,
+  makeMessagesRead, userPicByUsername,
 }                         from '../../repository';
 import MessageNewModal    from './MessageNewModal';
 import Swal               from 'sweetalert2';
@@ -39,13 +39,13 @@ class MessagesModal extends Component {
       this.setState({loading});
     }).catch(err => alert(err));
 
-    userData().then(response => {
-      this.setState({image: response.image});
-    }).then(() => {
-      let loading = this.state.loading;
-      loading[1] = false;
-      this.setState({loading});
-    });
+    userPicByUsername()
+        .then(response => this.setState(response))
+        .then(() => {
+          let loading = this.state.loading;
+          loading[1] = false;
+          this.setState({loading});
+        });
   }
 
   componentWillUnmount() {
@@ -111,6 +111,13 @@ class MessagesModal extends Component {
                      className = "container-fluid mt-2"
                 >
                   <AnimatedOnScroll animationIn = "slideInDown">
+                    { this.state.messages.length === 0 &&
+                      <div style = { {textAlign: 'center'} }>
+                        <p>
+                          Your inbox is empty. Go ahead are send a message :)
+                        </p>
+                      </div>
+                    }
                     { this.state.messages.map(
                         (msg, index) => {
                           // noinspection JSUnresolvedVariable

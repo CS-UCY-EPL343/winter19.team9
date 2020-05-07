@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {userData}         from '../../repository';
-import Spinner            from '../Spinner';
+import React, {Component}            from 'react';
+import {userData, userPicByUsername} from '../../repository';
+import Spinner                       from '../Spinner';
 
 class ProfileInfo extends Component {
   constructor(props) {
@@ -17,19 +17,27 @@ class ProfileInfo extends Component {
     userData()
         .then(response => {
           this.setState(response);
-        }).finally(() => this.props.toggleLoading());
-
+        })
+        .then(
+            () => userPicByUsername().then(response => this.setState(response)))
+        .finally(() => this.props.toggleLoading());
   }
 
   render() {
     let {image} = this.state;
     let imageURL = 'https://www.w3schools.com/howto/img_avatar.png';
-    let $imagePreview = <img data-testid={'image'} src = { imageURL } alt = { 'Profile Avatar' } />;
+    let $imagePreview = <img data-testid = { 'image' }
+                             src = { imageURL }
+                             alt = { 'Profile Avatar' }
+    />;
     if (image !== '') {
       imageURL =
           'data:image/png;base64,' + new Buffer.from(image, 'binary').toString(
           'base64');
-      $imagePreview = (<img data-testid={'image'} src = { imageURL } alt = { 'Profile Avatar' } />);
+      $imagePreview = (<img data-testid = { 'image' }
+                            src = { imageURL }
+                            alt = { 'Profile Avatar' }
+      />);
     }
 
     const name = this.state.Name + ' ' + this.state.Surname;

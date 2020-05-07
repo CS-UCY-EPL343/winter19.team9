@@ -1,10 +1,10 @@
 import axios from 'axios';
 
 const BASE_URL = 'http://localhost:5000';
-// const BASE_URL = 'https://us-central1-ffnbackend-d46c6.cloudfunctions.net/app';
+// const BASE_URL =
+// 'https://us-central1-ffnbackend-d46c6.cloudfunctions.net/app';
 
 // const BASE_URL = 'http://10.16.22.2:5000';  // For Android use your IPv4
-
 
 export function logIn(data) {
   return axios.post(`${ BASE_URL }/api/auth`, {
@@ -19,16 +19,17 @@ export function logIn(data) {
   }).catch(() => Promise.reject('Authentication Failed!'));
 }
 
-export function isVerify(data){
+export function isVerify(data) {
   return axios.post(`${ BASE_URL }/api/verify`, {
-    username : data.username,
-    level    : data.level,
+    username: data.username,
+    level   : data.level,
   }).then(response => {
     localStorage.setItem('x-access-token', response.data.token);
     // noinspection JSCheckFunctionSignatures
     // return response.data;
   }).catch(() => Promise.reject('Authentication Failed!'));
 }
+
 // noinspection JSUnusedLocalSymbols,JSUnusedGlobalSymbols
 export function images(file) {
   return axios.post('/api/getProfilePic', {emp_id: 5});
@@ -39,6 +40,14 @@ export function userData() {
     'x-access-token': localStorage.getItem('x-access-token'),
   })
       .then(response => response.data)
+      .catch(() => Promise.reject('Authentication Failed!'));
+}
+
+export function userPicByUsername() {
+  return axios.post(`${ BASE_URL }/api/user/image`, {
+    'x-access-token': localStorage.getItem('x-access-token'),
+  })
+      .then(response => response.data[0])
       .catch(() => Promise.reject('Authentication Failed!'));
 }
 
@@ -159,7 +168,7 @@ export function getUserID() {
 
 export function getAccountID(data) {
   return axios.post(`${ BASE_URL }/api/adminCoach/AccountID`, {
-    'x-access-token': localStorage.getItem('x-access-token'), data : data,
+    'x-access-token': localStorage.getItem('x-access-token'), data: data,
   })
       .then(response => response.data)
       .catch(() => Promise.reject('Authentication Failed user!'));
@@ -564,7 +573,7 @@ export function newPassword(data) {
         // noinspection JSCheckFunctionSignatures
         localStorage.setItem('x-access-token-expiration',
             Date.now() + 2 * 60 * 60 * 1000);
-      })
+      });
 
 }
 
