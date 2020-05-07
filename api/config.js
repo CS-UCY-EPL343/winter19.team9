@@ -5,6 +5,5 @@ module.exports = {
   // USER: "apikey",
   USER: "fitnessfactorynicosia@outlook.com",
   PASS: "MAqu7hez",
-  // PASS: "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",
   EMAIL: 'fitnessfactorynicosia@outlook.com'
 };
