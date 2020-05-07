@@ -29,14 +29,13 @@ class AnnouncementModal extends Component {
 
   // noinspection JSUnusedLocalSymbols
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if (!this.props.announcements || !this.props.announcement_id) {
+    if (!this.props.announcements || this.props.announcement_id === undefined) {
       return;
     }
     if (this.props.announcement_id === prevProps.announcement_id
         || this.props.announcement_id === undefined) {
       return;
     }
-
     if (this.props.title !== prevProps.title ||
         this.props.message !== prevProps.message
         || this.props.announcements[this.props.announcement_id].ANNOUNCEMENT_ID
@@ -56,7 +55,7 @@ class AnnouncementModal extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    if (this.props.announcements && this.props.announcement_id) {
+    if (this.props.announcements && this.props.announcement_id !== undefined) {
       this.props.onSubmit(this.state.title, this.state.message,
           this.props.announcements[this.props.announcement_id].ANNOUNCEMENT_ID)
           .then((res) => {
@@ -67,7 +66,7 @@ class AnnouncementModal extends Component {
     } else {
       this.props.onSubmit(this.state.title, this.state.message).then((res) => {
         if (res) {
-          // this.setState({title: '', message: ''});
+          this.setState({title: '', message: ''});
         }
       });
     }
@@ -100,7 +99,7 @@ class AnnouncementModal extends Component {
   };
 
   toggle = () => {
-    if (!(this.props.announcements && this.props.announcement_id)) {
+    if (!(this.props.announcements && this.props.announcement_id !== undefined)) {
       this.setState({title: '', message: ''});
     }
     this.props.toggle();

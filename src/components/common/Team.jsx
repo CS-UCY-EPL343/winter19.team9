@@ -25,6 +25,7 @@ class Team extends Component {
 
                   { this.props.coaches.map((coach, index) => {
                     return (<TeamMember
+                        right = {index % 2 === 1}
                         key = { index }
                         { ...coach }
                     />);

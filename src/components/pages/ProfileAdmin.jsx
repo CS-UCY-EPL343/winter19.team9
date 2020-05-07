@@ -396,7 +396,7 @@ class ProfileAdmin extends Component {
     if (x === undefined) {
       return;
     }
-
+    // console.log(x.Title);
     this.setState({
       modalTitle  : x.Title,
       modalMessage: x.Message,
@@ -566,9 +566,8 @@ class ProfileAdmin extends Component {
                                - a.ANNOUNCEMENT_ID;
                       }).map((ann, index) => {
                     return <Button className = "nav-link menu-box-tab menu-text"
-                                   onClick = { this.toggleAnnouncementsData.bind(
-                                       this) } id = { index + 100 }
-                                   key = { index }
+                                   onClick = { this.toggleAnnouncementsData } id = { index + 100 }
+                                   key = { index + 1 }
                     ><i style = { {marginRight: 10 + 'px'} }
                         className = "scnd-font-color fa fa-tasks"
                     />
@@ -615,8 +614,6 @@ class ProfileAdmin extends Component {
                                    announcement_id = { this.state.modalAnnId }
                                    isPrivate = { true }
                 />
-
-
               </div>
             </div>
 

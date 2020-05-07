@@ -5,7 +5,8 @@
     /*display: flex;*/
     width: 100%;
     margin: auto;
-    background-color: #fff;
+    background-color: #1B1B1B;
+    color: white;
 }
 
 #payment-modal .pay-icons {
@@ -40,7 +41,7 @@
     overflow: hidden;
     flex: 1;
     padding: 0.5em;
-    background: #EDF2F4;
+    background: #353535;
     position: relative;
     margin: 0 0.2em 0 0;
     border-radius: 0.25em;
@@ -234,7 +235,7 @@
 }
 
 #payment-options .radio-tile-group .input-container .radio-button:checked + .radio-tile {
-    background-color: #EDF2F4;
+    background-color: #353535;
     border: 2px solid #ef233c;
     color: white;
     transform: scale(1.1, 1.1);
@@ -250,10 +251,6 @@
     background-color: #079ad9;
 }
 
-#CheckoutButton .btn {
-
-}
-
 .btn-primary{
     font-family: 'Montserrat', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     font-weight: 700;
@@ -263,5 +260,6 @@
     border: none;
     margin-top: 30px;
     margin-bottom: 30px;
+    cursor: pointer;
 }
 
