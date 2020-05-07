@@ -160,10 +160,10 @@ app.post('/api/resetPassword/:id', (req, res) => {
     } else {
         db.resetPassword(req.body)
             .then((response) => {
-                return res.status(200).json({message: response.data});
+                return res.status(200).json(response);
             })
             .catch((response) => {
-                return res.status(409).json({message: response.data});
+                return res.status(409).json(response);
             });
     }
 });
