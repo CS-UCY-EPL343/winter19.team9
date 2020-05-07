@@ -113,8 +113,9 @@ class AnnouncementModal extends Component {
                aria-labelledby = "contained-modal-title-vcenter"
                centered
         >
-          <ModalHeader toggle = { this.toggle }>Add
-                                                Announcement</ModalHeader>
+          <ModalHeader toggle = { this.toggle }>
+            {this.props.isPrivate ? 'Edit' : 'Add' } Announcement
+          </ModalHeader>
           <ModalBody>
             <form>
               <div className = "form-group">
