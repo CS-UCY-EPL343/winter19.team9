@@ -37,14 +37,13 @@ class Signup extends React.Component {
     // noinspection JSUnusedLocalSymbols
     // const newToken = crypto.randomBytes(10).toString('hex');
 
-    const Crypto = require('cryptr');
-    const cryptr = new Crypto('ffn_private_key_!!!!');
-
-    const encryptedString = cryptr.encrypt(this.state.formData.password);
-
-    const dataLogIn = {
+    const crypto = require('crypto');
+      const hashCode = crypto.createHmac('sha256', 'ffn_private_key_!!!!')
+          .update(this.state.formData.password)
+          .digest('hex');
+      const dataLogIn = {
       username: this.state.formData.username,
-      password: encryptedString,
+      password: hashCode,
     };
 
 
@@ -67,7 +66,6 @@ class Signup extends React.Component {
                 isVerified().then(d => {
                   this.setState({Verify : d.Verify.data[0]},
                       () => {
-                          console.log(this.state.Verify);
                           if(this.state.Verify === 1){
                             this.props.toggleModal();
                             this.props.setUserLevel('user');

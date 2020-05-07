@@ -4,6 +4,7 @@ import React, {Component} from "react";
 
 import '../assets/styles/resetPassword.css';
 import {resetPass} from "../../repository";
+import Swal from "sweetalert2";
 
 class ResetPassword extends Component{
     constructor(props){
@@ -26,31 +27,39 @@ class ResetPassword extends Component{
         const { id } = this.props.match.params;
         this.setState({confirm: false});
         if(this.state.password !== this.state.confirmPassword){
-            alert("Passwords don't match");
+            Swal.fire(
+                'The password and confirm Password dont match',
+                '',
+                'warning',
+            ).then();
+        }else if (!this.state.password.match(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,)){
+            Swal.fire(
+                'The password mus have 8 character small and caps letters and 1 number',
+                '',
+                'warning',
+            ).then();
+        }else {
+            const crypto = require('crypto');
+            const hashCode = crypto.createHmac('sha256', 'ffn_private_key_!!!!')
+                .update(this.state.password)
+                .digest('hex');
+
+            const data = {
+                token: id,
+                username: this.state.username,
+                password: hashCode,
+            };
+            this.setState({isLoading: true});
+            resetPass(data)
+                .then(() => {
+                    Swal.fire(
+                        'Successfully reset password',
+                        '',
+                        'success',
+                    ).then(() => {window.location.replace('/');});
+                })
+
         }
-        const data ={
-            token: id,
-            username:this.state.username,
-            password: this.state.password,
-        };
-        //ResetPassword is working, but i need to fix the submit button
-        //so it can goes to home. However, it must shows if it was success or not.
-        //Last, users creds are at URL not sure why.
-        //Today, i need to fix Verification!!!.
-        this.setState({isLoading: true});
-        resetPass(data)
-            .then(() => {
-                alert("Error.")
-            })
-            // .then((response) => {
-            //         if(response.data ==='Success reset.'){
-            //             alert("Password changed successfully. Proceed to log in. ")
-            //         }else if(response.data ==='Failed to reset.'){
-            //             alert("There was an error! Please check your credentials.")
-            //         }
-            // })
-            // .catch((error)=>{
-            // })
     };
     render() {
         return(

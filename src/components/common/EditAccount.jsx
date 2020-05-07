@@ -13,24 +13,24 @@ class EditAccount extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      file           : '',
+      file: '',
       imagePreviewUrl: '',
-      username       : '',
-      Email          : '',
-      Name           : '',
-      Surname        : '',
-      password       : '',
+      username: '',
+      Email: '',
+      Name: '',
+      Surname: '',
+      password: '',
       confirmPassword: '',
-      image          : '',
-      flag           : '1',
-      csvData        : [],
-      Bdate          : '',
-      Age            : '',
-      dataPT         : [],
-      classes        : [],
-      loading        : true,
+      image: '',
+      flag: '1',
+      csvData: [],
+      Bdate: '',
+      Age: '',
+      dataPT: [],
+      classes: [],
+      loading: true,
       Medical_History: '',
-      Phone_Number   : '',
+      Phone_Number: '',
     };
     this.onValueInput = this.onValueInput.bind(this);
   }
@@ -93,12 +93,6 @@ class EditAccount extends Component {
   fillCSV = (
       name, surname, email, medical_history, phone_number, username, password,
       bdate, age, PT, classes) => {
-    // console.log(name);
-    //
-    // this.state.csvData =[
-    //     ["firstname", "lastname", "email","username","password"]];
-    // console.log("THIS IS THE COACH: \n");
-    // console.log(PT[0].c);
     let day = '';
     let x = '';
     let time = '';
@@ -310,7 +304,6 @@ class EditAccount extends Component {
     // const {name,surname,email,username,password} = '';
     userData()
         .then(response => {
-          console.log(response);
           this.setState(response);
           this.setState({confirmPassword: response.password});
         }).then(() => this.setState({loading: false}));
@@ -320,13 +313,8 @@ class EditAccount extends Component {
   }
 
   onValueInput = (e) => {
-    // if (e.target.value.length === 0) {
-    //   this.setState({flag: '0'});
-    // } else {
-    //   this.setState({flag: '1'});
-    // }
-
     this.setState({[e.target.name]: e.target.value});
+
   };
 
   Test = () => {
@@ -341,18 +329,19 @@ class EditAccount extends Component {
     //   ).then();
     // }
     if (this.handleSubmit()) {
-      postuserData(this.state)
-          .then(() => {
-            Swal.fire(
-                'Saved Changes',
-                '',
-                'success',
-            ).then();
-          }).catch(() => Swal.fire(
-          'Something went wrong',
-          'Please try again...',
-          'error',
-      ));
+        postuserData(this.state)
+            .then(() => {
+              Swal.fire(
+                  'Saved Changes',
+                  '',
+                  'success',
+              ).then();
+            }).catch(() => Swal.fire(
+            'Something went wrong',
+            'Please try again...',
+            'error',
+        ));
+
     } else {
       Swal.fire(
           'Passwords do not match',
@@ -385,11 +374,41 @@ class EditAccount extends Component {
     this.Test();
   };
   checkPhoneNo = (number) => {
-    if (number === '0') {
+    if ((number === '0') || (number === null)) {
       this.setState({Phone_Number: ''});
-
     }
     return this.state.Phone_Number;
+  };
+
+  changePassword = (e) => {
+    if(e.target.value === '' || e.target.value === ' '){
+      Swal.fire(
+          'The password cannot be empty or have space',
+          '',
+          'error',
+      ).then();
+    }
+      const crypto = require('crypto');
+      const hashCode = crypto.createHmac('sha256', 'ffn_private_key_!!!!')
+          .update(e.target.value)
+          .digest('hex');
+      this.setState({password : hashCode});
+  };
+
+changeConfirmPassword = (e) => {
+    if(e.target.value === '' || e.target.value === ' '){
+      Swal.fire(
+          'The password cannot be empty or have space',
+          '',
+          'warning',
+      ).then();
+    }
+      const crypto = require('crypto');
+      const hashCode = crypto.createHmac('sha256', 'ffn_private_key_!!!!')
+          .update(e.target.value)
+          .digest('hex');
+      this.setState({confirmPassword : hashCode});
+
   };
 
   _handleImageChange(e) {
@@ -537,9 +556,9 @@ class EditAccount extends Component {
                     <input className = "form-control"
                            name = { 'password' }
                            placeholder = { 'Enter password' }
-                           onChange = { this.onValueInput }
+                           onChange = { this.changePassword }
                            type = "password"
-                           defaultValue = { this.state.password }
+                           defaultValue = "**********"
                            required = "required"
                     />
                   </div>
@@ -549,9 +568,9 @@ class EditAccount extends Component {
                     <input className = "form-control"
                            name = { 'confirmPassword' }
                            placeholder = { 'Confirm password' }
-                           onChange = { this.onValueInput }
+                           onChange = { this.changeConfirmPassword }
                            type = "password"
-                           defaultValue = { this.state.confirmPassword }
+                           defaultValue = "**********"
                            required = "required"
                     />
                   </div>

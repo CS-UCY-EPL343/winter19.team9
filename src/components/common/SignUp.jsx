@@ -131,14 +131,13 @@ class SignUp extends React.Component {
     const crypto = require('crypto');
     const newToken = crypto.randomBytes(10).toString('hex');
 
-    const Crypto = require('cryptr');
-    const cryptr = new Crypto('ffn_private_key_!!!!');
-
-    const encryptedString = cryptr.encrypt(this.state.formData.password);
+    const hashCode = crypto.createHmac('sha256', 'ffn_private_key_!!!!')
+        .update(this.state.formData.password)
+        .digest('hex');
 
     const dataSign = {
       username: this.state.formData.username,
-      password: encryptedString,
+      password: hashCode,
       fname   : this.state.formData.fname,
       lname   : this.state.formData.lname,
       email   : this.state.formData.email,

@@ -27,7 +27,7 @@ class PaymentModal extends Component {
 
                             <label className="option" htmlFor="option-2">
                                 <span className="option__indicator"/>
-                                <span className="option__label">&euro;170<sub>/ 3 months</sub></span>
+                                <span className="option__label">&euro;160<sub>/ 3 months</sub></span>
                             </label>
 
                         </div>
@@ -40,12 +40,12 @@ class PaymentModal extends Component {
 
                             <label className="option" htmlFor="option-3">
                                 <span className="option__indicator"/>
-                                <span className="option__label">&euro;300<sub>/ 6 months</sub></span>
+                                <span className="option__label">&euro;310<sub>/ 6 months</sub></span>
                             </label>
 
                             <label className="option" htmlFor="option-4">
                                 <span className="option__indicator"/>
-                                <span className="option__label">&euro;565<sub>per year</sub></span>
+                                <span className="option__label">&euro;590<sub>per year</sub></span>
                             </label>
 
                         </div>

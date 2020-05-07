@@ -50,15 +50,10 @@ function dbDisconnect() {
 }
 
 function dbLogIn(username, password) {
-  console.log(username + password);
   return new Promise((resolve, reject) => {
     const sql = 'SELECT * FROM ACCOUNT WHERE username = ? AND password = ?';
 
-    const cryptr = new Crypto('ffn_private_key_!!!!');
-    const decryptedPassword = cryptr.decrypt(password);
-
-    connection.query(sql, [username, decryptedPassword], function(err, rows) {
-      console.log(err);
+    connection.query(sql, [username, password], function(err, rows) {
       if (err) {
         return reject(err);
       }
@@ -73,9 +68,6 @@ function dbSignUp(data) {
     const ins = 'INSERT INTO ACCOUNT(username, password, level, User_ID) values(?,?,?,?)';
     const insert = 'INSERT INTO USERS(Name, Surname, Bdate, Gender, Email, Medical_History, Age,Verify,Token, Membership_ID) values(?,?,?,?,?,?,?,?,?,?)';
 
-    const cryptr = new Crypto('ffn_private_key_!!!!');
-    const decryptedPassword = cryptr.decrypt(data.password);
-
     connection.query(insert, [
       data.fname,
       data.lname,
@@ -89,15 +81,14 @@ function dbSignUp(data) {
       data.med,
     ], function(err, rows) {
       if (err) {
-        console.log(err);
+
         return reject(err);
       }
       let id = rows.insertId;
       //The data.password must be with aes.
-      connection.query(ins, [data.username, decryptedPassword, lvl, id],
+      connection.query(ins, [data.username, data.password, lvl, id],
           function(err) {
             if (err) {
-              console.log(err);
               return reject(err);
             }
             return resolve('The user account was inserted successfully');
@@ -181,7 +172,6 @@ function postUserData(data) {
         data.username,
       ], function(err) {
         if (err) {
-          console.log(err);
           return reject(err);
         }
         return resolve('The data were saved successfully!');
@@ -202,7 +192,6 @@ function postUserData(data) {
           ],
           function(err) {
             if (err) {
-              console.log(err);
               return reject(err);
             }
             return resolve('The data were saved successfully!');
@@ -309,7 +298,6 @@ function addAnnouncement(title, message, level, username) {
 
           connection.query(sql, [title, message, id], function(err, rows) {
             if (err) {
-              console.log(err);
               return reject(err);
             }
             resolve({id: rows.insertId});
@@ -324,7 +312,6 @@ function addPrivateAnnouncement(title, message, uname, level, username) {
     const userid = 'SELECT * FROM `ACCOUNT` WHERE `username`= ?';
     connection.query(userid, [uname], function(err, rows) {
       if (err) {
-        console.log(err);
         return reject(err);
       }
       // resolve({id: rows.insertId});
@@ -394,7 +381,6 @@ function updateAnnouncement(announcement_id, title, message, level, username) {
 
           connection.query(sql, [title, message, id, ann_id], function(err) {
             if (err) {
-              console.log(err);
               return reject(err);
             }
             resolve({ANNOUNCEMENT_ID: ann_id});
@@ -408,7 +394,6 @@ function enrollUser(CLASS_ID, User_ID) {
     const sql = 'INSERT INTO ENROL (CLASS_ID, User_ID) VALUES ( ? , ? )';
     connection.query(sql, [CLASS_ID, User_ID], function(err) {
       if (err) {
-        console.log(err);
         return reject(err);
       }
       return resolve('The data were saved successfully!');
@@ -421,7 +406,6 @@ function unenrollUser(CLASS_ID, User_ID) {
     const sql = 'DELETE FROM ENROL WHERE CLASS_ID = ? AND User_ID = ?';
     connection.query(sql, [CLASS_ID, User_ID], function(err) {
       if (err) {
-        console.log(err);
         return reject(err);
       }
       return resolve('The data were saved successfully!');
@@ -436,7 +420,6 @@ function addClassCodes(DayCode, TimeCode, CLASS_ID) {
     const sql = 'UPDATE Class SET DayCode = ?, TimeCode = ? WHERE CLASS_ID = ?';
     connection.query(sql, [DayCode, TimeCode, CLASS_ID], function(err) {
       if (err) {
-        console.log(err);
         return reject(err);
       }
       return resolve('The data were saved successfully!');
@@ -747,7 +730,6 @@ function updateUser(data) {
       if (err) {
         return reject(err);
       }
-      console.log(res.affectedRows + ' record(s) updated');
     });
   });
 }
@@ -1137,7 +1119,6 @@ function insertNewCoach(data) {
       data.email,
     ], function(err, rows) {
       if (err) {
-        console.log(err);
         return reject(err);
       }
       let id = rows.insertId;
@@ -1145,13 +1126,12 @@ function insertNewCoach(data) {
       connection.query(
           insertAccount, [
             data.username,
-            decryptedPassword,
+            data.password,
             level,
             id,
           ],
           function(err) {
             if (err) {
-              console.log(err);
               return reject(err);
             }
             return resolve('The coach account was inserted successfully');
@@ -1168,8 +1148,6 @@ function insertNewAdmin(data) {
     const insertAdmin = 'INSERT INTO OWNER(Name, Surname, Bdate, Gender, Email) VALUES (?, ?, ?, ?, ?)';
     const insertAccount = 'INSERT INTO ACCOUNT(username , password, level, Owner_ID) VALUES (?, ?, ?, ?)';
 
-    const cryptr = new Crypto('ffn_private_key_!!!!');
-    const decryptedPassword = cryptr.decrypt(data.password);
 
     connection.query(insertAdmin, [
       data.fname,
@@ -1179,7 +1157,6 @@ function insertNewAdmin(data) {
       data.email,
     ], function(err, rows) {
       if (err) {
-        console.log(err);
         return reject(err);
       }
       let id = rows.insertId;
@@ -1187,13 +1164,12 @@ function insertNewAdmin(data) {
       connection.query(
           insertAccount, [
             data.username,
-            decryptedPassword,
+            data.password,
             level,
             id,
           ],
           function(err) {
             if (err) {
-              console.log(err);
               return reject(err);
             }
             return resolve('The admin account was inserted successfully');
