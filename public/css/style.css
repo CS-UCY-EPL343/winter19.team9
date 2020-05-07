@@ -338,3 +338,8 @@ button:disabled {
     content        : '';
     pointer-events : none;
 }
+
+/* Sweet Alert */
+.swal2-popup {
+    background-color: #19191a !important;
+}

@@ -8,14 +8,14 @@ function dbConnect() {
       return reject();
     }
     conn = mysql.createConnection({
-      // host    : 'dione.in.cs.ucy.ac.cy',
-      // user    : 'ffndb',
-      // password: '3dwaxQvnSDPpVjJS',
-      // database: 'ffndb',
-      host    : 'ffndb.mysql.database.azure.com',
-      user    : 'ffn_root@ffndb',
-      password: 'mavroS1234!',
+      host    : 'dione.in.cs.ucy.ac.cy',
+      user    : 'ffndb',
+      password: '3dwaxQvnSDPpVjJS',
       database: 'ffndb',
+      // host    : 'ffndb.mysql.database.azure.com',
+      // user    : 'ffn_root@ffndb',
+      // password: 'mavroS1234!',
+      // database: 'ffndb',
     });
 
     conn.connect((err) => {
@@ -725,7 +725,7 @@ function getUser_ID(email) {
 function updateUser(data) {
   return new Promise((resolve, reject) => {
     const update = 'UPDATE USERS SET Token =? WHERE User_ID = ?';
-    connection.query(update, [data.token, data.id.User_ID], function(err, res) {
+    connection.query(update, [data.token, data.id.User_ID], function(err) {
       if (err) {
         return reject(err);
       }
