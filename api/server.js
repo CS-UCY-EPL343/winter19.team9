@@ -182,7 +182,7 @@ app.post('/api/verifyEmail/:id', (req, res) => {
                 res.send('Success verify.');
             })
             .catch(() => {
-                return res.status(409).json('Authentication failed. User not found.');
+                res.status(409).json('Authentication failed. User not found.');
             });
     }
 });

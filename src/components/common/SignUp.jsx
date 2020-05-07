@@ -160,8 +160,19 @@ class SignUp extends React.Component {
                       'error',
                   ).then(() => {
                   }).catch(() => Swal.fire(
-                      'Something go wrong!!',
+                      'Something went wrong!!',
                       'Please try again...',
+                      'error',
+                  ));
+                } else if(this.state.formData.age < 13){
+                  Swal.fire(
+                      'You must be over 13 to able to sign up!!!',
+                      '',
+                      'error',
+                  ).then(() => {
+                  }).catch(() => Swal.fire(
+                      'Something went wrong ',
+                      '',
                       'error',
                   ));
                 } else {
