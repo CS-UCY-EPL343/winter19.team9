@@ -5,6 +5,7 @@ import React, {Component} from "react";
 import '../assets/styles/resetPassword.css';
 import {resetPass} from "../../repository";
 import Swal from "sweetalert2";
+import history from '../../history';
 
 class ResetPassword extends Component {
     constructor(props) {
@@ -56,9 +57,33 @@ class ResetPassword extends Component {
                 password: hashCode,
             };
             resetPass(data)
-                .then(() => console.log("HERE"))
-                .catch(()=> console.log("catch"))
-                .finally(()=> console.log("blabla"));
+                .then((response) => {
+                    if (response === 'Success reset') {
+                        Swal.fire(
+                            'Your credential have successfully changed',
+                            '',
+                            'success',
+                        ).then(() => {
+                            history.push('/');
+                        })
+                    } else if(response === 'Wrong username'){
+                        Swal.fire(
+                            'Wrong username',
+                            'Please try again...',
+                            'error',
+                        ).then();
+                    }else if(response === 'Password expired'){
+                        Swal.fire(
+                            'The link has expired',
+                            'Please try request another one.',
+                            'error',
+                        ).then();
+                    }
+                }).catch(() => Swal.fire(
+                'Something went wrong',
+                'Please try again...',
+                'error',
+            ));
         }
     };
 

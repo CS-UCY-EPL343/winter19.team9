@@ -564,20 +564,14 @@ export function lastVerify(data) {
 
 export function newPassword(data) {
   return axios.post(`${ BASE_URL }/api/reset-password`, data)
-      // .then(response => response.data);
-      .then(response => {
-        localStorage.setItem('x-access-token', response.data.token);
-        // noinspection JSCheckFunctionSignatures
-        localStorage.setItem('x-access-token-expiration',
-            Date.now() + 2 * 60 * 60 * 1000);
-      });
-
+      .then(response => response.data )
+      .catch(()=> Promise.reject('Reset password Failed'))
 }
 
 export function resetPass(data) {
   return axios.post(`${ BASE_URL }/api/resetPassword/:id`, data)
       .then(response => response.data)
-      .catch(() => Promise.reject('Failed to reset Password'));
+      .catch(() => Promise.reject('Failed to reset Password'))
 }
 
 export function sendEmail(data) {
@@ -597,7 +591,6 @@ export function getCoachInfo(coachID) {
       .catch(() => Promise.reject('Authentication Failed!'));
 }
 
-// Melios
 export function getMessagesMelios(username) {
   return axios.post(`${ BASE_URL }/api/messages/get2`, {
     'x-access-token': localStorage.getItem('x-access-token'),
