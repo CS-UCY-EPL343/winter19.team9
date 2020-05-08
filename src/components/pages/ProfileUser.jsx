@@ -7,7 +7,7 @@ import BookClass                           from '../common/BookClass';
 import Timetable
                                            from '../common/EnrolledClassSchedule';
 // noinspection ES6CheckImport
-import {NavLink, Redirect}                 from 'react-router-dom';
+import {Redirect}                 from 'react-router-dom';
 import {loggedInVisit, updateProfileVisit} from '../../repository';
 
 class ProfileUser extends Component {
@@ -67,14 +67,14 @@ class ProfileUser extends Component {
     return (
 
         <div id = 'profile' className = "main-container container-fluid">
-          { (navigator.userAgent.match(/Android/i)) &&
-            <NavLink to = "/"
-                     className = { 'logout btn btn-danger text-uppercase d-flex justify-content-center' }
-                     onClick = { this.onLogOut }
-            >
-              Logout <i className = "fas fa-sign-out-alt" />
-            </NavLink>
-          }
+          {/*{ (navigator.userAgent.match(/Android/i)) &&*/}
+          {/*  <NavLink to = "/"*/}
+          {/*           className = { 'logout btn btn-danger text-uppercase d-flex justify-content-center' }*/}
+          {/*           onClick = { this.onLogOut }*/}
+          {/*  >*/}
+          {/*    Logout <i className = "fas fa-sign-out-alt" />*/}
+          {/*  </NavLink>*/}
+          {/*}*/}
           { (this.props.userLevel === 'user') ? '' :
               <Redirect to = "/" /> }
 
