@@ -7,14 +7,19 @@ class PageWrapper extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {isBrowser: false, isAndroid: false};
+    this.state = {
+      isBrowser: false,
+      isAndroid: false,
+      width    : window.innerWidth,
+      height   : window.innerHeight,
+    };
   }
 
   componentDidMount() {
     this.handleClick();
 
     // Opera 8.0+
-    // noinspection JSUnresolvedVariable
+    // noinspection JSUnresolvedVariable,DuplicatedCode
     let isOpera = (!!window.opr) || !!window.opera
                   || navigator.userAgent.indexOf(' OPR/') >= 0;
     // Firefox 1.0+
@@ -38,7 +43,8 @@ class PageWrapper extends Component {
                                        || !!window.chrome.runtime);
     // Edge (based on chromium) detection
     // noinspection EqualityComparisonWithCoercionJS
-    let isEdgeChromium = isChrome && (navigator.userAgent.indexOf('Edg') !== -1);
+    let isEdgeChromium = isChrome && (navigator.userAgent.indexOf('Edg')
+                                      !== -1);
     // Blink engine detection
     let isBlink = (isChrome || isOpera) && !!window.CSS;
 
@@ -47,7 +53,39 @@ class PageWrapper extends Component {
                  || isEdgeChromium || isBlink,
       isAndroid: navigator.userAgent.match(/Android/i),
     });
+
+    this.handleJSCode();
   }
+
+  handleJSCode = () => {
+    // -------------------------------------------- Window Change
+// ---------------------------------------------------------// Check scrolling
+    window.onscroll = function() {
+      scrollFunction();
+    };
+
+    /**
+     * When the user scrolls down 20px from the top of the document, show the
+     * button and NavBar Background
+     */
+    function scrollFunction() {
+      if (document.body.scrollTop > 50 || document.documentElement.scrollTop
+          > 50) {
+        if (window.innerWidth > 500) {
+          document.getElementById('to-top').style.display = 'block';
+          document.getElementById('mainNav').style.backgroundColor = '#353535';
+        } else {
+          document.getElementById('to-top').style.display = 'none';
+          document.getElementById('mainNav').style.backgroundColor =
+              'transparent';
+        }
+      } else {
+        document.getElementById('to-top').style.display = 'none';
+        document.getElementById('mainNav').style.backgroundColor =
+            'transparent';
+      }
+    }
+  };
 
   handleClick = () => {
     // Scroll to top
