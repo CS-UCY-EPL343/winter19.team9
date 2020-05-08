@@ -30,8 +30,6 @@ class MessageNewModal extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-            console.log("User_ID ");
-            console.log(this.props.user_ID);
             if (!this.state.title || !this.state.message || !this.state.contact) {
                 Swal.fire(
                     'Please fill in all boxes',
@@ -42,7 +40,7 @@ class MessageNewModal extends Component {
             }
             this.props.onSubmit(e, this.state.title, this.state.message,
                 this.state.contact);
-            this.setState({title: '', message: '', contact: ''});
+            // this.setState({title: '', message: '', contact: ''});
 
     };
 

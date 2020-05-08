@@ -18,6 +18,7 @@ class MessagesModal extends Component {
       messages: [],
       newModal: false,
       loading : [true, true],
+      user_ID : '',
     };
     this.toggle = this.toggle.bind(this);
     this.onMessageSubmit = this.onMessageSubmit.bind(this);
