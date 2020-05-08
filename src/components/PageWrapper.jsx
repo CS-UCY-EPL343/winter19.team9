@@ -55,9 +55,9 @@ class PageWrapper extends Component {
 
   handleJSCode = () => {
     // Dont do this on Android
-    if (!this.state.isBrowser && this.state.isAndroid) {
-      return;
-    }
+    // if (!this.state.isBrowser && this.state.isAndroid) {
+    //   return;
+    // }
     let isBrowser = this.state.isBrowser;
     let isAndroid = this.state.isAndroid;
     // -------------------------------------------- Window Change
@@ -66,31 +66,32 @@ class PageWrapper extends Component {
       scrollFunction(isBrowser, isAndroid);
     };
 
+    // noinspection JSUnusedLocalSymbols
     /**
      * When the user scrolls down 20px from the top of the document, show the
      * button and NavBar Background
      */
     function scrollFunction(isBrowser, isAndroid) {
-      if (isBrowser && !isAndroid) {
-        if (document.body.scrollTop > 50 || document.documentElement.scrollTop
-            > 50) {
-          if (window.innerWidth > 500 &&
-              !!document.getElementById('to-top') &&
-              !!document.getElementById('mainNav')) {
-            document.getElementById('to-top').style.display = 'block';
-            document.getElementById('mainNav').style.backgroundColor =
-                '#353535';
-          } else {
-            document.getElementById('to-top').style.display = 'none';
-            document.getElementById('mainNav').style.backgroundColor =
-                'transparent';
-          }
+      // if (isBrowser && !isAndroid) {
+      if (document.body.scrollTop > 50 || document.documentElement.scrollTop
+          > 50) {
+        if (window.innerWidth > 500 &&
+            !!document.getElementById('to-top') &&
+            !!document.getElementById('mainNav')) {
+          document.getElementById('to-top').style.display = 'block';
+          document.getElementById('mainNav').style.backgroundColor =
+              '#353535';
         } else {
           document.getElementById('to-top').style.display = 'none';
           document.getElementById('mainNav').style.backgroundColor =
               'transparent';
         }
+      } else {
+        document.getElementById('to-top').style.display = 'none';
+        document.getElementById('mainNav').style.backgroundColor =
+            'transparent';
       }
+      // }
     }
 
     this.handleClick();
@@ -125,17 +126,17 @@ class PageWrapper extends Component {
                backgroundColor: '#1B1B1B',
              } }
         >
-          { this.state.isBrowser && !this.state.isAndroid &&
-            <Navigation userLevel = { this.props.userLevel }
-                        setUserLevel = { this.props.setUserLevel }
-            />
-          }
+          {/*{ this.state.isBrowser && !this.state.isAndroid &&*/ }
+          <Navigation userLevel = { this.props.userLevel }
+                      setUserLevel = { this.props.setUserLevel }
+          />
+          {/*}*/ }
           <div style = { {flex: '1'} }>
             { childrenWithProps }
           </div>
-          { this.state.isBrowser && !this.state.isAndroid &&
-            <Footer stylesheetData = { this.props.stylesheetData['Footer'] } />
-          }
+          {/*{ this.state.isBrowser && !this.state.isAndroid &&*/ }
+          <Footer stylesheetData = { this.props.stylesheetData['Footer'] } />
+          {/*}*/ }
 
           {/* Back To Top Button */ }
           <button data-hash = "top-of-page"

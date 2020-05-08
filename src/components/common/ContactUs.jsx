@@ -182,7 +182,7 @@ class ContactUs extends Component {
             <div className = "row">
               <div className = "col-lg-6 col-md-12 col-sm-12">
                 <h2>Contact Information</h2>
-                <p>
+                <p style={{marginLeft: 0}}>
                   { ' ' }
                   Address: { this.props.contact.address }
                   <br />
@@ -192,7 +192,7 @@ class ContactUs extends Component {
                   <br />
                 </p>
                 <br />
-                <p>
+                <p style={{marginLeft: 0}}>
                   <a href = { this.props.contact.facebook }>
                     <i className = "fa fa-facebook" />
                   </a>

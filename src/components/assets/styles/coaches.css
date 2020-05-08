@@ -96,6 +96,18 @@ img::-moz-selection {
     list-style : none;
 }
 
+@media (max-width: 450px) {
+    .timeline {
+        padding: 0;
+    }
+    .timeline:before {
+        display: none;
+    }
+    .timeline:before {
+        display: none;
+    }
+}
+
 .timeline:before {
     position         : absolute;
     top              : 0;

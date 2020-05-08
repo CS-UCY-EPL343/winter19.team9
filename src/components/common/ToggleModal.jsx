@@ -34,7 +34,8 @@ export default class ToggleModal extends React.Component {
                                        || !!window.chrome.runtime);
     // Edge (based on chromium) detection
     // noinspection EqualityComparisonWithCoercionJS
-    let isEdgeChromium = isChrome && (navigator.userAgent.indexOf('Edg') !== -1);
+    let isEdgeChromium = isChrome && (navigator.userAgent.indexOf('Edg')
+                                      !== -1);
     // Blink engine detection
     let isBlink = (isChrome || isOpera) && !!window.CSS;
 
@@ -61,12 +62,12 @@ export default class ToggleModal extends React.Component {
                 ...this.props,
               }) }
             </ModalBody>
-            { this.state.isBrowser && !this.state.isAndroid &&
-              <ModalFooter>
-                <Button onClick = { this.props.toggle }>{ this.props.btnCancel
-                                                          || 'Cancel' }</Button>
-              </ModalFooter>
-            }
+            {/*{ this.state.isBrowser && !this.state.isAndroid &&*/ }
+            <ModalFooter>
+              <Button onClick = { this.props.toggle }>{ this.props.btnCancel
+                                                        || 'Cancel' }</Button>
+            </ModalFooter>
+            {/*}*/ }
           </Modal>
         </div>
     );
