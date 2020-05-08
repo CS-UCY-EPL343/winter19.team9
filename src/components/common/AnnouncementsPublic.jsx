@@ -55,6 +55,24 @@ class AnnouncementsPublic extends Component {
     });
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.props.userLevel !== prevProps.userLevel) {
+      console.log('F')
+      let l = 0;
+      if (isAuthenticated()) {
+        const level = this.props.userLevel;
+        if (level === 'user') {
+          l = 1;
+        } else if (level === 'coach') {
+          l = 2;
+        } else if (level === 'admin') {
+          l = 3;
+        }
+      }
+      this.setState({level: l});
+    }
+  }
+
   componentWillUnmount() {
     this._isMounted = false;
   }

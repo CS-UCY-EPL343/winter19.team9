@@ -123,3 +123,15 @@
 #AnnouncementsPub .ann-card:focus::before, #AnnouncementsPub .ann-card:focus::after {
     transform : scale3d(1, 1, 1);
 }
+
+@media (max-width : 415px) {
+    #AnnouncementsPub .ann-title {
+        font-size: 32px !important;
+    }
+}
+
+@media (max-width : 365px) {
+    #AnnouncementsPub .ann-title {
+        font-size: 22px !important;
+    }
+}

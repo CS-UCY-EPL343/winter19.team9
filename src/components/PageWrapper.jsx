@@ -16,8 +16,6 @@ class PageWrapper extends Component {
   }
 
   componentDidMount() {
-    this.handleClick();
-
     // Opera 8.0+
     // noinspection JSUnresolvedVariable,DuplicatedCode
     let isOpera = (!!window.opr) || !!window.opera
@@ -51,40 +49,51 @@ class PageWrapper extends Component {
     this.setState({
       isBrowser: isOpera || isFirefox || isSafari || isIE || isEdge || isChrome
                  || isEdgeChromium || isBlink,
-      isAndroid: navigator.userAgent.match(/Android/i),
-    });
-
-    this.handleJSCode();
+      isAndroid: !!(navigator.userAgent.match(/Android/i)),
+    }, () => this.handleJSCode());
   }
 
   handleJSCode = () => {
+    // Dont do this on Android
+    if (!this.state.isBrowser && this.state.isAndroid) {
+      return;
+    }
+    let isBrowser = this.state.isBrowser;
+    let isAndroid = this.state.isAndroid;
     // -------------------------------------------- Window Change
 // ---------------------------------------------------------// Check scrolling
     window.onscroll = function() {
-      scrollFunction();
+      scrollFunction(isBrowser, isAndroid);
     };
 
     /**
      * When the user scrolls down 20px from the top of the document, show the
      * button and NavBar Background
      */
-    function scrollFunction() {
-      if (document.body.scrollTop > 50 || document.documentElement.scrollTop
-          > 50) {
-        if (window.innerWidth > 500) {
-          document.getElementById('to-top').style.display = 'block';
-          document.getElementById('mainNav').style.backgroundColor = '#353535';
+    function scrollFunction(isBrowser, isAndroid) {
+      if (isBrowser && !isAndroid) {
+        if (document.body.scrollTop > 50 || document.documentElement.scrollTop
+            > 50) {
+          if (window.innerWidth > 500 &&
+              !!document.getElementById('to-top') &&
+              !!document.getElementById('mainNav')) {
+            document.getElementById('to-top').style.display = 'block';
+            document.getElementById('mainNav').style.backgroundColor =
+                '#353535';
+          } else {
+            document.getElementById('to-top').style.display = 'none';
+            document.getElementById('mainNav').style.backgroundColor =
+                'transparent';
+          }
         } else {
           document.getElementById('to-top').style.display = 'none';
           document.getElementById('mainNav').style.backgroundColor =
               'transparent';
         }
-      } else {
-        document.getElementById('to-top').style.display = 'none';
-        document.getElementById('mainNav').style.backgroundColor =
-            'transparent';
       }
     }
+
+    this.handleClick();
   };
 
   handleClick = () => {

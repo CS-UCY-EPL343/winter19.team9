@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import '../assets/styles/PersonalTrainingTimetable.css';
 import {
-  insertPT, deletePT, getCoachTraining, getClassSchedule, getPersonalSchedule, getCoachClasses,
+  insertPT, deletePT, getCoachTraining, getClassSchedule, getPersonalSchedule,
 } from '../../repository';
 import Swal               from "sweetalert2";
 

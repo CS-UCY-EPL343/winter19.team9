@@ -20,8 +20,6 @@ import {
 }                                from '../../repository';
 import AnnouncementModal         from '../common/AnnouncementModal';
 import {Button}                  from 'reactstrap';
-import Box                       from '../common/SelectionPT';
-import Timetable                 from '../common/PersonalTrainingCreate';
 import AnnouncementsPrivateModal from '../common/AnnouncementsPrivateModal';
 import Swal                      from 'sweetalert2';
 import '@sweetalert2/theme-dark/dark.css';
@@ -222,6 +220,7 @@ class ProfileAdmin extends Component {
     return flag;
   };
 
+  // noinspection DuplicatedCode
   onAnnouncementSubmit2 = async(Title, Message) => {
     if (this.state.level <= 1) {
       Swal.fire(

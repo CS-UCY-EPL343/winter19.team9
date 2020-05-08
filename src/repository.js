@@ -273,7 +273,7 @@ export function getPageVisits() {
 export function allVisitCount() {
   return axios.get(`${ BASE_URL }/api/visit/count`)
       .then(response => response.data)
-      .catch(() => Promise.reject('HomePage Count Failed!!!'));
+      .catch(() => {});
 }
 
 export function loggedInVisit() {
@@ -286,34 +286,29 @@ export function loggedInVisit() {
 export function updateAboutUsVisit() {
   return axios.post(`${ BASE_URL }/api/AboutUs/visit/count`)
       .then(response => response.data)
-      .catch(() => Promise.reject('HomePage Count Failed!!!'));
-}
+      .catch(() => {});}
 
 export function updateClassesVisit() {
   return axios.post(`${ BASE_URL }/api/Classes/visit/count`)
       .then(response => response.data)
-      .catch(() => Promise.reject('HomePage Count Failed!!!'));
-}
+      .catch(() => {});}
 
 export function updateProfileVisit() {
   return axios.post(`${ BASE_URL }/api/profile/visit/count`,
       {'x-access-token': localStorage.getItem('x-access-token')})
       .then(response => response.data)
-      .catch(() => Promise.reject('Profile Count Failed!!!'));
-}
+      .catch(() => {});}
 
 export function updateDashboardVisit() {
   return axios.post(`${ BASE_URL }/api/dashboard/visit/count`,
       {'x-access-token': localStorage.getItem('x-access-token')})
       .then(response => response.data)
-      .catch(() => Promise.reject('Profile Count Failed!!!'));
-}
+      .catch(() => {});}
 
 export function updateHomePageVisit() {
   return axios.post(`${ BASE_URL }/api/homepage/visit/count`)
       .then(response => response.data)
-      .catch(() => Promise.reject('HomePage Count Failed!!!'));
-}
+      .catch(() => {});}
 
 export function insertCoach(data) {
   return axios.post(`${ BASE_URL }/api/coach/insert`, data)
