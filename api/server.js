@@ -208,7 +208,8 @@ app.post('/api/auth', (req, res) => {
 });
 // noinspection JSUnresolvedFunction
 app.post('/api/verify', (req,res) => {
-    db.isVerified(req.body.username)
+    // noinspection JSUnresolvedFunction
+  db.isVerified(req.body.username)
         .then(() => {
             res.send('Already Verified');
         })

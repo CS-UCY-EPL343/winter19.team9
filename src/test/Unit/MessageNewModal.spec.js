@@ -1,14 +1,9 @@
 import React from 'react';
 import {fireEvent, render} from '@testing-library/react';
 import MessagesNewModalForm from '../../components/common/MessagesNewModalForm';
-import MessagesNewModal from "../../components/common/MessageNewModal";
 
 function ByPass(props) {
     return <MessagesNewModalForm {...props} />;
-}
-
-function ByPass2(props) {
-    return <MessagesNewModal {...props} />;
 }
 
 describe('<MessagesNewModalForm />', () => {

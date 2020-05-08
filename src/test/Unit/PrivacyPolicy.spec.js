@@ -8,13 +8,8 @@ function ByPass(props) {
 
 describe('<PrivacyPolicy />', () => {
     it('renders correctly', () => {
-        const StaffList = {};
+        const {container} = render(<ByPass />);
 
-        const {container} = render(<ByPass
-
-        />);
         expect(container.firstChild).toBeTruthy();
-
     });
-
 });

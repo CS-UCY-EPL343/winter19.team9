@@ -227,6 +227,7 @@ class PersonalTrainingCreate extends Component {
 
         this.setState({coachName: coachName});
         // this.setState({Coach_ID: coachID});
+        // noinspection JSUnresolvedFunction
         this.props.coachIDret(coachID);
 
 

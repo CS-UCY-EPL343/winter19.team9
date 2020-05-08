@@ -8,12 +8,8 @@ function ByPass(props) {
 
 describe('<SignInUpModal />', () => {
     it('renders correctly', () => {
-        const SignInUpModal = {};
+        const {container} = render(<ByPass />);
 
-        const {container} = render(<ByPass
-
-        />);
         expect(container.firstChild).toBeTruthy();
     });
-
 });

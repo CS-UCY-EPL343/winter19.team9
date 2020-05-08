@@ -8,7 +8,6 @@ function ByPass(props) {
 
 describe('<Graphs />', () => {
     it('renders correctly', () => {
-        let ys;
         const {container} = render(<ByPass testLoading={true}/>);
         expect(container.firstChild).toHaveClass('charts');
     });

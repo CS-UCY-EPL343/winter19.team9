@@ -8,13 +8,8 @@ function ByPass(props) {
 
 describe('<Timetable />', () => {
     it('renders correctly', () => {
-        const Timetable = {};
+        const {container} = render(<ByPass />);
 
-        const {container} = render(<ByPass
-
-        />);
         expect(container.firstChild).toBeTruthy();
-
     });
-
 });

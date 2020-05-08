@@ -168,6 +168,7 @@ class ProfileAdmin extends Component {
     return flag;
   };
 
+  // noinspection DuplicatedCode
   onAnnouncementDelete = async(ANNOUNCEMENT_ID) => {
     if (this.state.level <= 1) {
       Swal.fire(

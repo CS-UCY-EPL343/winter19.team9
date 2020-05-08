@@ -8,12 +8,8 @@ function ByPass(props) {
 
 describe('<SettingsProfile />', () => {
     it('renders correctly', () => {
-        const SettingsProfile = {};
+        const {container} = render(<ByPass />);
 
-        const {container} = render(<ByPass
-
-        />);
         expect(container.firstChild).toHaveClass('col-lg-4 col-md-12 col-sm-12');
     });
-
 });
