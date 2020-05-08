@@ -5,8 +5,9 @@ import '../assets/styles/loginStyle.css';
 import 'react-bootstrap/';
 import Recaptcha          from 'react-recaptcha';
 
-import {logIn, signUp} from '../../repository';
+import {isVerified, logIn, logOut, signUp} from '../../repository';
 import history         from '../../history';
+import Swal from "sweetalert2";
 
 class LoginModal extends Component {
   constructor(props) {
@@ -28,6 +29,8 @@ class LoginModal extends Component {
       isVerified      : false,
       userVerify      : '',
       token           : '',
+      Verify          :0,
+
     };
     this.handleChange = this.handleChange.bind(this);
     this.onRadioChange = this.onRadioChange.bind(this);
@@ -61,23 +64,17 @@ class LoginModal extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const crypto = require('crypto');
     // noinspection JSUnusedLocalSymbols
     // const newToken = crypto.randomBytes(10).toString('hex');
 
-    const Crypto = require('cryptr');
-    const cryptr = new Crypto('ffn_private_key_!!!!');
-
-    // noinspection JSUnusedLocalSymbols
-    crypto.createHmac('sha256', this.state.password)
-        .update('I love cupcakes')
+    const crypto = require('crypto');
+    const hashCode = crypto.createHmac('sha256', 'ffn_private_key_!!!!')
+        .update(this.state.password)
         .digest('hex');
-
-    const encryptedString = cryptr.encrypt(this.state.password);
 
     const dataLogIn = {
       username: this.state.username,
-      password: encryptedString,
+      password: hashCode,
     };
     // console.log(this.state.password,  this.state.username);
     logIn(dataLogIn)
@@ -85,8 +82,37 @@ class LoginModal extends Component {
           if (!data.level) {
             throw Error;
           }
+          // Success
+          this.setState({
+              username: '',
+              password: '',
+          }, () => {
+            if(data.level==='user'){
+              isVerified().then(d => {
+                this.setState({Verify : d.Verify.data[0]},
+                    () => {
+                      if(this.state.Verify === 1){
+                        this.props.toggleModal();
+                        this.props.setUserLevel(data.level);
+                        history.push('/user/profile');
+                      }else{
+                        Swal.fire(
+                            'This Account is not Verified yet!!',
+                            'Please go and verify it!!',
+                            'warning',
+                        ).then(() => {logOut();});
+                      }
+                    });
+              });
+            }else{
+              this.props.toggleModal();
+              this.props.setUserLevel(data.level);
+              history.push('/' + data.level + '/profile');
+            }
+          });
           this.props.toggle();    // Close Modal
           this.props.setUserLevel(data.level);
+
           history.push('/user/profile');
         })
         .catch(err => alert(err));

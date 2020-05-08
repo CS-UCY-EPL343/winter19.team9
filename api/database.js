@@ -12,10 +12,10 @@ function dbConnect() {
       user    : 'ffndb',
       password: '3dwaxQvnSDPpVjJS',
       database: 'ffndb',
-      //host    : 'ffndb.mysql.database.azure.com',
-      //user    : 'ffn_root@ffndb',
-      //password: 'mavroS1234!',
-      //database: 'ffndb',
+      // host    : 'ffndb.mysql.database.azure.com',
+      // user    : 'ffn_root@ffndb',
+      // password: 'mavroS1234!',
+      // database: 'ffndb',
     });
 
     conn.connect((err) => {
