@@ -111,6 +111,10 @@
     margin-bottom : 45px;
 }
 
+#our-services .service-box-content p {
+    text-align: justify;
+}
+
 #our-services .service-box-icon {
     color         : #D90429;
     margin-bottom : 10px;

@@ -58,6 +58,7 @@
 
 #about p.text-muted {
     color : #AAAAAA !important;
+    text-align: justify;
 }
 
 @media (min-width : 768px) {
