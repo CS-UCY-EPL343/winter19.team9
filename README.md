@@ -4,7 +4,7 @@ This web application is a website developed for the company Fitness Factory Nico
 supports both front-end and back-end functionality. 
 
 #### Deployment link: 
-[https://ffnfinal.web.app/](https://ffnfinal.web.app/)
+[https://ffnfinal-21fa1.web.app/](https://ffnfinal-21fa1.web.app/)
 ##### The web application is also responsive and operates normally on mobile devices
 
 ## Getting Started
