@@ -40,6 +40,10 @@ class SelectionPTCoach extends Component {
 
 
     onSubmit = () => {
+        if(this.props.testSubmit) {
+            this.props.testSubmit('Testing');
+            return;
+        }
         if (this.state.selectionTime === '' || this.state.selectionDay === ''){
             Swal.fire(
                 'Required selections are empty',
@@ -60,6 +64,10 @@ class SelectionPTCoach extends Component {
     };
 
     onDelete = () => {
+        if(this.props.testSubmit) {
+            this.props.testSubmit('Testing');
+            return;
+        }
         if (this.state.selectionTime === '' || this.state.selectionDay === ''){
             Swal.fire(
                 'Required selections are empty',
@@ -139,10 +147,10 @@ class SelectionPTCoach extends Component {
                     </div>
                     <div className="row">
                         <div className="col-md-6 RowBlock">
-                            <button type="button" className="RowButton" onClick={this.onSubmit}>Submit</button>
+                            <button data-testid={'button'} type="button" className="RowButton" onClick={this.onSubmit}>Submit</button>
                         </div>
                         <div className="col-md-6 RowBlock">
-                            <button type="button" className="RowButton" onClick={this.onDelete}>Delete</button>
+                            <button data-testid={'delete-button'} type="button" className="RowButton" onClick={this.onDelete}>Delete</button>
                         </div>
                     </div>
                 </form>

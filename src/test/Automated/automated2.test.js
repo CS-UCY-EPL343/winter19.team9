@@ -37,7 +37,7 @@ describe('Login', function() {
     });
   });
 
-  context.skip('Unsuccessful Login', function() {
+  context('Unsuccessful Login', function() {
     // noinspection JSUnresolvedFunction
     it('Wrong Username ', function(done) {
       driver.findElement(By.css('input[name="username"]'))
@@ -129,7 +129,7 @@ describe('Login', function() {
   });
 });
 // noinspection NodeModulesDependencies,ES6ModulesDependencies
-describe.skip('Public Announcements', function() {
+describe('Public Announcements', function() {
   this.timeout(30000);
 
   // noinspection JSUnresolvedFunction

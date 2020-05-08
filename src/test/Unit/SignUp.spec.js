@@ -70,7 +70,6 @@ describe('<SignUp />', () => {
             expect(name).toHaveValue(data.name);
             expect(surname).toHaveValue(data.surname);
             expect(email).toHaveValue(data.email);
-            // expect(bdate).toHaveValue(data.bdate);
             expect(username).toHaveValue(data.username);
             expect(password).toHaveValue(data.password);
             expect(confirm_password).toHaveValue(data.confirm_password);
@@ -79,7 +78,6 @@ describe('<SignUp />', () => {
 
     it('Submit-Button', () => {
         const testSubmit = jest.fn();
-
         const {queryByTestId} = render(
             <ByPass testLoading={true} testSubmit={testSubmit}
             />);

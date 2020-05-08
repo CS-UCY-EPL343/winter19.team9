@@ -62,6 +62,7 @@ class MessagesModalAdminCoach extends Component {
 
   onMessageSubmit = (e, title, message, contact) => {
     e.preventDefault();
+
     createNewMessage({title, message, contact}).then(response => {
       this.toggle();
       let newArr = this.state.messages.slice(0);
