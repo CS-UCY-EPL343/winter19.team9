@@ -316,7 +316,6 @@ class ProfileCoach extends Component {
             }, () => {
                 getAccountID(this.state.username).then(response => {
                     this.setState({userAccountID: response.AccountID}, () =>{
-                        console.log(response.AccountID);
                     })
                 });
             });
