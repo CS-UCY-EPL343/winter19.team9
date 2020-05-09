@@ -3,7 +3,6 @@ import '../assets/styles/About.css';
 import {sendEmail}        from '../../repository';
 import ButtonLoader       from './ButtonLoader';
 import Swal               from 'sweetalert2';
-import '@sweetalert2/theme-dark/dark.css';
 
 class ContactUs extends Component {
   constructor(props) {

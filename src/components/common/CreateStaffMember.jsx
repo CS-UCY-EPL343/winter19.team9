@@ -11,7 +11,6 @@ import FormControl
                                                 from '@material-ui/core/FormControl';
 import Recaptcha                                from 'react-recaptcha';
 import Swal                                     from 'sweetalert2';
-import '@sweetalert2/theme-dark/dark.css';
 import '../assets/styles/SignInUp.css';
 import {insertAdmin, insertCoach, sameUsername} from '../../repository';
 

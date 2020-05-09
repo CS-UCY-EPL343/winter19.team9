@@ -20,7 +20,6 @@ import Box                       from '../common/SelectionPTCoach';
 import Timetable                 from '../common/CoachSchedule';
 import AnnouncementsPrivateModal from '../common/AnnouncementsPrivateModal';
 import Swal                      from 'sweetalert2';
-import '@sweetalert2/theme-dark/dark.css';
 import ButtonLoader              from '../common/ButtonLoader';
 import ToggleModal               from '../common/ToggleModal';
 import MessagesModalAdminCoach   from '../common/MessagesModalAdminCoach';

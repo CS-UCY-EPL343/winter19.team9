@@ -5,7 +5,6 @@ import {logOut, userData, userPicByUsername} from '../../repository';
 import {postuserData}                        from '../../repository';
 import {deleteUserData}                      from '../../repository';
 import Swal                                  from 'sweetalert2';
-import '@sweetalert2/theme-dark/dark.css';
 import Spinner                               from '../Spinner';
 import {AnimatedOnScroll}                    from 'react-animated-css-onscroll';
 import history from '../../history';

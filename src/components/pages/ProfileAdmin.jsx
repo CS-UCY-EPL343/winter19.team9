@@ -22,7 +22,6 @@ import AnnouncementModal         from '../common/AnnouncementModal';
 import {Button}                  from 'reactstrap';
 import AnnouncementsPrivateModal from '../common/AnnouncementsPrivateModal';
 import Swal                      from 'sweetalert2';
-import '@sweetalert2/theme-dark/dark.css';
 import ButtonLoader              from '../common/ButtonLoader';
 import Spinner                   from '../Spinner';
 import ToggleModal               from '../common/ToggleModal';

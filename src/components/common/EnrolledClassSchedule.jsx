@@ -13,7 +13,6 @@ import {
   unenrollUser,
 }                         from '../../repository';
 import Swal               from 'sweetalert2';
-import '@sweetalert2/theme-dark/dark.css';
 
 class EnrolledClassSchedule extends Component {
 

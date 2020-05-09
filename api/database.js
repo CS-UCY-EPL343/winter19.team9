@@ -801,21 +801,21 @@ function resetPassword(data) {
       } else {
         const expire = res[0].activeExpires;
         let today = Date.now();
-        if(expire >= today){
-        const user_id = res[0].User_ID;
-        const update = 'UPDATE ACCOUNT SET password =? WHERE User_ID = ? AND username=?';
-        connection.query(update, [data.password, user_id, data.username],
-            function(error, rows) {
-              if (error) {
-                return reject(error);
-              }
-              if (rows.affectedRows === 0) {
-                return reject('Wrong username');
-              }else{
-                return resolve('Success reset');
-              }
-            });
-      }else{
+        if (expire >= today) {
+          const user_id = res[0].User_ID;
+          const update = 'UPDATE ACCOUNT SET password =? WHERE User_ID = ? AND username=?';
+          connection.query(update, [data.password, user_id, data.username],
+              function(error, rows) {
+                if (error) {
+                  return reject(error);
+                }
+                if (rows.affectedRows === 0) {
+                  return reject('Wrong username');
+                } else {
+                  return resolve('Success reset');
+                }
+              });
+        } else {
           return reject('Password expired');
         }
       }

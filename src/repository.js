@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'https://europe-west1-ffnbackend-d46c6.cloudfunctions.net/app';
+const BASE_URL = 'http://localhost:5000';
 
 export function logIn(data) {
   return axios.post(`${ BASE_URL }/api/auth`, {

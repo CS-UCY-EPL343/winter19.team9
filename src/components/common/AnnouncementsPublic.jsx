@@ -7,7 +7,6 @@ import {AnimatedOnScroll} from 'react-animated-css-onscroll';
 import Announcement       from './Announcement';
 import AnnouncementModal  from './AnnouncementModal';
 import Swal               from 'sweetalert2';
-import '@sweetalert2/theme-dark/dark.css';
 import {
   getPublicAnnouncements,
   isAuthenticated,
@@ -45,19 +44,19 @@ class AnnouncementsPublic extends Component {
         l = 3;
       }
     }
-    this.setState({level: l});
-
-    getPublicAnnouncements().then(response => {
-      if (this._isMounted) {
-        this.setState(
-            {announcements: response.data.announcements});
-      }
+    this.setState({level: l}, () => {
+      getPublicAnnouncements().then(response => {
+        if (this._isMounted) {
+          this.setState(
+              {announcements: response.data.announcements});
+        }
+      });
     });
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (this.props.userLevel !== prevProps.userLevel) {
-      console.log('F')
+      console.log('F');
       let l = 0;
       if (isAuthenticated()) {
         const level = this.props.userLevel;
