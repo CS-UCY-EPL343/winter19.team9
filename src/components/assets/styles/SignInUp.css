@@ -332,9 +332,24 @@ form#signup, form#login {
     }
 }
 
+@media only screen and (max-width : 565px) {
+    form#signup, form#login {
+        width : 540px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 490px !important;
+    }
+}
+
 @media only screen and (max-width : 555px) {
     form#signup, form#login {
-        width : 520px !important;
+        width : 530px !important;
     }
     
     #signup > input,
@@ -347,9 +362,24 @@ form#signup, form#login {
     }
 }
 
+@media only screen and (max-width : 545px) {
+    form#signup, form#login {
+        width : 520px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 470px !important;
+    }
+}
+
 @media only screen and (max-width : 535px) {
     form#signup, form#login {
-        width : 500px !important;
+        width : 510px !important;
     }
     
     #signup > input,
@@ -362,9 +392,24 @@ form#signup, form#login {
     }
 }
 
+@media only screen and (max-width : 525px) {
+    form#signup, form#login {
+        width : 500px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 450px !important;
+    }
+}
+
 @media only screen and (max-width : 515px) {
     form#signup, form#login {
-        width : 480px !important;
+        width : 490px !important;
     }
     
     #signup > input,
@@ -377,9 +422,24 @@ form#signup, form#login {
     }
 }
 
+@media only screen and (max-width : 505px) {
+    form#signup, form#login {
+        width : 480px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 430px !important;
+    }
+}
+
 @media only screen and (max-width : 495px) {
     form#signup, form#login {
-        width : 460px !important;
+        width : 470px !important;
     }
     
     #signup > input,
@@ -392,9 +452,24 @@ form#signup, form#login {
     }
 }
 
+@media only screen and (max-width : 485px) {
+    form#signup, form#login {
+        width : 460px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 410px !important;
+    }
+}
+
 @media only screen and (max-width : 475px) {
     form#signup, form#login {
-        width : 440px !important;
+        width : 450px !important;
     }
     
     #signup > input,
@@ -407,9 +482,24 @@ form#signup, form#login {
     }
 }
 
-@media only screen and (max-width : 460px) {
+@media only screen and (max-width : 465px) {
     form#signup, form#login {
-        width : 420px !important;
+        width : 440px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 390px !important;
+    }
+}
+
+@media only screen and (max-width : 455px) {
+    form#signup, form#login {
+        width : 430px !important;
     }
     
     #signup > input,
@@ -422,9 +512,24 @@ form#signup, form#login {
     }
 }
 
-@media only screen and (max-width : 440px) {
+@media only screen and (max-width : 445px) {
     form#signup, form#login {
-        width : 400px !important;
+        width : 420px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 370px !important;
+    }
+}
+
+@media only screen and (max-width : 435px) {
+    form#signup, form#login {
+        width : 410px !important;
     }
     
     #signup > input,
@@ -437,9 +542,24 @@ form#signup, form#login {
     }
 }
 
-@media only screen and (max-width : 420px) {
+@media only screen and (max-width : 425px) {
     form#signup, form#login {
-        width : 380px !important;
+        width : 400px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 350px !important;
+    }
+}
+
+@media only screen and (max-width : 415px) {
+    form#signup, form#login {
+        width : 390px !important;
     }
     
     #signup > input,
@@ -452,9 +572,24 @@ form#signup, form#login {
     }
 }
 
-@media only screen and (max-width : 400px) {
+@media only screen and (max-width : 405px) {
     form#signup, form#login {
-        width : 360px !important;
+        width : 380px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 330px !important;
+    }
+}
+
+@media only screen and (max-width : 395px) {
+    form#signup, form#login {
+        width : 370px !important;
     }
     
     #signup > input,
@@ -467,10 +602,24 @@ form#signup, form#login {
     }
 }
 
-
-@media only screen and (max-width : 380px) {
+@media only screen and (max-width : 385px) {
     form#signup, form#login {
-        width : 340px !important;
+        width : 360px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 310px !important;
+    }
+}
+
+@media only screen and (max-width : 375px) {
+    form#signup, form#login {
+        width : 350px !important;
     }
     
     #signup > input,
@@ -483,7 +632,37 @@ form#signup, form#login {
     }
 }
 
-@media only screen and (max-width : 360px) {
+@media only screen and (max-width : 365px) {
+    form#signup, form#login {
+        width : 340px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 290px !important;
+    }
+}
+
+@media only screen and (max-width : 355px) {
+    form#signup, form#login {
+        width : 330px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 280px !important;
+    }
+}
+
+@media only screen and (max-width : 345px) {
     form#signup, form#login {
         width : 320px !important;
     }
@@ -494,6 +673,36 @@ form#signup, form#login {
     #login > textarea,
     #signup > .MuiTextField-root,
     #login > .MuiTextField-root {
-        width : 280px !important;
+        width : 270px !important;
+    }
+}
+
+@media only screen and (max-width : 335px) {
+    form#signup, form#login {
+        width : 310px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 260px !important;
+    }
+}
+
+@media only screen and (max-width : 325px) {
+    form#signup, form#login {
+        width : 300px !important;
+    }
+    
+    #signup > input,
+    #signup > textarea,
+    #login > input,
+    #login > textarea,
+    #signup > .MuiTextField-root,
+    #login > .MuiTextField-root {
+        width : 250px !important;
     }
 }
