@@ -834,7 +834,7 @@ function verifyUser(token) {
 
       const user = rows.length;
 
-      if (user === null) {
+      if (user === null || rows[0] === undefined) {
         return reject(err);
       } else {
         const user_id = rows[0].User_ID;

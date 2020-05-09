@@ -104,6 +104,7 @@ class Signup extends React.Component {
   };
 
   forgotPassword = () => {
+    this.props.toggleModal();
     history.push('/forgotPassword');
   };
 

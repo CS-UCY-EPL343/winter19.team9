@@ -197,12 +197,10 @@ class App extends Component {
                              path = "/forgotPassword"
                              component = { forgotPassword }
                       />
-                      <Route exact
-                             path = "/verifyEmail/:id"
+                      <Route path = "/verifyEmail/:id"
                              component = { VerifyEmail }
                       />
-                      <Route exact
-                             path = { '/resetPassword/:id' }
+                      <Route path = { '/resetPassword/:id' }
                              component = { ResetPassword }
                       />
 

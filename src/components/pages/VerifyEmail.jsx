@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import '../assets/styles/VerifyEmail.css';
 import {lastVerify} from "../../repository";
+import Swal from "sweetalert2";
+
 
 class VerifyEmail extends Component{
     constructor(props){
@@ -12,17 +14,21 @@ class VerifyEmail extends Component{
         };
     }
 
-   componentDidMount() {
-       const { id } = this.props.match.params;
-       const data = {
-           secret: id,
-       };
-       lastVerify(data)
-           .then(()=>{
-               // alert("Account is verified! Please Proceed to Login!.");
-               this.setState({confirm: true});
-           })
-   }
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    const data = {
+      secret: id,
+    };
+    lastVerify(data)
+        .then(()=>{
+          Swal.fire(
+              'Your account is verify',
+              '',
+              'success',
+          ).then();
+          this.setState({confirm: true});
+        })
+  }
 
     render() {
         return (
