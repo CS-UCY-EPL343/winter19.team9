@@ -9,7 +9,7 @@ class ButtonLoader extends Component {
             <div>
                 {this.props.onClick ?
                     (
-                        <button data-testid={'button'} className={'loading-button' + (this.props.className
+                        <button data-testid={'button'} className={'loading-button ' + (this.props.className
                             || '')}
                                 disabled={this.props.loading}
                                 type={this.props.type || 'button'}

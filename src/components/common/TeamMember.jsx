@@ -15,7 +15,7 @@ class TeamMember extends Component {
           </div>
           <div className = { this.props.right
               ? 'timeline-panel timeline-panel-right'
-              : 'timeline-panel' }
+              : 'timeline-panel timeline-panel-left' }
           >
             <div className = "timeline-heading">
               <h4>{ this.props.name }</h4>

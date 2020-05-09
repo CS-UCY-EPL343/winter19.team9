@@ -109,7 +109,6 @@
     "mock-local-storage": "^1.1.12",
     "react-material-ui-form-validator": "^2.0.10",
     "react-router-dom": "^5.1.2",
-    "reactjs-popup": "^1.5.0",
     "reactstrap": "latest"
   }
 }

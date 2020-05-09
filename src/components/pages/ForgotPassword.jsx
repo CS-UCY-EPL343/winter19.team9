@@ -3,6 +3,7 @@ import '../assets/styles/forgotPassword.css';
 import {newPassword}      from '../../repository';
 import Swal               from 'sweetalert2';
 import history            from '../../history';
+import ButtonLoader       from '../common/ButtonLoader';
 
 class forgotPassword extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class forgotPassword extends Component {
       showError   : false,
       sendingEmail: false,
       confirming  : true,
+      loading     : false,
     };
     this.onMailChange = this.onMailChange.bind(this);
     this.sendEmailPass = this.sendEmailPass.bind(this);
@@ -33,6 +35,7 @@ class forgotPassword extends Component {
           'error',
       ).then();
     } else {
+      this.setState({loading: true});
       const input = {
         email: this.state.email,
       };
@@ -48,11 +51,11 @@ class forgotPassword extends Component {
           })
           .catch(() => {
             Swal.fire(
-                'Something go wrong',
-                '',
+                'Something went wrong',
+                'Please try again...',
                 'error',
             ).then();
-          });
+          }).finally(() => this.setState({loading: false}));
     }
   };
 
@@ -69,10 +72,12 @@ class forgotPassword extends Component {
                      className = { 'emailText' }
                      onChange = { this.onMailChange }
               />
-              <input type = { 'submit' }
-                     className = { 'emailSubmit' }
-                     value = { 'Submit' }
-                     onClick = { this.sendEmailPass }
+              <ButtonLoader loading = { this.state.loading }
+                            text = { 'Submit' }
+                            loadingText = { 'Sending Email...' }
+                            type = { 'submit' }
+                            className = { 'emailSubmit' }
+                            onClick = { this.sendEmailPass }
               />
             </form>
           </div>
