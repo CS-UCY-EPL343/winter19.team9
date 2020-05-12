@@ -1,5 +1,10 @@
 .fade.sign-in-up-modal.modal.show {
     padding : 0 !important;
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
 }
 
 .sign-in-up-modal div.modal-content {
