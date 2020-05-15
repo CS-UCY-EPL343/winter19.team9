@@ -20,6 +20,8 @@
     transition  : 1s;
     cursor      : pointer;
     padding-top : 0;
+    height: 25px;
+    overflow-y: auto;
 }
 
 .ann-card .card-text {
@@ -27,6 +29,8 @@
     letter-spacing : 1px;
     color          : #8D99AE;
     font-weight    : 400;
+    overflow-y: auto;
+    height: 110px;
 }
 
 .ann-card:hover {
@@ -73,4 +77,16 @@
 .ann-card:hover::before, .ann-card:hover::after,
 .ann-card:focus::before, .ann-card:focus::after {
     transform : scale3d(1, 1, 1);
+}
+
+@media (max-width: 1200px) {
+    .ann-card .card-text {
+        height: 100px;
+    }
+}
+
+@media (max-width: 900px) {
+    .ann-card .card-text {
+        height: 90px;
+    }
 }
