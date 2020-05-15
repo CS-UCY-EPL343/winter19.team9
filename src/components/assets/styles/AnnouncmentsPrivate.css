@@ -20,3 +20,13 @@
     color: #aaaaaa;
     padding: 30px;
 }
+
+.Announcements .ann-card .card-title {
+    height: 25px;
+    overflow-y: auto;
+}
+
+.Announcements .ann-card .card-text {
+    overflow-y: auto;
+    height: 75px;
+}

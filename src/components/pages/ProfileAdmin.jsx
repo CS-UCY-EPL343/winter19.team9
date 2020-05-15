@@ -133,6 +133,24 @@ class ProfileAdmin extends Component {
       return false;
     }
 
+    if(Title.length > 50) {
+      Swal.fire(
+          'Title must be 50 characters at most.',
+          '',
+          'error',
+      ).then();
+      return false;
+    }
+
+    if(Message.length > 500) {
+      Swal.fire(
+          'Title must be 500 characters at most.',
+          '',
+          'error',
+      ).then();
+      return false;
+    }
+
     let flag = false;
     await updateAnnouncement(Ann_ID, Title, Message).then(response => {
       this.setState({
@@ -243,6 +261,24 @@ class ProfileAdmin extends Component {
     if (Title === '' || Message === '') {
       Swal.fire(
           'Please fill in all boxes',
+          '',
+          'error',
+      ).then();
+      return false;
+    }
+
+    if(Title.length > 50) {
+      Swal.fire(
+          'Title must be 50 characters at most.',
+          '',
+          'error',
+      ).then();
+      return false;
+    }
+
+    if(Message.length > 500) {
+      Swal.fire(
+          'Title must be 500 characters at most.',
           '',
           'error',
       ).then();
