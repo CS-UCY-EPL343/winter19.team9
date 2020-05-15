@@ -139,7 +139,7 @@ describe('Login', function() {
       driver.findElement(By.css('input[name="username"]'))
           .sendKeys('aloizo03')
           .then(() => driver.findElement(By.css('input[name="password"]'))
-              .sendKeys('1234')
+              .sendKeys('qwertY1234')
               .then(() => driver.findElement(By.css('#login button')).click()
                   .then(() => {
                     // noinspection JSUnresolvedFunction

@@ -115,7 +115,7 @@ describe('Login', function() {
       driver.findElement(By.css('input[name="username"]'))
           .sendKeys('elena')
           .then(() => driver.findElement(By.css('input[name="password"]'))
-              .sendKeys('1234')
+              .sendKeys('qwertY1234')
               .then(() => driver.findElement(By.css('#login button')).click()
                   .then(() => {
                     // noinspection JSUnresolvedFunction
@@ -139,6 +139,13 @@ describe('Public Announcements', function() {
         .then(() => wait(2000))
         .then(() => driver.executeScript(
             'window.scrollTo(0, document.body.scrollHeight)'))
+        .then(() => done(), done);
+  });
+
+  it('Navigate to Home', function(done) {
+    // noinspection JSUnresolvedFunction
+    driver.wait(until.elementLocated(By.css('a[href="/"]')))
+        .click()
         .then(() => done(), done);
   });
 
